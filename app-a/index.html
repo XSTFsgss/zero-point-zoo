@@ -1,0 +1,1683 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>困 · 每日陪伴打卡 | ZERO POINT ZOO</title>
+  
+  <!-- PWA Meta Tags -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#F5A623" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="困" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+
+  <style>
+    :root {
+      --bg-dark: #161220;
+      --bg-card: rgba(35, 29, 48, 0.88);
+      --bg-card-hover: rgba(48, 40, 66, 0.95);
+      --kun-yellow: #F5A623;
+      --kun-yellow-light: #FFC043;
+      --kun-yellow-glow: rgba(245, 166, 35, 0.45);
+      --kun-cream: #FFF3D1;
+      --kun-brown: #8C5A32;
+      --kun-red: #E05A47;
+      --text-main: #FFFFFF;
+      --text-sub: #D3C9E3;
+      --text-muted: #958AA6;
+      --border-card: rgba(245, 166, 35, 0.28);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      background: radial-gradient(circle at 50% 15%, #2D223E 0%, #171220 70%, #0F0B17 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding-top: var(--safe-top);
+      padding-bottom: calc(var(--safe-bottom) + 20px);
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* Mobile Container Frame */
+    .app-viewport {
+      width: 100%;
+      max-width: 440px;
+      min-height: 100vh;
+      background: rgba(22, 18, 32, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 0 45px rgba(0, 0, 0, 0.65);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Top Nav Bar */
+    .app-header {
+      padding: 13px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(245, 166, 35, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(22, 18, 32, 0.94);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--kun-yellow);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: rgba(245, 166, 35, 0.12);
+      border: 1px solid rgba(245, 166, 35, 0.3);
+      transition: all 0.2s;
+    }
+    .nav-back-btn:active {
+      transform: scale(0.96);
+      background: rgba(245, 166, 35, 0.25);
+    }
+
+    .app-logo {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-weight: 900;
+      font-size: 1rem;
+      color: var(--kun-cream);
+      letter-spacing: 0.5px;
+    }
+    .app-logo-badge {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--kun-yellow);
+      color: #1A1224;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 900;
+    }
+
+    .lang-toggle-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFF;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 5px 11px;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+
+    /* PWA Install Banner */
+    .install-bar {
+      display: none;
+      background: linear-gradient(90deg, #F5A623, #FFC043);
+      color: #1A1224;
+      padding: 9px 16px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 14px rgba(245, 166, 35, 0.35);
+    }
+    .install-bar button {
+      background: #1A1224;
+      color: #FFF3D1;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    /* Main Scrollable Content */
+    .app-content {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* ================= 2D DYNAMIC CHARACTER STAGE ================= */
+    .character-stage {
+      background: linear-gradient(180deg, rgba(46, 36, 66, 0.92) 0%, rgba(28, 22, 40, 0.95) 100%);
+      border: 2px solid var(--border-card);
+      border-radius: 26px;
+      padding: 26px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+    }
+
+    .stage-glow {
+      position: absolute;
+      top: -20px;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, var(--kun-yellow-glow) 0%, transparent 68%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .streak-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(245, 166, 35, 0.16);
+      border: 1px solid var(--kun-yellow);
+      color: var(--kun-cream);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 11px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      z-index: 3;
+    }
+
+    /* 2D Dynamic Stage Container */
+    .char-stage-2d {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      width: 100%;
+      height: 255px;
+      cursor: pointer;
+      margin-top: 4px;
+      margin-bottom: 2px;
+      z-index: 2;
+    }
+
+    /* Glowing Magical Pedestal */
+    .char-platform {
+      position: absolute;
+      bottom: 4px;
+      width: 205px;
+      height: 40px;
+      background: radial-gradient(ellipse at center, rgba(245, 166, 35, 0.48) 0%, rgba(245, 166, 35, 0.14) 55%, transparent 75%);
+      border-radius: 50%;
+      box-shadow: 0 0 26px rgba(245, 166, 35, 0.4);
+      animation: platformPulse 3.5s ease-in-out infinite alternate;
+      z-index: 1;
+    }
+    @keyframes platformPulse {
+      0% { transform: scale(0.94); opacity: 0.7; }
+      100% { transform: scale(1.06); opacity: 1; box-shadow: 0 0 32px rgba(245, 166, 35, 0.55); }
+    }
+
+    /* Living 2D Character Figure */
+    .char-figure-wrap {
+      position: relative;
+      z-index: 2;
+      transform-origin: bottom center;
+      animation: idleLiving 3.2s ease-in-out infinite;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .char-stage-2d:active .char-figure-wrap {
+      transform: scale(0.92) translateY(5px);
+    }
+
+    .char-figure-img {
+      height: 225px;
+      width: auto;
+      max-width: 255px;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 14px rgba(245, 166, 35, 0.25));
+      transition: transform 0.25s, opacity 0.2s;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    /* 2D Character Animation States */
+    @keyframes idleLiving {
+      0% { transform: translateY(0px) scale(1, 1); }
+      50% { transform: translateY(-7px) scale(0.985, 1.025); }
+      100% { transform: translateY(0px) scale(1, 1); }
+    }
+
+    .char-figure-wrap.cheer {
+      animation: charBounceCheer 0.75s ease-in-out !important;
+    }
+    @keyframes charBounceCheer {
+      0% { transform: translateY(0) scale(1, 1); }
+      30% { transform: translateY(-18px) scale(1.05, 0.95) rotate(-3deg); }
+      60% { transform: translateY(-7px) scale(0.97, 1.03) rotate(3deg); }
+      100% { transform: translateY(0) scale(1, 1); }
+    }
+
+    .char-figure-wrap.waggle {
+      animation: charWaggle 0.65s ease-in-out !important;
+    }
+    @keyframes charWaggle {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(-7deg) scale(1.03); }
+      50% { transform: rotate(7deg) scale(1.03); }
+      75% { transform: rotate(-4deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    .char-tagline {
+      margin-top: 6px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      z-index: 2;
+    }
+
+    /* Speech Bubble */
+    .speech-bubble {
+      margin-top: 12px;
+      background: rgba(20, 16, 28, 0.95);
+      border: 1.5px solid var(--kun-yellow);
+      border-radius: 18px;
+      padding: 12px 16px;
+      color: var(--kun-cream);
+      font-size: 0.88rem;
+      line-height: 1.5;
+      text-align: center;
+      position: relative;
+      width: 100%;
+      z-index: 2;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .speech-bubble::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 0 8px 8px 8px;
+      border-style: solid;
+      border-color: transparent transparent var(--kun-yellow) transparent;
+    }
+
+    .joke-quick-btn {
+      margin-top: 10px;
+      background: transparent;
+      border: 1px dashed var(--kun-yellow);
+      color: var(--kun-yellow);
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      z-index: 2;
+      transition: all 0.2s;
+    }
+    .joke-quick-btn:active {
+      background: rgba(245, 166, 35, 0.15);
+      transform: scale(0.97);
+    }
+
+    /* Section Navigation Tabs */
+    .app-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      background: rgba(30, 24, 43, 0.8);
+      padding: 5px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .tab-btn {
+      padding: 9px 0;
+      text-align: center;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 800;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: var(--kun-yellow);
+      color: #1E162B;
+      box-shadow: 0 3px 10px rgba(245, 166, 35, 0.35);
+    }
+
+    /* TAB 1: 10-Second Mood Record Card */
+    .record-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-card);
+      border-radius: 22px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-title-row h3 {
+      font-size: 0.96rem;
+      font-weight: 900;
+      color: var(--kun-cream);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .card-title-badge {
+      font-size: 0.72rem;
+      color: var(--kun-yellow);
+      background: rgba(245, 166, 35, 0.12);
+      padding: 3px 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(245, 166, 35, 0.25);
+    }
+
+    /* 5 Mood Selectors */
+    .mood-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+    .mood-btn {
+      background: rgba(45, 37, 62, 0.7);
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 10px 4px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .mood-btn .mood-emoji {
+      font-size: 1.5rem;
+      transition: transform 0.2s;
+    }
+    .mood-btn .mood-lbl {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--text-sub);
+    }
+    .mood-btn:active {
+      transform: scale(0.92);
+    }
+    .mood-btn.active {
+      background: rgba(245, 166, 35, 0.22);
+      border-color: var(--kun-yellow);
+      box-shadow: 0 0 14px var(--kun-yellow-glow);
+    }
+    .mood-btn.active .mood-emoji {
+      transform: scale(1.18);
+    }
+    .mood-btn.active .mood-lbl {
+      color: var(--kun-yellow);
+    }
+
+    /* Tag Chips */
+    .chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .chip {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-sub);
+      font-size: 0.74rem;
+      padding: 4px 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .chip.selected {
+      background: rgba(245, 166, 35, 0.2);
+      border-color: var(--kun-yellow);
+      color: var(--kun-cream);
+      font-weight: 700;
+    }
+
+    /* Quick Note Input */
+    .note-input {
+      width: 100%;
+      background: rgba(20, 16, 28, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
+      padding: 10px 14px;
+      color: #FFF;
+      font-size: 0.84rem;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .note-input:focus {
+      border-color: var(--kun-yellow);
+    }
+    .note-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    /* Submit Button */
+    .submit-record-btn {
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(90deg, #F5A623 0%, #FFC043 100%);
+      color: #171120;
+      border: none;
+      border-radius: 16px;
+      font-size: 0.95rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 16px rgba(245, 166, 35, 0.4);
+      transition: all 0.2s;
+    }
+    .submit-record-btn:active {
+      transform: scale(0.98);
+      filter: brightness(1.1);
+    }
+
+    /* Background Notification & Patrol Toggle Card */
+    .patrol-card {
+      background: rgba(30, 24, 43, 0.7);
+      border: 1px solid rgba(245, 166, 35, 0.2);
+      border-radius: 18px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .patrol-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .patrol-info h4 {
+      font-size: 0.84rem;
+      color: var(--kun-cream);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .patrol-info small {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(255, 255, 255, 0.18);
+      transition: .3s;
+      border-radius: 24px;
+    }
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+    input:checked + .toggle-slider {
+      background-color: var(--kun-yellow);
+    }
+    input:checked + .toggle-slider:before {
+      transform: translateX(20px);
+    }
+
+    /* History Timeline */
+    .history-section {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .history-header {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .history-item {
+      background: rgba(32, 26, 46, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      animation: fadeIn 0.3s ease;
+    }
+    .history-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .history-emoji {
+      font-size: 1.6rem;
+    }
+    .history-texts {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .history-mood-name {
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: var(--kun-cream);
+    }
+    .history-note {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+    .history-time {
+      font-size: 0.7rem;
+      color: var(--kun-yellow);
+      font-weight: 700;
+    }
+
+    /* TAB 2: Simple Local AI Chat Interface */
+    .chat-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-card);
+      border-radius: 22px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      height: 480px;
+    }
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-right: 4px;
+      margin-bottom: 12px;
+    }
+    .chat-bubble {
+      max-width: 82%;
+      padding: 10px 14px;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      line-height: 1.45;
+      animation: fadeIn 0.2s ease;
+    }
+    .chat-bubble.kun {
+      align-self: flex-start;
+      background: rgba(50, 40, 70, 0.9);
+      border: 1px solid rgba(245, 166, 35, 0.35);
+      color: var(--kun-cream);
+      border-bottom-left-radius: 4px;
+    }
+    .chat-bubble.user {
+      align-self: flex-end;
+      background: var(--kun-yellow);
+      color: #171120;
+      font-weight: 600;
+      border-bottom-right-radius: 4px;
+    }
+
+    .quick-chips-grid {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+    }
+    .quick-chips-grid button {
+      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--kun-cream);
+      font-size: 0.74rem;
+      padding: 5px 10px;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 8px;
+    }
+    .chat-input {
+      flex: 1;
+      background: rgba(20, 16, 28, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
+      padding: 10px 14px;
+      color: #FFF;
+      font-size: 0.84rem;
+      outline: none;
+    }
+    .chat-send-btn {
+      background: var(--kun-yellow);
+      border: none;
+      color: #171120;
+      font-weight: 900;
+      font-size: 0.86rem;
+      padding: 0 16px;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+
+    /* Modal / Popups */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10, 8, 16, 0.82);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-box {
+      width: 100%;
+      max-width: 380px;
+      background: linear-gradient(180deg, #2A2038 0%, #1B1527 100%);
+      border: 2px solid var(--kun-yellow);
+      border-radius: 24px;
+      padding: 22px 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .modal-icon {
+      font-size: 3rem;
+      margin-bottom: 8px;
+    }
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: var(--kun-yellow);
+      margin-bottom: 8px;
+    }
+    .modal-desc {
+      font-size: 0.88rem;
+      color: var(--kun-cream);
+      line-height: 1.55;
+      margin-bottom: 18px;
+      background: rgba(15, 11, 22, 0.6);
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(245, 166, 35, 0.2);
+    }
+    .modal-btn-row {
+      display: flex;
+      gap: 10px;
+    }
+    .modal-btn {
+      flex: 1;
+      padding: 11px;
+      border-radius: 14px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      border: none;
+    }
+    .modal-btn.primary {
+      background: var(--kun-yellow);
+      color: #171120;
+    }
+    .modal-btn.secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFF;
+    }
+
+    /* Floating Heart / Paw Animation */
+    .floating-fx {
+      position: absolute;
+      font-size: 1.5rem;
+      pointer-events: none;
+      animation: floatUp 1s ease-out forwards;
+      z-index: 99;
+    }
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translate(0, 0) scale(0.6); }
+      100% { opacity: 0; transform: translate(var(--tx, 0px), -80px) scale(1.4); }
+    }
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.85); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(6px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-viewport">
+    <!-- Top Navigation Header -->
+    <header class="app-header">
+      <a href="../#kun" class="nav-back-btn">
+        <span>←</span>
+        <span data-zh>返回动物园</span>
+        <span data-ko style="display:none;">동물원으로</span>
+      </a>
+
+      <div class="app-logo">
+        <span class="app-logo-badge">困</span>
+        <span data-zh>困 · APP</span>
+        <span data-ko style="display:none;">곤 · APP</span>
+      </div>
+
+      <button type="button" class="lang-toggle-btn" onclick="toggleAppLang()">
+        <span id="lang-indicator">KR 한국어</span>
+      </button>
+    </header>
+
+    <!-- PWA Install Banner -->
+    <div id="install-bar" class="install-bar">
+      <div>
+        <span data-zh>📱 添加「困」到手机主屏幕</span>
+        <span data-ko style="display:none;">📱 「곤」 홈 화면에 추가</span>
+      </div>
+      <button type="button" onclick="triggerPWAInstall()">
+        <span data-zh>安装应用</span>
+        <span data-ko style="display:none;">설치하기</span>
+      </button>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="app-content">
+
+      <!-- ================= 2D DYNAMIC CHARACTER STAGE ================= -->
+      <section class="character-stage">
+        <div class="stage-glow"></div>
+        
+        <div class="streak-badge" id="streak-badge">
+          <span>🐾</span>
+          <span id="streak-text" data-zh>连续打卡 1 天</span>
+          <span id="streak-text-ko" data-ko style="display:none;">연속 체크인 1일</span>
+        </div>
+
+        <!-- 2D Character Figure on Glowing Pedestal -->
+        <div class="char-stage-2d" onclick="handleKunClick()" title="点击与困互动！">
+          <div class="char-platform"></div>
+          <div class="char-figure-wrap" id="char-figure-wrap">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAkGBwgHBgkICAgKCgkLDhcPDg0NDhwUFREXIh4jIyEeICAlKjUtJScyKCAgLj8vMjc5PDw8JC1CRkE6RjU7PDn/2wBDAQoKCg4MDhsPDxs5JiAmOTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTn/wAARCADcANwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDw2iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKK6Xwp4H1vxSHksYY47ZBzcXDFIyfQHBJP0FdhP8AB2ZNNlaPUBJeouVULhCfT8vf/Cs51oQdpM0hSnPVI8qoqxf2kthezWk4xJC5U8HB9xnseoqvWhmFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRXqnw2+HthrWjHUNXglYOx8pAWQkfnyO4wO9RUqKmrsuEHN2R5XRX0G/wq8LTlswXCSE5JWXHX/ZxgfSsrU/grpckaf2dq13BJn5zcIsi49ABgj8SayWKpvqW8PNdDxGiu21v4Za7pVrLcKEuViYhhGeSM8Ec88demPesTQvCet68XOn2EjpGQHdvlVc/X6dq1U4tXT0M3CSdmjEor1K0+DF8baKW81e2ikY/PFGhkwP8Aez/Sr9z8GbZmb7Lq0qrj5fMQHn3xisniqSdrmiw9Rq9jyvStMudVuHgtVDOkTSnOeij+pwPqecDJr2DwP8KNPisbe+8QLLNet85tNwEUY4wG7luuecc47ZPQeAvCR8JadNExjkubiTMkyjPyDoM4z6nHbP1rqmnWFcsQMkAD1PYVy1sW2+SH3nRSw1lzSFjhEYS1tY1UBfkjRcKo+g6VKkDRxHcWMnetixi8u3XcAHYAtj1rNEiuXwpXDEFW6j61UcOlH3t2XCrzNpbI+efjHoi6X4nF1EoWG+TzAAf4hwfw6VwVe7fHHTmufDcN4gH+hzAue+G+Ufqa8Jrpw0uamjkrq02FFFFbmIUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAV9P/DqHyPCOlRs4YrAPmHQ18wV9R+BbtL3wtplykSRB4FykedqnuBntXNiPs+p04b4n6HXfZIZoV3x4Yj7wOD+dZWoSLp7AXDKiOQEbPc9AffNaekXCz2X3uY2IJJzjvWdqDLc3AaRY3CH90dv3R6/X+VY4hQ5Lvc0p8/tHEqrGl1saVXA6hTwR9fSltrSG3iEMEKQxL91EGF/IVMpx25qQAEYxXnJXOxtkYjx7UFcfWpMetJ5ZcgDnPAFPl7C5hm4/gKimt4LkoZolYo25c9VPr+tXpLWWFNzpgfXNV9tNxlF6iUlJaEz6ibHT3wrSbEODzuJ/D+dZWhzGd3JbJAyeetXxleQaqOy2owkKrFIfnZcLtP9c10wxPSYowUb8vU5X4tzm38IXJSTy2LBM9c7gQR+IJH4188V7n8WWlvfDvkh1jQO0ru+do2qSBwDycYHuecDJrwyuzBybo282/y/yOLFxSq+dkFFFFdJzBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXvvwc1B5/CSqVwkExiBGcZABI578g8cfN+FeBV13w68Q2+haqftCyKkwwZEc/hlehHX35rHEQc6bS3NsPJRqK+x77aPLHqsvlSKI9m6Rep56A+nOT9BV9eeo5qGxDC2VmXBlAchhg9OM1Y6CvInNzd2em0rst2FrHOX3k8DoDRdRLbzeWMlcZGawtX8T6boM9vBdTym7ueIbe3jaWV/oq84rT0XULPxBZLfWFwLiFiV3cghh1Ug8g+xrdRvTSUde5zOVpu70JApPPanwEpMj7dwU9KsTfZbQL9su4YC33Q8irn86tR20ZAYNuUjI/xq44ed0yZVo7EF3P5sexVIU9SaoEEHFYfiez8X6nrDafos0elaZFGrS6hIod5GP8ADGvbHfp9aboGh+IdJvHS+8QHVrR1PyywbZVbsQ2Tx7GivTk/ek9QpTS0S0N0ionVWBUjg8EetXI7aSTuin0JqOW0mWQJsLHr8vNc0qUrXsdCnG9rnkHxg0rUWs42t5lexGXMYJDfKCWz2IA57dK8cr6h8UaHHrmlXNjJ0lHdd2COhA9a+cdf0d9EvhayTxSuV3EKCGQbiAHUj5WIAbHPDDmvQwU04cvVHJi4vm5+5mUUUV2HIFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFdh8NtBOpa9Z3U4H2RJSoGCTI4AO3A6DkEk8frXH1638CtNYT3uqNbnaF8pJj68cLx9c/QVlXly02zSjHmmkevRh2cbgST2q2YZFQZiYZGelW7K1iVUlKPvx0bsfWpXtpHkLNIPrXBSwt43Z2Trq9jynxP8PtW1rxDPqtnfNDO8iiNo2KvEgVQpB4xgh+h7iu2+HfgxPB2n3MRupJ5rqQSSbmyoIGOPc9z/AIV08SCNcDP41jy2+r6XDqM1i8eoh2aeG2uGKurHkoH5+XPQEcdM4rupwcVZs5ZzUtjl/Fnw/sbzVn1fUNelgspJg0yzkfLuwAqOfugnA5HFd9YwQW1nBb2iqtvEgSMKcgKBgYNeKTarqPxBn8vUYGijs5CPskbEREnj5wedy8jJPfoK2tO0K4s0WOCUW0cTAoiMcA+uKTqpOx1U8FKpBSbsd5rOvxWOpafpdqYbjUbycL9nMmCkQBLufTAHGep4rXljDqVzjPcV5h4O8NSw/ESTUmUeXFatI7gcPI5Kgj3xu/KvUqpPmVzmqQ9lPlvsV0tUU5JJ9qnOT0paKdjNyb3M+9tEYAxoqN3PrXi3xi8H31yyavbOsyx/JIjFQVBxjDeme3qT617rLt2MMZOOlfPXxs1DXLXU/wCzZCselSqJIvL/AOWn+8eueOn161zqlaqpRNvaXptSPKqKKK7DmCiiigAooooAKKKKACiiigAooooAKKKKAHRlBIpkVmQEbgrYJHfBwcfka+ivg/r2malpsWmaZA9u1khLqy5yCfvZ9T/k18512/w58eal4WuBY2Vjb3Ud3IFMZUh2YnA5HPfp9KzqQ50XCXKz6lXpTqydJ1yx1C3gZL20eV4wzRwyhyDjkevH0rUR1cHac4pJrYGmOopKXFUI5nVNHt7G9udQtrcJ9tIa5Zem8cBiO2R1PqKpggEEfNzxgZz+ArsqhVGV8qqL7gAVlOmm7nXRxThHlaK2jWjWtsWlQJNKdzAdh2B/z3q9mhiFUlmAA6knFcxc+ONMWZrfT4bnULnoiwxna59mPb3HFabI5ZScndnTg5pHZUGWIArEtrrVZo911HFZ56IjeY+Pc4AH4ZrH1mytJ8x3t7fSApjZ533c98dK5Z4uEXY2hQlIXxd440/SFlsPOuP7SkiJhSGIFuc7Tlvl6ivmbWtV1DU724kvru5mZpCxEzHIIyBkdAQOK9d1jSJNNspbixZ5kVgo3jLxgng5A7fhWH4l8N2F74Vn1NUWLULceZvXjegGCG9SeuauFemra76BKhN302PLaKKK6zmCiiigAooooAKKKKACiiigAooooAKKKKACtzwd4dm8Ta3FYIxjiwXmlxxGgGSaw69D8AW8+jwy6gOZJlAVo2V0AIBAJHAPPI5I6EAg1FRtRfLuVBJySex0Eugpo11Hb6datbpJ+7WWKVhIxI6MwPRsA13HhvRrbzYybq7EsQ3MI7hxGpPUA5y341wnhrW1v/GEQ1a4mezbcQkgG13AyuRjpxke4FdXf+P7TTmKRaZOYA/zRgAHPqB1B9jXm1HXVoN3fkdyVJ3lFWR0mtwW8jPEuoanbyxp/wAsZ2AYcnHOR2xXBTeJ/EWmxJ/ZmozXKKuNkiBwMjsDknHHf/Cu80vVvD/iXy7u2uFkliGXiY7ZE9ivX+nvXnd3YXGl3U0FjdFJDIQ5kTKrzwPyrfDzldqW5hUSsmj03QNW1G70q0lvgqXUiAuq4I3d+laMk1wAXdmReuSMAfjXmegeLR4a1EJdn/RJmxIcggerj+7j9a6P4heL4rNY9LtCJZZ0Dvt5yp+6o+vJ/CunluZ3t0Of8Qa3Brc8pk8xobRswxlsBzyN7Dr9BUfgKWW5vbtbFnV/KLOCeOWA69u/FY0lhNcw+ZdvFFGuMLGADL67z1JFdL4T1XT9H015beEyy3L5KxDhFUHG49u5rHESUabNKUXKasd5EHs9OG92kdD8z59T79qz7y/0wM5d4muwoykfz7h6CvKde8Rat4mGLqVrTTwfktYSQG9C56k/p7V2Pg3wrcaVYJdx300NxMu4RMd8aA9AVPf6Vw1aPJBOT+RvSneQXvj2x0y8Wxjtbj7SpxIHhICg/wAxjvzTdM/s7UGmSKyhezkkbEZj3d/u4PT1we2K4n4jtqr67E2qRLDMsQSNos4cZJ3D256dsVa8DTXE7TCDVIrJ8BnWVB8zDpgnof51csKvYqUXZjhXtUaaMP4w+D7Xw7qUF9p+1LW9zmBVwsTjqB7e3b3rzuvZ/iPdy+IbE2NqUuLoYBNtGXaduMJjkg5A+71z17V4xXo0JN01fc4qseWQUUUVqZhRRRQAUUUUAFFFFABRRRQAUVf0LSLvXdXtdLsVQ3Fy+xN7bVHqSfQD8fTNfR/hf4S+HdDjtnuol1C5jG53mQEM/qB2A7D8+lJuw0jwbwr4Xl1Uvd3RENlbsm4MCDMThto+q859CPWu516dobTyYdsZcCOOJBhY1HQAdsAV0fixoh4nntLKKCMw5IiQBVLHqT7/AONcneq02oPDsJlRjH5afMQ5bGB69hWUZ80tTXltHQreFdAm1PXorWPCKo82SYjPlgfxe59PevWLrwvYvosmn2cWxguUcncxYc5YnqT3PvTPDPhuPQIBk77qUAzyA8E/3R7DNdGqjymB+8ea83EV/aT02R1U4ckfU8c0mDT7e+M10jOjwujGNfmDcY6e4xn3qaxsZtX1S5ZLm6aWJDuiV8lQMbevXuOaiW5tYo7tI5h5ks2cyMymRAWJHHTnbwfSuh8EXJWZYYZFnYh2kZJPMUF2UIu7/gJP410VfdfOtyYarlexa1rwTbaTpUuqRzbLiIiQGf5+nPJxnHtUen2qeOdfuJr2VhbwxBI4wm1scbs8cdeMevtXXa7/AMTi3uNOtnjAOQ0jk7d/YAjoc/59czTLHUdEuLrUp0he6unzNEH3MsYxyD0HTNW5yvfoQoq3mUtd8Fwwoq2sKGKNCcs5bjGMYJ+v6VzInmt7OW0srSNDPE0KQs6iWPA5J55OA3HvXomoSGZjdQTh7eWAOqnOWJyBn05A/WvL5M6ZM2pPlUtpWfyViVWZt2NpJPXPU+lYc3NUal02NUmoaEGjwR3+q2NkANssgViM8L1J/IGvYI7hZ4R5aYRSUXjsK8l8FzvJ4rsIymWCMQoOf4TyfYV61mMIYlUqo9KWMb50vIVBXVznvGmiDWtJeJ3UTowe2Z1+446jPXBHH615TpUbwXxSXKPnY6k9CP8AA17s0Y2j5trdia808e6O9neLq8cXyblS42jo2cBvx6H8KeErcsvZy2Y69PmXPHoVYrA3Ll4wQiDLsFzjkAZxzyTivPPG2gPo17HMBiK6Bk2hQoRiSdoAAAHoPavQrWRku/IWXatxE8DZfaASMrk/7wA/GuZ+Ia+Ro9nbSzRSXCykssLhlj4OAT68k12qUva2vocziuS/U8+ooorcwCiiigAooooAKKKKACiitLw3p0mra/YWETbXnmVQ3pzyaAPoD4RfD+Lw9p6anfBZr65CTRnH+qBU8fX5jz716JdXcdtFJK/SNckChQLW3jjJGEUJkDjgYrkvHV5LFphWEkPO+0YOOACT/KuWrUa0W5vThfV7HGeKL+Z9XutSi06HzWlXyVlQk5AGXLjHA44Pp71T+G+lzXOoNqUqvJHCxVWzgPIep+gB6+p9qpX3n3BEC5aObCkDILZ4xj68V6rpOmR6TpVtYIAYoUClh3bqT+JyaxxDdOna+rNqVpT20RdQEIoY5IGM1Q8Saiul6Hc6gf8AlihOM8HPA/UitDcpjyOeOMVhapLb3MFxbXkSvaW22aaMDrghlH4kZ/CvPja6udDTabPNYND1K20+z3adLKblRs2As/P8J9CcE/iPSvVNCsYrLT7W0hgiie1tzNMka/8ALQLhcnvzn8qo2k97/bmnyXqRqswPlRxPuwSp5PHUDj05NdbpSrsluAq5mckY/ujgf4/jXbCo6slfoYTioKyMvSoWn09fsgUpyZN+RuywLdM5IAGPpViNJYIxcTRLBbgqWUn5uhDbuMcA8EZqu/8AaWiSSG1g+0WJztRTll+o6+2R27d6ie+1rW4jDDaCzibhppOhH06n6cVolFL+8Q+ZvyIdMb7BYfaNvmKjzRL3B/iHX33Ul3p1j4isb1bq1gimdMfaY1yc9m6ZPIramsorTRVt4xlLcB8tzkg5JP15/Om+XDAS1vEvmOArYOBt9awqXg1Y0i1JPueT+DJTpHio21/CUuBG9tk8bW4OfcEL19xXqKD5QSOa5vxhoceparpWpDKTwTxrIQP9Ym4ED6j1rolY4JUZHYCsq1RTakjSlFxViSQ7iCccDGKiu7OC7sZbW5RXilQpICM5BqSFkfG4EN1wwII/Cqmr3v2WBpFV2Kc4UcsfQVi+5olfQ8dvdKntLq8069nLpHIMFgPmTgrz7jH61WFra3tykMojEEuIJMAsBzy3seh/Ct/xffvqN99pRUMSx+QXU/eYZJGe+M4z3wa7fwvFLbaXDFHbQqIIy32kqsYYnpuwOeCK9OVdxpxclqzk9l7zS2R83azYnTdVurMknyZCoJ647Z/CqVdX8TZJj4tubeckPbDytmflTkthfb5s/ia5SuyMuaKZySVm0FFFFUIKKKKACiiigArpPhx5f/Cc6L5rsiC4BLBtpHB/zjv0rm6t6RMLfVrKcuIxHOjFiu4KAwOSMjP0yPqKTGtz7Fu5A0O5TnnkVxPjpEktLEySOircEcdDlTwfy4ro7A3N7psNzKsUckqBsRy+YvPo2Bn8qzvEmmNqOk3NrgedjfHk4w68rz9R+tebVbU0zuppOLR5rFfrpmqW1y6CUWzhygOd2P68/nXr3h3WrTWNNS8/dqrsQp6bgDjODyDnIx7V4Hq6yrdM0jjzP+WibdpVj2I9q9T+CMUD+Hr2Yxr5/wBsIJI5wEXH9a7XBStI5m+W6Om1fULe0SZxDNtQEny4SS/r2qjYpa6lYzTFD5V+AFOMMyYwp/TNbmvyRjTJVIVnlYQICf4mOP5HP4VVi8m2jVCrcDGFHCj0NedioRjJWOmjJuJkQ6PJZyG7kupLq5VDDBuAUR7uOAO/vXVwRLBBHCn3Y1Cj6Cs4IXvreMHgMXPuAOP1IrUJwyjHXitMNG0W2RVldi47YoACjAGB6CnAUgIZcg5966rGFyOWNZY2jcZRhhh7Vz86H7LbQucHcYpGBxu25wue2SBXR96yLmFGubmCRQ0bkSFWHUEf4iuauvdubUnrYyoYpZdsCRm2aVWbZg4QqQVbB6c8e9O0zX4I7hodTtjBcq22IRBpPMAHJwB25/CtG3ggttxijCFupyST+JrO1IRRaha3CoQ/mAE44YEgEfXB/SuanOKmjeSck0dELtJ0P2eJpJD2Zdo/EmuS8f3eqaZ4YuZoobVQcIxddxAY7TjHGee9dwiLGNqgAZ6Cub+JYT/hBdYLxiQLCCAex3DB/Dr+FeryJ7nDzW2PG4p4jpzOFH7wbEjBBCY7/rx9a9Z0Z1TRIUdgEeNDkjODtGOK8Ot52Z1jQB2b+leq6F4j0uPQ0W5u0AiCpIM5dAFGDtHPXIrkxcGlHlOqjLmvzHkfxffzPHF0wfcDGmB/d46f1/GuKre8catba14nvb60ybd3wjFdu8DgHHb8eawa7qaagk+xxzacm0FFFFWSFFFFABRRRQAUUUUAezfA3xE8iTaNe6qixx821vIvzH12tn9P/rV6fdb45GYSZTvu4x9K+TI3eN1dGZHU5DKcEGvYfh58RbJNPXT9amvZr5nwsjLvUjsAB0wOua5q9HnWh0UavK9TrfENvZyWc1zcwBhbo0gYZDcD1HNYHw/bU9OL3lvN9ntrkiJS43IxU8kj6nAPt712x8i+BaGeCSI4A2sCDntxUWn20MFgdOaOMC2maNYwoUBSdy4Hpg/zrgTlTi7Hc+WclcuWn2i+vpr+9ERnEWyLyhjYOecHucdfTitCQnzwVzgEYXtt7k1nWqvpTMwjaW2YAELy8fX/AL6HP1HvWmDHPAslpMkgPG/OQPw9f1rCXNLWWonaLsthdNPnajNIG/1MYjHvnk/zH5VsDJXnK/Suc8P3wXzJrjIFxIXD4JGCTtz6cYro1cNnBDAdcGvRoq0Ujjq7itKiOFY4z0NIqKGJHGe3alyoHIH40BgRxjqRW5kBZU6nisq+ATUomLELKpRm7DuB+n61rFQTnv29qyfEIK2e5SA6HepPqOf6VlVjeNjSD1E81I1eTAZF4yRxVWZFvYXg2mPIyVKkHHque9PZxdwN5QCkbWQHoeh/I0kEciyCaWPykj3H5n3Fiff0ryztWmpEms6rbPIZbeK9hChEaI7CWA5Zs9j/AE71yXirW73VLpbS+QQaWEUy26/P5/POTjPHYD0FdZPqNrbq0cIE0xOX2/dz3yf8K5nUbA31wlzdSSks4BijGFKk9B6fXrXUq87WkyY0YvVI4Wz0vSrYxm61E2jyHahmKIG6jBZhgfieK4jUvEty00senSyQWpfchP8ArOOhJ7EdiMV6X8dbkQaPptrhN8rH7yq2EGDxnlTkDkYOMjOCQfFa76F2udnHWlZ8qCiiitzAKKKKACiiigAooooAKKKKACiiigC7Y6rf6fMk1rdyxSRoY0YH7ik7iBnoMknj1PrXV/DvxLqa+Jre2nvmkS7lUyPcSZJ2jONzHkkDaB1JIA5ODw9SQTS288c8EjxTRsHSRGKsrA5BBHQg96mUVJWY4ycHdH11GNxIxz60DRbe4LsPMgl6eZExRv0rg/g34sk8Qwf2deyM17bIWEhx86DHXHfnv/SvWAB1rz6eHalaXQ7KldNe6VLSxjt7aOHauExtx2A4H6Uk+nRNmSIFHzuO0kZP4Vd6VDcKWjO0kMORiuqySME22ZzTXAAXz2GDk5AOfY1BCbmEuUucbmL42Z5PXqentTbidYI5Z5XCxxqXct0AHU1wafF7w4XiDrcIGLCX5SxTHQjA+YGpS5ti3ZbnpkRurkf63YoPJAxmpG0+Hb8oJfcWLudx569en4VheHPEdrrmmLf6dJuhYsoDfeXB9O3aulhyY1JOTjk09NiXdaoxBZaojGCP7MkS58uXLMwXPAI4HHTqelQS6S0r/wCnXEt0VOQjHCD8BxXTdajeNWzkc4xmsZ4dPWJcKzT1MMxpGhQIoAGMAVyPiDxVpHht0OoyuJDGzxxRqWLnsPbp39RXQ+MNRj8O6bJqNzu8hBg7Rkluwr5i17VZtY1S4u5ZHZZJGZA38IJ9Og4xWdDD80nzbI2q1+WK5d2afjjxbd+K7+KSdv8AR7ZSsClApGcZJxnk4HfHFc3RRXppW2PPbuFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAG14P1aXRvEdheRs21Zk3qrY3LkcGvr6CWOaJZYslHGV47Gvk74a6Xa6x420qzvCnkNKGZWON+Odv419aRmPbhMBVO0AdBjtUSWpSYvUVWvX8mBpSdqqCWJ7CrXBJHpXO+MrWbWbCTQLe6W0e9hdnnKFzGgKjhQRySeueMd6lxvoUnY+cvGfjbVdc1O4Bn8q2CNb+XH9103Hk/XiuRr0Hxp8KdT8K6bdao2o2VxYQlAp+ZJX3EL9zBHU/3ugz7V59WiSSsiHd6svabq+o6VIHsbyaAg5wjkA+vFfU/w/8AEi+KvDsWoqnlkHy2QkEgrxk46ZxmvlfRtJvtc1KHTtOg8+7m3bI96rnCljyxA6A96+hvhl4Q1LwKFhvdSgnXUJCslvHGQsTgMVZXOC2QoGMDv9TMopji7HpIpDz1BpxIGOfakchVZieAMmlYdzwj9oDX3+2waLAzeS0IedSTjduyOPXA/WvGq9r/AGjrG2Emk6ghQXEgaJgMZZRyCf5V4pVRVkS9woooqhBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBPZXc9jdxXVs5jmibcjDqDXb6P8WvEunM/mTJcq0nmYcY5xg8+9cDRSaT3Gm0ehP8YfFP26a5jlgQSKq+WYwVGM/41QPxQ8WreT3dvqK28txjzNsKPnGcAbwxAGegwPbOSeMooSSBts29Z8W+Idb84ajrF5NHMFEkPmFImxjH7tcL1APTrz1rEoopiHwTS280c8EjxTRsHR0YqysDkEEdCDXXaf8AEzxRa2TWU96NQtipCLeAuyNu3Bw4IfcD0yxA9OlcdRQB6HD8X/EuI/tMqytCweMoFQFv9vIO4Y3cDHJBzxgrq3xg8RahDNEnlW6yoEO3kgd8H3rzuip5UPmZqa/r+p+IboXOp3LTSKAq8YCj0ArLooqhBRRRQAUUUUAFFFFABRRRQB//2Q==" onerror="this.onerror=null;this.src='../assets/kun_character_new.png';" alt="困 2D 角色" class="char-figure-img" id="char-figure-img" />
+          </div>
+        </div>
+
+        <div class="char-tagline">
+          <span data-zh>“无论去哪，困都陪着你！”</span>
+          <span data-ko style="display:none;">“어디든, 곤이 함께할게!”</span>
+        </div>
+
+        <div class="speech-bubble" id="kun-speech">
+          <span id="speech-content">汪！今天早上第一件事，就是想见到你！快来记录一下今天的心情吧~</span>
+        </div>
+
+        <button type="button" class="joke-quick-btn" onclick="tellDailyJoke(true)">
+          <span>✨</span>
+          <span data-zh>听困讲个早安笑话</span>
+          <span data-ko style="display:none;">곤의 모닝 유머 듣기</span>
+        </button>
+      </section>
+
+      <!-- App Tabs Navigation -->
+      <div class="app-tabs">
+        <button type="button" class="tab-btn active" id="tab-btn-record" onclick="switchAppTab('record')">
+          <span data-zh>📝 10秒心情记录</span>
+          <span data-ko style="display:none;">📝 10초 무드 기록</span>
+        </button>
+        <button type="button" class="tab-btn" id="tab-btn-chat" onclick="switchAppTab('chat')">
+          <span data-zh>💬 伴行 AI 对话</span>
+          <span data-ko style="display:none;">💬 동행 AI 대화</span>
+        </button>
+      </div>
+
+      <!-- VIEW 1: 10-Second Record View -->
+      <div id="view-record" style="display: flex; flex-direction: column; gap: 14px;">
+        <section class="record-card">
+          <div class="card-title-row">
+            <h3>
+              <span>🦴</span>
+              <span data-zh>今日状态快速打卡</span>
+              <span data-ko style="display:none;">오늘 상태 빠른 체크인</span>
+            </h3>
+            <span class="card-title-badge" data-zh>⏱️ 仅需 10 秒</span>
+            <span class="card-title-badge" data-ko style="display:none;">⏱️ 10초 컷</span>
+          </div>
+
+          <!-- 5 Mood Selectors -->
+          <div class="mood-grid">
+            <div class="mood-btn active" onclick="selectMood(0, '☀️', '元气满格', '에너지 100%')">
+              <span class="mood-emoji">☀️</span>
+              <span class="mood-lbl" data-zh>元气</span>
+              <span class="mood-lbl" data-ko style="display:none;">에너지</span>
+            </div>
+            <div class="mood-btn" onclick="selectMood(1, '🦴', '想吃零食', '간식 땡김')">
+              <span class="mood-emoji">🦴</span>
+              <span class="mood-lbl" data-zh>馋了</span>
+              <span class="mood-lbl" data-ko style="display:none;">간식</span>
+            </div>
+            <div class="mood-btn" onclick="selectMood(2, '🎒', '渴望探险', '모험 떠나기')">
+              <span class="mood-emoji">🎒</span>
+              <span class="mood-lbl" data-zh>探险</span>
+              <span class="mood-lbl" data-ko style="display:none;">모험</span>
+            </div>
+            <div class="mood-btn" onclick="selectMood(3, '💤', '有点累了', '지치고 졸림')">
+              <span class="mood-emoji">💤</span>
+              <span class="mood-lbl" data-zh>想歇</span>
+              <span class="mood-lbl" data-ko style="display:none;">휴식</span>
+            </div>
+            <div class="mood-btn" onclick="selectMood(4, '🌧️', '需要抱抱', '위로 필요해')">
+              <span class="mood-emoji">🌧️</span>
+              <span class="mood-lbl" data-zh>抱抱</span>
+              <span class="mood-lbl" data-ko style="display:none;">위로</span>
+            </div>
+          </div>
+
+          <!-- Tag Chips -->
+          <div class="chips-row">
+            <span class="chip selected" onclick="toggleChip(this)">#吃饱喝足</span>
+            <span class="chip" onclick="toggleChip(this)">#探险顺利</span>
+            <span class="chip" onclick="toggleChip(this)">#今天天气真好</span>
+            <span class="chip" onclick="toggleChip(this)">#有点困</span>
+            <span class="chip" onclick="toggleChip(this)">#想去旅行</span>
+          </div>
+
+          <!-- Optional Quick Note -->
+          <input type="text" id="record-note" class="note-input" placeholder="写一句想对困说的话 (选填)..." />
+
+          <!-- Submit Button -->
+          <button type="button" class="submit-record-btn" onclick="submitRecord()">
+            <span>🐾</span>
+            <span data-zh>完成打卡 · 盖个爪印！</span>
+            <span data-ko style="display:none;">체크인 완료 · 발도장 쾅!</span>
+          </button>
+        </section>
+
+        <!-- Background Patrol & Notification Toggle Card -->
+        <section class="patrol-card">
+          <div class="patrol-info">
+            <h4>
+              <span>🧭</span>
+              <span data-zh>困后台巡逻通知</span>
+              <span data-ko style="display:none;">곤 백그라운드 순찰 알림</span>
+            </h4>
+            <small data-zh>退出或切后台后，困会自己跑去探险并向你汇报！</small>
+            <small data-ko style="display:none;">앱을 나가도 곤이 혼자 모험을 떠나 알림을 보내요!</small>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="patrol-toggle" onchange="togglePatrol(this.checked)" />
+            <span class="toggle-slider"></span>
+          </label>
+        </section>
+
+        <!-- History Timeline -->
+        <section class="history-section">
+          <div class="history-header">
+            <span data-zh>📅 最近同行足迹</span>
+            <span data-ko style="display:none;">📅 최근 동행 발자국</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);" id="history-count">0 次打卡</span>
+          </div>
+          <div class="history-list" id="history-list">
+            <!-- Dynamic History Cards injected here -->
+          </div>
+        </section>
+      </div>
+
+      <!-- VIEW 2: AI Companion Chat View -->
+      <div id="view-chat" style="display: none;">
+        <section class="chat-card">
+          <div class="chat-messages" id="chat-messages">
+            <div class="chat-bubble kun">
+              汪！我是你的探险伙伴困！背包里已经装满了骨头饼干，想聊点什么？可以问我九尾的八卦、打包秘诀，或者让我给你讲个笑话！🦴
+            </div>
+          </div>
+
+          <!-- Quick Chips -->
+          <div class="quick-chips-grid">
+            <button type="button" onclick="sendQuickMessage('给你讲个笑话吧')">🐶 讲个笑话</button>
+            <button type="button" onclick="sendQuickMessage('背包里装了什么好吃的？')">🍖 背包食物</button>
+            <button type="button" onclick="sendQuickMessage('九尾今天在干嘛？')">🦊 九尾八卦</button>
+            <button type="button" onclick="sendQuickMessage('今天好累，需要安慰')">🌧️ 摸摸求安慰</button>
+            <button type="button" onclick="sendQuickMessage('背包怎么打包才不累？')">🎒 打包秘诀</button>
+          </div>
+
+          <div class="chat-input-row">
+            <input type="text" id="chat-input" class="chat-input" placeholder="跟困说点什么..." onkeydown="if(event.key==='Enter') sendChatMessage()" />
+            <button type="button" class="chat-send-btn" onclick="sendChatMessage()">
+              <span data-zh>发送</span>
+              <span data-ko style="display:none;">전송</span>
+            </button>
+          </div>
+        </section>
+      </div>
+
+    </main>
+
+    <!-- Daily Joke / Morning Greeting Modal -->
+    <div class="modal-overlay" id="joke-modal">
+      <div class="modal-box">
+        <div class="modal-icon">🌅</div>
+        <div class="modal-title" id="joke-modal-title">困的今日开门早安笑话！</div>
+        <div class="modal-desc" id="joke-modal-content">
+          加载中...
+        </div>
+        <div class="modal-btn-row">
+          <button type="button" class="modal-btn secondary" onclick="tellDailyJoke(false)">
+            <span>🔄</span>
+            <span data-zh>再讲一个</span>
+            <span data-ko style="display:none;">하나 더!</span>
+          </button>
+          <button type="button" class="modal-btn primary" onclick="closeJokeModal()">
+            <span>🐾</span>
+            <span data-zh>出发！</span>
+            <span data-ko style="display:none;">출발!</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Background Adventure Return Report Modal -->
+    <div class="modal-overlay" id="adventure-modal">
+      <div class="modal-box">
+        <div class="modal-icon">🎒</div>
+        <div class="modal-title" data-zh>🐾 困的秘密后台探险日记！</div>
+        <div class="modal-title" data-ko style="display:none;">🐾 곤의 비밀 모험 일지!</div>
+        <div class="modal-desc" id="adventure-report-content">
+          在你离开的这段时间里，困也没闲着哦...
+        </div>
+        <div class="modal-btn-row">
+          <button type="button" class="modal-btn primary" style="width:100%;" onclick="closeAdventureModal()">
+            <span data-zh>抱抱困，辛苦啦！</span>
+            <span data-ko style="display:none;">수고했어 곤! 꼬옥 안아주기</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    /* ================= APP STATE & DATA ================= */
+    let currentLang = 'zh'; // 'zh' or 'ko'
+    let currentMood = { emoji: '☀️', nameZh: '元气满格', nameKo: '에너지 100%' };
+    let deferredPrompt = null;
+    let patrolEnabled = false;
+    let leaveTimestamp = null;
+
+    // Rich Joke Pool (20+ cute bilingual travel & Shiba jokes for Kun)
+    const JOKES_POOL = [
+      {
+        zh: "你知道为什么困的背包总是这么鼓吗？因为里面装了 99% 的骨头饼干，和 1% 装骨头饼干的袋子！汪！",
+        ko: "곤의 배낭이 왜 항상 빵빵한지 알아? 뼈다귀 간식이 99%, 간식 봉지가 1% 들어있거든! 멍!"
+      },
+      {
+        zh: "今天早上九尾问我：‘困，世界上最难走的路是什么路？’ 我说：‘去没有烤红薯摊的探险路！’ 九尾无语了整整三分钟~",
+        ko: "오늘 아침 구미호가 물었어. ‘곤아, 세상에서 제일 험한 길이 뭔지 알아?’ 내가 말했지. ‘군고구마 포장마차가 없는 모험길!’ 구미호가 3분 동안 멍때리더라구~"
+      },
+      {
+        zh: "刚才我试着像猫咪七宝那样踩奶，结果把睡垫踩出了一个狗窝形的大坑……千万别告诉他！",
+        ko: "방금 고양이 칠보처럼 꾹꾹이를 해봤는데, 방석에 커다란 강아지 발자국 구멍을 내버렸어…… 절대 비밀이야!"
+      },
+      {
+        zh: "出门前我发誓只带生活必需品，结果背包拉链一拉开：磨牙棒、肉脯、牛肉粒、小鱼干……这全都是生存必需品啊！",
+        ko: "집 나설 땐 생필품만 챙기겠다고 맹세했는데, 배낭을 열어보니: 개껌, 육포, 소고기 큐브, 건포…… 전부 생존 필수품이잖아!"
+      },
+      {
+        zh: "如果今天感到疲倦，那就深吸一口气——闻到没有？这是大自然里烤香肠的味道！（其实是我背包里的肉干漏油了）",
+        ko: "오늘 피곤하다면 깊게 숨을 들이쉬어 봐——냄새 나지? 자연 속 소시지 구이 냄새야! (사실 배낭 속 육포 기름이 샌 거야)"
+      },
+      {
+        zh: "为什么困总是笑眯眯的？因为只要一直微笑，大家就会忍不住掏出零食投喂！这是困独创的‘零食引力波’！",
+        ko: "곤이 왜 항상 싱글벙글 웃는지 알아? 계속 웃고 있으면 사람들이 간식을 주거든! 이건 곤이 개발한 ‘간식 유인 작전’이야!"
+      },
+      {
+        zh: "黑羽乌鸦跟我说指南针最重要，但我发现：只要跟着香味走，永远不会迷路！",
+        ko: "까마귀 흑우가 나침반이 제일 중요하다고 했지만, 맛있는 냄새를 따라가면 길을 잃을 일이 전혀 없어!"
+      },
+      {
+        zh: "今天重物放中上部贴背，困健步如飞！路过的松鼠问我：‘你今天怎么跑这么快？’ 我说：‘因为前面十米有肉干！’",
+        ko: "무거운 짐을 등 쪽에 붙였더니 곤이 번개처럼 달려! 다람쥐가 물었어. ‘오늘 왜 이리 빨라?’ 내가 답했지. ‘10m 앞에 고기가 있거든!’"
+      },
+      {
+        zh: "有只蝴蝶停在困鼻子上，我打了个大喷嚏，结果背包里的指南针飞到了树顶……嘘，不要被队长发现！",
+        ko: "나비가 곤 코에 앉아서 재채기를 크게 했더니 배낭 나침반이 나무 위로 날아갔어…… 쉿, 대장한테 이르면 안 돼!"
+      },
+      {
+        zh: "只要心中有饭，哪里都是阳光营地！今天也跟困一起大口吃饭、快乐前行吧！",
+        ko: "마음속에 밥만 있다면 어디든 햇살 캠프야! 오늘도 곤과 함께 든든하게 먹고 신나게 달려보자!"
+      }
+    ];
+
+    // Background Random Adventure Logs
+    const ADVENTURE_LOGS = [
+      {
+        zh: "在你离开的这几分钟里，困背着大背包在零点树林里巡逻了 3 圈，追了一只金色蝴蝶，还在古树下偷偷藏了半根肉骨头！",
+        ko: "당신이 자리를 비운 사이, 곤은 큰 배낭을 메고 숲을 3바퀴 순찰하고 황금 나비를 쫓다가 고목 아래에 뼈다귀를 숨겨뒀어요!"
+      },
+      {
+        zh: "刚才困去九尾的营地探查敌情，趁他不注意顺走了一块刚出炉的烤土豆，尾巴摇得停不下来！",
+        ko: "방금 곤이 구미호의 캠프를 정찰하다가 갓 구운 감자를 득템했어요! 꼬리를 헬리콥터처럼 흔들고 있답니다!"
+      },
+      {
+        zh: "困在背包里清点了一下资产：一共 28 块骨头饼干、1 个生锈但还能转的指南针，以及一整袋想分给你的好心情！",
+        ko: "곤이 배낭 속 재산을 점검했어요: 뼈다귀 간식 28개, 낡았지만 잘 도는 나침반 1개, 그리고 당신에게 줄 행복 한 봉지!"
+      },
+      {
+        zh: "困在草地上打了个滚，伸了个超长的大懒腰，还趴在营地门槛上一直盯着小路，一听到你的脚步声立刻坐端正啦！",
+        ko: "곤이 잔디밭에서 뒹굴고 기지개를 켠 뒤, 문앞에서 당신 발소리가 들릴 때까지 얌전히 기다리고 있었어요!"
+      }
+    ];
+
+    /* ================= INITIALIZATION ================= */
+    window.addEventListener('DOMContentLoaded', () => {
+      // Register Service Worker
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js').then(() => {
+          console.log('Kun PWA Service Worker Registered!');
+        }).catch(err => console.log('SW registration fail:', err));
+      }
+
+      // Handle PWA Install Prompt
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        const installBar = document.getElementById('install-bar');
+        if (installBar) installBar.style.display = 'flex';
+      });
+
+      // Load Saved History
+      loadHistory();
+      updateStreakDisplay();
+
+      // Check Daily First-Time Open
+      checkDailyFirstOpen();
+
+      // Listen for Visibility Change (Background Patrol)
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+    });
+
+    /* ================= PWA INSTALL TRIGGER ================= */
+    function triggerPWAInstall() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            document.getElementById('install-bar').style.display = 'none';
+          }
+          deferredPrompt = null;
+        });
+      } else {
+        alert(currentLang === 'zh' 
+          ? '📱 点击浏览器菜单中的“添加到主屏幕”或“安装应用”即可将「困」安装到手机桌面！' 
+          : '📱 브라우저 메뉴에서 [홈 화면에 추가] 또는 [앱 설치]를 누르면 「곤」을 홈 화면에 설치할 수 있어요!');
+      }
+    }
+
+    /* ================= DAILY FIRST-TIME OPEN CHECK ================= */
+    function checkDailyFirstOpen() {
+      const todayStr = new Date().toISOString().split('T')[0];
+      const lastOpenDate = localStorage.getItem('kun_app_last_open_date');
+
+      if (lastOpenDate !== todayStr) {
+        localStorage.setItem('kun_app_last_open_date', todayStr);
+        setTimeout(() => {
+          tellDailyJoke(false);
+        }, 600);
+      }
+    }
+
+    /* ================= JOKE ENGINE ================= */
+    function tellDailyJoke(showModal = true) {
+      const randomIndex = Math.floor(Math.random() * JOKES_POOL.length);
+      const joke = JOKES_POOL[randomIndex];
+      const jokeText = currentLang === 'zh' ? joke.zh : joke.ko;
+
+      // Update Speech Bubble
+      document.getElementById('speech-content').innerText = jokeText;
+      triggerKun2DAnimation('cheer');
+      playCuteAudio('happy');
+
+      // Update Modal
+      const modal = document.getElementById('joke-modal');
+      const modalContent = document.getElementById('joke-modal-content');
+      modalContent.innerText = jokeText;
+      modal.style.display = 'flex';
+    }
+
+    function closeJokeModal() {
+      document.getElementById('joke-modal').style.display = 'none';
+    }
+
+    /* ================= 10-SEC MOOD SELECTION & SUBMISSION ================= */
+    function selectMood(idx, emoji, nameZh, nameKo) {
+      currentMood = { emoji, nameZh, nameKo };
+      const buttons = document.querySelectorAll('.mood-btn');
+      buttons.forEach((btn, i) => {
+        if (i === idx) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+
+      // Trigger dynamic 2D animations according to mood!
+      const charImg = document.getElementById('char-figure-img');
+      charImg.src = 'data:image/jpeg;base64,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';
+      if (idx === 0 || idx === 2) {
+        triggerKun2DAnimation('cheer');
+      } else {
+        triggerKun2DAnimation('waggle');
+      }
+
+      // Quick character comment
+      const commentsZh = [
+        "☀️ 元气满满！快来跟困比比谁跑得快！汪！",
+        "🦴 馋了？困的背包里正好有两块新鲜骨头饼干，分你一块！",
+        "🎒 想去探险？困的大背包已经整装待发啦，走起！",
+        "💤 累了就靠着困毛茸茸的背睡会儿吧，困替你守着营地！",
+        "🌧️ 无论发生什么，困的前爪都会紧紧握住你！大抱抱！"
+      ];
+      const commentsKo = [
+        "☀️ 에너지 100%! 곤이랑 달리기 시합할래? 멍!",
+        "🦴 배고파? 마침 곤의 배낭에 바삭한 뼈다귀 쿠키가 있어, 하나 줄게!",
+        "🎒 모험이 고파? 배낭 패킹 완료! 지금 당장 출발하자!",
+        "💤 피곤하면 곤의 푹신한 등에 기대어 쉬어, 곤이 보초 설게!",
+        "🌧️ 무슨 일 있어도 곤의 솜방망이 앞발이 꼭 잡아줄게! 꼬옥 안아주기!"
+      ];
+      const text = currentLang === 'zh' ? commentsZh[idx] : commentsKo[idx];
+      document.getElementById('speech-content').innerText = text;
+      playCuteAudio('tap');
+    }
+
+    function toggleChip(el) {
+      el.classList.toggle('selected');
+    }
+
+    function submitRecord() {
+      const noteInput = document.getElementById('record-note');
+      const noteVal = noteInput.value.trim();
+
+      const selectedChips = Array.from(document.querySelectorAll('.chip.selected')).map(c => c.innerText);
+      const now = new Date();
+      const timeStr = `${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+
+      const entry = {
+        id: Date.now(),
+        emoji: currentMood.emoji,
+        nameZh: currentMood.nameZh,
+        nameKo: currentMood.nameKo,
+        note: noteVal || selectedChips.join(' ') || (currentLang === 'zh' ? '完成了日常同行记录' : '오늘의 동행 체크 완료'),
+        time: timeStr
+      };
+
+      // Save to localStorage
+      let records = JSON.parse(localStorage.getItem('kun_records') || '[]');
+      records.unshift(entry);
+      if (records.length > 20) records = records.slice(0, 20);
+      localStorage.setItem('kun_records', JSON.stringify(records));
+
+      // Increase Streak
+      let streak = parseInt(localStorage.getItem('kun_streak') || '1', 10);
+      streak += 1;
+      localStorage.setItem('kun_streak', streak);
+
+      // Feedback animation & audio
+      triggerFloatingPaw();
+      triggerKun2DAnimation('cheer');
+      playCuteAudio('success');
+
+      // Speech
+      document.getElementById('speech-content').innerText = currentLang === 'zh'
+        ? `🐾 打卡成功！已盖上困的专属爪印，连续同行第 ${streak} 天！明天也要来哦！`
+        : `🐾 체크인 완료! 곤의 전용 발도장 쾅! 연속 ${streak}일 동행 중! 내일도 꼭 와줘!`;
+
+      // Reset input
+      noteInput.value = '';
+      loadHistory();
+      updateStreakDisplay();
+    }
+
+    function loadHistory() {
+      const records = JSON.parse(localStorage.getItem('kun_records') || '[]');
+      const container = document.getElementById('history-list');
+      const countEl = document.getElementById('history-count');
+      
+      countEl.innerText = currentLang === 'zh' ? `${records.length} 次打卡` : `${records.length}회 기록`;
+
+      if (records.length === 0) {
+        container.innerHTML = `<div style="text-align:center; padding:18px; color:var(--text-muted); font-size:0.8rem;">
+          ${currentLang === 'zh' ? '还没有打卡记录哦，立刻按下按钮打卡吧！' : '아직 기록이 없어요. 지금 첫 체크인을 해보세요!'}
+        </div>`;
+        return;
+      }
+
+      container.innerHTML = records.map(r => `
+        <div class="history-item">
+          <div class="history-item-left">
+            <span class="history-emoji">${r.emoji}</span>
+            <div class="history-texts">
+              <span class="history-mood-name">${currentLang === 'zh' ? r.nameZh : r.nameKo}</span>
+              <span class="history-note">${r.note}</span>
+            </div>
+          </div>
+          <span class="history-time">${r.time}</span>
+        </div>
+      `).join('');
+    }
+
+    function updateStreakDisplay() {
+      const streak = parseInt(localStorage.getItem('kun_streak') || '1', 10);
+      document.getElementById('streak-text').innerText = `连续打卡 ${streak} 天`;
+      document.getElementById('streak-text-ko').innerText = `연속 체크인 ${streak}일`;
+    }
+
+    /* ================= LOCAL AI CHAT ENGINE ================= */
+    function sendQuickMessage(text) {
+      document.getElementById('chat-input').value = text;
+      sendChatMessage();
+    }
+
+    function sendChatMessage() {
+      const input = document.getElementById('chat-input');
+      const msg = input.value.trim();
+      if (!msg) return;
+
+      input.value = '';
+      appendChatMessage(msg, 'user');
+
+      // Thinking & generate local response
+      setTimeout(() => {
+        const reply = generateKunAIReply(msg);
+        appendChatMessage(reply, 'kun');
+        triggerKun2DAnimation('waggle');
+        playCuteAudio('tap');
+      }, 350);
+    }
+
+    function appendChatMessage(text, sender) {
+      const container = document.getElementById('chat-messages');
+      const bubble = document.createElement('div');
+      bubble.className = `chat-bubble ${sender}`;
+      bubble.innerText = text;
+      container.appendChild(bubble);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    // Smart, lively character-driven AI dialogue engine for Kun
+    let lastFallbackIdx = -1;
+
+    function generateKunAIReply(rawQuery) {
+      const q = rawQuery.toLowerCase().trim();
+
+      // 1. Math / Calculus / Science / Study / Homework / Exam
+      if (q.includes('微积分') || q.includes('积分') || q.includes('微分') || q.includes('数学') || q.includes('高数') || q.includes('算') || q.includes('作业') || q.includes('考试') || q.includes('学习') || q.includes('代码') || q.includes('论文') || q.includes('미적분') || q.includes('수학') || q.includes('공부') || q.includes('시험') || q.includes('과제')) {
+        const studyRepliesZh = [
+          "微……微积分？！（困把两只小耳朵耷拉下来，小狗脑门上冒出了大大的问号）困理解的微积分，就是把一根大骨头切成无限多个极小片（微分 dx），然后一口气全部吃进肚子里求和（积分 ∫）！公式是：∫(零食)dt = 饱饱的困！汪！听懂了没有？🍗",
+          "高等数学这种高危法术，困建议你把它交给九尾去算！困的任务是趴在你脚边当暖脚宝，负责监督你别偷懒！写完一页就奖励你捏一次困的粉色肉垫！加油加油！🐾",
+          "呜哇！听见‘高数/微积分/考试’困的舌头都要打结啦……但是！困相信你绝对可以搞定的！现在伸出前爪给你的笔杆注入‘困之超绝好运护符’——唰唰唰全做对！✨",
+          "学累了吗？快抬起头深呼吸！困听说学习时嚼一块肉干能提高 50% 的脑力，要不要从困的背包里掏一块？嚼嚼嚼~🦴"
+        ];
+        const studyRepliesKo = [
+          "미…… 미적분?! (곤이 귀를 긁적이며 갸우뚱합니다) 곤이 생각하는 미적분이란: 커다란 고기를 무한히 잘게 썰어서(미분 dx), 배 속으로 전부 쓸어 담는 것(적분 ∫)! 공식은 ∫(간식)dt = 배부른 곤! 멍! 이해됐지? 🍗",
+          "수학이나 과제 같은 고난도 마법은 구미호한테 맡겨버려! 곤은 네 발밑에서 보송보송한 발난로가 되어줄게! 한 페이지 풀 때마다 곤의 젤리 발바닥 터치 1회 적립! 힘내자! 🐾",
+          "우와! 공부/시험 이야기만 들어도 곤의 혀가 꼬일 것 같아…… 하지만 넌 반드시 해낼 수 있어! 곤의 앞발 행운 버프 발사——전부 정답만 콕콕 찍어라! ✨"
+        ];
+        const pool = currentLang === 'zh' ? studyRepliesZh : studyRepliesKo;
+        return pool[Math.floor(Math.random() * pool.length)];
+      }
+
+      // 2. Tired / Exhausted / Crying / Stress / Overtime / Comfort
+      if (q.includes('累') || q.includes('难过') || q.includes('烦') || q.includes('压力') || q.includes('哭') || q.includes('伤心') || q.includes('不想动') || q.includes('加班') || q.includes('委屈') || q.includes('崩') || q.includes('힘들') || q.includes('우울') || q.includes('지쳐') || q.includes('슬퍼') || q.includes('야근') || q.includes('피곤')) {
+        const comfortRepliesZh = [
+          "（轻轻把暖烘烘的大脑袋贴在你膝盖上，两只前爪扒着你）辛苦啦！不管今天在外面遇到了什么，回到营地，困永远是最欢迎你的小狗！靠在困毛茸茸的肚皮上休息一会儿吧，天塌下来困的大背包顶着！💛",
+          "谁欺负你啦？告诉困，困去咬他的裤脚！……要是只是生活太辛苦，那就先什么都别想，深呼吸——困把背包里最香的一块牛肉干分给你，吃完烦恼减半！",
+          "摸摸头，抱紧紧！感到疲惫的时候，允许自己像困一样在草地上摊成一张软软的‘狗饼’。今天你已经做得很棒很棒了，困给你打满分！🌟"
+        ];
+        const comfortRepliesKo = [
+          "（따뜻하고 보송보송한 머리를 네 무릎에 얹고 꼬리를 살랑살랑 흔들며） 고생 많았어! 오늘 밖에서 무슨 일이 있었든, 곤은 언제나 너의 가장 든든한 친구야! 곤의 푹신한 배에 기대어 쉬어, 꼬옥 안아줄게! 💛",
+          "누가 널 괴롭혔어? 곤한테 말해, 바짓가랑이를 확 물어버릴 테니까! 세상이 널 지치게 할 땐 심호흡 한번 하고 곤의 간식을 나눠 먹자. 힘내!",
+          "토닥토닥, 안아줄게! 피곤할 땐 곤처럼 잔디밭에 털썩 누워 강아지 빈대떡이 되어도 괜찮아. 넌 오늘도 충분히 멋졌어! 🌟"
+        ];
+        const pool = currentLang === 'zh' ? comfortRepliesZh : comfortRepliesKo;
+        return pool[Math.floor(Math.random() * pool.length)];
+      }
+
+      // 3. Food / Snacks / Hungry / BBQ / Milk Tea
+      if (q.includes('吃') || q.includes('零食') || q.includes('肉') || q.includes('骨头') || q.includes('饿') || q.includes('饭') || q.includes('奶茶') || q.includes('火锅') || q.includes('烧烤') || q.includes('夜宵') || q.includes('간식') || q.includes('고기') || q.includes('배고') || q.includes('야식') || q.includes('먹')) {
+        const foodRepliesZh = [
+          "说到吃的困可就不困了！困今天强推：烤红薯配热奶茶！或者热气腾腾的火锅烤肉！困的大背包里还有备用自制肉干，要不要分你一小截磨磨牙？🍗",
+          "饿了就必须立刻去吃！困的人生格言第一条：肚子里有粮，探险才不慌！走走走，困陪你去觅食！今天你想吃甜的还是咸的？😋",
+          "吸溜……困的口水已经把胸前的金色小狗牌浸湿了！要不我们现在就去外卖软件里探险？困用直觉帮你挑最好吃的一家！"
+        ];
+        const foodRepliesKo = [
+          "먹는 이야기라면 곤은 언제나 번쩍 눈을 떠! 배낭에 뼈다귀 쿠키, 바삭한 육포, 그리고 어제 유적에서 찾은 바비큐 치킨이 가득해! 너한테 반 줄게! 🍗",
+          "배고프면 당장 먹으러 가야지! 곤의 좌우명 제1조: 배가 든든해야 모험도 신난다! 가자 가자, 곤이랑 맛있는 거 찾으러 출발! 😋"
+        ];
+        const pool = currentLang === 'zh' ? foodRepliesZh : foodRepliesKo;
+        return pool[Math.floor(Math.random() * pool.length)];
+      }
+
+      // 4. Companions Gossip
+      if (q.includes('九尾') || q.includes('狐狸') || q.includes('구미호')) {
+        return currentLang === 'zh'
+          ? "九尾啊？别看他平时尾巴翘得老高装高冷，昨天困在小溪边抓鱼，他偷偷在旁边看，结果脚滑掉进水里，九条尾巴全湿成了落汤狐！哈哈哈哈千万别告诉他是我说的！🦊"
+          : "구미호 말이야? 항상 쿨한 척 ‘고구마 따위 안 먹어’ 하더니, 어젯밤에 내 군고구마를 꼬리 속에 몰래 숨기다 딱 걸렸어! 비밀이다? 🦊";
+      }
+      if (q.includes('七宝') || q.includes('猫') || q.includes('고양이') || q.includes('칠보')) {
+        return currentLang === 'zh'
+          ? "七宝那只小黑猫总嘴硬说讨厌小狗，结果今天中午困在树下打盹，一睁眼发现他居然蜷在困的大背包上睡得呼噜震天响~ 偷拍证据就在困的相机里！🐱"
+          : "칠보 고양이는 늘 내 배낭 위에 올라가서 풍경 구경을 해! 덜컹거린다고 투덜대지만 실은 멸치 간식 냄새를 맡고 싶은 거라구~ 🐱";
+      }
+      if (q.includes('黑羽') || q.includes('乌鸦') || q.includes('까마귀') || q.includes('흑우')) {
+        return currentLang === 'zh'
+          ? "黑羽总站在高处吹风装深沉，说指南针是指引命运的光。但困觉得他纯粹就是路痴，经常在森林树冠顶上绕圈飞，其实是在找回营地的路！🦅"
+          : "까마귀 흑우는 늘 높은 나무 위에서 폼을 잡지만, 사실 심각한 길치야! 정찰하는 척 빙빙 도는 건 집 찾는 중이거든! 🦅";
+      }
+
+      // 5. Love / Praises / Flirting
+      if (q.includes('喜欢你') || q.includes('可爱') || q.includes('真乖') || q.includes('聪明') || q.includes('困最棒') || q.includes('好喜欢') || q.includes('爱') || q.includes('귀여워') || q.includes('사랑해') || q.includes('착해')) {
+        return currentLang === 'zh'
+          ? "汪呜呜~！（尾巴疯狂摇成了螺旋桨，两只耳朵害羞地抖了抖）困也最喜欢你了！无论你去哪片森林、哪座遗迹，困都要一辈子做你的同行伙伴！给你一个热乎乎的小狗抱抱！🐾💛"
+          : "멍멍 헤헤~! (꼬리를 헬리콥터처럼 돌리며 양 귀를 쫑긋) 곤도 네가 제일 좋아! 어디로 가든 평생 너의 동행 친구가 되어줄게! 꼬옥 안아주기! 🐾💛";
+      }
+
+      // 6. Walk / Play / Outside
+      if (q.includes('散步') || q.includes('出门') || q.includes('出去玩') || q.includes('走走') || q.includes('玩') || q.includes('산책') || q.includes('놀자') || q.includes('나가')) {
+        return currentLang === 'zh'
+          ? "散步？！出门？！你刚才说了‘出去玩’对不对？！困已经咬起牵引绳和大背包啦！快走快走，风里都是青草和烤肠的香味！🐾"
+          : "산책?! 지금 ‘나갈까’라고 했지?! 곤은 벌써 가방 메고 문앞에서 대기 중이야! 빨리 나가자, 바깥 공기 너무 좋아! 🐾";
+      }
+
+      // 7. Jokes
+      if (q.includes('笑话') || q.includes('逗我') || q.includes('好玩') || q.includes('유머') || q.includes('웃겨')) {
+        const joke = JOKES_POOL[Math.floor(Math.random() * JOKES_POOL.length)];
+        return currentLang === 'zh' ? `汪！来听这个：${joke.zh}` : `멍! 이거 들어봐: ${joke.ko}`;
+      }
+
+      // 8. Backpack / Packing
+      if (q.includes('背包') || q.includes('打包') || q.includes('旅行') || q.includes('探险') || q.includes('배낭') || q.includes('모험')) {
+        return currentLang === 'zh'
+          ? "困的黄金打包法则请牢记：重物（水、罐头）一定要贴背放在中上部！这样背一天也不会腰酸，走路还能腾出手来吃零食！🎒"
+          : "곤의 황금 패킹 법칙을 기억해! 무거운 물건(물, 캔)은 등 쪽 중간 위쪽에 붙여야 해! 그래야 하루 종일 걸어도 허리가 안 아프고 간식도 편하게 꺼내먹지! 🎒";
+      }
+
+      // 9. Greetings / Good Morning / Good Night
+      if (q.includes('早') || q.includes('晚安') || q.includes('睡') || q.includes('hi') || q.includes('hello') || q.includes('你好') || q.includes('안녕') || q.includes('잘자')) {
+        if (q.includes('晚') || q.includes('睡') || q.includes('잘자')) {
+          return currentLang === 'zh'
+            ? "晚安哦！快去钻进暖和的被窝吧，困把大背包放在门边守夜，有怪兽困就用大叫把它们吓跑！做个满天都是骨头饼干的好梦~💤"
+            : "잘 자! 따뜻한 이불 속에 푹 들어가 쉬어. 곤이 문앞에서 보초 설 테니 안심해! 꿈에서 맛있는 간식 파티 하자~ 💤";
+        }
+        return currentLang === 'zh'
+          ? "汪汪！早安呀！今天阳光真好，困的尾巴已经在为你打节拍啦！今天打算去哪探险？🐾"
+          : "멍멍! 좋은 아침! 오늘 햇살이 끝내줘, 곤은 벌써 꼬리로 신나게 박자를 맞추는 중이야! 🐾";
+      }
+
+      // 10. Dynamic Rotating Smart Fallback Pool (Never repeat consecutively!)
+      const fallbacksZh = [
+        `汪！你说的“${rawQuery}”，困听得两只耳朵直竖！（认真地歪了歪头）虽然困只是一只爱探险的柴犬，但只要跟你在一起，什么新鲜话题困都想听！要不要边吃零食边细说？🦴`,
+        `嗷呜~！听到你这么说，困的小狗尾巴又开始无意识地摇摆啦！无论你遇到什么奇思妙想，困的大背包随时借你装灵感！🎒`,
+        `（困凑过来用湿漉漉的小鼻子轻轻碰了碰你的手）听起来是个大事情呢！别担心，有困在身边当你的首席同行护卫，什么困难都能迎刃而解！汪！✨`,
+        `汪！关于这个，困觉得：只要踏出第一步，路边的花会开，天上的云会散，答案自然就来啦！先伸出前爪跟困碰个拳，给你小狗能量加成！🐾`,
+        `嘿嘿，你是在考考困吗？困的小脑袋瓜转了三圈！虽然这超出了一只小狗的知识范围，但困能给你提供最热烈的陪伴和掌声！加油呀！💛`,
+        `嗷！困觉得你说得特别有道理！今天困就把这句话记在探险日记的小金句里！现在深呼吸一下，困给你变个摇尾巴小魔术~💫`
+      ];
+
+      const fallbacksKo = [
+        `멍! 네가 말한 이야기, 곤이 두 귀를 쫑긋 세우고 다 들었어! 비록 곤은 모험을 좋아하는 강아지지만, 네가 하는 말이라면 뭐든 흥미진진해! 간식 먹으면서 더 들려줘! 🦴`,
+        `헤헤~ 네 말을 들으니 곤의 꼬리가 저절로 살랑살랑 흔들려! 어떤 생각을 하든 곤은 언제나 네 편이야! 🎒`,
+        `（촉촉한 코로 네 손을 콩콩 누르며） 정말 멋진 이야기야! 걱정 마, 곤이 곁에서 든든하게 지켜줄 테니까! 멍! ✨`,
+        `멍! 발걸음을 내딛기만 하면 길가의 꽃도 피고 구름도 걷힐 거야! 곤이랑 하이파이브 하고 강아지 파워 충전하자! 🐾`
+      ];
+
+      const fPool = currentLang === 'zh' ? fallbacksZh : fallbacksKo;
+      let nextIdx = Math.floor(Math.random() * fPool.length);
+      if (nextIdx === lastFallbackIdx) {
+        nextIdx = (nextIdx + 1) % fPool.length;
+      }
+      lastFallbackIdx = nextIdx;
+      return fPool[nextIdx];
+    }
+
+    /* ================= BACKGROUND PATROL & NOTIFICATION ================= */
+    function togglePatrol(checked) {
+      patrolEnabled = checked;
+      if (checked) {
+        if ('Notification' in window) {
+          Notification.requestPermission().then(perm => {
+            if (perm === 'granted') {
+              alert(currentLang === 'zh'
+                ? '✅ 巡逻通知已开启！当你把应用切入后台或离开时，困会在探险中向你发送消息~'
+                : '✅ 순찰 알림 켜짐! 앱을 백그라운드로 전환하면 곤이 모험 소식을 보내드려요~');
+            } else {
+              alert(currentLang === 'zh' ? '⚠️ 需要在系统通知中允许权限哦！' : '⚠️ 브라우저 알림 권한을 허용해 주세요!');
+            }
+          });
+        }
+      }
+    }
+
+    function handleVisibilityChange() {
+      if (document.hidden) {
+        leaveTimestamp = Date.now();
+        if (patrolEnabled && 'Notification' in window && Notification.permission === 'granted') {
+          setTimeout(() => {
+            if (document.hidden) {
+              const randAdv = ADVENTURE_LOGS[Math.floor(Math.random() * ADVENTURE_LOGS.length)];
+              const title = currentLang === 'zh' ? '【困的后台巡逻日志】' : '【곤의 백그라운드 탐험 일지】';
+              const body = currentLang === 'zh' ? randAdv.zh : randAdv.ko;
+              new Notification(title, {
+                body: body,
+                icon: 'icons/icon-192.png'
+              });
+            }
+          }, 8000);
+        }
+      } else {
+        if (leaveTimestamp && (Date.now() - leaveTimestamp > 5000)) {
+          const randAdv = ADVENTURE_LOGS[Math.floor(Math.random() * ADVENTURE_LOGS.length)];
+          const content = currentLang === 'zh' ? randAdv.zh : randAdv.ko;
+          document.getElementById('adventure-report-content').innerText = content;
+          document.getElementById('adventure-modal').style.display = 'flex';
+          playCuteAudio('success');
+        }
+        leaveTimestamp = null;
+      }
+    }
+
+    function closeAdventureModal() {
+      document.getElementById('adventure-modal').style.display = 'none';
+    }
+
+    /* ================= TAB SWITCHING ================= */
+    function switchAppTab(tab) {
+      const btnRecord = document.getElementById('tab-btn-record');
+      const btnChat = document.getElementById('tab-btn-chat');
+      const viewRecord = document.getElementById('view-record');
+      const viewChat = document.getElementById('view-chat');
+
+      if (tab === 'record') {
+        btnRecord.classList.add('active');
+        btnChat.classList.remove('active');
+        viewRecord.style.display = 'flex';
+        viewChat.style.display = 'none';
+      } else {
+        btnRecord.classList.remove('active');
+        btnChat.classList.add('active');
+        viewRecord.style.display = 'none';
+        viewChat.style.display = 'flex';
+      }
+    }
+
+    /* ================= 2D DYNAMIC CHARACTER INTERACTION ================= */
+    function handleKunClick() {
+      triggerKun2DAnimation('cheer');
+      triggerFloatingPaw();
+      playCuteAudio('bark');
+      
+      const barksZh = [
+        "汪！摸摸肚皮，今天好运翻倍！",
+        "肉垫给你捏一下，今天也要开心哦！",
+        "背包好沉啊，但困还是想陪你一直走！",
+        "咕噜噜……困的尾巴摇得太用力，停不下来啦！"
+      ];
+      const barksKo = [
+        "멍! 곤의 배를 긁어주면 오늘 행운이 두 배!",
+        "말랑말랑 젤리 발바닥 터치! 오늘도 힘내!",
+        "배낭은 무겁지만 너와 함께라면 곤은 어디든 좋아!",
+        "헤헤…… 곤의 꼬리가 너무 신나게 흔들려!"
+      ];
+      const text = currentLang === 'zh' 
+        ? barksZh[Math.floor(Math.random() * barksZh.length)]
+        : barksKo[Math.floor(Math.random() * barksKo.length)];
+      document.getElementById('speech-content').innerText = text;
+    }
+
+    function triggerKun2DAnimation(type = 'cheer') {
+      const wrap = document.getElementById('char-figure-wrap');
+      wrap.classList.remove('cheer', 'waggle');
+      void wrap.offsetWidth; // trigger reflow
+      wrap.classList.add(type);
+      setTimeout(() => wrap.classList.remove(type), 800);
+    }
+
+    function triggerFloatingPaw() {
+      const stage = document.querySelector('.character-stage');
+      const emojis = ['🐾', '🦴', '✨', '💛', '🍖'];
+      for (let i = 0; i < 4; i++) {
+        const fx = document.createElement('div');
+        fx.className = 'floating-fx';
+        fx.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        fx.style.left = `${50 + (Math.random() * 40 - 20)}%`;
+        fx.style.top = `${60 + (Math.random() * 20 - 10)}%`;
+        fx.style.setProperty('--tx', `${(Math.random() - 0.5) * 80}px`);
+        stage.appendChild(fx);
+        setTimeout(() => fx.remove(), 1000);
+      }
+    }
+
+    // Cute Web Audio synthesizer
+    function playCuteAudio(type) {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        const now = ctx.currentTime;
+        if (type === 'bark') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(320, now);
+          osc.frequency.exponentialRampToValueAtTime(580, now + 0.08);
+          osc.frequency.exponentialRampToValueAtTime(280, now + 0.16);
+          gain.gain.setValueAtTime(0.25, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.18);
+          osc.start(now);
+          osc.stop(now + 0.18);
+        } else if (type === 'success') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(523.25, now); // C5
+          osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+          osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        } else {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(440, now);
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+          osc.start(now);
+          osc.stop(now + 0.12);
+        }
+      } catch (e) {
+        // AudioContext disabled
+      }
+    }
+
+    /* ================= LANGUAGE SWITCHER ================= */
+    function toggleAppLang() {
+      currentLang = currentLang === 'zh' ? 'ko' : 'zh';
+      document.getElementById('lang-indicator').innerText = currentLang === 'zh' ? 'KR 한국어' : 'ZH 中文';
+
+      const zhEls = document.querySelectorAll('[data-zh]');
+      const koEls = document.querySelectorAll('[data-ko]');
+
+      if (currentLang === 'zh') {
+        zhEls.forEach(el => el.style.display = '');
+        koEls.forEach(el => el.style.display = 'none');
+        document.getElementById('record-note').placeholder = '写一句想对困说的话 (选填)...';
+        document.getElementById('chat-input').placeholder = '跟困说点什么...';
+      } else {
+        zhEls.forEach(el => el.style.display = 'none');
+        koEls.forEach(el => el.style.display = '');
+        document.getElementById('record-note').placeholder = '곤에게 남길 한 마디 (선택)...';
+        document.getElementById('chat-input').placeholder = '곤에게 말 걸어보기...';
+      }
+
+      loadHistory();
+      updateStreakDisplay();
+    }
+  </script>
+</body>
+</html>

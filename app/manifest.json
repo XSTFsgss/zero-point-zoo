@@ -1,0 +1,32 @@
+{
+  "name": "困 · 每日陪伴打卡",
+  "short_name": "困",
+  "description": "每天打开10秒记录心情，困陪你度过每一刻。专属每日笑话、互动AI伴行与秘密巡逻日记。",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1E162B",
+  "theme_color": "#F5A623",
+  "lang": "zh-CN",
+  "categories": ["lifestyle", "entertainment", "health"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
