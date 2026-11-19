@@ -4307,6 +4307,7 @@ grid-template-columns: 1fr;
 <img src="assets/char_cat.jpg" alt="Character Standee" class="kun-main-standee" id="m-avatar" />
 </div>
 <div class="kun-pose-caption" id="m-role-caption"></div>
+<div id="m-keywords" style="display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin-top:10px; max-width:320px;"></div>
 </div>
 <div class="kun-hero-card-col">
 <div class="kun-member-tag" id="m-creator"></div>
@@ -4316,6 +4317,13 @@ grid-template-columns: 1fr;
 <div class="bubble-tag"><span data-zh>💬 标志性台词 · 대표 대사</span><span data-ko>💬 대표 대사 · 标志性台词</span></div>
 <div class="bubble-quote-main" id="m-say"></div>
 <div class="bubble-quote-sub" id="m-never"></div>
+</div>
+<div class="kun-slogan-bar" id="m-slogan-bar" style="margin-bottom:10px; display:none;">
+<div class="slogan-icon">🧭</div>
+<div class="slogan-text">
+<div class="slogan-label">SLOGAN · 陪伴标语</div>
+<div class="slogan-val" id="m-slogan"></div>
+</div>
 </div>
 <div class="kun-slogan-bar">
 <div class="slogan-icon">🗝️</div>
@@ -4575,8 +4583,12 @@ creatorZh: '创作者：朱熠霏 주예비（202323035）03 个人角色主页'
 creatorKo: '창작자: 주예비 朱熠霏（202323035）03 개인 캐릭터 페이지',
 titleZh: '鲨鱼 · 潮安 (상어 · 차안)',
 titleKo: '상어 · 차안 (鲨鱼 · 潮安)',
-roleZh: '左眼旧疤大胡子鲨鱼 · 调酒师 · 愧疚驱动的护崽导师',
-roleKo: '왼쪽 눈 흉터 큰 수염 상어 · 바텐더 · 죄책감 기반의 보호자 멘토',
+roleZh: '左眼旧疤大胡子鲨鱼 · 愧疚驱动的护崽导师',
+roleKo: '왼쪽 눈 흉터 큰 수염 상어 · 죄책감 기반의 보호자 멘토',
+sloganZh: '嘴上不管你，危险时我挡在前面。',
+sloganKo: '말로는 신경 안 쓴다면서, 위험할 땐 내가 앞을 막아선다.',
+keywordsZh: ['深海老油条', '断后型守护者', '危险区标记师'],
+keywordsKo: ['심해의 베테랑', '후방 엄호 수호자', '위험 구역 마킹사'],
 card1TitleZh: '角色档案 · 鲨鱼 · 潮安 (상어 · 차안) 核心设定卡',
 card1TitleKo: '캐릭터 파일 · 상어 · 차안 (상어 · 차안) 핵심 설정 카드',
 card1SubZh: '基础信息卡片 · 零点动物园 MEMBER 03',
@@ -5109,6 +5121,30 @@ function openMemberRoom(id) {
   document.getElementById('m-say').innerHTML = `<span data-zh>${m.sayZh}</span><span data-ko>${m.sayKo}</span>`;
   document.getElementById('m-never').innerHTML = `<span data-zh>${m.neverZh}</span><span data-ko>${m.neverKo}</span>`;
   document.getElementById('m-props').innerHTML = `<span data-zh>${m.propsZh}</span><span data-ko>${m.propsKo}</span>`;
+
+  const elSloganBar = document.getElementById('m-slogan-bar');
+  if (elSloganBar) {
+    if (m.sloganZh) {
+      elSloganBar.style.display = 'flex';
+      document.getElementById('m-slogan').innerHTML = `<span data-zh>${m.sloganZh}</span><span data-ko>${m.sloganKo || m.sloganZh}</span>`;
+    } else {
+      elSloganBar.style.display = 'none';
+    }
+  }
+
+  const elKeywords = document.getElementById('m-keywords');
+  if (elKeywords) {
+    if (m.keywordsZh && m.keywordsZh.length > 0) {
+      elKeywords.style.display = 'flex';
+      elKeywords.innerHTML = m.keywordsZh.map((kZh, i) => {
+        const kKo = (m.keywordsKo && m.keywordsKo[i]) ? m.keywordsKo[i] : kZh;
+        return `<span class="member-keyword-chip" style="background:rgba(245,166,35,0.15); border:1px solid rgba(245,166,35,0.5); color:#F5A623; font-weight:700; font-size:0.78rem; padding:3px 10px; border-radius:12px; display:inline-flex; align-items:center; gap:4px; box-shadow:0 2px 8px rgba(0,0,0,0.2);"><span style="color:#F5A623;">✦</span><span data-zh>${kZh}</span><span data-ko>${kKo}</span></span>`;
+      }).join('');
+    } else {
+      elKeywords.style.display = 'none';
+      elKeywords.innerHTML = '';
+    }
+  }
   document.getElementById('m-w1-heading').innerHTML = `<span data-zh>W1 P · ${m.titleZh} 角色介绍 (故事/头衔/素材表/关系)</span><span data-ko>W1 P · ${m.titleKo} 캐릭터 소개</span>`;
   const c1TitleZh = m.card1TitleZh || '角色故事 &amp; 专属头衔 (캐릭터 스토리 &amp; 직함)';
   const c1TitleKo = m.card1TitleKo || '캐릭터 스토리 &amp; 직함';
