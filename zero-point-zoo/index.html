@@ -2166,12 +2166,67 @@ padding: 10px;
 display: flex;
 align-items: center;
 justify-content: center;
+transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.comic-img-container:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 24px rgba(245, 166, 35, 0.35);
 }
 .comic-img-container img {
 width: 100%;
-max-width: 340px;
+max-width: 480px;
 height: auto;
 border-radius: 12px;
+cursor: zoom-in;
+display: block;
+}
+/* Comic Lightbox Modal */
+.comic-lightbox {
+position: fixed;
+inset: 0;
+background: rgba(15, 10, 25, 0.94);
+backdrop-filter: blur(8px);
+-webkit-backdrop-filter: blur(8px);
+z-index: 9999;
+display: none;
+align-items: center;
+justify-content: center;
+padding: 20px;
+cursor: zoom-out;
+}
+.comic-lightbox.active {
+display: flex;
+}
+.comic-lightbox img {
+max-width: min(94vw, 900px);
+max-height: 90vh;
+object-fit: contain;
+border-radius: 16px;
+box-shadow: 0 16px 48px rgba(0, 0, 0, 0.85), 0 0 24px rgba(217, 164, 65, 0.4);
+border: 2px solid var(--accent-gold);
+cursor: default;
+}
+.comic-lightbox-close {
+position: absolute;
+top: 24px;
+right: 24px;
+width: 44px;
+height: 44px;
+border-radius: 50%;
+background: var(--bg-card);
+border: 2px solid var(--accent-gold);
+color: var(--accent-gold);
+font-size: 26px;
+line-height: 1;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+transition: transform 0.2s ease;
+}
+.comic-lightbox-close:hover {
+transform: scale(1.12);
 }
 .comic-story-notes {
 background: rgba(30, 22, 43, 0.85);
@@ -4616,7 +4671,7 @@ grid-template-columns: 1fr;
 <div class="w-plan-code"><span>W2 P</span><span>02</span></div>
 <div class="w-plan-zh"><span data-zh>四格漫画</span><span data-ko>4컷 만화</span></div>
 <div class="w-plan-ko">4컷 · comics</div>
-<div class="w-plan-desc"><span data-zh>我是主角的四格漫画2篇以上</span><span data-ko>내가 주인공인 4컷 2편 이상</span></div>
+<div class="w-plan-desc" id="m-w2-btn-desc"><span data-zh>我是主角的四格漫画2篇以上</span><span data-ko>내가 주인공인 4컷 2편 이상</span></div>
 </button>
 <button type="button" class="w-plan-col w3" id="mw-btn-3" onclick="switchMemberWTab(3)">
 <div class="w-plan-code"><span>W3 P</span><span>03</span></div>
@@ -4668,10 +4723,11 @@ grid-template-columns: 1fr;
 <div class="kun-panel-header">
 <div>
 <span class="kun-panel-step">W2 P · 4컷 · COMICS · 내가 주인공인 4컷 2편 이상</span>
-<h3><span data-zh>W2 P · 四格漫画预留位（我是主角的四格漫画 2 篇以上）</span><span data-ko>W2 P · 4컷 만화 전용 슬롯 (내가 주인공인 4컷 2편 이상)</span></h3>
+<h3 id="m-w2-heading"><span data-zh>W2 P · 四格漫画预留位（我是主角的四格漫画 2 篇以上）</span><span data-ko>W2 P · 4컷 만화 전용 슬롯 (내가 주인공인 4컷 2편 이상)</span></h3>
 </div>
-<span class="kun-charm-pill">📖 <span data-zh>2篇以上四格条漫标准预留展位</span><span data-ko>4컷 만화 2편 이상 업로드 슬롯</span></span>
+<span class="kun-charm-pill" id="m-w2-badge">📖 <span data-zh>2篇以上四格条漫标准预留展位</span><span data-ko>4컷 만화 2편 이상 업로드 슬롯</span></span>
 </div>
+<div id="m-comics-container">
 <div class="kun-two-col-cards">
 <div class="kun-info-card" style="text-align:center; padding:38px 24px; border-style:dashed;">
 <div style="font-size:2.6rem; margin-bottom:10px;">🖼️</div>
@@ -4682,6 +4738,7 @@ grid-template-columns: 1fr;
 <div style="font-size:2.6rem; margin-bottom:10px;">🖼️</div>
 <h4 style="color:#F5A623; margin-bottom:8px;"><span data-zh>四格漫画 #02 预留位 (4컷 만화 제2편 슬롯)</span><span data-ko>4컷 만화 제2편 전용 슬롯</span></h4>
 <p style="color:var(--text-Soft); font-size:0.88rem;"><span data-zh>预留尺寸：4格标准比例画布 · 展示该角色作为主角的同伴互动故事第 2 篇。</span><span data-ko>해당 캐릭터가 주인공으로 등장하는 4컷 만화 제2편이 배치될 영역입니다.</span></p>
+</div>
 </div>
 </div>
 </div>
@@ -4829,10 +4886,10 @@ recipeZh: '<p><b>【角色素材表 · 재료표】</b>45% 渴望被记住的傲
 },
 shark: {
 avatar: 'assets/char_shark.jpg',
-creatorZh: '👤 创作者：朱熠霏 주예비 · MEMBER 03 个人角色主页',
-creatorKo: '👤 창작자: 주예비 朱熠霏 · MEMBER 03 개인 캐릭터 페이지',
-titleZh: '鲨鱼 · 潮安 (상어 · 차오안)',
-titleKo: '상어 · 차오안 (鲨鱼 · 潮安)',
+creatorZh: '👤 创作者：朱肖灿 · MEMBER 03 个人角色主页',
+creatorKo: '👤 창작자: 주효찬 朱肖灿 · MEMBER 03 개인 캐릭터 페이지',
+titleZh: '鲨鱼 · 潮安 (상어 · 차안)',
+titleKo: '상어 · 차안 (鲨鱼 · 潮安)',
 roleZh: '左眼旧疤大胡子鲨鱼 · 危险区探查者 · 核心情绪：愧疚 (죄책감)',
 roleKo: '왼쪽 눈 흉터와 큰 수염 상어 · 위험 구역 탐색자 · 핵심 감정: 죄책감',
 sayZh: '「“我只是来赚赏金的，谁管你们死活？”」',
@@ -4842,7 +4899,41 @@ neverKo: '🚫 하지 않는 말: “과거의 모든 것을 아낌없이 말씀
 propsZh: '量酒器、胸前旧队友名牌、旧鱼雷发射器“老伙计”',
 propsKo: '계량 지거, 옛 동료의 이름표, 어뢰 발사기 ‘오랜 친구’',
 storyZh: '<p><b>【角色故事 · 캐릭터 스토리】</b>左眼留有旧疤的鲨鱼大叔潮安，胸前挂着昔日队友的名牌。被「愧疚」束缚的他无法坦率表达关心，总用“为了赏金”的玩笑掩饰过去的伤痛；但在每天重组后的迷宫里，他总是第一个孤身潜入情绪爆发的高危区，用尾鳍和背鳍为大家标记安全界线。</p><p style="margin-top:8px;"><b>【专属头衔 · 직함】</b>零点动物园 · 高危区探查先锋 &amp; 守夜重炮手 / 위험 구역 탐색 선봉장</p>',
-recipeZh: '<p><b>【角色素材表 · 재료표】</b>50% 嘴硬心软的可靠保护欲 + 25% 从不离身的旧队友名牌与“老伙计” + 15% 敏锐的尾鳍危险雷达 + 10% 藏在特调饮品里的往事。</p><p style="margin-top:8px;"><b>【角色关系 · 관계도】</b>总是被跟在身后帮忙背水瓶的柴犬·困打动，与白兔·安月配合默契预判险情。</p>'
+recipeZh: '<p><b>【角色素材表 · 재료표】</b>50% 嘴硬心软的可靠保护欲 + 25% 从不离身的旧队友名牌与“老伙计” + 15% 敏锐的尾鳍危险雷达 + 10% 藏在特调饮品里的往事。</p><p style="margin-top:8px;"><b>【角色关系 · 관계도】</b>总是默默关注着队里冒失的年轻队员，嘴上嫌弃麻烦，却总在危险时刻第一时间冲在最前面。</p>',
+comics: [
+  {
+    epZh: '★ EPISODE 01 · 危险区域篇',
+    epKo: '★ EPISODE 01 · 위험 구역 편',
+    titleZh: '《我只是怕你把事情搞得更麻烦》',
+    titleKo: '《그저 네가 일을 더 복잡하게 만들까 봐》',
+    img: 'assets/shark_comic_1.jpg',
+    alt: '四格漫画：我只是怕你把事情搞得更麻烦',
+    storyZh: '<b>剧情亮点：</b>表面上冷酷声称“谁管你们死活”的鲨鱼潮安，在吧台擦着酒具，被冒失队员疯狂发信息询问难题。看到没得到回复的队员赌气大喊“那只能我自己去危险区域了！！！！”，潮安神色骤变，尽管嘴上依旧傲娇地嫌弃“我只是怕你把事情搞得更麻烦”，身体却早已带齐装备，第一个全速冲进了满是硝烟与火光的高危战场！',
+    storyKo: '<b>스토리 포인트:</b> 겉으로는 "누가 신경 쓰겠어?"라며 무뚝뚝하게 굴던 바텐더 상어 차안. 카운터에서 잔을 닦던 중, 미숙한 팀원이 답장이 늦어지자 홧김에 "그럼 저 혼자 위험 구역으로 갈게요!!!!"라며 뛰쳐나가려 합니다. 차안은 정색하며 "그저 네가 일을 더 복잡하게 만들까 봐"라며 츤데레처럼 핀잔을 던지지만, 이미 중무장을 마치고 연기와 헬기가 뒤덮인 위험 구역으로 가장 먼저 전속력으로 달려 나가고 있습니다!',
+    dialogues: [
+      { cut: '1컷', zh: '队员：潮安哥，有空吗？', ko: '팀원: 차안 형, 시간 있어요?' },
+      { cut: '2컷', zh: '队员：都看到了吗…？（潮安：……）', ko: '팀원: 다 봤어요...? (차안: ……)' },
+      { cut: '3컷', zh: '队员：那只能我自己去危险区域了！！！！', ko: '팀원: 그럼 저 혼자 위험 구역으로 갈게요!!!!' },
+      { cut: '4컷', zh: '潮安：我只是怕你把事情搞得更麻烦。', ko: '차안: 그저 네가 일을 더 복잡하게 만들까 봐.' }
+    ]
+  },
+  {
+    epZh: '★ EPISODE 02 · 调饮审讯篇',
+    epKo: '★ EPISODE 02 · 민트 심문 편',
+    titleZh: '《你是在做饮料，还是在审讯薄荷？》',
+    titleKo: '《너 음료 만드는 거야, 아니면 민트 심문하는 거야?》',
+    img: 'assets/shark_comic_2.jpg',
+    alt: '四格漫画：你是在做饮料，还是在审讯薄荷？',
+    storyZh: '<b>剧情亮点：</b>在吧台前热情尝试调配莫吉托饮料的队员，拿起捣棒就是一阵粗暴狂砸，把新鲜薄荷叶彻底捣成了烂泥。专业调酒大叔潮安一脸黑线、头顶冒旋涡，一边扶额指点“捣压适度才能释放香气，过度挤压可能带来苦味”，一边眼神如闪电般凌厉逼问：“你是在做饮料，还是在审讯薄荷？”吓得队员冷汗直冒！',
+    storyKo: '<b>스토리 포인트:</b> 모히토 음료를 만들겠다며 머들러를 쥐고 잔 속의 민트 잎을 마구 내리쳐 녹색 곤죽으로 만들어버린 열정 넘치는 팀원! 이를 본 베테랑 바텐더 차안은 머리가 어지러운 듯 "적당히 눌러야 향이 나고, 너무 세게 하면 쓴맛이 날 수 있어"라며 올바른 압착 방법을 친절히 설명해 줍니다. 그러더니 번쩍이는 날카로운 눈빛으로 "너 음료 만드는 거야, 아니면 민트 심문하는 거야?"라며 오싹한 일침을 날립니다!',
+    dialogues: [
+      { cut: '1컷', zh: '队员：我用力捣碎一下！', ko: '팀원: 힘껏 으깨볼게요!' },
+      { cut: '2컷', zh: '潮安：薄荷都搞成泥了……', ko: '차안: 민트가 다 으깨졌는데……' },
+      { cut: '3컷', zh: '潮安：捣压适度才能释放香气，过度挤压可能带来苦味。', ko: '차안: 적당히 눌러야 향이 나고, 너무 세게 하면 쓴맛이 날 수 있어.' },
+      { cut: '4컷', zh: '潮安：你是在做饮料，还是在审讯薄荷？', ko: '차안: 너 음료 만드는 거야, 아니면 민트 심문하는 거야?' }
+    ]
+  }
+]
 },
 fox: {
 avatar: 'assets/char_fox.jpg',
@@ -4926,38 +5017,155 @@ history.pushState({ view: 'kun' }, '', '#kun');
 }
 window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+let currentMemberId = '';
+
+function renderMemberComics(m) {
+  const container = document.getElementById('m-comics-container');
+  const heading = document.getElementById('m-w2-heading');
+  const badge = document.getElementById('m-w2-badge');
+  const btnDesc = document.getElementById('m-w2-btn-desc');
+  if (!container) return;
+
+  if (m.comics && m.comics.length > 0) {
+    if (heading) {
+      heading.innerHTML = `<span data-zh>W2 P · 四格漫画 · ${m.titleZh}（共 ${m.comics.length} 篇）</span><span data-ko>W2 P · 4컷 만화 · ${m.titleKo} (총 ${m.comics.length}편)</span>`;
+    }
+    if (badge) {
+      badge.innerHTML = `📖 <span data-zh>已收录 ${m.comics.length} 篇完整全彩四格</span><span data-ko>풀컬러 4컷 ${m.comics.length}편 수록 완료</span>`;
+    }
+    if (btnDesc) {
+      btnDesc.innerHTML = `<span data-zh>★ 已收录 ${m.comics.length} 篇全彩四格</span><span data-ko>★ 풀컬러 4컷 ${m.comics.length}편 수록</span>`;
+    }
+    let html = `<div class="kun-comics-grid">`;
+    m.comics.forEach((c) => {
+      html += `
+<div class="kun-comic-card" style="border: 2.5px solid #F5A623; box-shadow: 0 12px 32px rgba(245,166,35,0.22);">
+<div class="comic-header">
+<span class="comic-ep" style="background:#F5A623; color:#1E162B;"><span data-zh>${c.epZh}</span><span data-ko>${c.epKo}</span></span>
+<h4>
+<span data-zh>${c.titleZh}</span>
+<span data-ko>${c.titleKo}</span>
+</h4>
+</div>
+<div class="comic-img-container" onclick="openComicModal('${c.img}', '${c.alt}')" title="点击查看高清大图 / 클릭하여 원본 보기">
+<img src="${c.img}" alt="${c.alt}" />
+</div>
+<div class="comic-story-notes">
+<p>
+<span data-zh>${c.storyZh}</span>
+<span data-ko>${c.storyKo}</span>
+</p>
+<div class="comic-panels-dialogue">
+${c.dialogues.map(d => `<div class="comic-panel-line"><b>${d.cut}</b> <span data-zh>${d.zh}</span><span data-ko>${d.ko}</span></div>`).join('')}
+</div>
+</div>
+</div>`;
+    });
+    html += `</div>`;
+    container.innerHTML = html;
+  } else {
+    if (heading) {
+      heading.innerHTML = `<span data-zh>W2 P · 四格漫画预留位（我是主角的四格漫画 2 篇以上）</span><span data-ko>W2 P · 4컷 만화 전용 슬롯 (내가 주인공인 4컷 2편 이상)</span>`;
+    }
+    if (badge) {
+      badge.innerHTML = `📖 <span data-zh>2篇以上四格条漫标准预留展位</span><span data-ko>4컷 만화 2편 이상 업로드 슬롯</span>`;
+    }
+    if (btnDesc) {
+      btnDesc.innerHTML = `<span data-zh>我是主角的四格漫画2篇以上</span><span data-ko>내가 주인공인 4컷 2편 이상</span>`;
+    }
+    container.innerHTML = `
+<div class="kun-two-col-cards">
+<div class="kun-info-card" style="text-align:center; padding:38px 24px; border-style:dashed;">
+<div style="font-size:2.6rem; margin-bottom:10px;">🖼️</div>
+<h4 style="color:#F5A623; margin-bottom:8px;"><span data-zh>四格漫画 #01 预留位 (4컷 만화 제1편 슬롯)</span><span data-ko>4컷 만화 제1편 전용 슬롯</span></h4>
+<p style="color:var(--text-Soft); font-size:0.88rem;"><span data-zh>预留尺寸：4格标准比例画布 · 展示该角色作为主角的日常情绪故事第 1 篇。</span><span data-ko>해당 캐릭터가 주인공으로 등장하는 4컷 만화 제1편이 배치될 영역입니다.</span></p>
+</div>
+<div class="kun-info-card" style="text-align:center; padding:38px 24px; border-style:dashed;">
+<div style="font-size:2.6rem; margin-bottom:10px;">🖼️</div>
+<h4 style="color:#F5A623; margin-bottom:8px;"><span data-zh>四格漫画 #02 预留位 (4컷 만화 제2편 슬롯)</span><span data-ko>4컷 만화 제2편 전용 슬롯</span></h4>
+<p style="color:var(--text-Soft); font-size:0.88rem;"><span data-zh>预留尺寸：4格标准比例画布 · 展示该角色作为主角的同伴互动故事第 2 篇。</span><span data-ko>해당 캐릭터가 주인공으로 등장하는 4컷 만화 제2편이 배치될 영역입니다.</span></p>
+</div>
+</div>`;
+  }
+}
+
+function openComicModal(src, alt) {
+  let modal = document.getElementById('comic-lightbox');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'comic-lightbox';
+    modal.className = 'comic-lightbox';
+    modal.innerHTML = '<span class="comic-lightbox-close" onclick="closeComicModal()">&times;</span><img id="comic-lightbox-img" src="" alt="" onclick="event.stopPropagation()">';
+    modal.onclick = closeComicModal;
+    document.body.appendChild(modal);
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeComicModal();
+    });
+  }
+  document.getElementById('comic-lightbox-img').src = src;
+  document.getElementById('comic-lightbox-img').alt = alt || '';
+  modal.classList.add('active');
+}
+
+function closeComicModal() {
+  const modal = document.getElementById('comic-lightbox');
+  if (modal) modal.classList.remove('active');
+}
+
 function openMemberRoom(id) {
-const m = MEMBERS_DATA[id];
-if (!m) { openKunRoom(); return; }
-document.getElementById('m-avatar').src = m.avatar;
-document.getElementById('m-creator').innerHTML = `<span data-zh>${m.creatorZh}</span><span data-ko>${m.creatorKo}</span>`;
-document.getElementById('m-title').innerHTML = `<span data-zh>${m.titleZh}</span><span data-ko>${m.titleKo}</span>`;
-document.getElementById('m-role-caption').innerHTML = `<span data-zh>${m.roleZh}</span><span data-ko>${m.roleKo}</span>`;
-document.getElementById('m-badges').innerHTML = `<span class="backpack-tag"><span data-zh>${m.roleZh}</span><span data-ko>${m.roleKo}</span></span>`;
-document.getElementById('m-say').innerHTML = `<span data-zh>${m.sayZh}</span><span data-ko>${m.sayKo}</span>`;
-document.getElementById('m-never').innerHTML = `<span data-zh>${m.neverZh}</span><span data-ko>${m.neverKo}</span>`;
-document.getElementById('m-props').innerHTML = `<span data-zh>${m.propsZh}</span><span data-ko>${m.propsKo}</span>`;
-document.getElementById('m-w1-heading').innerHTML = `<span data-zh>W1 P · ${m.titleZh} 角色介绍 (故事/头衔/素材表/关系)</span><span data-ko>W1 P · ${m.titleKo} 캐릭터 소개</span>`;
-document.getElementById('m-story-box').innerHTML = m.storyZh;
-document.getElementById('m-recipe-box').innerHTML = m.recipeZh;
-['cat','shark','fox','crow','rabbit','otter'].forEach(k => {
-const pill = document.getElementById('mpill-' + k);
-if (pill) pill.classList.toggle('active', k === id);
-});
-switchMemberWTab(1);
-document.documentElement.setAttribute('data-view', 'member');
-if (location.hash !== '#member-' + id) {
-history.pushState({ view: 'member', id }, '', '#member-' + id);
+  const parts = id.split('-w');
+  const actualId = parts[0];
+  const targetTab = parts[1] ? parseInt(parts[1]) : 1;
+  const m = MEMBERS_DATA[actualId];
+  if (!m) { openKunRoom(); return; }
+  currentMemberId = actualId;
+
+  document.getElementById('m-avatar').src = m.avatar;
+  document.getElementById('m-creator').innerHTML = `<span data-zh>${m.creatorZh}</span><span data-ko>${m.creatorKo}</span>`;
+  document.getElementById('m-title').innerHTML = `<span data-zh>${m.titleZh}</span><span data-ko>${m.titleKo}</span>`;
+  document.getElementById('m-role-caption').innerHTML = `<span data-zh>${m.roleZh}</span><span data-ko>${m.roleKo}</span>`;
+  
+  if (m.comics && m.comics.length > 0) {
+    document.getElementById('m-badges').innerHTML = `<span class="backpack-tag"><span data-zh>${m.roleZh}</span><span data-ko>${m.roleKo}</span></span><button type="button" onclick="switchMemberWTab(2)" class="backpack-tag" style="background:#F5A623; color:#1E162B; cursor:pointer; border:none; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击切换至四格漫画 / 클릭하여 4컷 만화 보기"><span data-zh>📖 专属四格漫画 (${m.comics.length}篇) ➔</span><span data-ko>📖 전용 4컷 만화 (${m.comics.length}편) ➔</span></button>`;
+  } else {
+    document.getElementById('m-badges').innerHTML = `<span class="backpack-tag"><span data-zh>${m.roleZh}</span><span data-ko>${m.roleKo}</span></span>`;
+  }
+
+  document.getElementById('m-say').innerHTML = `<span data-zh>${m.sayZh}</span><span data-ko>${m.sayKo}</span>`;
+  document.getElementById('m-never').innerHTML = `<span data-zh>${m.neverZh}</span><span data-ko>${m.neverKo}</span>`;
+  document.getElementById('m-props').innerHTML = `<span data-zh>${m.propsZh}</span><span data-ko>${m.propsKo}</span>`;
+  document.getElementById('m-w1-heading').innerHTML = `<span data-zh>W1 P · ${m.titleZh} 角色介绍 (故事/头衔/素材表/关系)</span><span data-ko>W1 P · ${m.titleKo} 캐릭터 소개</span>`;
+  document.getElementById('m-story-box').innerHTML = m.storyZh;
+  document.getElementById('m-recipe-box').innerHTML = m.recipeZh;
+
+  ['cat','shark','fox','crow','rabbit','otter'].forEach(k => {
+    const pill = document.getElementById('mpill-' + k);
+    if (pill) pill.classList.toggle('active', k === actualId);
+  });
+
+  renderMemberComics(m);
+  switchMemberWTab(targetTab);
+
+  document.documentElement.setAttribute('data-view', 'member');
+  const targetHash = targetTab > 1 ? ('#member-' + actualId + '-w' + targetTab) : ('#member-' + actualId);
+  if (location.hash !== targetHash) {
+    history.pushState({ view: 'member', id: actualId, tab: targetTab }, '', targetHash);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+
 function switchMemberWTab(idx) {
-for (let i = 1; i <= 6; i++) {
-const b = document.getElementById('mw-btn-' + i);
-const p = document.getElementById('mw-panel-' + i);
-if (b) b.classList.toggle('active', i === idx);
-if (p) p.classList.toggle('active', i === idx);
-}
+  for (let i = 1; i <= 6; i++) {
+    const b = document.getElementById('mw-btn-' + i);
+    const p = document.getElementById('mw-panel-' + i);
+    if (b) b.classList.toggle('active', i === idx);
+    if (p) p.classList.toggle('active', i === idx);
+  }
+  if (currentMemberId && idx > 1) {
+    history.replaceState({ view: 'member', id: currentMemberId, tab: idx }, '', '#member-' + currentMemberId + '-w' + idx);
+  } else if (currentMemberId) {
+    history.replaceState({ view: 'member', id: currentMemberId }, '', '#member-' + currentMemberId);
+  }
 }
 function closeKunRoom() {
 document.documentElement.removeAttribute('data-view');
