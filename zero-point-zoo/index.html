@@ -4677,7 +4677,7 @@ grid-template-columns: 1fr;
 <div class="w-plan-code"><span>W3 P</span><span>03</span></div>
 <div class="w-plan-zh"><span data-zh>动画</span><span data-ko>애니메이션</span></div>
 <div class="w-plan-ko">애니메이션 · animation</div>
-<div class="w-plan-desc"><span data-zh>9:16竖屏短视频2部以上</span><span data-ko>9:16 숏폼 2편 이상</span></div>
+<div class="w-plan-desc" id="m-w3-btn-desc"><span data-zh>9:16竖屏短视频2部以上</span><span data-ko>9:16 숏폼 2편 이상</span></div>
 </button>
 <button type="button" class="w-plan-col w4" id="mw-btn-4" onclick="switchMemberWTab(4)">
 <div class="w-plan-code"><span>W4 P</span><span>04</span></div>
@@ -4747,23 +4747,34 @@ grid-template-columns: 1fr;
 <div class="kun-panel-header">
 <div>
 <span class="kun-panel-step">W3 P · 애니메이션 · ANIMATION · 9:16 숏폼 2편 이상</span>
-<h3><span data-zh>W3 P · 动画预留位（9:16 竖屏短视频 2 部以上）</span><span data-ko>W3 P · 애니메이션 전용 슬롯 (9:16 세로형 숏폼 2편 이상)</span></h3>
+<h3 id="m-w3-heading"><span data-zh>W3 P · 动画预留位（9:16 竖屏短视频 2 部以上）</span><span data-ko>W3 P · 애니메이션 전용 슬롯 (9:16 세로형 숏폼 2편 이상)</span></h3>
 </div>
-<span class="kun-charm-pill">🎬 <span data-zh>9:16 竖屏播放器预留框</span><span data-ko>9:16 숏폼 플레이어 슬롯</span></span>
+<span class="kun-charm-pill" id="m-w3-badge">🎬 <span data-zh>9:16 竖屏播放器预留框</span><span data-ko>9:16 숏폼 플레이어 슬롯</span></span>
 </div>
-<div class="shortform-grid">
-<div class="shortform-phone" style="border-style:dashed;">
-<div class="shortform-overlay" style="justify-content:center; align-items:center; text-align:center; gap:12px;">
-<div style="font-size:2.8rem;">📱</div>
-<span class="compare-badge gold">9:16 SHORT #01</span>
-<p style="font-size:0.84rem; color:var(--text-Soft);"><span data-zh>9:16 竖屏短视频第 1 部预留展位</span><span data-ko>9:16 숏폼 애니메이션 제1편 슬롯</span></p>
+<div id="m-animation-container">
+<div class="shortform-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 340px)); justify-content:center;">
+<div class="shortform-phone" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:9/16; border-radius:32px; border:3px solid #F5A623;">
+  <video controls playsinline loop preload="metadata" style="width:100%; height:100%; object-fit:cover; border-radius:28px; display:block;">
+    <source src="assets/shark-short01.mp4#t=0.001" type="video/mp4">
+    <source src="assets/shark-short01.mp4" type="video/mp4">
+    <source src="assets/shipin1_1.mp4" type="video/mp4">
+  </video>
+  <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(15,10,25,0.92) 25%); padding:18px 16px 14px; pointer-events:none;">
+    <span class="compare-badge gold" style="font-size:0.75rem; pointer-events:auto;">🎬 9:16 SHORT #01</span>
+    <h4 style="color:#FFF3D1; font-size:1rem; margin:6px 0 3px; text-shadow:0 2px 4px rgba(0,0,0,0.8);">
+      <span data-zh>《鲨鱼·潮安 · 专属动画短片 #01》</span><span data-ko>《상어 · 차안 전용 숏폼 애니메이션 #01》</span>
+    </h4>
+  </div>
 </div>
-</div>
-<div class="shortform-phone" style="border-style:dashed;">
-<div class="shortform-overlay" style="justify-content:center; align-items:center; text-align:center; gap:12px;">
-<div style="font-size:2.8rem;">📱</div>
-<span class="compare-badge gold">9:16 SHORT #02</span>
-<p style="font-size:0.84rem; color:var(--text-Soft);"><span data-zh>9:16 竖屏短视频第 2 部预留展位</span><span data-ko>9:16 숏폼 애니메이션 제2편 슬롯</span></p>
+<div class="shortform-phone" style="padding:0; overflow:hidden; position:relative; background:#1b1527; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:9/16; border-radius:32px; border:2.5px dashed rgba(245,166,35,0.45); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px;">
+  <div style="font-size:2.8rem; margin-bottom:12px;">🎬</div>
+  <span class="compare-badge gold" style="font-size:0.75rem; margin-bottom:8px;">🎬 9:16 SHORT #02</span>
+  <h4 style="color:#F5A623; font-size:1.05rem; margin-bottom:8px;">
+    <span data-zh>动画 #02 预留位</span><span data-ko>애니메이션 #02 슬롯</span>
+  </h4>
+  <p style="color:var(--text-Soft); font-size:0.82rem; line-height:1.5;">
+    <span data-zh>预留 9:16 竖屏动画短片展位</span><span data-ko>9:16 세로형 숏폼 영상 전용 슬롯</span>
+  </p>
 </div>
 </div>
 </div>
@@ -4932,6 +4943,13 @@ comics: [
       { cut: '3컷', zh: '潮安：捣压适度才能释放香气，过度挤压可能带来苦味。', ko: '차안: 적당히 눌러야 향이 나고, 너무 세게 하면 쓴맛이 날 수 있어.' },
       { cut: '4컷', zh: '潮安：你是在做饮料，还是在审讯薄荷？', ko: '차안: 너 음료 만드는 거야, 아니면 민트 심문하는 거야?' }
     ]
+,
+animation: {
+  src: 'assets/shark-short01.mp4',
+  altSrc: 'assets/shipin1_1.mp4',
+  titleZh: '《鲨鱼·潮安 · 专属动画短片 #01》',
+  titleKo: '《상어 · 차안 전용 숏폼 애니메이션 #01》'
+}
   }
 ]
 },
@@ -5112,6 +5130,84 @@ function closeComicModal() {
   if (modal) modal.classList.remove('active');
 }
 
+function renderMemberAnimation(m) {
+  const container = document.getElementById('m-animation-container');
+  const heading = document.getElementById('m-w3-heading');
+  const badge = document.getElementById('m-w3-badge');
+  const btnDesc = document.getElementById('m-w3-btn-desc');
+  if (!container) return;
+
+  if (m.animation) {
+    if (heading) {
+      heading.innerHTML = `<span data-zh>W3 P · 动画 · ${m.titleZh} 专属短片</span><span data-ko>W3 P · 애니메이션 · ${m.titleKo} 전용 숏폼</span>`;
+    }
+    if (badge) {
+      badge.innerHTML = `🎬 <span data-zh>已收录专属 9:16 竖屏短片</span><span data-ko>전용 9:16 숏폼 영상 수록 완료</span>`;
+    }
+    if (btnDesc) {
+      btnDesc.innerHTML = `<span data-zh>★ 专属短视频已收录</span><span data-ko>★ 전용 숏폼 영상 수록</span>`;
+    }
+    container.innerHTML = `
+<div class="shortform-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 340px)); justify-content:center;">
+<div class="shortform-phone" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:9/16; border-radius:32px; border:3px solid #F5A623;">
+  <video controls playsinline loop preload="metadata" style="width:100%; height:100%; object-fit:cover; border-radius:28px; display:block;">
+    <source src="${m.animation.src}#t=0.001" type="video/mp4">
+    <source src="${m.animation.src}" type="video/mp4">
+    <source src="${m.animation.altSrc}" type="video/mp4">
+  </video>
+  <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(15,10,25,0.92) 25%); padding:18px 16px 14px; pointer-events:none;">
+    <span class="compare-badge gold" style="font-size:0.75rem; pointer-events:auto;">🎬 9:16 SHORT #01</span>
+    <h4 style="color:#FFF3D1; font-size:1rem; margin:6px 0 3px; text-shadow:0 2px 4px rgba(0,0,0,0.8);">
+      <span data-zh>${m.animation.titleZh}</span><span data-ko>${m.animation.titleKo}</span>
+    </h4>
+  </div>
+</div>
+<div class="shortform-phone" style="padding:0; overflow:hidden; position:relative; background:#1b1527; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:9/16; border-radius:32px; border:2.5px dashed rgba(245,166,35,0.45); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px;">
+  <div style="font-size:2.8rem; margin-bottom:12px;">🎬</div>
+  <span class="compare-badge gold" style="font-size:0.75rem; margin-bottom:8px;">🎬 9:16 SHORT #02</span>
+  <h4 style="color:#F5A623; font-size:1.05rem; margin-bottom:8px;">
+    <span data-zh>动画 #02 预留位</span><span data-ko>애니메이션 #02 슬롯</span>
+  </h4>
+  <p style="color:var(--text-Soft); font-size:0.82rem; line-height:1.5;">
+    <span data-zh>预留 9:16 竖屏动画短片展位</span><span data-ko>9:16 세로형 숏폼 영상 전용 슬롯</span>
+  </p>
+</div>
+</div>`;
+  } else {
+    if (heading) {
+      heading.innerHTML = `<span data-zh>W3 P · 动画预留位（9:16 竖屏短视频 2 部以上）</span><span data-ko>W3 P · 애니메이션 전용 슬롯 (9:16 세로형 숏폼 2편 이상)</span>`;
+    }
+    if (badge) {
+      badge.innerHTML = `🎬 <span data-zh>9:16 竖屏播放器预留框</span><span data-ko>9:16 숏폼 플레이어 슬롯</span>`;
+    }
+    if (btnDesc) {
+      btnDesc.innerHTML = `<span data-zh>9:16竖屏短视频2部以上</span><span data-ko>9:16 숏폼 2편 이상</span>`;
+    }
+    container.innerHTML = `
+<div class="shortform-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 340px)); justify-content:center;">
+<div class="shortform-phone" style="padding:0; overflow:hidden; position:relative; background:#1b1527; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:9/16; border-radius:32px; border:2.5px dashed rgba(245,166,35,0.45); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px;">
+  <div style="font-size:2.8rem; margin-bottom:12px;">🎬</div>
+  <span class="compare-badge gold" style="font-size:0.75rem; margin-bottom:8px;">🎬 9:16 SHORT #01</span>
+  <h4 style="color:#F5A623; font-size:1.05rem; margin-bottom:8px;">
+    <span data-zh>动画 #01 预留位</span><span data-ko>애니메이션 #01 슬롯</span>
+  </h4>
+  <p style="color:var(--text-Soft); font-size:0.82rem; line-height:1.5;">
+    <span data-zh>预留 9:16 竖屏动画短片展位</span><span data-ko>9:16 세로형 숏폼 영상 전용 슬롯</span>
+  </p>
+</div>
+<div class="shortform-phone" style="padding:0; overflow:hidden; position:relative; background:#1b1527; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:9/16; border-radius:32px; border:2.5px dashed rgba(245,166,35,0.45); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px;">
+  <div style="font-size:2.8rem; margin-bottom:12px;">🎬</div>
+  <span class="compare-badge gold" style="font-size:0.75rem; margin-bottom:8px;">🎬 9:16 SHORT #02</span>
+  <h4 style="color:#F5A623; font-size:1.05rem; margin-bottom:8px;">
+    <span data-zh>动画 #02 预留位</span><span data-ko>애니메이션 #02 슬롯</span>
+  </h4>
+  <p style="color:var(--text-Soft); font-size:0.82rem; line-height:1.5;">
+    <span data-zh>预留 9:16 竖屏动画短片展位</span><span data-ko>9:16 세로형 숏폼 영상 전용 슬롯</span>
+  </p>
+</div>
+</div>`;
+  }
+}
 function openMemberRoom(id) {
   const parts = id.split('-w');
   const actualId = parts[0];
@@ -5125,11 +5221,14 @@ function openMemberRoom(id) {
   document.getElementById('m-title').innerHTML = `<span data-zh>${m.titleZh}</span><span data-ko>${m.titleKo}</span>`;
   document.getElementById('m-role-caption').innerHTML = `<span data-zh>${m.roleZh}</span><span data-ko>${m.roleKo}</span>`;
   
+  let badgesHtml = `<span class="backpack-tag"><span data-zh>${m.roleZh}</span><span data-ko>${m.roleKo}</span></span>`;
   if (m.comics && m.comics.length > 0) {
-    document.getElementById('m-badges').innerHTML = `<span class="backpack-tag"><span data-zh>${m.roleZh}</span><span data-ko>${m.roleKo}</span></span><button type="button" onclick="switchMemberWTab(2)" class="backpack-tag" style="background:#F5A623; color:#1E162B; cursor:pointer; border:none; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击切换至四格漫画 / 클릭하여 4컷 만화 보기"><span data-zh>📖 专属四格漫画 (${m.comics.length}篇) ➔</span><span data-ko>📖 전용 4컷 만화 (${m.comics.length}편) ➔</span></button>`;
-  } else {
-    document.getElementById('m-badges').innerHTML = `<span class="backpack-tag"><span data-zh>${m.roleZh}</span><span data-ko>${m.roleKo}</span></span>`;
+    badgesHtml += `<button type="button" onclick="switchMemberWTab(2)" class="backpack-tag" style="background:#F5A623; color:#1E162B; cursor:pointer; border:none; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击切换至四格漫画 / 클릭하여 4컷 만화 보기"><span data-zh>📖 专属四格漫画 (${m.comics.length}篇) ➔</span><span data-ko>📖 전용 4컷 만화 (${m.comics.length}편) ➔</span></button>`;
   }
+  if (m.animation) {
+    badgesHtml += `<button type="button" onclick="switchMemberWTab(3)" class="backpack-tag" style="background:rgba(245,166,35,0.22); color:#F5A623; border:1.5px solid #F5A623; cursor:pointer; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击切换至动画短片 / 클릭하여 숏폼 영상 보기"><span data-zh>🎬 专属动画短片 ➔</span><span data-ko>🎬 전용 숏폼 영상 ➔</span></button>`;
+  }
+  document.getElementById('m-badges').innerHTML = badgesHtml;
 
   document.getElementById('m-say').innerHTML = `<span data-zh>${m.sayZh}</span><span data-ko>${m.sayKo}</span>`;
   document.getElementById('m-never').innerHTML = `<span data-zh>${m.neverZh}</span><span data-ko>${m.neverKo}</span>`;
@@ -5144,6 +5243,7 @@ function openMemberRoom(id) {
   });
 
   renderMemberComics(m);
+  renderMemberAnimation(m);
   switchMemberWTab(targetTab);
 
   document.documentElement.setAttribute('data-view', 'member');
@@ -5153,7 +5253,6 @@ function openMemberRoom(id) {
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
 function switchMemberWTab(idx) {
   for (let i = 1; i <= 6; i++) {
     const b = document.getElementById('mw-btn-' + i);
