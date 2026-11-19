@@ -4695,7 +4695,35 @@ animation: {
   altSrc: 'assets/fox-short01.mp4',
   titleZh: '《赤狐·九尾 · 专属动画短片 #01》',
   titleKo: '《적호·구미호 전용 숏폼 애니메이션 #01》'
-}
+},
+animation2: {
+  src: 'assets/fox-short02.mp4',
+  altSrc: 'assets/video_2.mp4',
+  titleZh: '《赤狐·九尾 · 专属动画短片 #02》',
+  titleKo: '《적호·구미호 전용 숏폼 애니메이션 #02》',
+  aspectRatio: '9/16',
+  width: 720,
+  height: 1280,
+  isLandscape: false
+},
+emoticons: [
+  { img: 'assets/fox_expr_01.jpg', zh: '趴窝小憩 · 呼呼', ko: '쿨쿨..' },
+  { img: 'assets/fox_expr_02.jpg', zh: '蜷缩好梦 · 酣睡', ko: '새근새근' },
+  { img: 'assets/fox_expr_03.jpg', zh: '叉腰凝视 · 测谎', ko: '거짓말 탐지' },
+  { img: 'assets/fox_expr_04.jpg', zh: '搓手沉思 · 祈愿', ko: '두 손 모아' },
+  { img: 'assets/fox_expr_05.jpg', zh: '双手抱胸 · 傲娇', ko: '흥!' },
+  { img: 'assets/fox_expr_06.jpg', zh: '开心飞扑 · 欢呼', ko: '와아~!' },
+  { img: 'assets/fox_expr_07.jpg', zh: '乖巧正坐 · 盯视', ko: '빤히..' },
+  { img: 'assets/fox_expr_08.jpg', zh: '警觉打量 · 戒备', ko: '경계 중' },
+  { img: 'assets/fox_expr_09.jpg', zh: '疾步冲锋 · 追击', ko: '출동!' },
+  { img: 'assets/fox_expr_10.jpg', zh: '认可点赞 · 棒棒', ko: '최고!' },
+  { img: 'assets/fox_expr_11.jpg', zh: '惊吓呆住 · 吓跳', ko: '깜짝이야!' },
+  { img: 'assets/fox_expr_12.jpg', zh: '扶巾思索 · 怀疑', ko: '흠...' },
+  { img: 'assets/fox_expr_13.jpg', zh: '音符跃动 · 哼歌', ko: '랄랄라~' },
+  { img: 'assets/fox_expr_14.jpg', zh: '警觉潜行 · 踱步', ko: '살금살금' }
+],
+emoticonZip: 'assets/fox_emoticons.zip',
+emoticonZipName: 'fox_emoticons.zip'
 },
 crow: {
 avatar: 'assets/char_crow.jpg',
@@ -4875,7 +4903,10 @@ function renderMemberAnimation(m) {
     }
     if (badge) {
       if (hasBoth) {
-        badge.innerHTML = `🎬 <span data-zh>已收录 9:16 竖屏 + 16:9 横屏双格式动画</span><span data-ko>9:16 세로형 + 16:9 와이드 영상 수록 완료</span>`;
+        const isMixed = (m.animation2 && (m.animation2.isLandscape || m.animation2.aspectRatio === '16/9'));
+        const badgeZh = isMixed ? '已收录 9:16 竖屏 + 16:9 横屏双格式动画' : '已收录专属动画短片（共 2 部 · 原画幅比例）';
+        const badgeKo = isMixed ? '9:16 세로형 + 16:9 와이드 영상 수록 완료' : '전용 숏폼 애니메이션 2편 수록 완료 (원작 비율)';
+        badge.innerHTML = `🎬 <span data-zh>${badgeZh}</span><span data-ko>${badgeKo}</span>`;
       } else {
         badge.innerHTML = `🎬 <span data-zh>已收录专属 9:16 竖屏短片</span><span data-ko>전용 9:16 숏폼 영상 수록 완료</span>`;
       }
@@ -4889,9 +4920,10 @@ function renderMemberAnimation(m) {
     let html = `<div class="shortform-grid" style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:24px;">`;
 
     if (m.animation) {
+      const anim1Ratio = m.animation.aspectRatio || '9/16';
       html += `
-<div class="shortform-phone" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:9/16; border-radius:32px; border:3px solid #F5A623; width:100%; max-width:295px;">
-  <video controls playsinline loop preload="metadata" style="width:100%; height:100%; object-fit:cover; border-radius:28px; display:block;">
+<div class="shortform-phone" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:${anim1Ratio}; border-radius:32px; border:3px solid #F5A623; width:100%; max-width:295px;">
+  <video controls playsinline loop preload="metadata" style="width:100%; height:100%; object-fit:contain; background:#000; border-radius:28px; display:block;">
     <source src="${m.animation.src}#t=0.001" type="video/mp4">
     <source src="${m.animation.src}" type="video/mp4">
     ${m.animation.altSrc ? `<source src="${m.animation.altSrc}" type="video/mp4">` : ''}
@@ -4907,15 +4939,18 @@ function renderMemberAnimation(m) {
 
     if (m.animation2) {
       const isLand = m.animation2.isLandscape || m.animation2.aspectRatio === '16/9';
+      const anim2Ratio = m.animation2.aspectRatio || (isLand ? '16/9' : '9/16');
+      const anim2MaxWidth = isLand ? '580px' : (m.animation2.maxWidth || '295px');
+      const badgeFormat = isLand ? '16:9' : (m.animation2.aspectRatio || '9:16');
       html += `
-<div class="shortform-phone ${isLand ? 'landscape' : ''}" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); ${isLand ? 'aspect-ratio:16/9; max-width:580px; max-height:none; width:100%;' : 'aspect-ratio:9/16; max-width:295px; width:100%;'} border-radius:32px; border:3px solid #F5A623;">
-  <video controls playsinline loop preload="metadata" style="width:100%; height:100%; object-fit:cover; border-radius:28px; display:block;">
+<div class="shortform-phone ${isLand ? 'landscape' : ''}" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:${anim2Ratio}; max-width:${anim2MaxWidth}; max-height:none; width:100%; border-radius:32px; border:3px solid #F5A623;">
+  <video controls playsinline loop preload="metadata" style="width:100%; height:100%; object-fit:contain; background:#000; border-radius:28px; display:block;">
     <source src="${m.animation2.src}#t=0.001" type="video/mp4">
     <source src="${m.animation2.src}" type="video/mp4">
     ${m.animation2.altSrc ? `<source src="${m.animation2.altSrc}" type="video/mp4">` : ''}
   </video>
   <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(15,10,25,0.92) 25%); padding:18px 16px 14px; pointer-events:none;">
-    <span class="compare-badge gold" style="font-size:0.75rem; pointer-events:auto;">🎬 ${isLand ? '16:9' : '9:16'} ANIMATION #02</span>
+    <span class="compare-badge gold" style="font-size:0.75rem; pointer-events:auto;">🎬 ${badgeFormat} ANIMATION #02</span>
     <h4 style="color:#FFF3D1; font-size:1rem; margin:6px 0 3px; text-shadow:0 2px 4px rgba(0,0,0,0.8);">
       <span data-zh>${m.animation2.titleZh}</span><span data-ko>${m.animation2.titleKo}</span>
     </h4>
