@@ -1233,6 +1233,12 @@ position: relative;
 overflow: hidden;
 box-shadow: 0 16px 38px rgba(0, 0, 0, 0.6);
 }
+.shortform-phone.landscape, .shortform-landscape {
+aspect-ratio: 16 / 9 !important;
+max-width: 580px !important;
+max-height: none !important;
+width: 100% !important;
+}
 .shortform-phone-bg {
 position: absolute;
 inset: 0;
@@ -4350,7 +4356,7 @@ grid-template-columns: 1fr;
 <div class="w-plan-code"><span>W5 P</span><span>05</span></div>
 <div class="w-plan-zh"><span data-zh>表情包</span><span data-ko>이모티콘</span></div>
 <div class="w-plan-ko">이모티콘 · emoticons</div>
-<div class="w-plan-desc"><span data-zh>24种×3套及下载</span><span data-ko>24종 × 3세트와 다운로드</span></div>
+<div class="w-plan-desc" id="m-w5-btn-desc"><span data-zh>24种×3套及下载</span><span data-ko>24종 × 3세트와 다운로드</span></div>
 </button>
 <button type="button" class="w-plan-col w5b" id="mw-btn-6" onclick="switchMemberWTab(6)">
 <div class="w-plan-code"><span>W5 P</span><span>06</span></div>
@@ -4408,13 +4414,13 @@ grid-template-columns: 1fr;
 <div class="kun-panel-header">
 <div>
 <span class="kun-panel-step">W3 P · 애니메이션 · ANIMATION · 9:16 숏폼 2편 이상</span>
-<h3 id="m-w3-heading"><span data-zh>W3 P · 动画预留位（9:16 竖屏短视频 2 部以上）</span><span data-ko>W3 P · 애니메이션 전용 슬롯 (9:16 세로형 숏폼 2편 이상)</span></h3>
+<h3 id="m-w3-heading"><span data-zh>W3 P · 动画 · 鲨鱼 · 潮安 专属短片（已收录 2 部）</span><span data-ko>W3 P · 애니메이션 · 상어 · 차안 전용 영상 (총 2편)</span></h3>
 </div>
-<span class="kun-charm-pill" id="m-w3-badge">🎬 <span data-zh>9:16 竖屏播放器预留框</span><span data-ko>9:16 숏폼 플레이어 슬롯</span></span>
+<span class="kun-charm-pill" id="m-w3-badge">🎬 <span data-zh>已收录 9:16 竖屏 + 16:9 横屏双格式动画</span><span data-ko>9:16 세로형 + 16:9 와이드 영상 수록 완료</span></span>
 </div>
 <div id="m-animation-container">
-<div class="shortform-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 340px)); justify-content:center;">
-<div class="shortform-phone" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:9/16; border-radius:32px; border:3px solid #F5A623;">
+<div class="shortform-grid" style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:24px;">
+<div class="shortform-phone" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:9/16; border-radius:32px; border:3px solid #F5A623; width:100%; max-width:295px;">
   <video controls playsinline loop preload="metadata" style="width:100%; height:100%; object-fit:cover; border-radius:28px; display:block;">
     <source src="assets/shark-short01.mp4#t=0.001" type="video/mp4">
     <source src="assets/shark-short01.mp4" type="video/mp4">
@@ -4427,15 +4433,19 @@ grid-template-columns: 1fr;
     </h4>
   </div>
 </div>
-<div class="shortform-phone" style="padding:0; overflow:hidden; position:relative; background:#1b1527; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:9/16; border-radius:32px; border:2.5px dashed rgba(245,166,35,0.45); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px;">
-  <div style="font-size:2.8rem; margin-bottom:12px;">🎬</div>
-  <span class="compare-badge gold" style="font-size:0.75rem; margin-bottom:8px;">🎬 9:16 SHORT #02</span>
-  <h4 style="color:#F5A623; font-size:1.05rem; margin-bottom:8px;">
-    <span data-zh>动画 #02 预留位</span><span data-ko>애니메이션 #02 슬롯</span>
-  </h4>
-  <p style="color:var(--text-Soft); font-size:0.82rem; line-height:1.5;">
-    <span data-zh>预留 9:16 竖屏动画短片展位</span><span data-ko>9:16 세로형 숏폼 영상 전용 슬롯</span>
-  </p>
+<div class="shortform-phone landscape" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:16/9; max-width:580px; max-height:none; width:100%; border-radius:32px; border:3px solid #F5A623;">
+  <video controls playsinline loop preload="metadata" style="width:100%; height:100%; object-fit:cover; border-radius:28px; display:block;">
+    <source src="assets/shipin2_1.mp4#t=0.001" type="video/mp4">
+    <source src="assets/shipin2_1.mp4" type="video/mp4">
+    <source src="assets/shark-short02.mp4" type="video/mp4">
+    <source src="shipin2_1.mp4" type="video/mp4">
+  </video>
+  <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(15,10,25,0.92) 25%); padding:18px 16px 14px; pointer-events:none;">
+    <span class="compare-badge gold" style="font-size:0.75rem; pointer-events:auto;">🎬 16:9 ANIMATION #02</span>
+    <h4 style="color:#FFF3D1; font-size:1rem; margin:6px 0 3px; text-shadow:0 2px 4px rgba(0,0,0,0.8);">
+      <span data-zh>《鲨鱼·潮安 · 专属动画短片 #02（16:9 横屏）》</span><span data-ko>《상어 · 차안 전용 애니메이션 #02 (16:9 와이드)》</span>
+    </h4>
+  </div>
 </div>
 </div>
 </div>
@@ -4460,14 +4470,17 @@ grid-template-columns: 1fr;
 <div class="kun-panel-header">
 <div>
 <span class="kun-panel-step">W5 P · 이모티콘 · EMOTICONS · 24종 × 3세트와 다운로드</span>
-<h3><span data-zh>W5 P · 表情包预留位（24种 × 3套 及下载）</span><span data-ko>W5 P · 이모티콘 전용 슬롯 (24종 × 3세트와 다운로드)</span></h3>
+<h3 id="m-w5-heading"><span data-zh>W5 P · 表情包预留位（24种 × 3套 及下载）</span><span data-ko>W5 P · 이모티콘 전용 슬롯 (24종 × 3세트와 다운로드)</span></h3>
 </div>
-<button type="button" class="copy-prompt-btn" style="padding:8px 16px;"><span data-zh>⬇ 表情包下载预留按钮 (ZIP)</span><span data-ko>⬇ 이모티콘 세트 다운로드 슬롯</span></button>
+<span class="kun-charm-pill" id="m-w5-badge">😊 <span data-zh>已预留完整 W5 P 表情包展位</span><span data-ko>이모티콘 슬롯</span></span>
+<a id="m-emoticon-dl-btn" href="assets/shark_emoticons.zip" download="shark_emoticons.zip" class="copy-prompt-btn" style="text-decoration:none; display:none; align-items:center; gap:6px; padding:8px 16px;"><span data-zh>⬇ 下载表情包全集 (ZIP)</span><span data-ko>⬇ 이모티콘 세트 다운로드 (ZIP)</span></a>
 </div>
+<div id="m-emoticons-container">
 <div class="kun-info-card" style="text-align:center; padding:38px 24px; border-style:dashed;">
 <div style="font-size:2.8rem; margin-bottom:10px;">😊 × 72</div>
 <h4 style="color:#F5A623; margin-bottom:8px;"><span data-zh>SET 01 / SET 02 / SET 03 · 24种 × 3套 表情包展示矩阵预留位</span><span data-ko>24종 × 3세트 (총 72종) 이모티콘 그리드 및 다운로드 슬롯</span></h4>
 <p style="color:var(--text-Soft); font-size:0.9rem;"><span data-zh>已预留 3 套主题切换栏、24 格表情包预览网格及一键打包下载接口。</span><span data-ko>3가지 테마 세트 전환 탭과 24종 프리뷰 그리드, 다운로드 버튼이 예약되어 있습니다.</span></p>
+</div>
 </div>
 </div>
 <!-- Member W5 P Panel 2: 周边 (굿즈 / goods) -->
@@ -4611,7 +4624,31 @@ animation: {
   altSrc: 'assets/shipin1_1.mp4',
   titleZh: '《鲨鱼·潮安 · 专属动画短片 #01》',
   titleKo: '《상어 · 차안 전용 숏폼 애니메이션 #01》'
-}
+},
+animation2: {
+  src: 'assets/shipin2_1.mp4',
+  altSrc: 'assets/shark-short02.mp4',
+  titleZh: '《鲨鱼·潮安 · 专属动画短片 #02（16:9 横屏）》',
+  titleKo: '《상어 · 차안 전용 애니메이션 #02 (16:9 와이드)》',
+  aspectRatio: '16/9',
+  isLandscape: true
+},
+emoticons: [
+  { img: 'assets/shark_expr_01.jpg', zh: '惊诧 · 炸毛', ko: '깜짝!' },
+  { img: 'assets/shark_expr_02.jpg', zh: '呼呼大睡 · Zzz', ko: '드르렁..' },
+  { img: 'assets/shark_expr_03.jpg', zh: '趴下沉默 · 无语', ko: '침묵...' },
+  { img: 'assets/shark_expr_04.jpg', zh: '迷茫看地图 · 犯难', ko: '지도 보는 중' },
+  { img: 'assets/shark_expr_05.jpg', zh: '委屈泪奔 · 心碎', ko: '훌쩍..' },
+  { img: 'assets/shark_expr_06.jpg', zh: '欢呼闪光 · 灿笑', ko: '반짝반짝!' },
+  { img: 'assets/shark_expr_07.jpg', zh: '气呼呼 · 炸腮', ko: '씩씩!' },
+  { img: 'assets/shark_expr_08.jpg', zh: '举杯致意 · 干杯', ko: '짠!' },
+  { img: 'assets/shark_expr_09.jpg', zh: '脸红害羞 · 傲娇', ko: '발그레~' },
+  { img: 'assets/shark_expr_10.jpg', zh: '乌云愧疚 · 垂头', ko: '시무룩..' },
+  { img: 'assets/shark_expr_11.jpg', zh: '夕阳港口 · 守望', ko: '석양의 항구' },
+  { img: 'assets/shark_expr_12.png', zh: '昏黄调饮 · 沉思', ko: '바텐더의 회상' }
+],
+emoticonZip: 'assets/shark_emoticons.zip',
+emoticonZipName: 'shark_emoticons.zip'
 },
 fox: {
 avatar: 'assets/char_fox.jpg',
@@ -4827,23 +4864,37 @@ function renderMemberAnimation(m) {
   const btnDesc = document.getElementById('m-w3-btn-desc');
   if (!container) return;
 
-  if (m.animation) {
+  if (m.animation || m.animation2) {
+    const hasBoth = m.animation && m.animation2;
     if (heading) {
-      heading.innerHTML = `<span data-zh>W3 P · 动画 · ${m.titleZh} 专属短片</span><span data-ko>W3 P · 애니메이션 · ${m.titleKo} 전용 숏폼</span>`;
+      if (hasBoth) {
+        heading.innerHTML = `<span data-zh>W3 P · 动画 · ${m.titleZh} 专属短片（已收录 2 部）</span><span data-ko>W3 P · 애니메이션 · ${m.titleKo} 전용 영상 (총 2편)</span>`;
+      } else {
+        heading.innerHTML = `<span data-zh>W3 P · 动画 · ${m.titleZh} 专属短片</span><span data-ko>W3 P · 애니메이션 · ${m.titleKo} 전용 숏폼</span>`;
+      }
     }
     if (badge) {
-      badge.innerHTML = `🎬 <span data-zh>已收录专属 9:16 竖屏短片</span><span data-ko>전용 9:16 숏폼 영상 수록 완료</span>`;
+      if (hasBoth) {
+        badge.innerHTML = `🎬 <span data-zh>已收录 9:16 竖屏 + 16:9 横屏双格式动画</span><span data-ko>9:16 세로형 + 16:9 와이드 영상 수록 완료</span>`;
+      } else {
+        badge.innerHTML = `🎬 <span data-zh>已收录专属 9:16 竖屏短片</span><span data-ko>전용 9:16 숏폼 영상 수록 완료</span>`;
+      }
     }
     if (btnDesc) {
-      btnDesc.innerHTML = `<span data-zh>★ 专属短视频已收录</span><span data-ko>★ 전용 숏폼 영상 수록</span>`;
+      btnDesc.innerHTML = hasBoth
+        ? `<span data-zh>★ 专属动画2部已收录</span><span data-ko>★ 전용 영상 2편 수록</span>`
+        : `<span data-zh>★ 专属短视频已收录</span><span data-ko>★ 전용 숏폼 영상 수록</span>`;
     }
-    container.innerHTML = `
-<div class="shortform-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 340px)); justify-content:center;">
-<div class="shortform-phone" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:9/16; border-radius:32px; border:3px solid #F5A623;">
+
+    let html = `<div class="shortform-grid" style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:24px;">`;
+
+    if (m.animation) {
+      html += `
+<div class="shortform-phone" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:9/16; border-radius:32px; border:3px solid #F5A623; width:100%; max-width:295px;">
   <video controls playsinline loop preload="metadata" style="width:100%; height:100%; object-fit:cover; border-radius:28px; display:block;">
     <source src="${m.animation.src}#t=0.001" type="video/mp4">
     <source src="${m.animation.src}" type="video/mp4">
-    <source src="${m.animation.altSrc}" type="video/mp4">
+    ${m.animation.altSrc ? `<source src="${m.animation.altSrc}" type="video/mp4">` : ''}
   </video>
   <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(15,10,25,0.92) 25%); padding:18px 16px 14px; pointer-events:none;">
     <span class="compare-badge gold" style="font-size:0.75rem; pointer-events:auto;">🎬 9:16 SHORT #01</span>
@@ -4851,8 +4902,28 @@ function renderMemberAnimation(m) {
       <span data-zh>${m.animation.titleZh}</span><span data-ko>${m.animation.titleKo}</span>
     </h4>
   </div>
-</div>
-<div class="shortform-phone" style="padding:0; overflow:hidden; position:relative; background:#1b1527; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:9/16; border-radius:32px; border:2.5px dashed rgba(245,166,35,0.45); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px;">
+</div>`;
+    }
+
+    if (m.animation2) {
+      const isLand = m.animation2.isLandscape || m.animation2.aspectRatio === '16/9';
+      html += `
+<div class="shortform-phone ${isLand ? 'landscape' : ''}" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); ${isLand ? 'aspect-ratio:16/9; max-width:580px; max-height:none; width:100%;' : 'aspect-ratio:9/16; max-width:295px; width:100%;'} border-radius:32px; border:3px solid #F5A623;">
+  <video controls playsinline loop preload="metadata" style="width:100%; height:100%; object-fit:cover; border-radius:28px; display:block;">
+    <source src="${m.animation2.src}#t=0.001" type="video/mp4">
+    <source src="${m.animation2.src}" type="video/mp4">
+    ${m.animation2.altSrc ? `<source src="${m.animation2.altSrc}" type="video/mp4">` : ''}
+  </video>
+  <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(15,10,25,0.92) 25%); padding:18px 16px 14px; pointer-events:none;">
+    <span class="compare-badge gold" style="font-size:0.75rem; pointer-events:auto;">🎬 ${isLand ? '16:9' : '9:16'} ANIMATION #02</span>
+    <h4 style="color:#FFF3D1; font-size:1rem; margin:6px 0 3px; text-shadow:0 2px 4px rgba(0,0,0,0.8);">
+      <span data-zh>${m.animation2.titleZh}</span><span data-ko>${m.animation2.titleKo}</span>
+    </h4>
+  </div>
+</div>`;
+    } else {
+      html += `
+<div class="shortform-phone" style="padding:0; overflow:hidden; position:relative; background:#1b1527; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:9/16; border-radius:32px; border:2.5px dashed rgba(245,166,35,0.45); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px; width:100%; max-width:295px;">
   <div style="font-size:2.8rem; margin-bottom:12px;">🎬</div>
   <span class="compare-badge gold" style="font-size:0.75rem; margin-bottom:8px;">🎬 9:16 SHORT #02</span>
   <h4 style="color:#F5A623; font-size:1.05rem; margin-bottom:8px;">
@@ -4861,8 +4932,11 @@ function renderMemberAnimation(m) {
   <p style="color:var(--text-Soft); font-size:0.82rem; line-height:1.5;">
     <span data-zh>预留 9:16 竖屏动画短片展位</span><span data-ko>9:16 세로형 숏폼 영상 전용 슬롯</span>
   </p>
-</div>
 </div>`;
+    }
+
+    html += `</div>`;
+    container.innerHTML = html;
   } else {
     if (heading) {
       heading.innerHTML = `<span data-zh>W3 P · 动画预留位（9:16 竖屏短视频 2 部以上）</span><span data-ko>W3 P · 애니메이션 전용 슬롯 (9:16 세로형 숏폼 2편 이상)</span>`;
@@ -4898,6 +4972,63 @@ function renderMemberAnimation(m) {
 </div>`;
   }
 }
+
+function renderMemberEmoticons(m) {
+  const container = document.getElementById('m-emoticons-container');
+  const heading = document.getElementById('m-w5-heading');
+  const badge = document.getElementById('m-w5-badge');
+  const btnDesc = document.getElementById('m-w5-btn-desc');
+  const dlBtn = document.getElementById('m-emoticon-dl-btn');
+  if (!container) return;
+
+  if (m.emoticons && m.emoticons.length > 0) {
+    if (heading) {
+      heading.innerHTML = `<span data-zh>W5 P · 表情包 · ${m.titleZh}（已收录 ${m.emoticons.length} 款）</span><span data-ko>W5 P · 이모티콘 · ${m.titleKo} (${m.emoticons.length}종 수록)</span>`;
+    }
+    if (badge) {
+      badge.innerHTML = `😊 <span data-zh>已收录 ${m.emoticons.length} 款专属表情与精美插画</span><span data-ko>전용 이모티콘 ${m.emoticons.length}종 수록 완료</span>`;
+    }
+    if (btnDesc) {
+      btnDesc.innerHTML = `<span data-zh>★ 专属表情已收录 (${m.emoticons.length}款)</span><span data-ko>★ 전용 이모티콘 ${m.emoticons.length}종 수록</span>`;
+    }
+    if (dlBtn) {
+      dlBtn.style.display = 'inline-flex';
+      dlBtn.href = m.emoticonZip || 'assets/shark_emoticons.zip';
+      dlBtn.download = m.emoticonZipName || 'shark_emoticons.zip';
+      dlBtn.innerHTML = `<span data-zh>⬇ 下载 ${m.titleZh} 表情包全集 (ZIP)</span><span data-ko>⬇ ${m.titleKo} 이모티콘 전체 다운로드 (ZIP)</span>`;
+    }
+    let html = `<div class="emoticon-grid-24" style="grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap:14px; margin-top:14px;">`;
+    m.emoticons.forEach((e, idx) => {
+      const numStr = String(idx + 1).padStart(2, '0');
+      html += `
+<div class="emoticon-cell" style="cursor:pointer;" onclick="openComicModal('${e.img}', '${e.zh}')" title="点击查看高清原图 / 클릭하여 원본 보기">
+  <img src="${e.img}" alt="${e.zh}" style="width:76px; height:76px; object-fit:contain; border-radius:14px; background:rgba(30,22,43,0.7); padding:4px; border:2px solid #F5A623; margin-bottom:8px;" />
+  <span>#${numStr} <span data-zh>${e.zh}</span><span data-ko>${e.ko}</span></span>
+</div>`;
+    });
+    html += `</div>`;
+    container.innerHTML = html;
+  } else {
+    if (heading) {
+      heading.innerHTML = `<span data-zh>W5 P · 表情包预留位（24种 × 3套 及下载）</span><span data-ko>W5 P · 이모티콘 전용 슬롯 (24종 × 3세트와 다운로드)</span>`;
+    }
+    if (badge) {
+      badge.innerHTML = `😊 <span data-zh>已预留完整 W5 P 表情包展位</span><span data-ko>이모티콘 슬롯</span>`;
+    }
+    if (btnDesc) {
+      btnDesc.innerHTML = `<span data-zh>24种×3套及下载</span><span data-ko>24종 × 3세트와 다운로드</span>`;
+    }
+    if (dlBtn) {
+      dlBtn.style.display = 'none';
+    }
+    container.innerHTML = `
+<div class="kun-info-card" style="text-align:center; padding:38px 24px; border-style:dashed;">
+<div style="font-size:2.8rem; margin-bottom:10px;">😊 × 72</div>
+<h4 style="color:#F5A623; margin-bottom:8px;"><span data-zh>SET 01 / SET 02 / SET 03 · 24种 × 3套 表情包展示矩阵预留位</span><span data-ko>24종 × 3세트 (총 72종) 이모티콘 그리드 및 다운로드 슬롯</span></h4>
+<p style="color:var(--text-Soft); font-size:0.9rem;"><span data-zh>已预留 3 套主题切换栏、24 格表情包预览网格及一键打包下载接口。</span><span data-ko>3가지 테마 세트 전환 탭과 24종 프리뷰 그리드, 다운로드 버튼이 예약되어 있습니다.</span></p>
+</div>`;
+  }
+}
 function openMemberRoom(id) {
   const parts = id.split('-w');
   const actualId = parts[0];
@@ -4915,8 +5046,12 @@ function openMemberRoom(id) {
   if (m.comics && m.comics.length > 0) {
     badgesHtml += `<button type="button" onclick="switchMemberWTab(2)" class="backpack-tag" style="background:#F5A623; color:#1E162B; cursor:pointer; border:none; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击切换至四格漫画 / 클릭하여 4컷 만화 보기"><span data-zh>📖 专属四格漫画 (${m.comics.length}篇) ➔</span><span data-ko>📖 전용 4컷 만화 (${m.comics.length}편) ➔</span></button>`;
   }
-  if (m.animation) {
-    badgesHtml += `<button type="button" onclick="switchMemberWTab(3)" class="backpack-tag" style="background:rgba(245,166,35,0.22); color:#F5A623; border:1.5px solid #F5A623; cursor:pointer; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击切换至动画短片 / 클릭하여 숏폼 영상 보기"><span data-zh>🎬 专属动画短片 ➔</span><span data-ko>🎬 전용 숏폼 영상 ➔</span></button>`;
+  if (m.animation || m.animation2) {
+    const animCount = (m.animation ? 1 : 0) + (m.animation2 ? 1 : 0);
+    badgesHtml += `<button type="button" onclick="switchMemberWTab(3)" class="backpack-tag" style="background:rgba(245,166,35,0.22); color:#F5A623; border:1.5px solid #F5A623; cursor:pointer; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击切换至动画短片 / 클릭하여 숏폼 영상 보기"><span data-zh>🎬 专属动画 (${animCount}部) ➔</span><span data-ko>🎬 전용 영상 (${animCount}편) ➔</span></button>`;
+  }
+  if (m.emoticons && m.emoticons.length > 0) {
+    badgesHtml += `<button type="button" onclick="switchMemberWTab(5)" class="backpack-tag" style="background:rgba(245,166,35,0.22); color:#F5A623; border:1.5px solid #F5A623; cursor:pointer; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击切换至表情包 / 클릭하여 이모티콘 보기"><span data-zh>😊 专属表情包 (${m.emoticons.length}款) ➔</span><span data-ko>😊 전용 이모티콘 (${m.emoticons.length}종) ➔</span></button>`;
   }
   document.getElementById('m-badges').innerHTML = badgesHtml;
 
@@ -4934,6 +5069,7 @@ function openMemberRoom(id) {
 
   renderMemberComics(m);
   renderMemberAnimation(m);
+  renderMemberEmoticons(m);
   switchMemberWTab(targetTab);
 
   document.documentElement.setAttribute('data-view', 'member');
