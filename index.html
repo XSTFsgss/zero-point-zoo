@@ -4358,7 +4358,7 @@ grid-template-columns: 1fr;
 <div class="w-plan-code"><span>W4 P</span><span>04</span></div>
 <div class="w-plan-zh"><span data-zh>应用</span><span data-ko>앱</span></div>
 <div class="w-plan-ko">앱 · app</div>
-<div class="w-plan-desc"><span data-zh>使用角色制作的应用1个</span><span data-ko>캐릭터를 활용한 앱 1개</span></div>
+<div class="w-plan-desc" id="m-w4-btn-desc"><span data-zh>使用角色制作的应用1个</span><span data-ko>캐릭터를 활용한 앱 1개</span></div>
 </button>
 <button type="button" class="w-plan-col w5a" id="mw-btn-5" onclick="switchMemberWTab(5)">
 <div class="w-plan-code"><span>W5 P</span><span>05</span></div>
@@ -4463,14 +4463,16 @@ grid-template-columns: 1fr;
 <div class="kun-panel-header">
 <div>
 <span class="kun-panel-step">W4 P · 앱 · APP · 캐릭터를 활용한 앱 1개</span>
-<h3><span data-zh>W4 P · 角色应用预留位（使用角色制作的应用 1 个）</span><span data-ko>W4 P · 캐릭터 활용 앱 슬롯 (캐릭터를 활용한 앱 1개)</span></h3>
+<h3 id="m-w4-heading"><span data-zh>W4 P · 角色应用预留位（使用角色制作的应用 1 个）</span><span data-ko>W4 P · 캐릭터 활용 앱 슬롯 (캐릭터를 활용한 앱 1개)</span></h3>
 </div>
-<span class="kun-charm-pill">🕹️ <span data-zh>角色专属互动 Web App 容器</span><span data-ko>캐릭터 인터랙티브 웹앱 컨테이너</span></span>
+<span class="kun-charm-pill" id="m-w4-badge">🕹️ <span data-zh>角色专属互动 Web App 容器</span><span data-ko>캐릭터 인터랙티브 웹앱 컨테이너</span></span>
 </div>
+<div id="m-app-container">
 <div class="kun-info-card" style="text-align:center; padding:44px 24px; border-style:dashed;">
 <div style="font-size:3rem; margin-bottom:12px;">💻</div>
 <h4 style="color:#F5A623; font-size:1.25rem; margin-bottom:8px;"><span data-zh>W4 P · 角色专属互动应用挂载区 (캐릭터 활용 앱 1개)</span><span data-ko>W4 P · 캐릭터 활용 앱 1개 임베드 영역</span></h4>
 <p style="color:var(--text-Soft); max-width:620px; margin:0 auto; font-size:0.92rem;"><span data-zh>此处已预留标准应用容器（支持直接嵌入角色小游戏、情绪测试器、占卜互动或日常实用小工具）。</span><span data-ko>캐릭터의 고유 능력을 활용한 미니게임, 감정 기록기 또는 유틸리티 앱 1개가 탑재될 전용 영역입니다.</span></p>
+</div>
 </div>
 </div>
 <!-- Member W5 P Panel 1: 表情包 (이모티콘 / emoticons) -->
@@ -4867,7 +4869,16 @@ emoticons: [
   { img: 'assets/otter_expr_10.jpg', zh: '双拳握紧 · 元气加油', ko: '파이팅! · 힘내자 힘!' }
 ],
 emoticonZip: 'assets/otter_emoticons.zip',
-emoticonZipName: 'otter_emoticons.zip'
+emoticonZipName: 'otter_emoticons.zip',
+app: {
+  titleZh: '水獭·露的健康一句话手账',
+  titleKo: '수달·루의 한 줄 건강 다이어리',
+  subtitleZh: '按日期写健康一句话日记 · 心情印章盖印 · 满10格海獭鼓掌激励',
+  subtitleKo: '날짜별 한 줄 건강 일기 · 실감 나는 감정 도장 · 10일 달성 시 박수 응원',
+  tagsZh: ['健康一句话', '心情印章', '满10格鼓掌激励', '本地自动保存', '音效合成'],
+  tagsKo: ['한줄다이어리', '감정도장', '10일박수응원', '로컬자동저장', '자체효과음'],
+  url: 'apps/otter-diary/index.html'
+}
 }
 };
 function setLanguage(lang) {
@@ -5101,6 +5112,99 @@ function renderMemberAnimation(m) {
   }
 }
 
+function renderMemberApp(m) {
+  const container = document.getElementById('m-app-container');
+  const heading = document.getElementById('m-w4-heading');
+  const badge = document.getElementById('m-w4-badge');
+  const btnDesc = document.getElementById('m-w4-btn-desc');
+  if (!container) return;
+
+  if (m.app) {
+    if (heading) {
+      heading.innerHTML = `<span data-zh>W4 P · 应用 · ${m.app.titleZh}</span><span data-ko>W4 P · 앱 · ${m.app.titleKo}</span>`;
+    }
+    if (badge) {
+      badge.innerHTML = `🕹️ <span data-zh>已上线专属互动 Web App</span><span data-ko>전용 인터랙티브 웹앱 서비스 중</span>`;
+    }
+    if (btnDesc) {
+      btnDesc.innerHTML = `<span data-zh>★ ${m.app.titleZh} (已上线)</span><span data-ko>★ ${m.app.titleKo} (서비스 중)</span>`;
+    }
+
+    const tagsZhHtml = m.app.tagsZh ? m.app.tagsZh.map(t => `<span class="backpack-tag" style="background:rgba(82,196,156,0.15); border:1px solid #52C49C; color:#52C49C; font-size:0.78rem;">#${t}</span>`).join('') : '';
+    const tagsKoHtml = m.app.tagsKo ? m.app.tagsKo.map(t => `<span class="backpack-tag" style="background:rgba(82,196,156,0.15); border:1px solid #52C49C; color:#52C49C; font-size:0.78rem;">#${t}</span>`).join('') : '';
+
+    container.innerHTML = `
+      <div class="kun-info-card" style="padding: 20px 24px; margin-bottom: 20px; border: 2px solid rgba(82,196,156,0.4); background: linear-gradient(135deg, rgba(82,196,156,0.08) 0%, rgba(245,166,35,0.06) 100%);">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:1.6rem;">🦦</span>
+              <h4 style="color:#52C49C; font-size:1.3rem; font-weight:900; margin:0;">
+                <span data-zh>${m.app.titleZh}</span>
+                <span data-ko>${m.app.titleKo}</span>
+              </h4>
+            </div>
+            <p style="color:var(--text-Soft); font-size:0.92rem; margin:6px 0 0 0;">
+              <span data-zh>${m.app.subtitleZh}</span>
+              <span data-ko>${m.app.subtitleKo}</span>
+            </p>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <a href="${m.app.url}" target="_blank" class="copy-prompt-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg, #52C49C 0%, #2E8B6B 100%); border-color:#D9FFF1; color:#FFF; font-weight:800; padding:8px 16px;">
+              <span data-zh>↗ 新标签页独立全屏打开</span>
+              <span data-ko>↗ 새 창 전체화면 열기</span>
+            </a>
+          </div>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px;">
+          <span data-zh>${tagsZhHtml}</span>
+          <span data-ko>${tagsKoHtml}</span>
+        </div>
+      </div>
+      
+      <!-- 嵌入式应用主视窗 -->
+      <div style="position:relative; width:100%; border-radius:18px; overflow:hidden; border:2px solid rgba(217, 164, 65, 0.4); box-shadow:0 14px 40px rgba(0,0,0,0.45); background:#FFFDF7;">
+        <div style="display:flex; justify-content:space-between; align-items:center; background:#2A2338; padding:8px 16px; border-bottom:1px solid rgba(217,164,65,0.25);">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="width:11px; height:11px; border-radius:50%; background:#FF5F56; display:inline-block;"></span>
+            <span style="width:11px; height:11px; border-radius:50%; background:#FFBD2E; display:inline-block;"></span>
+            <span style="width:11px; height:11px; border-radius:50%; background:#27C93F; display:inline-block;"></span>
+            <span style="font-size:0.8rem; color:#D9C3A3; margin-left:8px; font-family:monospace;">${m.app.url}</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <button onclick="const f=document.getElementById('otter-app-iframe'); if(f) f.src=f.src;" class="copy-prompt-btn" style="padding:4px 10px; font-size:0.75rem; background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.2); color:#FFF; cursor:pointer;" title="重新加载">
+              ↻ 刷新应用
+            </button>
+          </div>
+        </div>
+        <iframe 
+          id="otter-app-iframe" 
+          src="${m.app.url}" 
+          style="width:100%; height:860px; border:none; display:block;"
+          title="${m.app.titleZh}">
+        </iframe>
+      </div>
+    `;
+  } else {
+    if (heading) {
+      heading.innerHTML = `<span data-zh>W4 P · 角色应用预留位（使用角色制作的应用 1 个）</span><span data-ko>W4 P · 캐릭터 활용 앱 슬롯 (캐릭터를 활용한 앱 1개)</span>`;
+    }
+    if (badge) {
+      badge.innerHTML = `🕹️ <span data-zh>角色专属互动 Web App 容器</span><span data-ko>캐릭터 인터랙티브 웹앱 컨테이너</span>`;
+    }
+    if (btnDesc) {
+      btnDesc.innerHTML = `<span data-zh>使用角色制作的应用1个</span><span data-ko>캐릭터를 활용한 앱 1개</span>`;
+    }
+    container.innerHTML = `
+      <div class="kun-info-card" style="text-align:center; padding:44px 24px; border-style:dashed;">
+        <div style="font-size:3rem; margin-bottom:12px;">💻</div>
+        <h4 style="color:#F5A623; font-size:1.25rem; margin-bottom:8px;"><span data-zh>W4 P · 角色专属互动应用挂载区 (캐릭터 활용 앱 1个)</span><span data-ko>W4 P · 캐릭터 활용 앱 1개 임베드 영역</span></h4>
+        <p style="color:var(--text-Soft); max-width:620px; margin:0 auto; font-size:0.92rem;"><span data-zh>此处已预留标准应用容器（支持直接嵌入角色小游戏、情绪测试器、占卜互动或日常实用小工具）。</span><span data-ko>캐릭터의 고유 능력을 활용한 미니게임, 감정 기록기 또는 유틸리티 앱 1개가 탑재될 전용 영역입니다.</span></p>
+      </div>
+    `;
+  }
+}
+
 function renderMemberEmoticons(m) {
   const container = document.getElementById('m-emoticons-container');
   const heading = document.getElementById('m-w5-heading');
@@ -5178,6 +5282,9 @@ function openMemberRoom(id) {
     const animCount = (m.animation ? 1 : 0) + (m.animation2 ? 1 : 0);
     badgesHtml += `<button type="button" onclick="switchMemberWTab(3)" class="backpack-tag" style="background:rgba(245,166,35,0.22); color:#F5A623; border:1.5px solid #F5A623; cursor:pointer; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击切换至动画短片 / 클릭하여 숏폼 영상 보기"><span data-zh>🎬 专属动画 (${animCount}部) ➔</span><span data-ko>🎬 전용 영상 (${animCount}편) ➔</span></button>`;
   }
+  if (m.app) {
+    badgesHtml += `<button type="button" onclick="switchMemberWTab(4)" class="backpack-tag" style="background:rgba(82,196,156,0.22); color:#52C49C; border:1.5px solid #52C49C; cursor:pointer; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击切换至专属应用 / 클릭하여 전용 앱 보기"><span data-zh>🕹️ 专属应用 (已上线) ➔</span><span data-ko>🕹️ 전용 앱 (서비스 중) ➔</span></button>`;
+  }
   if (m.emoticons && m.emoticons.length > 0) {
     badgesHtml += `<button type="button" onclick="switchMemberWTab(5)" class="backpack-tag" style="background:rgba(245,166,35,0.22); color:#F5A623; border:1.5px solid #F5A623; cursor:pointer; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击切换至表情包 / 클릭하여 이모티콘 보기"><span data-zh>😊 专属表情包 (${m.emoticons.length}款) ➔</span><span data-ko>😊 전용 이모티콘 (${m.emoticons.length}종) ➔</span></button>`;
   }
@@ -5239,6 +5346,7 @@ function openMemberRoom(id) {
 
   renderMemberComics(m);
   renderMemberAnimation(m);
+  renderMemberApp(m);
   renderMemberEmoticons(m);
   switchMemberWTab(targetTab);
 
