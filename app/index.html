@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
@@ -141,7 +141,6 @@
       padding: 9px 16px;
       font-size: 0.82rem;
       font-weight: 800;
-      display: flex;
       align-items: center;
       justify-content: space-between;
       box-shadow: 0 4px 14px rgba(245, 166, 35, 0.35);
@@ -166,33 +165,68 @@
       gap: 16px;
     }
 
-    /* ================= 2D DYNAMIC CHARACTER STAGE ================= */
+    /* ================= LIVE 2D RIGGED CHARACTER STAGE ================= */
     .character-stage {
-      background: linear-gradient(180deg, rgba(46, 36, 66, 0.92) 0%, rgba(28, 22, 40, 0.95) 100%);
+      background: radial-gradient(circle at 50% 38%, rgba(74, 52, 98, 0.65) 0%, rgba(36, 28, 52, 0.94) 62%, rgba(22, 17, 33, 0.98) 100%);
       border: 2px solid var(--border-card);
       border-radius: 26px;
-      padding: 26px 16px 18px;
+      padding: 20px 16px 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
       overflow: hidden;
     }
 
     .stage-glow {
       position: absolute;
-      top: -20px;
-      width: 240px;
-      height: 240px;
-      background: radial-gradient(circle, var(--kun-yellow-glow) 0%, transparent 68%);
+      top: -10px;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(245, 166, 35, 0.34) 0%, rgba(255, 192, 67, 0.08) 52%, transparent 72%);
       pointer-events: none;
       z-index: 1;
+      animation: haloBreath 4s ease-in-out infinite alternate;
+    }
+    @keyframes haloBreath {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      100% { transform: scale(1.08); opacity: 1; }
+    }
+
+    .live2d-badge {
+      position: absolute;
+      top: 13px;
+      left: 14px;
+      background: rgba(82, 196, 156, 0.16);
+      border: 1px solid rgba(82, 196, 156, 0.55);
+      color: #8FF0CB;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      z-index: 3;
+      letter-spacing: 0.3px;
+    }
+    .live2d-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #52C49C;
+      box-shadow: 0 0 8px #52C49C;
+      animation: dotBlink 1.8s infinite;
+    }
+    @keyframes dotBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
     }
 
     .streak-badge {
       position: absolute;
-      top: 14px;
+      top: 13px;
       right: 14px;
       background: rgba(245, 166, 35, 0.16);
       border: 1px solid var(--kun-yellow);
@@ -215,91 +249,172 @@
       align-items: center;
       justify-content: flex-end;
       width: 100%;
-      height: 255px;
+      height: 268px;
       cursor: pointer;
-      margin-top: 4px;
-      margin-bottom: 2px;
+      margin-top: 10px;
       z-index: 2;
+      touch-action: manipulation;
+    }
+
+    /* Ambient Fireflies */
+    .stage-firefly {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #FFD875;
+      box-shadow: 0 0 10px #F5A623;
+      opacity: 0.65;
+      pointer-events: none;
+      animation: fireflyFloat 4.6s ease-in-out infinite;
+    }
+    .stage-firefly.f1 { left: 16%; top: 28%; animation-delay: 0s; }
+    .stage-firefly.f2 { right: 17%; top: 24%; animation-delay: 1.4s; width: 6px; height: 6px; }
+    .stage-firefly.f3 { left: 22%; bottom: 26%; animation-delay: 2.5s; width: 4px; height: 4px; }
+    .stage-firefly.f4 { right: 21%; bottom: 30%; animation-delay: 0.8s; }
+    @keyframes fireflyFloat {
+      0%, 100% { transform: translate(0, 0) scale(0.85); opacity: 0.35; }
+      50% { transform: translate(5px, -12px) scale(1.25); opacity: 0.9; }
     }
 
     /* Glowing Magical Pedestal */
     .char-platform {
       position: absolute;
-      bottom: 4px;
-      width: 205px;
-      height: 40px;
-      background: radial-gradient(ellipse at center, rgba(245, 166, 35, 0.48) 0%, rgba(245, 166, 35, 0.14) 55%, transparent 75%);
+      bottom: 6px;
+      width: 208px;
+      height: 36px;
+      background: radial-gradient(ellipse at center, rgba(245, 166, 35, 0.52) 0%, rgba(245, 166, 35, 0.18) 54%, transparent 76%);
       border-radius: 50%;
-      box-shadow: 0 0 26px rgba(245, 166, 35, 0.4);
-      animation: platformPulse 3.5s ease-in-out infinite alternate;
+      box-shadow: 0 0 26px rgba(245, 166, 35, 0.42);
+      animation: platformPulse 3.2s ease-in-out infinite alternate;
       z-index: 1;
     }
+    .char-platform::after {
+      content: '';
+      position: absolute;
+      inset: 6px 22px;
+      border: 1.5px dashed rgba(255, 243, 209, 0.35);
+      border-radius: 50%;
+    }
     @keyframes platformPulse {
-      0% { transform: scale(0.94); opacity: 0.7; }
-      100% { transform: scale(1.06); opacity: 1; box-shadow: 0 0 32px rgba(245, 166, 35, 0.55); }
+      0% { transform: scale(0.95); opacity: 0.72; }
+      100% { transform: scale(1.05); opacity: 1; box-shadow: 0 0 34px rgba(245, 166, 35, 0.6); }
     }
 
-    /* Living 2D Character Figure */
+    /* Living 2D Rig Wrapper */
     .char-figure-wrap {
       position: relative;
       z-index: 2;
-      transform-origin: bottom center;
-      animation: idleLiving 3.2s ease-in-out infinite;
-      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .char-stage-2d:active .char-figure-wrap {
-      transform: scale(0.92) translateY(5px);
-    }
-
-    .char-figure-img {
-      height: 225px;
-      width: auto;
-      max-width: 255px;
-      object-fit: contain;
-      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 14px rgba(245, 166, 35, 0.25));
-      transition: transform 0.25s, opacity 0.2s;
-      user-select: none;
-      -webkit-user-drag: none;
+      width: 262px;
+      height: 262px;
+      transform-origin: 50% 92%;
+      filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.52)) drop-shadow(0 0 14px rgba(245, 166, 35, 0.18));
+      will-change: transform;
     }
 
-    /* 2D Character Animation States */
-    @keyframes idleLiving {
-      0% { transform: translateY(0px) scale(1, 1); }
-      50% { transform: translateY(-7px) scale(0.985, 1.025); }
-      100% { transform: translateY(0px) scale(1, 1); }
+    .kun-live2d-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      display: block;
     }
 
+    /* Whole-body reaction animations */
     .char-figure-wrap.cheer {
-      animation: charBounceCheer 0.75s ease-in-out !important;
+      animation: charBounceCheer 0.78s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     @keyframes charBounceCheer {
       0% { transform: translateY(0) scale(1, 1); }
-      30% { transform: translateY(-18px) scale(1.05, 0.95) rotate(-3deg); }
-      60% { transform: translateY(-7px) scale(0.97, 1.03) rotate(3deg); }
+      28% { transform: translateY(-22px) scale(1.05, 0.96) rotate(-3deg); }
+      58% { transform: translateY(-6px) scale(0.97, 1.04) rotate(3deg); }
+      82% { transform: translateY(-12px) scale(1.02, 0.99) rotate(-1.5deg); }
       100% { transform: translateY(0) scale(1, 1); }
     }
 
     .char-figure-wrap.waggle {
-      animation: charWaggle 0.65s ease-in-out !important;
+      animation: charWaggle 0.68s ease-in-out;
     }
     @keyframes charWaggle {
       0% { transform: rotate(0deg); }
-      25% { transform: rotate(-7deg) scale(1.03); }
-      50% { transform: rotate(7deg) scale(1.03); }
-      75% { transform: rotate(-4deg); }
+      25% { transform: rotate(-6deg) translateY(-4px) scale(1.03); }
+      50% { transform: rotate(6deg) translateY(-6px) scale(1.03); }
+      75% { transform: rotate(-3.5deg); }
       100% { transform: rotate(0deg); }
     }
 
+    .char-figure-wrap.dance {
+      animation: charDance 1.25s ease-in-out;
+    }
+    @keyframes charDance {
+      0% { transform: translateY(0) rotate(0deg) scale(1); }
+      18% { transform: translateY(-16px) rotate(-8deg) scale(1.04); }
+      36% { transform: translateY(0) rotate(0deg) scale(0.97, 1.03); }
+      54% { transform: translateY(-18px) rotate(8deg) scale(1.05); }
+      72% { transform: translateY(-4px) rotate(-5deg) scale(1.02); }
+      90% { transform: translateY(-10px) rotate(4deg); }
+      100% { transform: translateY(0) rotate(0deg) scale(1); }
+    }
+
+    /* Sleepy floating Zzz */
+    .sleep-zzz-group {
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+    .sleep-zzz-group.visible {
+      opacity: 1;
+    }
+    .zzz-1 { animation: zzzFloat 2.4s ease-in-out infinite; }
+    .zzz-2 { animation: zzzFloat 2.4s ease-in-out 0.75s infinite; }
+    .zzz-3 { animation: zzzFloat 2.4s ease-in-out 1.5s infinite; }
+    @keyframes zzzFloat {
+      0% { transform: translate(0, 6px) scale(0.7); opacity: 0; }
+      35% { opacity: 0.95; }
+      100% { transform: translate(12px, -22px) scale(1.18); opacity: 0; }
+    }
+
+    /* Interactive Action Bar right under 2D Kun */
+    .char-action-bar {
+      display: flex;
+      gap: 7px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 4px;
+      z-index: 3;
+    }
+    .char-act-btn {
+      background: rgba(255, 243, 209, 0.08);
+      border: 1px solid rgba(245, 166, 35, 0.38);
+      color: var(--kun-cream);
+      font-size: 0.73rem;
+      font-weight: 800;
+      padding: 5px 10px;
+      border-radius: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .char-act-btn:hover {
+      background: rgba(245, 166, 35, 0.22);
+      border-color: var(--kun-yellow);
+      transform: translateY(-2px);
+    }
+    .char-act-btn:active {
+      transform: scale(0.93);
+    }
+
     .char-tagline {
-      margin-top: 6px;
-      font-size: 0.78rem;
+      margin-top: 7px;
+      font-size: 0.76rem;
       color: var(--text-muted);
       z-index: 2;
     }
 
     /* Speech Bubble */
     .speech-bubble {
-      margin-top: 12px;
+      margin-top: 10px;
       background: rgba(20, 16, 28, 0.95);
       border: 1.5px solid var(--kun-yellow);
       border-radius: 18px;
@@ -790,14 +905,14 @@
     /* Floating Heart / Paw Animation */
     .floating-fx {
       position: absolute;
-      font-size: 1.5rem;
+      font-size: 1.45rem;
       pointer-events: none;
-      animation: floatUp 1s ease-out forwards;
+      animation: floatUp 1.05s ease-out forwards;
       z-index: 99;
     }
     @keyframes floatUp {
       0% { opacity: 1; transform: translate(0, 0) scale(0.6); }
-      100% { opacity: 0; transform: translate(var(--tx, 0px), -80px) scale(1.4); }
+      100% { opacity: 0; transform: translate(var(--tx, 0px), -88px) scale(1.38); }
     }
     @keyframes popIn {
       0% { opacity: 0; transform: scale(0.85); }
@@ -832,7 +947,7 @@
     </header>
 
     <!-- PWA Install Banner -->
-    <div id="install-bar" class="install-bar">
+    <div id="install-bar" class="install-bar" style="display:none;">
       <div>
         <span data-zh>📱 添加「困」到手机主屏幕</span>
         <span data-ko style="display:none;">📱 「곤」 홈 화면에 추가</span>
@@ -846,9 +961,15 @@
     <!-- Main Content Area -->
     <main class="app-content">
 
-      <!-- ================= 2D DYNAMIC CHARACTER STAGE ================= -->
-      <section class="character-stage">
+      <!-- ================= LIVE 2D RIGGED CHARACTER STAGE ================= -->
+      <section class="character-stage" id="character-stage">
         <div class="stage-glow"></div>
+
+        <div class="live2d-badge">
+          <span class="live2d-dot"></span>
+          <span data-zh>2D 动态交互</span>
+          <span data-ko style="display:none;">2D 라이브</span>
+        </div>
         
         <div class="streak-badge" id="streak-badge">
           <span>🐾</span>
@@ -856,21 +977,366 @@
           <span id="streak-text-ko" data-ko style="display:none;">연속 체크인 1일</span>
         </div>
 
-        <!-- 2D Character Figure on Glowing Pedestal -->
-        <div class="char-stage-2d" onclick="handleKunClick()" title="点击与困互动！">
+        <!-- Multi-Bone Articulated 2D Shiba Inu Kun Rig -->
+        <div class="char-stage-2d" id="char-stage-2d" title="点击摸摸头、捏捏肉垫，移动手指看困的眼神跟随！">
+          <span class="stage-firefly f1"></span>
+          <span class="stage-firefly f2"></span>
+          <span class="stage-firefly f3"></span>
+          <span class="stage-firefly f4"></span>
           <div class="char-platform"></div>
+
           <div class="char-figure-wrap" id="char-figure-wrap">
-            <img src="data:image/jpeg;base64,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" onerror="this.onerror=null;this.src='../assets/kun_character_new.png';" alt="困 2D 角色" class="char-figure-img" id="char-figure-img" />
+            <svg class="kun-live2d-svg" id="kun-live2d-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Soft Anime Fur & Outfit Gradients -->
+                <linearGradient id="kunFurGold" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#FFD485" />
+                  <stop offset="52%" stop-color="#F7B05B" />
+                  <stop offset="100%" stop-color="#E59238" />
+                </linearGradient>
+                <linearGradient id="kunCream" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#FFFDF7" />
+                  <stop offset="70%" stop-color="#FFF5DE" />
+                  <stop offset="100%" stop-color="#F2E2C2" />
+                </linearGradient>
+                <linearGradient id="kunEarPink" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#F8B0B7" />
+                  <stop offset="100%" stop-color="#DF7C88" />
+                </linearGradient>
+                <linearGradient id="kunCoatYellow" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#FFE094" />
+                  <stop offset="55%" stop-color="#F6BA52" />
+                  <stop offset="100%" stop-color="#DF952C" />
+                </linearGradient>
+                <linearGradient id="kunPackDark" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#524B52" />
+                  <stop offset="55%" stop-color="#3B353C" />
+                  <stop offset="100%" stop-color="#282329" />
+                </linearGradient>
+                <linearGradient id="kunGoldMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#FFE48F" />
+                  <stop offset="50%" stop-color="#F3AE38" />
+                  <stop offset="100%" stop-color="#B97618" />
+                </linearGradient>
+                <radialGradient id="kunBlushGrad" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#FF8A9A" stop-opacity="0.72" />
+                  <stop offset="100%" stop-color="#FF8A9A" stop-opacity="0" />
+                </radialGradient>
+              </defs>
+
+              <!-- 1. WAGGING FLUFFY CURLED SHIBA TAIL (Back Layer) -->
+              <g id="kun-rig-tail" style="transform-origin: 96px 226px;">
+                <!-- Cream fluffy outer tail fur -->
+                <path d="M 96 228 C 66 238, 42 216, 44 190 C 45 182, 37 178, 46 171 C 43 163, 52 159, 60 162 C 59 154, 70 151, 79 158 C 96 170, 104 196, 98 224 Z"
+                      fill="url(#kunCream)" stroke="#4A2C1D" stroke-width="2.8" stroke-linejoin="round" />
+                <!-- Golden-orange inner tail curl -->
+                <path d="M 97 224 C 75 228, 58 212, 60 192 C 62 177, 78 171, 90 183 C 96 190, 99 206, 97 224 Z"
+                      fill="url(#kunFurGold)" />
+                <path d="M 73 188 C 78 184, 86 188, 84 196" fill="none" stroke="#4A2C1D" stroke-width="2.2" stroke-linecap="round" />
+              </g>
+
+              <!-- 2. TWIN-POCKET EXPLORER BACKPACK (Behind Shoulders) -->
+              <g id="kun-rig-backpack" style="transform-origin: 150px 195px;">
+                <!-- Top Rolled Yellow Sleeping Bag peeking behind hood -->
+                <path d="M 88 152 Q 86 134, 104 134 L 196 134 Q 214 134, 212 152 Z"
+                      fill="url(#kunCoatYellow)" stroke="#4A2C1D" stroke-width="2.6" />
+                <!-- Left Backpack Wing -->
+                <path d="M 96 150 C 70 152, 58 172, 58 202 C 58 224, 70 236, 92 234 L 104 226 Z"
+                      fill="url(#kunPackDark)" stroke="#4A2C1D" stroke-width="2.8" stroke-linejoin="round" />
+                <!-- Left Gold Buckle & Pocket -->
+                <path d="M 62 194 Q 75 190, 88 195 L 88 225 Q 72 229, 62 218 Z"
+                      fill="#463E45" stroke="#4A2C1D" stroke-width="2.2" />
+                <rect x="68" y="182" width="13" height="16" rx="3.5" fill="url(#kunGoldMetal)" stroke="#4A2C1D" stroke-width="2" transform="rotate(-10 74 190)" />
+                <!-- Right Backpack Wing -->
+                <path d="M 204 150 C 230 152, 242 172, 242 202 C 242 224, 230 236, 208 234 L 196 226 Z"
+                      fill="url(#kunPackDark)" stroke="#4A2C1D" stroke-width="2.8" stroke-linejoin="round" />
+                <!-- Right Yellow Expedition Side Pouch & Gold Buckles -->
+                <path d="M 218 196 Q 232 194, 241 200 L 239 229 Q 228 234, 217 228 Z"
+                      fill="url(#kunCoatYellow)" stroke="#4A2C1D" stroke-width="2.3" />
+                <circle cx="230" cy="214" r="3.5" fill="none" stroke="#C77B1E" stroke-width="1.6" />
+                <rect x="218" y="176" width="13" height="16" rx="3.5" fill="url(#kunGoldMetal)" stroke="#4A2C1D" stroke-width="2" transform="rotate(10 224 184)" />
+              </g>
+
+              <!-- 3. CHUBBY SHORT LEGS & PAWS -->
+              <g id="kun-rig-legs">
+                <!-- Left Leg -->
+                <g id="kun-rig-leg-l" style="transform-origin: 118px 236px;">
+                  <path d="M 96 226 C 94 246, 100 264, 105 272 L 136 272 C 138 260, 139 246, 136 234 Z"
+                        fill="url(#kunFurGold)" stroke="#4A2C1D" stroke-width="2.8" stroke-linejoin="round" />
+                  <path d="M 103 254 Q 120 248, 137 254 L 137 272 L 103 272 Z" fill="url(#kunCream)" />
+                  <ellipse cx="120" cy="273" rx="20" ry="9.5" fill="url(#kunCream)" stroke="#4A2C1D" stroke-width="2.8" />
+                  <path d="M 113 268 V 279 M 120 267 V 280 M 127 268 V 279" stroke="#4A2C1D" stroke-width="2" stroke-linecap="round" />
+                </g>
+                <!-- Right Leg -->
+                <g id="kun-rig-leg-r" style="transform-origin: 182px 236px;">
+                  <path d="M 164 234 C 161 246, 162 260, 164 272 L 195 272 C 200 264, 206 246, 204 226 Z"
+                        fill="url(#kunFurGold)" stroke="#4A2C1D" stroke-width="2.8" stroke-linejoin="round" />
+                  <path d="M 163 254 Q 180 248, 197 254 L 197 272 L 163 272 Z" fill="url(#kunCream)" />
+                  <ellipse cx="180" cy="273" rx="20" ry="9.5" fill="url(#kunCream)" stroke="#4A2C1D" stroke-width="2.8" />
+                  <path d="M 173 268 V 279 M 180 267 V 280 M 187 268 V 279" stroke="#4A2C1D" stroke-width="2" stroke-linecap="round" />
+                </g>
+              </g>
+
+              <!-- 4. BREATHING TORSO + CREAM BELLY + PATTERNED EXPLORER COAT -->
+              <g id="kun-rig-torso" style="transform-origin: 150px 238px;">
+                <!-- Fluffy Cream Chest & Belly -->
+                <path d="M 102 156 L 198 156 C 204 192, 202 228, 190 244 Q 150 253, 110 244 C 98 228, 96 192, 102 156 Z"
+                      fill="url(#kunCream)" stroke="#4A2C1D" stroke-width="2.8" stroke-linejoin="round" />
+                <!-- Soft tummy fur tuft accents -->
+                <path d="M 136 226 Q 150 232, 164 226 M 150 198 V 242" stroke="#E4CFA8" stroke-width="1.8" fill="none" stroke-linecap="round" />
+
+                <!-- Left Patterned Yellow Jacket Panel -->
+                <path d="M 104 152 L 132 158 L 122 245 L 90 236 C 86 208, 90 176, 104 152 Z"
+                      fill="url(#kunCoatYellow)" stroke="#4A2C1D" stroke-width="2.7" stroke-linejoin="round" />
+                <!-- Geometric Sun-Ring Motif on Left Coat -->
+                <circle cx="107" cy="222" r="9" fill="none" stroke="#CC7E1F" stroke-width="2" opacity="0.55" />
+                <circle cx="107" cy="222" r="4" fill="#CC7E1F" opacity="0.5" />
+
+                <!-- Right Patterned Yellow Jacket Panel -->
+                <path d="M 196 152 L 168 158 L 178 245 L 210 236 C 214 208, 210 176, 196 152 Z"
+                      fill="url(#kunCoatYellow)" stroke="#4A2C1D" stroke-width="2.7" stroke-linejoin="round" />
+                <!-- Geometric Sun-Ring Motifs on Right Coat -->
+                <circle cx="188" cy="204" r="7.5" fill="none" stroke="#CC7E1F" stroke-width="2" opacity="0.55" />
+                <circle cx="188" cy="204" r="3" fill="#CC7E1F" opacity="0.5" />
+                <circle cx="195" cy="228" r="8.5" fill="none" stroke="#CC7E1F" stroke-width="2" opacity="0.55" />
+                <circle cx="195" cy="228" r="3.5" fill="#CC7E1F" opacity="0.5" />
+
+                <!-- Backpack Chest Straps & Gold Buckles -->
+                <path d="M 113 154 L 108 198 L 119 198 L 124 156 Z" fill="#463E46" stroke="#4A2C1D" stroke-width="2.2" />
+                <rect x="106" y="172" width="15" height="13" rx="3" fill="url(#kunGoldMetal)" stroke="#4A2C1D" stroke-width="2" />
+                <circle cx="111" cy="205" r="5.5" fill="none" stroke="url(#kunGoldMetal)" stroke-width="3" />
+                <circle cx="111" cy="205" r="5.5" fill="none" stroke="#4A2C1D" stroke-width="1.3" />
+
+                <path d="M 187 154 L 192 198 L 181 198 L 176 156 Z" fill="#463E46" stroke="#4A2C1D" stroke-width="2.2" />
+                <rect x="179" y="172" width="15" height="13" rx="3" fill="url(#kunGoldMetal)" stroke="#4A2C1D" stroke-width="2" />
+
+                <!-- Dark Slate Hood Collar Scarf with Golden Flecks -->
+                <path d="M 94 144 Q 118 166, 150 165 Q 182 166, 206 144 Q 214 154, 196 164 Q 172 172, 150 168 Q 128 172, 104 164 Q 86 154, 94 144 Z"
+                      fill="#45424C" stroke="#4A2C1D" stroke-width="2.7" stroke-linejoin="round" />
+                <circle cx="114" cy="157" r="3" fill="#F2AE40" opacity="0.85" />
+                <circle cx="184" cy="157" r="3.2" fill="#F2AE40" opacity="0.85" />
+                <circle cx="168" cy="162" r="2.2" fill="#F2AE40" opacity="0.85" />
+
+                <!-- 5. SWINGING GOLDEN SHIBA MEDALLION NECKLACE -->
+                <g id="kun-rig-medallion" style="transform-origin: 150px 164px;">
+                  <rect x="146" y="161" width="8" height="11" rx="3" fill="url(#kunGoldMetal)" stroke="#4A2C1D" stroke-width="2" />
+                  <circle cx="150" cy="186" r="16.5" fill="url(#kunGoldMetal)" stroke="#4A2C1D" stroke-width="2.5" />
+                  <circle cx="150" cy="186" r="12.5" fill="#FFF8E6" stroke="#4A2C1D" stroke-width="1.8" />
+                  <!-- Mini Cute Shiba Emblem inside Locket -->
+                  <path d="M 142 185 L 143 176 L 148 180 Q 150 179, 152 180 L 157 176 L 158 185 Q 160 192, 150 194 Q 140 192, 142 185 Z"
+                        fill="#F5AD52" stroke="#4A2C1D" stroke-width="1.4" stroke-linejoin="round" />
+                  <path d="M 143 188 Q 150 185, 157 188 Q 156 194, 150 194 Q 144 194, 143 188 Z" fill="#FFFDF8" />
+                  <circle cx="147" cy="186" r="1.2" fill="#4A2C1D" />
+                  <circle cx="153" cy="186" r="1.2" fill="#4A2C1D" />
+                  <path d="M 148.5 189 Q 150 190.5, 151.5 189" fill="none" stroke="#4A2C1D" stroke-width="1.2" stroke-linecap="round" />
+                </g>
+
+                <!-- 6A. RIGHT ARM (Viewer's Left — Can Wave Paw or Hold Bone!) -->
+                <g id="kun-rig-arm-l" style="transform-origin: 98px 166px;">
+                  <!-- Normal resting arm -->
+                  <g id="kun-arm-l-rest">
+                    <path d="M 98 160 C 80 168, 74 188, 78 206 L 103 208 C 106 194, 106 176, 102 162 Z"
+                          fill="url(#kunCoatYellow)" stroke="#4A2C1D" stroke-width="2.7" stroke-linejoin="round" />
+                    <path d="M 77 203 Q 90 198, 103 205 Q 105 212, 90 212 Q 75 212, 77 203 Z"
+                          fill="url(#kunCream)" stroke="#4A2C1D" stroke-width="2.3" />
+                    <ellipse cx="90" cy="216" rx="11.5" ry="10.5" fill="url(#kunCream)" stroke="#4A2C1D" stroke-width="2.6" />
+                    <path d="M 86 218 V 225 M 91 218 V 225" stroke="#4A2C1D" stroke-width="1.8" stroke-linecap="round" />
+                  </g>
+                  <!-- Raised Waving Paw with Pink Jelly Pads (shown during wave/cheer/hug!) -->
+                  <g id="kun-arm-l-wave" style="display:none;">
+                    <path d="M 98 164 C 76 156, 62 138, 66 120 L 89 116 C 95 130, 102 146, 104 160 Z"
+                          fill="url(#kunCoatYellow)" stroke="#4A2C1D" stroke-width="2.7" stroke-linejoin="round" />
+                    <ellipse cx="76" cy="113" rx="14" ry="13" fill="url(#kunCream)" stroke="#4A2C1D" stroke-width="2.6" />
+                    <!-- Cute Pink Jelly Paw Pads! -->
+                    <ellipse cx="76" cy="116" rx="5.5" ry="4.5" fill="#F59AA6" />
+                    <circle cx="69" cy="108" r="2.5" fill="#F59AA6" />
+                    <circle cx="76" cy="106" r="2.6" fill="#F59AA6" />
+                    <circle cx="83" cy="108" r="2.5" fill="#F59AA6" />
+                  </g>
+                </g>
+
+                <!-- 6B. LEFT ARM (Viewer's Right — Can Hold Bone Biscuit or Hug!) -->
+                <g id="kun-rig-arm-r" style="transform-origin: 202px 166px;">
+                  <path d="M 202 160 C 220 168, 226 188, 222 206 L 197 208 C 194 194, 194 176, 198 162 Z"
+                        fill="url(#kunCoatYellow)" stroke="#4A2C1D" stroke-width="2.7" stroke-linejoin="round" />
+                  <path d="M 197 205 Q 210 198, 223 203 Q 225 212, 210 212 Q 195 212, 197 205 Z"
+                        fill="url(#kunCream)" stroke="#4A2C1D" stroke-width="2.3" />
+                  <ellipse cx="210" cy="216" rx="11.5" ry="10.5" fill="url(#kunCream)" stroke="#4A2C1D" stroke-width="2.6" />
+                  <path d="M 209 218 V 225 M 214 218 V 225" stroke="#4A2C1D" stroke-width="1.8" stroke-linecap="round" />
+
+                  <!-- Crispy Bone Biscuit Prop (shown in Snack mode / Feed biscuit!) -->
+                  <g id="kun-prop-bone" style="display:none;" transform="translate(192, 198) rotate(-28)">
+                    <path d="M 4 8 C 0 4, 4 -2, 9 2 C 13 -1, 16 4, 13 8 L 31 8 C 28 4, 31 -1, 35 2 C 40 -2, 44 4, 40 8 C 44 12, 40 18, 35 14 C 31 17, 28 12, 31 12 L 13 12 C 16 12, 13 17, 9 14 C 4 18, 0 12, 4 8 Z"
+                          fill="#FFF3D1" stroke="#8C5A32" stroke-width="2.2" stroke-linejoin="round" />
+                  </g>
+                </g>
+              </g>
+
+              <!-- 7. ARTICULATED HEAD GROUP WITH CURSOR PARALLAX & LIVE EXPRESSIONS -->
+              <g id="kun-rig-head" style="transform-origin: 150px 146px;">
+                <!-- 7A. Independent Left Ear (Viewer's Left) -->
+                <g id="kun-rig-ear-l" style="transform-origin: 104px 62px;">
+                  <path d="M 82 82 C 75 56, 76 34, 83 24 C 94 28, 114 40, 126 54 Z"
+                        fill="url(#kunFurGold)" stroke="#4A2C1D" stroke-width="2.9" stroke-linejoin="round" />
+                  <path d="M 88 74 C 84 56, 85 40, 88 33 C 96 37, 108 46, 116 56 Z"
+                        fill="url(#kunEarPink)" />
+                  <!-- Fluffy White Inner Ear Tuft -->
+                  <path d="M 86 76 L 92 58 L 97 65 L 104 53 L 116 62 Z" fill="url(#kunCream)" />
+                </g>
+
+                <!-- 7B. Independent Right Ear (Viewer's Right) -->
+                <g id="kun-rig-ear-r" style="transform-origin: 196px 60px;">
+                  <path d="M 174 52 C 186 36, 206 22, 217 18 C 224 28, 225 54, 218 80 Z"
+                        fill="url(#kunFurGold)" stroke="#4A2C1D" stroke-width="2.9" stroke-linejoin="round" />
+                  <path d="M 184 54 C 193 42, 205 32, 212 28 C 216 38, 216 54, 212 72 Z"
+                        fill="url(#kunEarPink)" />
+                  <!-- Fluffy White Inner Ear Tuft -->
+                  <path d="M 184 60 L 196 50 L 203 62 L 209 54 L 214 74 Z" fill="url(#kunCream)" />
+                </g>
+
+                <!-- 7C. Fluffy Shiba Head & Cheek Silhouette -->
+                <path d="M 114 50 Q 150 40, 186 50 C 206 56, 218 72, 220 88 L 229 93 L 222 103 L 233 114 L 221 124 C 216 142, 196 154, 150 156 C 104 154, 84 142, 79 124 L 67 114 L 78 103 L 71 93 L 80 88 C 82 72, 94 56, 114 50 Z"
+                      fill="url(#kunFurGold)" stroke="#4A2C1D" stroke-width="2.9" stroke-linejoin="round" />
+
+                <!-- Cream Urajiro Lower Face & Fluffy Cheeks -->
+                <path d="M 79 122 L 70 114 L 80 105 C 94 102, 112 108, 128 112 Q 150 94, 172 112 C 188 108, 206 102, 220 105 L 230 114 L 221 122 C 214 142, 192 154, 150 155 C 108 154, 86 142, 79 122 Z"
+                      fill="url(#kunCream)" />
+                <!-- Re-stroke outer cheek fluff cleanly over cream fill -->
+                <path d="M 80 88 L 71 93 L 78 103 L 67 114 L 79 124 C 85 142, 106 154, 150 156 C 194 154, 215 142, 221 124 L 233 114 L 222 103 L 229 93 L 220 88"
+                      fill="none" stroke="#4A2C1D" stroke-width="2.9" stroke-linejoin="round" stroke-linecap="round" />
+
+                <!-- 7D. Parallax Facial Features Group -->
+                <g id="kun-rig-face">
+                  <!-- Cream Shiba Eyebrow Dots ("Maru-Mayu") -->
+                  <g id="kun-rig-brows">
+                    <ellipse cx="126" cy="84" rx="8.5" ry="6" fill="#FFFDF8" transform="rotate(-12 126 84)" />
+                    <ellipse cx="174" cy="84" rx="8.5" ry="6" fill="#FFFDF8" transform="rotate(12 174 84)" />
+                  </g>
+
+                  <!-- Soft Rosy Blush Cheeks -->
+                  <g id="kun-rig-blush">
+                    <ellipse cx="99" cy="118" rx="14" ry="7.5" fill="url(#kunBlushGrad)" />
+                    <path d="M 94 119 L 97 115 M 99 119 L 102 115 M 104 119 L 107 115" stroke="#F48B9B" stroke-width="1.4" stroke-linecap="round" opacity="0.7" />
+                    <ellipse cx="201" cy="118" rx="14" ry="7.5" fill="url(#kunBlushGrad)" />
+                    <path d="M 194 119 L 197 115 M 199 119 L 202 115 M 204 119 L 207 115" stroke="#F48B9B" stroke-width="1.4" stroke-linecap="round" opacity="0.7" />
+                  </g>
+
+                  <!-- === DYNAMIC MULTI-STATE EYES === -->
+                  <!-- State 1: Normal Glossy Anime Eyes (+ Wink right eye option) -->
+                  <g id="kun-eyes-normal">
+                    <!-- Left Glossy Eye -->
+                    <g id="kun-eye-l" style="transform-origin: 117px 103px;">
+                      <ellipse cx="117" cy="103" rx="9.5" ry="10.2" fill="#3B2118" />
+                      <g class="kun-pupil">
+                        <ellipse cx="118" cy="105" rx="6.2" ry="6.2" fill="#6B3D28" />
+                        <circle cx="117.5" cy="103" r="4" fill="#26130D" />
+                        <circle cx="114" cy="99" r="3.1" fill="#FFFFFF" />
+                        <circle cx="121" cy="107" r="1.5" fill="#FFFFFF" opacity="0.9" />
+                      </g>
+                    </g>
+                    <!-- Right Eye: Normal Open vs Signature Playful Wink -->
+                    <g id="kun-eye-r-open" style="transform-origin: 183px 103px;">
+                      <ellipse cx="183" cy="103" rx="9.5" ry="10.2" fill="#3B2118" />
+                      <g class="kun-pupil">
+                        <ellipse cx="182" cy="105" rx="6.2" ry="6.2" fill="#6B3D28" />
+                        <circle cx="182.5" cy="103" r="4" fill="#26130D" />
+                        <circle cx="179" cy="99" r="3.1" fill="#FFFFFF" />
+                        <circle cx="186" cy="107" r="1.5" fill="#FFFFFF" opacity="0.9" />
+                      </g>
+                    </g>
+                    <path id="kun-eye-r-wink" d="M 171 104 Q 183 93, 195 103" fill="none" stroke="#3B2118" stroke-width="4.2" stroke-linecap="round" style="display:none;" />
+                  </g>
+
+                  <!-- State 2: Happy Crescent Eyes (^ ^) -->
+                  <g id="kun-eyes-happy" style="display:none;">
+                    <path d="M 106 105 Q 117 92, 128 105" fill="none" stroke="#3B2118" stroke-width="4.2" stroke-linecap="round" />
+                    <path d="M 172 105 Q 183 92, 194 105" fill="none" stroke="#3B2118" stroke-width="4.2" stroke-linecap="round" />
+                  </g>
+
+                  <!-- State 3: Sparkling Golden Star Eyes (Snack / Excited) -->
+                  <g id="kun-eyes-star" style="display:none;">
+                    <ellipse cx="117" cy="103" rx="10.5" ry="11" fill="#3B2118" />
+                    <path d="M 117 93 L 119.5 100.5 L 127 103 L 119.5 105.5 L 117 113 L 114.5 105.5 L 107 103 L 114.5 100.5 Z" fill="#FFE26A" />
+                    <ellipse cx="183" cy="103" rx="10.5" ry="11" fill="#3B2118" />
+                    <path d="M 183 93 L 185.5 100.5 L 193 103 L 185.5 105.5 L 183 113 L 180.5 105.5 L 173 103 L 180.5 100.5 Z" fill="#FFE26A" />
+                  </g>
+
+                  <!-- State 4: Sleepy Closed Eyes (︶ ︶) -->
+                  <g id="kun-eyes-sleepy" style="display:none;">
+                    <path d="M 106 102 Q 117 112, 128 102" fill="none" stroke="#3B2118" stroke-width="3.8" stroke-linecap="round" />
+                    <path d="M 172 102 Q 183 112, 194 102" fill="none" stroke="#3B2118" stroke-width="3.8" stroke-linecap="round" />
+                  </g>
+
+                  <!-- State 5: Shimmering Puppy Comfort Eyes (🥺) -->
+                  <g id="kun-eyes-comfort" style="display:none;">
+                    <ellipse cx="117" cy="104" rx="10.5" ry="11.2" fill="#3B2118" />
+                    <circle cx="114" cy="99.5" r="4.2" fill="#FFFFFF" />
+                    <circle cx="121" cy="107" r="2.2" fill="#FFFFFF" />
+                    <ellipse cx="112" cy="113" rx="3.5" ry="2.2" fill="#8CD8FF" opacity="0.85" />
+                    <ellipse cx="183" cy="104" rx="10.5" ry="11.2" fill="#3B2118" />
+                    <circle cx="180" cy="99.5" r="4.2" fill="#FFFFFF" />
+                    <circle cx="187" cy="107" r="2.2" fill="#FFFFFF" />
+                    <ellipse cx="188" cy="113" rx="3.5" ry="2.2" fill="#8CD8FF" opacity="0.85" />
+                  </g>
+
+                  <!-- Cute Glossy Nose + Real-Time Lip-Sync Mouth -->
+                  <g id="kun-rig-muzzle">
+                    <!-- Nose -->
+                    <path d="M 143.5 108 Q 150 105.5, 156.5 108 Q 157.5 112.5, 150 115.5 Q 142.5 112.5, 143.5 108 Z" fill="#3B2118" />
+                    <ellipse cx="148.5" cy="108.8" rx="2.5" ry="1.2" fill="#8B685C" opacity="0.7" />
+
+                    <!-- Animated Open Mouth & Bouncy Pink Tongue (Lip-Sync Target) -->
+                    <g id="kun-mouth-open" style="transform-origin: 150px 121px;">
+                      <path d="M 134 120 Q 150 124, 166 120 C 165 136, 159 144, 150 144 C 141 144, 135 136, 134 120 Z"
+                            fill="#6A2631" stroke="#4A2C1D" stroke-width="2.4" stroke-linejoin="round" />
+                      <!-- Bouncy Pink Tongue -->
+                      <path d="M 139 127 Q 150 124, 161 127 C 163 139, 157 146, 150 146 C 143 146, 137 139, 139 127 Z"
+                            fill="#FF98A6" stroke="#4A2C1D" stroke-width="2" />
+                      <path d="M 150 128 V 140" stroke="#E06D7E" stroke-width="1.6" stroke-linecap="round" />
+                      <!-- Cute Tiny Fang -->
+                      <polygon points="160,121 163.5,121 161.8,125.5" fill="#FFFFFF" />
+                    </g>
+
+                    <!-- Upper Shiba ω Lip Line -->
+                    <path d="M 130 118 Q 140 125, 150 115.5 Q 160 125, 170 118"
+                          fill="none" stroke="#4A2C1D" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                  </g>
+                </g>
+
+                <!-- Floating Sleepy Zzz Bubbles -->
+                <g class="sleep-zzz-group" id="kun-sleep-zzz">
+                  <text x="212" y="64" fill="#FFE082" font-size="14" font-weight="900" class="zzz-1">z</text>
+                  <text x="226" y="48" fill="#FFC043" font-size="18" font-weight="900" class="zzz-2">Z</text>
+                  <text x="242" y="30" fill="#F5A623" font-size="22" font-weight="900" class="zzz-3">Z</text>
+                </g>
+              </g>
+            </svg>
           </div>
         </div>
 
+        <!-- Quick Interactive 2D Toy Bar -->
+        <div class="char-action-bar">
+          <button type="button" class="char-act-btn" onclick="interactKun('pat')">
+            <span>🤚</span><span data-zh>摸摸头</span><span data-ko style="display:none;">쓰담쓰담</span>
+          </button>
+          <button type="button" class="char-act-btn" onclick="interactKun('wave')">
+            <span>🐾</span><span data-zh>挥挥爪</span><span data-ko style="display:none;">손 흔들기</span>
+          </button>
+          <button type="button" class="char-act-btn" onclick="interactKun('feed')">
+            <span>🦴</span><span data-zh>喂饼干</span><span data-ko style="display:none;">간식 주기</span>
+          </button>
+          <button type="button" class="char-act-btn" onclick="interactKun('dance')">
+            <span>🎵</span><span data-zh>开心跳</span><span data-ko style="display:none;">신나는 춤</span>
+          </button>
+        </div>
+
         <div class="char-tagline">
-          <span data-zh>“无论去哪，困都陪着你！”</span>
-          <span data-ko style="display:none;">“어디든, 곤이 함께할게!”</span>
+          <span data-zh>“无论去哪，困都陪着你！” · 移动手指看困眼神跟随~</span>
+          <span data-ko style="display:none;">“어디든, 곤이 함께할게!” · 터치하면 곤이 반응해요~</span>
         </div>
 
         <div class="speech-bubble" id="kun-speech">
-          <span id="speech-content">汪！今天早上第一件事，就是想见到你！快来记录一下今天的心情吧~</span>
+          <span id="speech-content">汪！今天早上第一件事，就是想见到你！快来摸摸困或者记录今天的心情吧~</span>
         </div>
 
         <button type="button" class="joke-quick-btn" onclick="tellDailyJoke(true)">
@@ -1065,7 +1531,331 @@
     let patrolEnabled = false;
     let leaveTimestamp = null;
 
-    // Rich Joke Pool (20+ cute bilingual travel & Shiba jokes for Kun)
+    /* ================= LIVE 2D PHYSICS & SKELETAL RIG ENGINE ================= */
+    const kunRig = {
+      moodMode: 'energetic', // 'energetic' | 'snack' | 'adventure' | 'sleepy' | 'comfort'
+      eyeState: 'normal',    // 'normal' | 'wink' | 'happy' | 'star' | 'sleepy' | 'comfort'
+      lookTargetX: 0,        // -1 .. +1 normalized pointer X
+      lookTargetY: 0,        // -1 .. +1 normalized pointer Y
+      lookX: 0,
+      lookY: 0,
+      talkUntil: 0,
+      waveUntil: 0,
+      boneUntil: 0,
+      marchUntil: 0,
+      tailBoostUntil: 0,
+      blinkProgress: 0,      // 0 = open, 1 = closed
+      nextBlinkAt: performance.now() + 1800,
+      earTwitchL: 0,
+      earTwitchR: 0,
+      nextEarTwitchAt: performance.now() + 2600,
+      medallionAngle: 0,
+      medallionVel: 0,
+      prevHeadX: 0
+    };
+
+    function setKunEyeState(state) {
+      kunRig.eyeState = state;
+      const ids = ['normal', 'happy', 'star', 'sleepy', 'comfort'];
+      ids.forEach(k => {
+        const el = document.getElementById('kun-eyes-' + k);
+        if (el) el.style.display = (k === state || (state === 'wink' && k === 'normal')) ? '' : 'none';
+      });
+      const rOpen = document.getElementById('kun-eye-r-open');
+      const rWink = document.getElementById('kun-eye-r-wink');
+      if (rOpen && rWink) {
+        rOpen.style.display = (state === 'wink') ? 'none' : '';
+        rWink.style.display = (state === 'wink') ? '' : 'none';
+      }
+      const zzz = document.getElementById('kun-sleep-zzz');
+      if (zzz) zzz.classList.toggle('visible', state === 'sleepy');
+    }
+
+    function speakKun(text, talkMs = 1900) {
+      const el = document.getElementById('speech-content');
+      if (el) el.innerText = text;
+      kunRig.talkUntil = performance.now() + talkMs;
+    }
+
+    function initKunLive2DRig() {
+      const stageEl = document.getElementById('char-stage-2d');
+      const tailEl = document.getElementById('kun-rig-tail');
+      const packEl = document.getElementById('kun-rig-backpack');
+      const torsoEl = document.getElementById('kun-rig-torso');
+      const headEl = document.getElementById('kun-rig-head');
+      const faceEl = document.getElementById('kun-rig-face');
+      const earLEl = document.getElementById('kun-rig-ear-l');
+      const earREl = document.getElementById('kun-rig-ear-r');
+      const armLEl = document.getElementById('kun-rig-arm-l');
+      const armLRest = document.getElementById('kun-arm-l-rest');
+      const armLWave = document.getElementById('kun-arm-l-wave');
+      const armREl = document.getElementById('kun-rig-arm-r');
+      const propBone = document.getElementById('kun-prop-bone');
+      const legLEl = document.getElementById('kun-rig-leg-l');
+      const legREl = document.getElementById('kun-rig-leg-r');
+      const medalEl = document.getElementById('kun-rig-medallion');
+      const eyeLEl = document.getElementById('kun-eye-l');
+      const eyeROpenEl = document.getElementById('kun-eye-r-open');
+      const mouthOpenEl = document.getElementById('kun-mouth-open');
+      const pupils = document.querySelectorAll('.kun-pupil');
+
+      // Pointer / Touch tracking for Live2D eye & head look-at
+      const updatePointer = (clientX, clientY) => {
+        const rect = stageEl.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height * 0.45;
+        kunRig.lookTargetX = Math.max(-1, Math.min(1, (clientX - cx) / 140));
+        kunRig.lookTargetY = Math.max(-1, Math.min(1, (clientY - cy) / 140));
+      };
+
+      window.addEventListener('mousemove', (e) => updatePointer(e.clientX, e.clientY), { passive: true });
+      stageEl.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches[0]) updatePointer(e.touches[0].clientX, e.touches[0].clientY);
+      }, { passive: true });
+      window.addEventListener('mouseleave', () => {
+        kunRig.lookTargetX = 0;
+        kunRig.lookTargetY = 0;
+      });
+
+      // Click hit-detection on SVG zones (Headpat vs Belly/Medallion vs Paw)
+      stageEl.addEventListener('click', (e) => {
+        const rect = stageEl.getBoundingClientRect();
+        const relY = (e.clientY - rect.top) / rect.height;
+        if (relY < 0.48) {
+          interactKun('pat');
+        } else {
+          handleKunClick();
+        }
+      });
+
+      // Start with signature playful wink greeting!
+      setKunEyeState('wink');
+      kunRig.waveUntil = performance.now() + 1800;
+      kunRig.talkUntil = performance.now() + 1800;
+      setTimeout(() => {
+        if (kunRig.moodMode === 'energetic') setKunEyeState('normal');
+      }, 1900);
+
+      // 60FPS Real-Time Skeletal Animation Loop
+      function animateRig(now) {
+        const t = now * 0.001;
+        const isSleepy = kunRig.moodMode === 'sleepy';
+        const isExcited = now < kunRig.tailBoostUntil || kunRig.moodMode === 'adventure';
+
+        // 1. Smooth spring interpolation for pointer tracking
+        const targetX = isSleepy ? 0 : kunRig.lookTargetX;
+        const targetY = isSleepy ? 0.18 : kunRig.lookTargetY;
+        kunRig.lookX += (targetX - kunRig.lookX) * 0.09;
+        kunRig.lookY += (targetY - kunRig.lookY) * 0.09;
+
+        // 2. Breathing cycle
+        const breathFreq = isSleepy ? 1.45 : 2.35;
+        const breath = Math.sin(t * breathFreq);
+        const torsoScaleY = 1 + breath * 0.016;
+        const torsoScaleX = 1 - breath * 0.01;
+        const torsoBobY = -breath * 2.2;
+        torsoEl.style.transform = `translateY(${torsoBobY.toFixed(2)}px) scale(${torsoScaleX.toFixed(4)}, ${torsoScaleY.toFixed(4)})`;
+
+        // Secondary lag on backpack
+        packEl.style.transform = `translateY(${(-breath * 1.4).toFixed(2)}px) rotate(${(kunRig.lookX * -1.8).toFixed(2)}deg)`;
+
+        // 3. Head tilt, nod & parallax face shift
+        const idleTilt = Math.sin(t * 1.35) * (isSleepy ? 1.8 : 2.6);
+        const headRot = idleTilt + kunRig.lookX * 6.5;
+        const headX = kunRig.lookX * 5.5;
+        const headY = torsoBobY * 1.25 + kunRig.lookY * 4.2 + (isSleepy ? 3.5 : 0);
+        headEl.style.transform = `translate(${headX.toFixed(2)}px, ${headY.toFixed(2)}px) rotate(${headRot.toFixed(2)}deg)`;
+        faceEl.style.transform = `translate(${(kunRig.lookX * 3.8).toFixed(2)}px, ${(kunRig.lookY * 2.8).toFixed(2)}px)`;
+
+        // Pupil tracking
+        const px = (kunRig.lookX * 2.5).toFixed(2);
+        const py = (kunRig.lookY * 2.0).toFixed(2);
+        pupils.forEach(p => { p.style.transform = `translate(${px}px, ${py}px)`; });
+
+        // 4. Damped pendulum physics on Golden Shiba Medallion
+        const headVelX = headX - kunRig.prevHeadX;
+        kunRig.prevHeadX = headX;
+        kunRig.medallionVel += (-headVelX * 1.6) - (kunRig.medallionAngle * 0.08);
+        kunRig.medallionVel *= 0.90;
+        kunRig.medallionAngle += kunRig.medallionVel;
+        const medalSwing = kunRig.medallionAngle + Math.sin(t * 2.35) * 2.2;
+        medalEl.style.transform = `rotate(${medalSwing.toFixed(2)}deg)`;
+
+        // 5. Continuous Fluffy Tail Wagging
+        const tailFreq = isSleepy ? 2.2 : (isExcited ? 14.5 : 6.8);
+        const tailAmp = isSleepy ? 4.5 : (isExcited ? 16 : 9.5);
+        const tailAngle = Math.sin(t * tailFreq) * tailAmp;
+        tailEl.style.transform = `rotate(${tailAngle.toFixed(2)}deg)`;
+
+        // 6. Spontaneous Ear Twitches & Mood Ear Angles
+        if (now > kunRig.nextEarTwitchAt) {
+          if (Math.random() < 0.5) kunRig.earTwitchL = 1;
+          else kunRig.earTwitchR = 1;
+          kunRig.nextEarTwitchAt = now + 2600 + Math.random() * 3200;
+        }
+        kunRig.earTwitchL *= 0.84;
+        kunRig.earTwitchR *= 0.84;
+        const moodEarDrop = (isSleepy || kunRig.moodMode === 'comfort') ? 10 : 0;
+        const earLRot = -moodEarDrop - Math.sin(t * 2.35) * 2.2 - kunRig.earTwitchL * 14;
+        const earRRot = moodEarDrop + Math.sin(t * 2.35 + 0.6) * 2.2 + kunRig.earTwitchR * 14;
+        earLEl.style.transform = `rotate(${earLRot.toFixed(2)}deg)`;
+        earREl.style.transform = `rotate(${earRRot.toFixed(2)}deg)`;
+
+        // 7. Natural Eyelid Blinking (every 2.4s - 4.8s)
+        if (now > kunRig.nextBlinkAt) {
+          kunRig.blinkProgress = 1;
+          // 22% chance of cute double-blink
+          kunRig.nextBlinkAt = now + (Math.random() < 0.22 ? 260 : (2400 + Math.random() * 2600));
+        }
+        if (kunRig.blinkProgress > 0.01) {
+          kunRig.blinkProgress *= 0.68;
+        } else {
+          kunRig.blinkProgress = 0;
+        }
+        const eyeScaleY = (1 - kunRig.blinkProgress * 0.92).toFixed(3);
+        eyeLEl.style.transform = `scaleY(${eyeScaleY})`;
+        eyeROpenEl.style.transform = `scaleY(${eyeScaleY})`;
+
+        // 8. Arms & Bone Biscuit Prop Animation
+        const isWaving = now < kunRig.waveUntil;
+        const showBone = (kunRig.moodMode === 'snack') || (now < kunRig.boneUntil);
+        if (isWaving) {
+          armLRest.style.display = 'none';
+          armLWave.style.display = '';
+          const waveRot = Math.sin(t * 15) * 16;
+          armLEl.style.transform = `rotate(${waveRot.toFixed(2)}deg)`;
+        } else {
+          armLRest.style.display = '';
+          armLWave.style.display = 'none';
+          const idleArmL = kunRig.moodMode === 'comfort'
+            ? 24 + Math.sin(t * 4) * 5
+            : Math.sin(t * 2.35 + 1) * 3.5;
+          armLEl.style.transform = `rotate(${idleArmL.toFixed(2)}deg)`;
+        }
+
+        propBone.style.display = showBone ? '' : 'none';
+        if (showBone) {
+          const munchArm = -22 + Math.sin(t * 9) * 6;
+          armREl.style.transform = `rotate(${munchArm.toFixed(2)}deg)`;
+        } else if (kunRig.moodMode === 'comfort') {
+          armREl.style.transform = `rotate(${(-24 - Math.sin(t * 4) * 5).toFixed(2)}deg)`;
+        } else {
+          armREl.style.transform = `rotate(${(-Math.sin(t * 2.35 + 1) * 3.5).toFixed(2)}deg)`;
+        }
+
+        // 9. Marching Feet (Adventure Mode or Dance/March boost)
+        const isMarching = (kunRig.moodMode === 'adventure') || (now < kunRig.marchUntil);
+        if (isMarching) {
+          const step = Math.sin(t * 11);
+          legLEl.style.transform = `translateY(${Math.min(0, step * 7).toFixed(2)}px)`;
+          legREl.style.transform = `translateY(${Math.min(0, -step * 7).toFixed(2)}px)`;
+        } else {
+          legLEl.style.transform = '';
+          legREl.style.transform = '';
+        }
+
+        // 10. Real-Time Lip-Sync Mouth & Tongue
+        const isTalking = now < kunRig.talkUntil;
+        if (isTalking) {
+          const syllable = 0.35 + Math.abs(Math.sin(t * 18)) * 0.78;
+          mouthOpenEl.style.transform = `scaleY(${syllable.toFixed(3)})`;
+        } else if (showBone) {
+          const chew = 0.25 + Math.abs(Math.sin(t * 10)) * 0.65;
+          mouthOpenEl.style.transform = `scaleY(${chew.toFixed(3)})`;
+        } else if (isSleepy) {
+          const snore = 0.14 + (breath + 1) * 0.12;
+          mouthOpenEl.style.transform = `scaleY(${snore.toFixed(3)})`;
+        } else if (kunRig.moodMode === 'comfort') {
+          mouthOpenEl.style.transform = `scaleY(0.18)`;
+        } else {
+          const pant = 0.76 + breath * 0.08;
+          mouthOpenEl.style.transform = `scaleY(${pant.toFixed(3)})`;
+        }
+
+        requestAnimationFrame(animateRig);
+      }
+
+      requestAnimationFrame(animateRig);
+    }
+
+    function interactKun(action) {
+      const now = performance.now();
+      kunRig.tailBoostUntil = now + 2400;
+
+      if (action === 'pat') {
+        setKunEyeState('happy');
+        kunRig.earTwitchL = 1;
+        kunRig.earTwitchR = 1;
+        triggerKun2DAnimation('waggle');
+        triggerFloatingPaw(['💛', '✨', '🐾', '🥰']);
+        playCuteAudio('happy');
+        const patLinesZh = [
+          "嘿嘿~ 被摸摸头啦！困的两只耳朵都舒服得抖起来咯！💛",
+          "呜汪~ 再摸两下，困今天给你守护双倍好运！✨",
+          "暖乎乎的手掌最舒服啦，困蹭蹭你！"
+        ];
+        const patLinesKo = [
+          "헤헤~ 머리 쓰담쓰담 최고야! 곤의 귀가 기분 좋게 쫑긋거려! 💛",
+          "멍~ 조금만 더 쓰다듬어 줘, 오늘 행운을 두 배로 지켜줄게! ✨"
+        ];
+        const pool = currentLang === 'zh' ? patLinesZh : patLinesKo;
+        speakKun(pool[Math.floor(Math.random() * pool.length)], 1800);
+        setTimeout(() => restoreMoodEyes(), 2100);
+      } else if (action === 'wave') {
+        setKunEyeState('wink');
+        kunRig.waveUntil = now + 2300;
+        triggerKun2DAnimation('cheer');
+        triggerFloatingPaw(['🐾', '☀️', '✨']);
+        playCuteAudio('bark');
+        speakKun(
+          currentLang === 'zh'
+            ? "汪汪！看到困粉嘟嘟的肉垫了吗？击个掌，今天也一起出发吧！🐾"
+            : "멍멍! 곤의 분홍 젤리 발바닥 보이지? 하이파이브 하고 오늘도 힘차게 출발하자! 🐾",
+          2000
+        );
+        setTimeout(() => restoreMoodEyes(), 2300);
+      } else if (action === 'feed') {
+        setKunEyeState('star');
+        kunRig.boneUntil = now + 2800;
+        triggerKun2DAnimation('cheer');
+        triggerFloatingPaw(['🦴', '🍖', '💛', '✨']);
+        playCuteAudio('success');
+        speakKun(
+          currentLang === 'zh'
+            ? "咔嚓咔嚓……太香啦！！是脆脆的骨头饼干！困幸福得尾巴要飞上天啦！🦴"
+            : "와삭와삭…… 너무 맛있어!! 바삭한 뼈다귀 쿠키 최고야! 꼬리가 하늘로 날아갈 것 같아! 🦴",
+          2500
+        );
+        setTimeout(() => restoreMoodEyes(), 2800);
+      } else if (action === 'dance') {
+        setKunEyeState('happy');
+        kunRig.waveUntil = now + 1500;
+        kunRig.marchUntil = now + 1800;
+        triggerKun2DAnimation('dance');
+        triggerFloatingPaw(['🎵', '🎶', '✨', '🌟', '🐾']);
+        playCuteAudio('success');
+        speakKun(
+          currentLang === 'zh'
+            ? "噔噔噔~ 困的阳光营地摇尾舞开演啦！烦恼通通甩飞！🎵"
+            : "랄랄라~ 곤의 햇살 캠프 꼬리 춤 시작! 걱정은 전부 날려버려! 🎵",
+          2000
+        );
+        setTimeout(() => restoreMoodEyes(), 2000);
+      }
+    }
+
+    function restoreMoodEyes() {
+      const map = {
+        energetic: 'normal',
+        snack: 'star',
+        adventure: 'normal',
+        sleepy: 'sleepy',
+        comfort: 'comfort'
+      };
+      setKunEyeState(map[kunRig.moodMode] || 'normal');
+    }
+
+    // Rich Joke Pool
     const JOKES_POOL = [
       {
         zh: "你知道为什么困的背包总是这么鼓吗？因为里面装了 99% 的骨头饼干，和 1% 装骨头饼干的袋子！汪！",
@@ -1131,10 +1921,12 @@
 
     /* ================= INITIALIZATION ================= */
     window.addEventListener('DOMContentLoaded', () => {
-      // Register Service Worker
+      initKunLive2DRig();
+
+      // Register Service Worker & check for fresh updates
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js').then(() => {
-          console.log('Kun PWA Service Worker Registered!');
+        navigator.serviceWorker.register('./sw.js').then((reg) => {
+          reg.update();
         }).catch(err => console.log('SW registration fail:', err));
       }
 
@@ -1193,12 +1985,14 @@
       const joke = JOKES_POOL[randomIndex];
       const jokeText = currentLang === 'zh' ? joke.zh : joke.ko;
 
-      // Update Speech Bubble
-      document.getElementById('speech-content').innerText = jokeText;
+      speakKun(jokeText, 2600);
+      kunRig.waveUntil = performance.now() + 1800;
+      kunRig.tailBoostUntil = performance.now() + 2600;
+      setKunEyeState('happy');
+      setTimeout(() => restoreMoodEyes(), 2400);
       triggerKun2DAnimation('cheer');
       playCuteAudio('happy');
 
-      // Update Modal
       const modal = document.getElementById('joke-modal');
       const modalContent = document.getElementById('joke-modal-content');
       modalContent.innerText = jokeText;
@@ -1218,32 +2012,51 @@
         else btn.classList.remove('active');
       });
 
-      // Trigger dynamic 2D animations according to mood!
-      const charImg = document.getElementById('char-figure-img');
-      charImg.src = 'data:image/jpeg;base64,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';
-      if (idx === 0 || idx === 2) {
+      const now = performance.now();
+      if (idx === 0) {
+        kunRig.moodMode = 'energetic';
+        setKunEyeState('wink');
+        kunRig.waveUntil = now + 1800;
+        kunRig.tailBoostUntil = now + 2200;
         triggerKun2DAnimation('cheer');
-      } else {
+        setTimeout(() => { if (kunRig.moodMode === 'energetic') setKunEyeState('normal'); }, 1800);
+      } else if (idx === 1) {
+        kunRig.moodMode = 'snack';
+        setKunEyeState('star');
+        kunRig.tailBoostUntil = now + 2400;
+        triggerKun2DAnimation('cheer');
+      } else if (idx === 2) {
+        kunRig.moodMode = 'adventure';
+        setKunEyeState('normal');
+        kunRig.waveUntil = now + 1400;
+        kunRig.tailBoostUntil = now + 2600;
+        triggerKun2DAnimation('cheer');
+      } else if (idx === 3) {
+        kunRig.moodMode = 'sleepy';
+        setKunEyeState('sleepy');
+        triggerKun2DAnimation('waggle');
+      } else if (idx === 4) {
+        kunRig.moodMode = 'comfort';
+        setKunEyeState('comfort');
         triggerKun2DAnimation('waggle');
       }
 
-      // Quick character comment
       const commentsZh = [
         "☀️ 元气满满！快来跟困比比谁跑得快！汪！",
-        "🦴 馋了？困的背包里正好有两块新鲜骨头饼干，分你一块！",
-        "🎒 想去探险？困的大背包已经整装待发啦，走起！",
-        "💤 累了就靠着困毛茸茸的背睡会儿吧，困替你守着营地！",
-        "🌧️ 无论发生什么，困的前爪都会紧紧握住你！大抱抱！"
+        "🦴 馋了？困已经掏出脆脆的骨头饼干啦，咔嚓咔嚓分你一块！",
+        "🎒 探险模式启动！困的小短腿已经原地踏步准备好出发咯！",
+        "💤 呼噜噜……累了就闭上眼睛靠着困毛茸茸的背歇会儿吧~",
+        "🌧️ 别难过，困张开双爪抱紧你！摸摸困的头就能收获暖暖治愈哦！"
       ];
       const commentsKo = [
         "☀️ 에너지 100%! 곤이랑 달리기 시합할래? 멍!",
-        "🦴 배고파? 마침 곤의 배낭에 바삭한 뼈다귀 쿠키가 있어, 하나 줄게!",
-        "🎒 모험이 고파? 배낭 패킹 완료! 지금 당장 출발하자!",
-        "💤 피곤하면 곤의 푹신한 등에 기대어 쉬어, 곤이 보초 설게!",
-        "🌧️ 무슨 일 있어도 곤의 솜방망이 앞발이 꼭 잡아줄게! 꼬옥 안아주기!"
+        "🦴 배고파? 곤이 벌써 바삭한 뼈다귀 쿠키를 꺼냈어, 같이 먹자!",
+        "🎒 모험 모드 가동! 곤의 짧은 다리가 벌써 출발 준비 중이야!",
+        "💤 쿨쿨…… 피곤하면 눈을 감고 곤의 푹신한 등에 기대어 쉬어~",
+        "🌧️ 슬퍼하지 마, 곤이 두 팔 벌려 꼭 안아줄게!"
       ];
       const text = currentLang === 'zh' ? commentsZh[idx] : commentsKo[idx];
-      document.getElementById('speech-content').innerText = text;
+      speakKun(text, 2100);
       playCuteAudio('tap');
     }
 
@@ -1268,28 +2081,30 @@
         time: timeStr
       };
 
-      // Save to localStorage
       let records = JSON.parse(localStorage.getItem('kun_records') || '[]');
       records.unshift(entry);
       if (records.length > 20) records = records.slice(0, 20);
       localStorage.setItem('kun_records', JSON.stringify(records));
 
-      // Increase Streak
       let streak = parseInt(localStorage.getItem('kun_streak') || '1', 10);
       streak += 1;
       localStorage.setItem('kun_streak', streak);
 
-      // Feedback animation & audio
+      kunRig.waveUntil = performance.now() + 2200;
+      kunRig.tailBoostUntil = performance.now() + 2800;
+      setKunEyeState('happy');
+      setTimeout(() => restoreMoodEyes(), 2200);
       triggerFloatingPaw();
-      triggerKun2DAnimation('cheer');
+      triggerKun2DAnimation('dance');
       playCuteAudio('success');
 
-      // Speech
-      document.getElementById('speech-content').innerText = currentLang === 'zh'
-        ? `🐾 打卡成功！已盖上困的专属爪印，连续同行第 ${streak} 天！明天也要来哦！`
-        : `🐾 체크인 완료! 곤의 전용 발도장 쾅! 연속 ${streak}일 동행 중! 내일도 꼭 와줘!`;
+      speakKun(
+        currentLang === 'zh'
+          ? `🐾 打卡成功！已盖上困的专属爪印，连续同行第 ${streak} 天！明天也要来哦！`
+          : `🐾 체크인 완료! 곤의 전용 발도장 쾅! 연속 ${streak}일 동행 중! 내일도 꼭 와줘!`,
+        2400
+      );
 
-      // Reset input
       noteInput.value = '';
       loadHistory();
       updateStreakDisplay();
@@ -1343,13 +2158,14 @@
       input.value = '';
       appendChatMessage(msg, 'user');
 
-      // Thinking & generate local response
       setTimeout(() => {
         const reply = generateKunAIReply(msg);
         appendChatMessage(reply, 'kun');
+        kunRig.talkUntil = performance.now() + 2400;
+        kunRig.tailBoostUntil = performance.now() + 2000;
         triggerKun2DAnimation('waggle');
         playCuteAudio('tap');
-      }, 350);
+      }, 320);
     }
 
     function appendChatMessage(text, sender) {
@@ -1361,13 +2177,11 @@
       container.scrollTop = container.scrollHeight;
     }
 
-    // Smart, lively character-driven AI dialogue engine for Kun
     let lastFallbackIdx = -1;
 
     function generateKunAIReply(rawQuery) {
       const q = rawQuery.toLowerCase().trim();
 
-      // 1. Math / Calculus / Science / Study / Homework / Exam
       if (q.includes('微积分') || q.includes('积分') || q.includes('微分') || q.includes('数学') || q.includes('高数') || q.includes('算') || q.includes('作业') || q.includes('考试') || q.includes('学习') || q.includes('代码') || q.includes('论文') || q.includes('미적분') || q.includes('수학') || q.includes('공부') || q.includes('시험') || q.includes('과제')) {
         const studyRepliesZh = [
           "微……微积分？！（困把两只小耳朵耷拉下来，小狗脑门上冒出了大大的问号）困理解的微积分，就是把一根大骨头切成无限多个极小片（微分 dx），然后一口气全部吃进肚子里求和（积分 ∫）！公式是：∫(零食)dt = 饱饱的困！汪！听懂了没有？🍗",
@@ -1384,7 +2198,6 @@
         return pool[Math.floor(Math.random() * pool.length)];
       }
 
-      // 2. Tired / Exhausted / Crying / Stress / Overtime / Comfort
       if (q.includes('累') || q.includes('难过') || q.includes('烦') || q.includes('压力') || q.includes('哭') || q.includes('伤心') || q.includes('不想动') || q.includes('加班') || q.includes('委屈') || q.includes('崩') || q.includes('힘들') || q.includes('우울') || q.includes('지쳐') || q.includes('슬퍼') || q.includes('야근') || q.includes('피곤')) {
         const comfortRepliesZh = [
           "（轻轻把暖烘烘的大脑袋贴在你膝盖上，两只前爪扒着你）辛苦啦！不管今天在外面遇到了什么，回到营地，困永远是最欢迎你的小狗！靠在困毛茸茸的肚皮上休息一会儿吧，天塌下来困的大背包顶着！💛",
@@ -1400,8 +2213,10 @@
         return pool[Math.floor(Math.random() * pool.length)];
       }
 
-      // 3. Food / Snacks / Hungry / BBQ / Milk Tea
       if (q.includes('吃') || q.includes('零食') || q.includes('肉') || q.includes('骨头') || q.includes('饿') || q.includes('饭') || q.includes('奶茶') || q.includes('火锅') || q.includes('烧烤') || q.includes('夜宵') || q.includes('간식') || q.includes('고기') || q.includes('배고') || q.includes('야식') || q.includes('먹')) {
+        kunRig.boneUntil = performance.now() + 2600;
+        setKunEyeState('star');
+        setTimeout(() => restoreMoodEyes(), 2600);
         const foodRepliesZh = [
           "说到吃的困可就不困了！困今天强推：烤红薯配热奶茶！或者热气腾腾的火锅烤肉！困的大背包里还有备用自制肉干，要不要分你一小截磨磨牙？🍗",
           "饿了就必须立刻去吃！困的人生格言第一条：肚子里有粮，探险才不慌！走走走，困陪你去觅食！今天你想吃甜的还是咸的？😋",
@@ -1415,51 +2230,49 @@
         return pool[Math.floor(Math.random() * pool.length)];
       }
 
-      // 4. Companions Gossip
       if (q.includes('九尾') || q.includes('狐狸') || q.includes('구미호')) {
         return currentLang === 'zh'
           ? "九尾啊？别看他平时尾巴翘得老高装高冷，昨天困在小溪边抓鱼，他偷偷在旁边看，结果脚滑掉进水里，九条尾巴全湿成了落汤狐！哈哈哈哈千万别告诉他是我说的！🦊"
           : "구미호 말이야? 항상 쿨한 척 ‘고구마 따위 안 먹어’ 하더니, 어젯밤에 내 군고구마를 꼬리 속에 몰래 숨기다 딱 걸렸어! 비밀이다? 🦊";
       }
-      if (q.includes('七宝') || q.includes('猫') || q.includes('고양이') || q.includes('칠보')) {
+      if (q.includes('七宝') || q.includes('球球') || q.includes('猫') || q.includes('고양이') || q.includes('칠보')) {
         return currentLang === 'zh'
-          ? "七宝那只小黑猫总嘴硬说讨厌小狗，结果今天中午困在树下打盹，一睁眼发现他居然蜷在困的大背包上睡得呼噜震天响~ 偷拍证据就在困的相机里！🐱"
-          : "칠보 고양이는 늘 내 배낭 위에 올라가서 풍경 구경을 해! 덜컹거린다고 투덜대지만 실은 멸치 간식 냄새를 맡고 싶은 거라구~ 🐱";
+          ? "球球那只精致小猫总假装高冷不在乎，结果今天中午困在树下打盹，一睁眼发现她正偷偷在笔记本上画大家的笑脸呢~ 🐱"
+          : "고양이 친구는 늘 쿨한 척하지만 사실 우리 모두를 소중히 기록하고 있어~ 🐱";
       }
-      if (q.includes('黑羽') || q.includes('乌鸦') || q.includes('까마귀') || q.includes('흑우')) {
+      if (q.includes('黑羽') || q.includes('默可') || q.includes('乌鸦') || q.includes('까마귀') || q.includes('흑우')) {
         return currentLang === 'zh'
-          ? "黑羽总站在高处吹风装深沉，说指南针是指引命运的光。但困觉得他纯粹就是路痴，经常在森林树冠顶上绕圈飞，其实是在找回营地的路！🦅"
-          : "까마귀 흑우는 늘 높은 나무 위에서 폼을 잡지만, 사실 심각한 길치야! 정찰하는 척 빙빙 도는 건 집 찾는 중이거든! 🦅";
+          ? "乌鸦伙伴总站在高处吹风写记忆魔法书，困每次都会掏出骨头饼干陪他一起坐着，这样他就不会觉得孤单啦！🦅"
+          : "까마귀 친구가 외롭지 않게 곤이 늘 옆에서 간식을 나눠주며 함께 앉아 있어! 🦅";
       }
 
-      // 5. Love / Praises / Flirting
       if (q.includes('喜欢你') || q.includes('可爱') || q.includes('真乖') || q.includes('聪明') || q.includes('困最棒') || q.includes('好喜欢') || q.includes('爱') || q.includes('귀여워') || q.includes('사랑해') || q.includes('착해')) {
+        setKunEyeState('happy');
+        kunRig.waveUntil = performance.now() + 2200;
+        setTimeout(() => restoreMoodEyes(), 2200);
         return currentLang === 'zh'
           ? "汪呜呜~！（尾巴疯狂摇成了螺旋桨，两只耳朵害羞地抖了抖）困也最喜欢你了！无论你去哪片森林、哪座遗迹，困都要一辈子做你的同行伙伴！给你一个热乎乎的小狗抱抱！🐾💛"
           : "멍멍 헤헤~! (꼬리를 헬리콥터처럼 돌리며 양 귀를 쫑긋) 곤도 네가 제일 좋아! 어디로 가든 평생 너의 동행 친구가 되어줄게! 꼬옥 안아주기! 🐾💛";
       }
 
-      // 6. Walk / Play / Outside
       if (q.includes('散步') || q.includes('出门') || q.includes('出去玩') || q.includes('走走') || q.includes('玩') || q.includes('산책') || q.includes('놀자') || q.includes('나가')) {
+        kunRig.marchUntil = performance.now() + 2400;
         return currentLang === 'zh'
           ? "散步？！出门？！你刚才说了‘出去玩’对不对？！困已经咬起牵引绳和大背包啦！快走快走，风里都是青草和烤肠的香味！🐾"
           : "산책?! 지금 ‘나갈까’라고 했지?! 곤은 벌써 가방 메고 문앞에서 대기 중이야! 빨리 나가자, 바깥 공기 너무 좋아! 🐾";
       }
 
-      // 7. Jokes
       if (q.includes('笑话') || q.includes('逗我') || q.includes('好玩') || q.includes('유머') || q.includes('웃겨')) {
         const joke = JOKES_POOL[Math.floor(Math.random() * JOKES_POOL.length)];
         return currentLang === 'zh' ? `汪！来听这个：${joke.zh}` : `멍! 이거 들어봐: ${joke.ko}`;
       }
 
-      // 8. Backpack / Packing
       if (q.includes('背包') || q.includes('打包') || q.includes('旅行') || q.includes('探险') || q.includes('배낭') || q.includes('모험')) {
         return currentLang === 'zh'
           ? "困的黄金打包法则请牢记：重物（水、罐头）一定要贴背放在中上部！这样背一天也不会腰酸，走路还能腾出手来吃零食！🎒"
           : "곤의 황금 패킹 법칙을 기억해! 무거운 물건(물, 캔)은 등 쪽 중간 위쪽에 붙여야 해! 그래야 하루 종일 걸어도 허리가 안 아프고 간식도 편하게 꺼내먹지! 🎒";
       }
 
-      // 9. Greetings / Good Morning / Good Night
       if (q.includes('早') || q.includes('晚安') || q.includes('睡') || q.includes('hi') || q.includes('hello') || q.includes('你好') || q.includes('안녕') || q.includes('잘자')) {
         if (q.includes('晚') || q.includes('睡') || q.includes('잘자')) {
           return currentLang === 'zh'
@@ -1471,7 +2284,6 @@
           : "멍멍! 좋은 아침! 오늘 햇살이 끝내줘, 곤은 벌써 꼬리로 신나게 박자를 맞추는 중이야! 🐾";
       }
 
-      // 10. Dynamic Rotating Smart Fallback Pool (Never repeat consecutively!)
       const fallbacksZh = [
         `汪！你说的“${rawQuery}”，困听得两只耳朵直竖！（认真地歪了歪头）虽然困只是一只爱探险的柴犬，但只要跟你在一起，什么新鲜话题困都想听！要不要边吃零食边细说？🦴`,
         `嗷呜~！听到你这么说，困的小狗尾巴又开始无意识地摇摆啦！无论你遇到什么奇思妙想，困的大背包随时借你装灵感！🎒`,
@@ -1569,48 +2381,53 @@
 
     /* ================= 2D DYNAMIC CHARACTER INTERACTION ================= */
     function handleKunClick() {
+      kunRig.waveUntil = performance.now() + 1800;
+      kunRig.tailBoostUntil = performance.now() + 2200;
+      setKunEyeState('wink');
+      setTimeout(() => restoreMoodEyes(), 1800);
       triggerKun2DAnimation('cheer');
       triggerFloatingPaw();
       playCuteAudio('bark');
       
       const barksZh = [
-        "汪！摸摸肚皮，今天好运翻倍！",
-        "肉垫给你捏一下，今天也要开心哦！",
-        "背包好沉啊，但困还是想陪你一直走！",
-        "咕噜噜……困的尾巴摇得太用力，停不下来啦！"
+        "汪！摸摸肚皮，胸前的小狗护符都在为你闪闪发光哦！",
+        "肉垫给你捏一下，今天也要开心满格哦！🐾",
+        "大背包虽然鼓鼓的，但困永远留了一半空间装你的好心情！",
+        "咕噜噜……困的尾巴摇成了小风车，根本停不下来啦！"
       ];
       const barksKo = [
-        "멍! 곤의 배를 긁어주면 오늘 행운이 두 배!",
-        "말랑말랑 젤리 발바닥 터치! 오늘도 힘내!",
-        "배낭은 무겁지만 너와 함께라면 곤은 어디든 좋아!",
-        "헤헤…… 곤의 꼬리가 너무 신나게 흔들려!"
+        "멍! 곤의 배를 쓰다듬으면 행운 메달이 반짝반짝 빛나!",
+        "말랑말랑 젤리 발바닥 터치! 오늘도 기분 최고로 보내자! 🐾",
+        "배낭은 묵직해도 너와 함께라면 어디든 신나!",
+        "헤헤…… 곤의 꼬리가 프로펠러처럼 신나게 돌아가!"
       ];
       const text = currentLang === 'zh' 
         ? barksZh[Math.floor(Math.random() * barksZh.length)]
         : barksKo[Math.floor(Math.random() * barksKo.length)];
-      document.getElementById('speech-content').innerText = text;
+      speakKun(text, 1900);
     }
 
     function triggerKun2DAnimation(type = 'cheer') {
       const wrap = document.getElementById('char-figure-wrap');
-      wrap.classList.remove('cheer', 'waggle');
-      void wrap.offsetWidth; // trigger reflow
+      wrap.classList.remove('cheer', 'waggle', 'dance');
+      void wrap.offsetWidth;
       wrap.classList.add(type);
-      setTimeout(() => wrap.classList.remove(type), 800);
+      const dur = type === 'dance' ? 1300 : 820;
+      setTimeout(() => wrap.classList.remove(type), dur);
     }
 
-    function triggerFloatingPaw() {
-      const stage = document.querySelector('.character-stage');
-      const emojis = ['🐾', '🦴', '✨', '💛', '🍖'];
-      for (let i = 0; i < 4; i++) {
+    function triggerFloatingPaw(customEmojis) {
+      const stage = document.getElementById('character-stage');
+      const emojis = customEmojis || ['🐾', '🦴', '✨', '💛', '🍖'];
+      for (let i = 0; i < 5; i++) {
         const fx = document.createElement('div');
         fx.className = 'floating-fx';
         fx.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-        fx.style.left = `${50 + (Math.random() * 40 - 20)}%`;
-        fx.style.top = `${60 + (Math.random() * 20 - 10)}%`;
-        fx.style.setProperty('--tx', `${(Math.random() - 0.5) * 80}px`);
+        fx.style.left = `${50 + (Math.random() * 44 - 22)}%`;
+        fx.style.top = `${52 + (Math.random() * 20 - 10)}%`;
+        fx.style.setProperty('--tx', `${(Math.random() - 0.5) * 90}px`);
         stage.appendChild(fx);
-        setTimeout(() => fx.remove(), 1000);
+        setTimeout(() => fx.remove(), 1050);
       }
     }
 
@@ -1635,24 +2452,23 @@
           osc.stop(now + 0.18);
         } else if (type === 'success') {
           osc.type = 'sine';
-          osc.frequency.setValueAtTime(523.25, now); // C5
-          osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
-          osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
+          osc.frequency.setValueAtTime(523.25, now);
+          osc.frequency.setValueAtTime(659.25, now + 0.08);
+          osc.frequency.setValueAtTime(783.99, now + 0.16);
           gain.gain.setValueAtTime(0.2, now);
           gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
           osc.start(now);
           osc.stop(now + 0.35);
         } else {
           osc.type = 'sine';
-          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.setValueAtTime(460, now);
+          osc.frequency.exponentialRampToValueAtTime(620, now + 0.09);
           gain.gain.setValueAtTime(0.15, now);
-          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.13);
           osc.start(now);
-          osc.stop(now + 0.12);
+          osc.stop(now + 0.13);
         }
-      } catch (e) {
-        // AudioContext disabled
-      }
+      } catch (e) {}
     }
 
     /* ================= LANGUAGE SWITCHER ================= */
