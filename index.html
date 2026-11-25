@@ -4603,12 +4603,12 @@ grid-template-columns: 1fr;
 <script>
 const MEMBERS_DATA = {
 cat: {
-avatar: 'assets/char_cat.jpg',
+avatar: 'assets/cat_standee.jpg',
 creatorZh: '👤 创作者：李桂婷 LI GUITING · MEMBER 02 个人角色主页',
 creatorKo: '👤 창작자: 이계정 LI GUITING · MEMBER 02 개인 캐릭터 페이지',
 titleZh: '白猫 · 球球 (흰 고양이 · 치우치우)',
 titleKo: '흰 고양이 · 치우치우 (白猫 · 球球)',
-roleZh: '银灰短发精致白猫 · 观察记录者 · 核心情绪：妒羡 (질투·선망)',
+roleZh: '银渐层精致白猫 · 观察记录者 · 核心情绪：妒羡 (질투·선망)',
 roleKo: '은회색 단발의 섬세한 고양이 · 관찰 기록자 · 핵심 감정: 질투·선망',
 sayZh: '「“为什么每次被你们记住的，都不是我？”」',
 sayKo: '「“왜 매번 여러분이 기억해 주시는 건 제가 아닌가요?”」',
@@ -4616,8 +4616,72 @@ neverZh: '🚫 绝不会说：“只要没人注意我，我就已经很满足�
 neverKo: '🚫 하지 않는 말: “아무도 저를 신경 쓰지 않기만 해도 충분히 만족합니다.”',
 propsZh: '紫色骷髅扣斗篷（感知情绪与周围环境变化）、同伴情绪观察笔记',
 propsKo: '보라색 해골 버클 망토(감정 및 환경 변화 감지), 동료 감정 관찰 노트',
-storyZh: '<p><b>【角色故事 · 캐릭터 스토리】</b>球球是一只渴望被注视与铭记的精致白猫。在每日零点重置的迷宫里，她被「妒羡」束缚，总是羡慕同伴们鲜明的能力，表面上假装高冷不在乎、偶尔故意搅局，实则每天都在笔记本上偷偷记录六位伙伴的情绪变化，并在背后默默补救。</p><p style="margin-top:8px;"><b>【专属头衔 · 직함】</b>零点动物园 · 首席情绪观察记录官 / 제로 포인트 동물원 · 수석 감정 관찰 기록관</p>',
-recipeZh: '<p><b>【角色素材表 · 재료표】</b>45% 渴望被记住的傲娇真心 + 30% 感知情绪波动的紫色骷髅扣斗篷 + 15% 偷偷写满同伴名字的观察日记 + 10% 嘴硬心软的事后补救。</p><p style="margin-top:8px;"><b>【角色关系 · 관계도】</b>羡慕水獭·露的感染力，常被柴犬·困直球夸奖斗篷好看而害羞脸红。</p>'
+storyZh: '<p><b>【角色故事 · 캐릭터 스토리】</b>球球是一只渴望被注视与铭记的精致银渐层白猫。在每日零点重置的迷宫里，她被「妒羡」束缚，总是羡慕同伴们鲜明的能力，表面上假装高冷不在乎、偶尔故意搅局，实则每天都在笔记本上偷偷记录六位伙伴的情绪变化，并在背后默默补救。</p><p style="margin-top:8px;"><b>【专属头衔 · 직함】</b>零点动物园 · 首席情绪观察记录官 / 제로 포인트 동물원 · 수석 감정 관찰 기록관</p>',
+recipeZh: '<p><b>【角色素材表 · 재료표】</b>45% 渴望被记住的傲娇真心 + 30% 感知情绪波动的紫色骷髅扣斗篷 + 15% 偷偷写满同伴名字的观察日记 + 10% 嘴硬心软的事后补救。</p><p style="margin-top:8px;"><b>【角色关系 · 관계도】</b>羡慕水獭·露的感染力，常被柴犬·困直球夸奖斗篷好看而害羞脸红。</p>',
+comics: [
+  {
+    epZh: '★ EPISODE 01 · 情绪感知篇',
+    epKo: '★ EPISODE 01 · 감정 감지 편',
+    titleZh: '《你不必把情绪藏起来的》',
+    titleKo: '《감정을 숨기지 않아도 괜찮아》',
+    img: 'assets/cat_comic_1.png',
+    alt: '四格漫画：你不必把情绪藏起来的',
+    storyZh: '<b>剧情亮点：</b>赤狐九尾故作元气地笑着说“我今天心情超好！”，却没逃过白猫球球敏锐的情绪感知——她一眼看穿了九尾笑容背后沉重悲伤的伪装，轻轻走到九尾身边安慰道：“你在勉强自己笑，你其实很难过……你不必把情绪藏起来的。”傲娇外表下藏着最细腻温柔的共情力。',
+    storyKo: '<b>스토리 포인트:</b> 구미호가 애써 밝은 척 “오늘 정말 기분 좋아!”라고 웃어 보이지만, 치우치우는 그의 무겁고 슬픈 속마음을 단번에 알아챕니다. 조용히 다가가 “억지로 웃고 있잖아. 감정을 숨기지 않아도 괜찮아.”라며 따뜻하게 위로해 줍니다.',
+    dialogues: [
+      { cut: '1컷', zh: '九尾：我今天心情超好！（球球感知：他的情绪是沉重悲伤。）', ko: '구미호: 오늘 정말 기분 좋아! (그의 감정은 무겁고 슬퍼.)' },
+      { cut: '2컷', zh: '球球：我感受到他的情绪是沉重悲伤的……', ko: '치우치우: 그의 감정은 무겁고 슬퍼…' },
+      { cut: '3컷', zh: '球球：你在勉强自己笑，你其实很难过。', ko: '큐큐: 억지로 웃고 있잖아. 슬퍼하고 있어.' },
+      { cut: '4컷', zh: '球球：你不必把情绪藏起来的。', ko: '큐큐: 감정을 숨기지 않아도 괜찮아.' }
+    ]
+  },
+  {
+    epZh: '★ EPISODE 02 · 妒羡心事篇',
+    epKo: '★ EPISODE 02 · 질투와 시선 편',
+    titleZh: '《我才不想和你玩…？》',
+    titleKo: '《너랑 놀고 싶지 않아…?》',
+    img: 'assets/cat_comic_2.jpg',
+    alt: '四格漫画：我才不想和你玩…？',
+    storyZh: '<b>剧情亮点：</b>九尾兴高采烈地邀请球球“一起玩吧！”，嘴硬傲娇的球球却冷冰冰地拒绝“不要，我才不想和你玩”。没过多久，软萌的白兔安月跑来邀请失落的九尾一起玩耍。躲在树后的球球默默看着他们有说有笑的身影，眼底藏不住既羡慕又别扭的小小妒羡。',
+    storyKo: '<b>스토리 포인트:</b> 구미호가 “큐큐야! 같이 놀자!”라고 다가오자 츤데레 치우치우는 “싫어. 너랑 놀고 싶지 않아.”라며 차갑게 거절합니다. 잠시 후 토끼 안월이 구미호와 함께 어울리는 모습을 보며 나무 뒤에 숨어 부러움과 질투 어린 시선으로 바라봅니다.',
+    dialogues: [
+      { cut: '1컷', zh: '九尾：球球呀！一起玩吧！ / 球球：不要，我才不想和你玩。', ko: '여우: 큐큐야! 같이 놀자! / 큐큐: 싫어. 너랑 놀고 싶지 않아.' },
+      { cut: '2컷', zh: '（被拒绝后低头失落走开的九尾……）', ko: '(거절당하고 시무룩해진 여우…)' },
+      { cut: '3컷', zh: '安月：九尾呀，不想和我一起玩吗？', ko: '토끼: 여우야, 나랑 놀고 싶지 않아?' },
+      { cut: '4컷', zh: '安月：九尾呀！一起玩吧！（球球躲在树后默默看着……）', ko: '토끼: 여우야! 같이 놀자! (나무 뒤에서 몰래 지켜보는 큐큐…)' }
+    ]
+  }
+],
+animation: {
+  src: 'assets/cat-short01.mov',
+  titleZh: '《白猫·球球 · 专属动画短片 #01（树荫下的妒羡与加入）》',
+  titleKo: '《흰 고양이 · 치우치우 전용 애니메이션 #01》',
+  aspectRatio: '16/9',
+  isLandscape: true,
+  mimeType: ''
+},
+animation2: {
+  src: 'assets/cat-short02.mov',
+  titleZh: '《白猫·球球 · 专属动画短片 #02（木地板可爱手势舞）》',
+  titleKo: '《흰 고양이 · 치우치우 전용 애니메이션 #02》',
+  aspectRatio: '16/9',
+  isLandscape: true,
+  mimeType: ''
+},
+emoticons: [
+  { img: 'assets/cat_expr_01.jpg', zh: '傲娇 · 别过脸', ko: '새침 · 츤데레' },
+  { img: 'assets/cat_expr_02.jpg', zh: '生气 · 才不是呢！', ko: '화남 · 아니거든!' },
+  { img: 'assets/cat_expr_03.jpg', zh: '嫌弃 · 咦…真是…', ko: '질색 · 칫… 정말…' },
+  { img: 'assets/cat_expr_04.jpg', zh: '惊讶 · 探头 !?!', ko: '깜짝 · 빼꼼 !?!' },
+  { img: 'assets/cat_expr_05.jpg', zh: '你们在看我吗…？', ko: '나 보고 있는 거야…?' },
+  { img: 'assets/cat_expr_06.jpg', zh: '抓到一只！扑蝶', ko: '한 마리 잡았다!' },
+  { img: 'assets/cat_expr_07.jpg', zh: 'Zzz · 我没有不开心…', ko: '쿨쿨 · 기분 안 나빠…' },
+  { img: 'assets/cat_expr_08.jpg', zh: '调皮 · 威严记录', ko: '장난꾸러기 · 위엄' },
+  { img: 'assets/cat_expr_09.jpg', zh: '嫉妒 · 捉迷藏偷看', ko: '질투 · 숨바꼭질' },
+  { img: 'assets/cat_expr_10.jpg', zh: '闹别扭 · 假装漠不关心', ko: '삐짐 · 무관심' }
+],
+emoticonZip: 'assets/cat_emoticons.zip',
+emoticonZipName: 'cat_emoticons.zip'
 },
 shark: {
 avatar: 'assets/char_shark.jpg',
@@ -5047,9 +5111,10 @@ function renderMemberAnimation(m) {
     }
     if (badge) {
       if (hasBoth) {
+        const isLand1 = m.animation && (m.animation.isLandscape || m.animation.aspectRatio === '16/9');
         const isMixed = (m.animation2 && (m.animation2.isLandscape || m.animation2.aspectRatio === '16/9'));
-        const badgeZh = isMixed ? '已收录 9:16 竖屏 + 16:9 横屏双格式动画' : '已收录专属动画短片（共 2 部 · 原画幅比例）';
-        const badgeKo = isMixed ? '9:16 세로형 + 16:9 와이드 영상 수록 완료' : '전용 숏폼 애니메이션 2편 수록 완료 (원작 비율)';
+        const badgeZh = (isLand1 && isMixed) ? '已收录 2 部 16:9 横屏专属动画短片' : (isMixed ? '已收录 9:16 竖屏 + 16:9 横屏双格式动画' : '已收录专属动画短片（共 2 部 · 原画幅比例）');
+        const badgeKo = (isLand1 && isMixed) ? '16:9 와이드 전용 애니메이션 2편 수록 완료' : (isMixed ? '9:16 세로형 + 16:9 와이드 영상 수록 완료' : '전용 숏폼 애니메이션 2편 수록 완료 (원작 비율)');
         badge.innerHTML = `🎬 <span data-zh>${badgeZh}</span><span data-ko>${badgeKo}</span>`;
       } else {
         badge.innerHTML = `🎬 <span data-zh>已收录专属 9:16 竖屏短片</span><span data-ko>전용 9:16 숏폼 영상 수록 완료</span>`;
@@ -5064,16 +5129,20 @@ function renderMemberAnimation(m) {
     let html = `<div class="shortform-grid" style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:24px;">`;
 
     if (m.animation) {
-      const anim1Ratio = m.animation.aspectRatio || '9/16';
+      const isLand1 = m.animation.isLandscape || m.animation.aspectRatio === '16/9';
+      const anim1Ratio = m.animation.aspectRatio || (isLand1 ? '16/9' : '9/16');
+      const anim1MaxWidth = isLand1 ? '580px' : (m.animation.maxWidth || '295px');
+      const badgeFormat1 = isLand1 ? '16:9 ANIMATION' : '9:16 SHORT';
+      const type1Attr = m.animation.mimeType !== undefined ? (m.animation.mimeType ? ` type="${m.animation.mimeType}"` : '') : ' type="video/mp4"';
       html += `
-<div class="shortform-phone" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:${anim1Ratio}; border-radius:32px; border:3px solid #F5A623; width:100%; max-width:295px;">
+<div class="shortform-phone ${isLand1 ? 'landscape' : ''}" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:${anim1Ratio}; max-width:${anim1MaxWidth}; max-height:none; width:100%; border-radius:32px; border:3px solid #F5A623;">
   <video controls playsinline loop preload="metadata" style="width:100%; height:100%; object-fit:contain; background:#000; border-radius:28px; display:block;">
-    <source src="${m.animation.src}#t=0.001" type="video/mp4">
-    <source src="${m.animation.src}" type="video/mp4">
-    ${m.animation.altSrc ? `<source src="${m.animation.altSrc}" type="video/mp4">` : ''}
+    <source src="${m.animation.src}#t=0.001"${type1Attr}>
+    <source src="${m.animation.src}"${type1Attr}>
+    ${m.animation.altSrc ? `<source src="${m.animation.altSrc}"${type1Attr}>` : ''}
   </video>
   <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(15,10,25,0.92) 25%); padding:18px 16px 14px; pointer-events:none;">
-    <span class="compare-badge gold" style="font-size:0.75rem; pointer-events:auto;">🎬 9:16 SHORT #01</span>
+    <span class="compare-badge gold" style="font-size:0.75rem; pointer-events:auto;">🎬 ${badgeFormat1} #01</span>
     <h4 style="color:#FFF3D1; font-size:1rem; margin:6px 0 3px; text-shadow:0 2px 4px rgba(0,0,0,0.8);">
       <span data-zh>${m.animation.titleZh}</span><span data-ko>${m.animation.titleKo}</span>
     </h4>
@@ -5086,12 +5155,13 @@ function renderMemberAnimation(m) {
       const anim2Ratio = m.animation2.aspectRatio || (isLand ? '16/9' : '9/16');
       const anim2MaxWidth = isLand ? '580px' : (m.animation2.maxWidth || '295px');
       const badgeFormat = isLand ? '16:9' : (m.animation2.aspectRatio || '9:16');
+      const type2Attr = m.animation2.mimeType !== undefined ? (m.animation2.mimeType ? ` type="${m.animation2.mimeType}"` : '') : ' type="video/mp4"';
       html += `
 <div class="shortform-phone ${isLand ? 'landscape' : ''}" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:${anim2Ratio}; max-width:${anim2MaxWidth}; max-height:none; width:100%; border-radius:32px; border:3px solid #F5A623;">
   <video controls playsinline loop preload="metadata" style="width:100%; height:100%; object-fit:contain; background:#000; border-radius:28px; display:block;">
-    <source src="${m.animation2.src}#t=0.001" type="video/mp4">
-    <source src="${m.animation2.src}" type="video/mp4">
-    ${m.animation2.altSrc ? `<source src="${m.animation2.altSrc}" type="video/mp4">` : ''}
+    <source src="${m.animation2.src}#t=0.001"${type2Attr}>
+    <source src="${m.animation2.src}"${type2Attr}>
+    ${m.animation2.altSrc ? `<source src="${m.animation2.altSrc}"${type2Attr}>` : ''}
   </video>
   <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(15,10,25,0.92) 25%); padding:18px 16px 14px; pointer-events:none;">
     <span class="compare-badge gold" style="font-size:0.75rem; pointer-events:auto;">🎬 ${badgeFormat} ANIMATION #02</span>
@@ -10113,12 +10183,12 @@ grid-template-columns: 1fr;
 <script>
 const MEMBERS_DATA = {
 cat: {
-avatar: 'assets/char_cat.jpg',
+avatar: 'assets/cat_standee.jpg',
 creatorZh: '👤 创作者：李桂婷 LI GUITING · MEMBER 02 个人角色主页',
 creatorKo: '👤 창작자: 이계정 LI GUITING · MEMBER 02 개인 캐릭터 페이지',
 titleZh: '白猫 · 球球 (흰 고양이 · 치우치우)',
 titleKo: '흰 고양이 · 치우치우 (白猫 · 球球)',
-roleZh: '银灰短发精致白猫 · 观察记录者 · 核心情绪：妒羡 (질투·선망)',
+roleZh: '银渐层精致白猫 · 观察记录者 · 核心情绪：妒羡 (질투·선망)',
 roleKo: '은회색 단발의 섬세한 고양이 · 관찰 기록자 · 핵심 감정: 질투·선망',
 sayZh: '「“为什么每次被你们记住的，都不是我？”」',
 sayKo: '「“왜 매번 여러분이 기억해 주시는 건 제가 아닌가요?”」',
@@ -10126,8 +10196,72 @@ neverZh: '🚫 绝不会说：“只要没人注意我，我就已经很满足�
 neverKo: '🚫 하지 않는 말: “아무도 저를 신경 쓰지 않기만 해도 충분히 만족합니다.”',
 propsZh: '紫色骷髅扣斗篷（感知情绪与周围环境变化）、同伴情绪观察笔记',
 propsKo: '보라색 해골 버클 망토(감정 및 환경 변화 감지), 동료 감정 관찰 노트',
-storyZh: '<p><b>【角色故事 · 캐릭터 스토리】</b>球球是一只渴望被注视与铭记的精致白猫。在每日零点重置的迷宫里，她被「妒羡」束缚，总是羡慕同伴们鲜明的能力，表面上假装高冷不在乎、偶尔故意搅局，实则每天都在笔记本上偷偷记录六位伙伴的情绪变化，并在背后默默补救。</p><p style="margin-top:8px;"><b>【专属头衔 · 직함】</b>零点动物园 · 首席情绪观察记录官 / 제로 포인트 동물원 · 수석 감정 관찰 기록관</p>',
-recipeZh: '<p><b>【角色素材表 · 재료표】</b>45% 渴望被记住的傲娇真心 + 30% 感知情绪波动的紫色骷髅扣斗篷 + 15% 偷偷写满同伴名字的观察日记 + 10% 嘴硬心软的事后补救。</p><p style="margin-top:8px;"><b>【角色关系 · 관계도】</b>羡慕水獭·露的感染力，常被柴犬·困直球夸奖斗篷好看而害羞脸红。</p>'
+storyZh: '<p><b>【角色故事 · 캐릭터 스토리】</b>球球是一只渴望被注视与铭记的精致银渐层白猫。在每日零点重置的迷宫里，她被「妒羡」束缚，总是羡慕同伴们鲜明的能力，表面上假装高冷不在乎、偶尔故意搅局，实则每天都在笔记本上偷偷记录六位伙伴的情绪变化，并在背后默默补救。</p><p style="margin-top:8px;"><b>【专属头衔 · 직함】</b>零点动物园 · 首席情绪观察记录官 / 제로 포인트 동물원 · 수석 감정 관찰 기록관</p>',
+recipeZh: '<p><b>【角色素材表 · 재료표】</b>45% 渴望被记住的傲娇真心 + 30% 感知情绪波动的紫色骷髅扣斗篷 + 15% 偷偷写满同伴名字的观察日记 + 10% 嘴硬心软的事后补救。</p><p style="margin-top:8px;"><b>【角色关系 · 관계도】</b>羡慕水獭·露的感染力，常被柴犬·困直球夸奖斗篷好看而害羞脸红。</p>',
+comics: [
+  {
+    epZh: '★ EPISODE 01 · 情绪感知篇',
+    epKo: '★ EPISODE 01 · 감정 감지 편',
+    titleZh: '《你不必把情绪藏起来的》',
+    titleKo: '《감정을 숨기지 않아도 괜찮아》',
+    img: 'assets/cat_comic_1.png',
+    alt: '四格漫画：你不必把情绪藏起来的',
+    storyZh: '<b>剧情亮点：</b>赤狐九尾故作元气地笑着说“我今天心情超好！”，却没逃过白猫球球敏锐的情绪感知——她一眼看穿了九尾笑容背后沉重悲伤的伪装，轻轻走到九尾身边安慰道：“你在勉强自己笑，你其实很难过……你不必把情绪藏起来的。”傲娇外表下藏着最细腻温柔的共情力。',
+    storyKo: '<b>스토리 포인트:</b> 구미호가 애써 밝은 척 “오늘 정말 기분 좋아!”라고 웃어 보이지만, 치우치우는 그의 무겁고 슬픈 속마음을 단번에 알아챕니다. 조용히 다가가 “억지로 웃고 있잖아. 감정을 숨기지 않아도 괜찮아.”라며 따뜻하게 위로해 줍니다.',
+    dialogues: [
+      { cut: '1컷', zh: '九尾：我今天心情超好！（球球感知：他的情绪是沉重悲伤。）', ko: '구미호: 오늘 정말 기분 좋아! (그의 감정은 무겁고 슬퍼.)' },
+      { cut: '2컷', zh: '球球：我感受到他的情绪是沉重悲伤的……', ko: '치우치우: 그의 감정은 무겁고 슬퍼…' },
+      { cut: '3컷', zh: '球球：你在勉强自己笑，你其实很难过。', ko: '큐큐: 억지로 웃고 있잖아. 슬퍼하고 있어.' },
+      { cut: '4컷', zh: '球球：你不必把情绪藏起来的。', ko: '큐큐: 감정을 숨기지 않아도 괜찮아.' }
+    ]
+  },
+  {
+    epZh: '★ EPISODE 02 · 妒羡心事篇',
+    epKo: '★ EPISODE 02 · 질투와 시선 편',
+    titleZh: '《我才不想和你玩…？》',
+    titleKo: '《너랑 놀고 싶지 않아…?》',
+    img: 'assets/cat_comic_2.jpg',
+    alt: '四格漫画：我才不想和你玩…？',
+    storyZh: '<b>剧情亮点：</b>九尾兴高采烈地邀请球球“一起玩吧！”，嘴硬傲娇的球球却冷冰冰地拒绝“不要，我才不想和你玩”。没过多久，软萌的白兔安月跑来邀请失落的九尾一起玩耍。躲在树后的球球默默看着他们有说有笑的身影，眼底藏不住既羡慕又别扭的小小妒羡。',
+    storyKo: '<b>스토리 포인트:</b> 구미호가 “큐큐야! 같이 놀자!”라고 다가오자 츤데레 치우치우는 “싫어. 너랑 놀고 싶지 않아.”라며 차갑게 거절합니다. 잠시 후 토끼 안월이 구미호와 함께 어울리는 모습을 보며 나무 뒤에 숨어 부러움과 질투 어린 시선으로 바라봅니다.',
+    dialogues: [
+      { cut: '1컷', zh: '九尾：球球呀！一起玩吧！ / 球球：不要，我才不想和你玩。', ko: '여우: 큐큐야! 같이 놀자! / 큐큐: 싫어. 너랑 놀고 싶지 않아.' },
+      { cut: '2컷', zh: '（被拒绝后低头失落走开的九尾……）', ko: '(거절당하고 시무룩해진 여우…)' },
+      { cut: '3컷', zh: '安月：九尾呀，不想和我一起玩吗？', ko: '토끼: 여우야, 나랑 놀고 싶지 않아?' },
+      { cut: '4컷', zh: '安月：九尾呀！一起玩吧！（球球躲在树后默默看着……）', ko: '토끼: 여우야! 같이 놀자! (나무 뒤에서 몰래 지켜보는 큐큐…)' }
+    ]
+  }
+],
+animation: {
+  src: 'assets/cat-short01.mov',
+  titleZh: '《白猫·球球 · 专属动画短片 #01（树荫下的妒羡与加入）》',
+  titleKo: '《흰 고양이 · 치우치우 전용 애니메이션 #01》',
+  aspectRatio: '16/9',
+  isLandscape: true,
+  mimeType: ''
+},
+animation2: {
+  src: 'assets/cat-short02.mov',
+  titleZh: '《白猫·球球 · 专属动画短片 #02（木地板可爱手势舞）》',
+  titleKo: '《흰 고양이 · 치우치우 전용 애니메이션 #02》',
+  aspectRatio: '16/9',
+  isLandscape: true,
+  mimeType: ''
+},
+emoticons: [
+  { img: 'assets/cat_expr_01.jpg', zh: '傲娇 · 别过脸', ko: '새침 · 츤데레' },
+  { img: 'assets/cat_expr_02.jpg', zh: '生气 · 才不是呢！', ko: '화남 · 아니거든!' },
+  { img: 'assets/cat_expr_03.jpg', zh: '嫌弃 · 咦…真是…', ko: '질색 · 칫… 정말…' },
+  { img: 'assets/cat_expr_04.jpg', zh: '惊讶 · 探头 !?!', ko: '깜짝 · 빼꼼 !?!' },
+  { img: 'assets/cat_expr_05.jpg', zh: '你们在看我吗…？', ko: '나 보고 있는 거야…?' },
+  { img: 'assets/cat_expr_06.jpg', zh: '抓到一只！扑蝶', ko: '한 마리 잡았다!' },
+  { img: 'assets/cat_expr_07.jpg', zh: 'Zzz · 我没有不开心…', ko: '쿨쿨 · 기분 안 나빠…' },
+  { img: 'assets/cat_expr_08.jpg', zh: '调皮 · 威严记录', ko: '장난꾸러기 · 위엄' },
+  { img: 'assets/cat_expr_09.jpg', zh: '嫉妒 · 捉迷藏偷看', ko: '질투 · 숨바꼭질' },
+  { img: 'assets/cat_expr_10.jpg', zh: '闹别扭 · 假装漠不关心', ko: '삐짐 · 무관심' }
+],
+emoticonZip: 'assets/cat_emoticons.zip',
+emoticonZipName: 'cat_emoticons.zip'
 },
 shark: {
 avatar: 'assets/char_shark.jpg',
@@ -10557,9 +10691,10 @@ function renderMemberAnimation(m) {
     }
     if (badge) {
       if (hasBoth) {
+        const isLand1 = m.animation && (m.animation.isLandscape || m.animation.aspectRatio === '16/9');
         const isMixed = (m.animation2 && (m.animation2.isLandscape || m.animation2.aspectRatio === '16/9'));
-        const badgeZh = isMixed ? '已收录 9:16 竖屏 + 16:9 横屏双格式动画' : '已收录专属动画短片（共 2 部 · 原画幅比例）';
-        const badgeKo = isMixed ? '9:16 세로형 + 16:9 와이드 영상 수록 완료' : '전용 숏폼 애니메이션 2편 수록 완료 (원작 비율)';
+        const badgeZh = (isLand1 && isMixed) ? '已收录 2 部 16:9 横屏专属动画短片' : (isMixed ? '已收录 9:16 竖屏 + 16:9 横屏双格式动画' : '已收录专属动画短片（共 2 部 · 原画幅比例）');
+        const badgeKo = (isLand1 && isMixed) ? '16:9 와이드 전용 애니메이션 2편 수록 완료' : (isMixed ? '9:16 세로형 + 16:9 와이드 영상 수록 완료' : '전용 숏폼 애니메이션 2편 수록 완료 (원작 비율)');
         badge.innerHTML = `🎬 <span data-zh>${badgeZh}</span><span data-ko>${badgeKo}</span>`;
       } else {
         badge.innerHTML = `🎬 <span data-zh>已收录专属 9:16 竖屏短片</span><span data-ko>전용 9:16 숏폼 영상 수록 완료</span>`;
@@ -10574,16 +10709,20 @@ function renderMemberAnimation(m) {
     let html = `<div class="shortform-grid" style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:24px;">`;
 
     if (m.animation) {
-      const anim1Ratio = m.animation.aspectRatio || '9/16';
+      const isLand1 = m.animation.isLandscape || m.animation.aspectRatio === '16/9';
+      const anim1Ratio = m.animation.aspectRatio || (isLand1 ? '16/9' : '9/16');
+      const anim1MaxWidth = isLand1 ? '580px' : (m.animation.maxWidth || '295px');
+      const badgeFormat1 = isLand1 ? '16:9 ANIMATION' : '9:16 SHORT';
+      const type1Attr = m.animation.mimeType !== undefined ? (m.animation.mimeType ? ` type="${m.animation.mimeType}"` : '') : ' type="video/mp4"';
       html += `
-<div class="shortform-phone" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:${anim1Ratio}; border-radius:32px; border:3px solid #F5A623; width:100%; max-width:295px;">
+<div class="shortform-phone ${isLand1 ? 'landscape' : ''}" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:${anim1Ratio}; max-width:${anim1MaxWidth}; max-height:none; width:100%; border-radius:32px; border:3px solid #F5A623;">
   <video controls playsinline loop preload="metadata" style="width:100%; height:100%; object-fit:contain; background:#000; border-radius:28px; display:block;">
-    <source src="${m.animation.src}#t=0.001" type="video/mp4">
-    <source src="${m.animation.src}" type="video/mp4">
-    ${m.animation.altSrc ? `<source src="${m.animation.altSrc}" type="video/mp4">` : ''}
+    <source src="${m.animation.src}#t=0.001"${type1Attr}>
+    <source src="${m.animation.src}"${type1Attr}>
+    ${m.animation.altSrc ? `<source src="${m.animation.altSrc}"${type1Attr}>` : ''}
   </video>
   <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(15,10,25,0.92) 25%); padding:18px 16px 14px; pointer-events:none;">
-    <span class="compare-badge gold" style="font-size:0.75rem; pointer-events:auto;">🎬 9:16 SHORT #01</span>
+    <span class="compare-badge gold" style="font-size:0.75rem; pointer-events:auto;">🎬 ${badgeFormat1} #01</span>
     <h4 style="color:#FFF3D1; font-size:1rem; margin:6px 0 3px; text-shadow:0 2px 4px rgba(0,0,0,0.8);">
       <span data-zh>${m.animation.titleZh}</span><span data-ko>${m.animation.titleKo}</span>
     </h4>
@@ -10596,12 +10735,13 @@ function renderMemberAnimation(m) {
       const anim2Ratio = m.animation2.aspectRatio || (isLand ? '16/9' : '9/16');
       const anim2MaxWidth = isLand ? '580px' : (m.animation2.maxWidth || '295px');
       const badgeFormat = isLand ? '16:9' : (m.animation2.aspectRatio || '9:16');
+      const type2Attr = m.animation2.mimeType !== undefined ? (m.animation2.mimeType ? ` type="${m.animation2.mimeType}"` : '') : ' type="video/mp4"';
       html += `
 <div class="shortform-phone ${isLand ? 'landscape' : ''}" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:${anim2Ratio}; max-width:${anim2MaxWidth}; max-height:none; width:100%; border-radius:32px; border:3px solid #F5A623;">
   <video controls playsinline loop preload="metadata" style="width:100%; height:100%; object-fit:contain; background:#000; border-radius:28px; display:block;">
-    <source src="${m.animation2.src}#t=0.001" type="video/mp4">
-    <source src="${m.animation2.src}" type="video/mp4">
-    ${m.animation2.altSrc ? `<source src="${m.animation2.altSrc}" type="video/mp4">` : ''}
+    <source src="${m.animation2.src}#t=0.001"${type2Attr}>
+    <source src="${m.animation2.src}"${type2Attr}>
+    ${m.animation2.altSrc ? `<source src="${m.animation2.altSrc}"${type2Attr}>` : ''}
   </video>
   <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(15,10,25,0.92) 25%); padding:18px 16px 14px; pointer-events:none;">
     <span class="compare-badge gold" style="font-size:0.75rem; pointer-events:auto;">🎬 ${badgeFormat} ANIMATION #02</span>
