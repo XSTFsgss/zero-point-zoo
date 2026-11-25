@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>白猫·球球 情绪小鱼干屋 &amp; 猫咪运势占卜 | ZERO POINT ZOO</title>
+  <style>
+    :root {
+      --bg-deep: #181326;
+      --bg-card: #241D38;
+      --bg-card-2: #2F264A;
+      --violet: #9C7CF4;
+      --violet-light: #CBB7FF;
+      --violet-glow: rgba(156, 124, 244, 0.35);
+      --gold: #F5A623;
+      --gold-soft: #FFE4A3;
+      --pink: #FF8FB1;
+      --text: #F7F4FC;
+      --text-soft: #C7BEE0;
+      --border: rgba(179, 146, 240, 0.32);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(156, 124, 244, 0.22), transparent 42%),
+        radial-gradient(circle at 84% 82%, rgba(245, 166, 35, 0.14), transparent 44%),
+        linear-gradient(160deg, #161122 0%, #211936 55%, #171225 100%);
+      color: var(--text);
+      font-family: "PingFang SC", "Microsoft YaHei", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+    }
+
+    [data-lang="zh"] [data-ko] { display: none !important; }
+    [data-lang="ko"] [data-zh] { display: none !important; }
+
+    .app-shell {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 16px 14px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Top Header */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      background: rgba(36, 29, 56, 0.85);
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 12px 16px;
+      backdrop-filter: blur(8px);
+    }
+
+    .brand-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .brand-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 2px solid var(--violet);
+      background: #fff;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #FFF;
+      line-height: 1.25;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      color: var(--violet-light);
+      margin-top: 2px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pill-btn {
+      border: 1.5px solid var(--border);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: transform 0.14s ease, background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .pill-btn:active { transform: scale(0.95); }
+    .pill-btn.active {
+      background: rgba(156, 124, 244, 0.25);
+      border-color: var(--violet);
+      color: #FFF;
+    }
+
+    /* Mode Switch Tabs */
+    .mode-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .mode-tab {
+      border: 1.5px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-soft);
+      border-radius: 16px;
+      padding: 12px 10px;
+      font-size: 0.94rem;
+      font-weight: 800;
+      cursor: pointer;
+      touch-action: manipulation;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      transition: all 0.2s ease;
+    }
+
+    .mode-tab.active {
+      background: linear-gradient(135deg, #7C5CBF 0%, #583C99 100%);
+      border-color: #E3D6FF;
+      color: #FFF;
+      box-shadow: 0 8px 22px var(--violet-glow);
+    }
+
+    .mode-tab:active { transform: scale(0.98); }
+
+    .panel { display: none; }
+    .panel.active { display: block; animation: fadeIn 0.25s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Main Card */
+    .stage-card {
+      background: linear-gradient(180deg, rgba(47, 38, 74, 0.92) 0%, rgba(28, 22, 46, 0.96) 100%);
+      border: 2px solid var(--border);
+      border-radius: 22px;
+      padding: 18px 16px;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.42);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Stats strip */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .stat-box {
+      background: rgba(18, 13, 30, 0.55);
+      border: 1px solid rgba(179, 146, 240, 0.22);
+      border-radius: 14px;
+      padding: 8px 10px;
+      text-align: center;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--text-soft);
+      display: block;
+    }
+
+    .stat-value {
+      font-size: 1.08rem;
+      font-weight: 900;
+      color: var(--gold-soft);
+      margin-top: 2px;
+      display: block;
+    }
+
+    /* Progress bar */
+    .mood-bar-wrap {
+      margin-bottom: 14px;
+    }
+
+    .mood-bar-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--violet-light);
+    }
+
+    .mood-track {
+      height: 12px;
+      background: rgba(14, 10, 24, 0.8);
+      border-radius: 999px;
+      border: 1px solid rgba(179, 146, 240, 0.28);
+      overflow: hidden;
+    }
+
+    .mood-fill {
+      height: 100%;
+      width: 20%;
+      background: linear-gradient(90deg, #8E6CE6 0%, #D08BFF 55%, #F5A623 100%);
+      border-radius: 999px;
+      transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Interactive Cat Avatar Zone */
+    .cat-arena {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 10px 16px;
+      background: radial-gradient(circle at 50% 45%, rgba(156, 124, 244, 0.2), transparent 68%);
+      border-radius: 18px;
+      border: 1px dashed rgba(179, 146, 240, 0.28);
+      margin-bottom: 14px;
+      user-select: none;
+    }
+
+    .speech-bubble {
+      background: rgba(24, 18, 40, 0.92);
+      border: 1.5px solid var(--violet);
+      border-radius: 16px;
+      padding: 10px 14px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #FFF;
+      text-align: center;
+      max-width: 92%;
+      margin-bottom: 12px;
+      position: relative;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      line-height: 1.45;
+    }
+
+    .cat-tap-btn {
+      position: relative;
+      border: none;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      touch-action: manipulation;
+      outline: none;
+      border-radius: 22px;
+      transition: transform 0.14s ease;
+    }
+
+    .cat-tap-btn:active {
+      transform: scale(0.93) rotate(-2deg);
+    }
+
+    .cat-tap-btn.boing {
+      animation: catBoing 0.34s ease;
+    }
+
+    @keyframes catBoing {
+      0% { transform: scale(1); }
+      35% { transform: scale(1.08, 0.94); }
+      70% { transform: scale(0.97, 1.04); }
+      100% { transform: scale(1); }
+    }
+
+    .cat-portrait {
+      width: 176px;
+      height: 176px;
+      object-fit: contain;
+      border-radius: 22px;
+      background: #FFF9FF;
+      border: 3px solid var(--violet);
+      padding: 6px;
+      box-shadow: 0 10px 28px rgba(156, 124, 244, 0.35);
+      display: block;
+    }
+
+    .tap-hint {
+      margin-top: 8px;
+      font-size: 0.76rem;
+      color: var(--text-soft);
+    }
+
+    /* Action Buttons */
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .action-btn {
+      border: 1.5px solid rgba(255, 255, 255, 0.16);
+      border-radius: 16px;
+      padding: 12px 8px;
+      min-height: 62px;
+      cursor: pointer;
+      touch-action: manipulation;
+      color: #FFF;
+      font-weight: 800;
+      font-size: 0.86rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      text-align: center;
+      transition: transform 0.12s ease, box-shadow 0.18s ease;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.32);
+    }
+
+    .action-btn:active { transform: scale(0.94); }
+    .action-btn .ico { font-size: 1.35rem; line-height: 1; }
+    .action-btn.fish {
+      background: linear-gradient(135deg, #E59424 0%, #C46F10 100%);
+      border-color: #FFD98E;
+    }
+    .action-btn.pat {
+      background: linear-gradient(135deg, #8B68DC 0%, #6343AD 100%);
+      border-color: #DFCEFF;
+    }
+    .action-btn.praise {
+      background: linear-gradient(135deg, #D96098 0%, #A33A6E 100%);
+      border-color: #FFC5E0;
+    }
+
+    .sub-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+
+    /* Floating Particles */
+    .float-pop {
+      position: fixed;
+      pointer-events: none;
+      font-weight: 900;
+      font-size: 1rem;
+      color: var(--gold-soft);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
+      z-index: 999;
+      animation: floatUp 0.85s ease-out forwards;
+      white-space: nowrap;
+    }
+
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translate(-50%, 0) scale(0.9); }
+      100% { opacity: 0; transform: translate(-50%, -58px) scale(1.18); }
+    }
+
+    /* Fortune Panel */
+    .fortune-hero {
+      text-align: center;
+      padding: 6px 4px 12px;
+    }
+
+    .draw-btn {
+      width: 100%;
+      max-width: 340px;
+      margin: 6px auto 14px;
+      border: 2px solid #FFE29E;
+      background: linear-gradient(135deg, #9C7CF4 0%, #6C4AB6 60%, #D98F2B 140%);
+      color: #FFF;
+      font-size: 1rem;
+      font-weight: 900;
+      padding: 14px 20px;
+      border-radius: 999px;
+      cursor: pointer;
+      touch-action: manipulation;
+      box-shadow: 0 10px 24px rgba(156, 124, 244, 0.38);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.14s ease;
+    }
+
+    .draw-btn:active { transform: scale(0.96); }
+
+    .fortune-card {
+      background: rgba(20, 15, 34, 0.88);
+      border: 2px solid var(--gold);
+      border-radius: 20px;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 146px 1fr;
+      gap: 16px;
+      align-items: center;
+      text-align: left;
+    }
+
+    .fortune-card.shake {
+      animation: cardPop 0.38s ease;
+    }
+
+    @keyframes cardPop {
+      0% { transform: scale(0.94); opacity: 0.65; }
+      60% { transform: scale(1.02); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+    .fortune-img-wrap {
+      text-align: center;
+    }
+
+    .fortune-img {
+      width: 138px;
+      height: 138px;
+      object-fit: contain;
+      border-radius: 18px;
+      background: #FFF9FF;
+      border: 2.5px solid var(--violet);
+      padding: 4px;
+    }
+
+    .luck-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #F5A623, #FFD166);
+      color: #1E162B;
+      font-weight: 900;
+      font-size: 0.78rem;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 6px;
+    }
+
+    .fortune-title {
+      margin: 0 0 6px;
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #FFF3D1;
+    }
+
+    .fortune-desc {
+      margin: 0 0 10px;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: var(--text-soft);
+    }
+
+    .fortune-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .meta-chip {
+      background: rgba(156, 124, 244, 0.16);
+      border: 1px solid rgba(156, 124, 244, 0.42);
+      color: var(--violet-light);
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .app-shell { padding: 10px 10px 22px; }
+      .action-grid { grid-template-columns: 1fr; }
+      .action-btn { flex-direction: row; min-height: 48px; padding: 10px 14px; font-size: 0.9rem; }
+      .fortune-card { grid-template-columns: 1fr; text-align: center; }
+      .fortune-meta { justify-content: center; }
+      .cat-portrait { width: 150px; height: 150px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Top Header -->
+    <header class="top-bar">
+      <div class="brand-left">
+        <img src="../../assets/cat_standee.jpg" alt="白猫·球球" class="brand-avatar" />
+        <div>
+          <div class="brand-title">
+            <span data-zh>🐱 球球的情绪小鱼干屋</span>
+            <span data-ko>🐱 치우치우의 생선가게 &amp; 운세방</span>
+          </div>
+          <div class="brand-sub">
+            <span data-zh>银渐层傲娇观察官 · 投喂减压 &amp; 今日猫咪占卜</span>
+            <span data-ko>은빛 고양이 관찰관 · 간식 주기 &amp; 오늘의 고양이 운세</span>
+          </div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button type="button" id="sound-btn" class="pill-btn active" onclick="toggleSound()">
+          <span id="sound-label">🔊 音效开</span>
+        </button>
+        <button type="button" id="lang-btn" class="pill-btn" onclick="toggleLang()">
+          <span data-zh>🇰🇷 한국어</span>
+          <span data-ko>🇨🇳 中文</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mode Switch -->
+    <div class="mode-tabs" role="tablist">
+      <button type="button" id="tab-feed" class="mode-tab active" onclick="switchMode('feed')">
+        <span>🐟</span>
+        <span data-zh>投喂小鱼干减压</span>
+        <span data-ko>생선 간식 주기 게임</span>
+      </button>
+      <button type="button" id="tab-fortune" class="mode-tab" onclick="switchMode('fortune')">
+        <span>🔮</span>
+        <span data-zh>今日猫咪运势占卜</span>
+        <span data-ko>오늘의 고양이 운세</span>
+      </button>
+    </div>
+
+    <!-- Panel 1: Fish Feeding Mini-Game -->
+    <section id="panel-feed" class="panel active">
+      <div class="stage-card">
+        <div class="stats-row">
+          <div class="stat-box">
+            <span class="stat-label"><span data-zh>🐟 累计小鱼干</span><span data-ko>🐟 누적 생선</span></span>
+            <span class="stat-value" id="stat-fish">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label"><span data-zh>💜 互动连击</span><span data-ko>💜 연속 콤보</span></span>
+            <span class="stat-value" id="stat-combo">x0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label"><span data-zh>✨ 当前状态</span><span data-ko>✨ 현재 상태</span></span>
+            <span class="stat-value" id="stat-stage" style="font-size:0.9rem;">傲娇观察中</span>
+          </div>
+        </div>
+
+        <div class="mood-bar-wrap">
+          <div class="mood-bar-head">
+            <span><span data-zh>🐾 球球傲娇软化度（治愈值）</span><span data-ko>🐾 치우치우 마음 열림 지수</span></span>
+            <span id="mood-pct">20%</span>
+          </div>
+          <div class="mood-track">
+            <div class="mood-fill" id="mood-fill"></div>
+          </div>
+        </div>
+
+        <div class="cat-arena">
+          <div class="speech-bubble" id="cat-bubble">
+            <span data-zh>「哼……我才没有在等你投喂呢。不过小鱼干递过来的话，勉强收下好了。」</span>
+            <span data-ko>「흥… 간식 따위 기다린 적 없거든. 그래도 준다면 마지못해 받아줄게.」</span>
+          </div>
+
+          <button type="button" class="cat-tap-btn" id="cat-tap-btn" onclick="interact('tap', event)" aria-label="点击球球互动">
+            <img src="../../assets/cat_expr_01.jpg" alt="白猫·球球" class="cat-portrait" id="cat-img" />
+          </button>
+
+          <div class="tap-hint">
+            <span data-zh>👆 直接点击球球或下方按钮均可互动（手机 / 电脑通用）</span>
+            <span data-ko>👆 치우치우를 직접 터치하거나 아래 버튼을 눌러보세요!</span>
+          </div>
+        </div>
+
+        <div class="action-grid">
+          <button type="button" class="action-btn fish" onclick="interact('fish', event)">
+            <span class="ico">🐟</span>
+            <span><span data-zh>投喂小鱼干 (+12%)</span><span data-ko>생선 주기 (+12%)</span></span>
+          </button>
+          <button type="button" class="action-btn pat" onclick="interact('pat', event)">
+            <span class="ico">🖐️</span>
+            <span><span data-zh>轻轻摸摸头 (+8%)</span><span data-ko>쓰담쓰담 (+8%)</span></span>
+          </button>
+          <button type="button" class="action-btn praise" onclick="interact('praise', event)">
+            <span class="ico">🧥</span>
+            <span><span data-zh>夸紫色斗篷 (+18%)</span><span data-ko>망토 칭찬 (+18%)</span></span>
+          </button>
+        </div>
+
+        <div class="sub-controls">
+          <span>
+            <span data-zh>💡 提示：把治愈值喂满 100% 会触发球球隐藏彩蛋表情哦！</span>
+            <span data-ko>💡 팁: 게이지를 100%까지 채우면 치우치우의 특별한 표정이 열려요!</span>
+          </span>
+          <button type="button" class="pill-btn" onclick="resetMood()">
+            <span data-zh>↻ 重置心情</span>
+            <span data-ko>↻ 기분 초기화</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 2: Daily Cat Fortune -->
+    <section id="panel-fortune" class="panel">
+      <div class="stage-card">
+        <div class="fortune-hero">
+          <p style="margin:0 0 10px; font-size:0.86rem; color:var(--text-soft);">
+            <span data-zh>紫色骷髅扣斗篷能感知周围情绪波动——点击按钮，让球球为你占卜今日猫咪运势！</span>
+            <span data-ko>보라색 해골 망토가 주변의 감정 파동을 감지합니다. 버튼을 눌러 오늘의 운세를 뽑아보세요!</span>
+          </p>
+          <button type="button" class="draw-btn" onclick="drawFortune(event)">
+            <span>🔮</span>
+            <span data-zh>摇一摇紫色斗篷 · 抽取今日猫运签</span>
+            <span data-ko>망토 흔들기 · 오늘의 고양이 운세 뽑기</span>
+          </button>
+        </div>
+
+        <div class="fortune-card" id="fortune-card">
+          <div class="fortune-img-wrap">
+            <img src="../../assets/cat_expr_08.jpg" alt="球球占卜签" class="fortune-img" id="fortune-img" />
+          </div>
+          <div>
+            <span class="luck-badge" id="fortune-luck">✨ 今日待占卜 · READY</span>
+            <h3 class="fortune-title" id="fortune-title">
+              <span data-zh>《点击上方按钮，查看球球笔记里的今日运势》</span>
+              <span data-ko>《위 버튼을 눌러 오늘의 운세를 확인하세요》</span>
+            </h3>
+            <p class="fortune-desc" id="fortune-desc">
+              <span data-zh>球球正抱着她的观察笔记偷偷看着你……“才、才不是专门为你占卜的，顺手翻一页而已！”</span>
+              <span data-ko>치우치우가 관찰 노트를 안고 슬쩍 쳐다보고 있어요… “널 위해 점쳐주는 건 아니거든, 그냥 한 장 넘겨보는 거야!”</span>
+            </p>
+            <div class="fortune-meta" id="fortune-meta">
+              <span class="meta-chip"><span data-zh>🎨 幸运色：星夜紫</span><span data-ko>🎨 행운색: 스타 퍼플</span></span>
+              <span class="meta-chip"><span data-zh>🧸 幸运物：小鱼干</span><span data-ko>🧸 행운템: 마른 생선</span></span>
+              <span class="meta-chip"><span data-zh>🐾 幸运伙伴：白猫·球球</span><span data-ko>🐾 행운 동료: 치우치우</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'zpz_cat_app_v1';
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    let state = {
+      fishTotal: 0,
+      combo: 0,
+      mood: 20,
+      fortuneCount: 0
+    };
+
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+      if (saved && typeof saved === 'object') {
+        state.fishTotal = Number(saved.fishTotal) || 0;
+        state.mood = Math.min(100, Math.max(0, Number(saved.mood) || 20));
+        state.fortuneCount = Number(saved.fortuneCount) || 0;
+      }
+    } catch (e) {}
+
+    // Sync initial language with parent page if accessible
+    try {
+      if (window.parent && window.parent !== window && window.parent.document) {
+        const pLang = window.parent.document.documentElement.getAttribute('data-lang');
+        if (pLang === 'ko' || pLang === 'zh') {
+          document.documentElement.setAttribute('data-lang', pLang);
+        }
+      }
+    } catch (e) {}
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          fishTotal: state.fishTotal,
+          mood: state.mood,
+          fortuneCount: state.fortuneCount
+        }));
+      } catch (e) {}
+    }
+
+    function getLang() {
+      return document.documentElement.getAttribute('data-lang') === 'ko' ? 'ko' : 'zh';
+    }
+
+    function toggleLang() {
+      const next = getLang() === 'ko' ? 'zh' : 'ko';
+      document.documentElement.setAttribute('data-lang', next);
+      document.documentElement.setAttribute('lang', next === 'ko' ? 'ko' : 'zh-CN');
+      updateSoundLabel();
+      updateFeedUI();
+    }
+
+    function updateSoundLabel() {
+      const lbl = document.getElementById('sound-label');
+      if (!lbl) return;
+      if (getLang() === 'ko') {
+        lbl.textContent = soundEnabled ? '🔊 효과음 ON' : '🔇 음소거';
+      } else {
+        lbl.textContent = soundEnabled ? '🔊 音效开' : '🔇 已静音';
+      }
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      document.getElementById('sound-btn').classList.toggle('active', soundEnabled);
+      updateSoundLabel();
+      if (soundEnabled) playChime('pat');
+    }
+
+    function playChime(type) {
+      if (!soundEnabled) return;
+      try {
+        const Ctx = window.AudioContext || window.webkitAudioContext;
+        if (!Ctx) return;
+        if (!audioCtx) audioCtx = new Ctx();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const now = audioCtx.currentTime;
+        const notes = type === 'fortune'
+          ? [523.25, 659.25, 783.99, 1046.5]
+          : (type === 'praise' ? [587.33, 739.99, 880] : (type === 'fish' ? [659.25, 880] : [523.25, 659.25]));
+        notes.forEach((freq, i) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = type === 'fortune' ? 'triangle' : 'sine';
+          osc.frequency.setValueAtTime(freq, now + i * 0.065);
+          gain.gain.setValueAtTime(0.001, now + i * 0.065);
+          gain.gain.exponentialRampToValueAtTime(0.09, now + i * 0.065 + 0.015);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.065 + 0.22);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + i * 0.065);
+          osc.stop(now + i * 0.065 + 0.24);
+        });
+      } catch (e) {}
+    }
+
+    function switchMode(mode) {
+      ['feed', 'fortune'].forEach(k => {
+        document.getElementById('tab-' + k).classList.toggle('active', k === mode);
+        document.getElementById('panel-' + k).classList.toggle('active', k === mode);
+      });
+    }
+
+    const FEED_REACTIONS = {
+      fish: [
+        {
+          img: '../../assets/cat_expr_04.jpg',
+          zh: '「哇…！这、这条小鱼干还蛮香的嘛，本喵姑且收下啦！」',
+          ko: '「어…! 이 생선 간식 꽤 맛있어 보이네. 특별히 받아줄게!」'
+        },
+        {
+          img: '../../assets/cat_expr_02.jpg',
+          zh: '「才不是因为饿了才吃的呢！只是怕放久了浪费而已！」',
+          ko: '「배고파서 먹는 거 아니거든! 그냥 남기면 아까워서 먹는 거야!」'
+        },
+        {
+          img: '../../assets/cat_expr_06.jpg',
+          zh: '「抓住小鱼干啦！咳咳……我是说，味道还算合格吧♪」',
+          ko: '「잡았다! 흠흠… 내 말은, 나름 합격점이라는 뜻이야♪」'
+        }
+      ],
+      pat: [
+        {
+          img: '../../assets/cat_expr_01.jpg',
+          zh: '「别、别随便摸银渐层的头啦……好吧，只能摸三秒钟哦。」',
+          ko: '「함부로 머리 만지지 마… 좋아, 딱 3초만 허락해 줄게.」'
+        },
+        {
+          img: '../../assets/cat_expr_05.jpg',
+          zh: '「你一直在看着我吗……？其实被记住的感觉，也不坏嘛。」',
+          ko: '「계속 나만 보고 있는 거야…? 사실 기억해 주는 기분, 나쁘지 않네.」'
+        },
+        {
+          img: '../../assets/cat_expr_07.jpg',
+          zh: '「呼噜呼噜……我才没有开心到打盹呢，只是刚好有点困而已……」',
+          ko: '「그르렁… 기분 좋아서 조는 거 아니거든, 그냥 조금 졸린 것뿐이야…」'
+        }
+      ],
+      praise: [
+        {
+          img: '../../assets/cat_expr_01.jpg',
+          zh: '「什、什么？你说我的紫色骷髅扣斗篷全园最好看？算你有眼光！」',
+          ko: '「뭐, 뭐라고? 내 보라색 해골 망토가 제일 예쁘다고? 보는 눈은 있네!」'
+        },
+        {
+          img: '../../assets/cat_expr_08.jpg',
+          zh: '「哼哼，既然你这么诚心诚意地夸我，我就把你的名字也写进笔记第一页！」',
+          ko: '「흥흥, 그렇게까지 칭찬한다면 네 이름도 내 노트 첫 페이지에 적어줄게!」'
+        }
+      ],
+      tap: [
+        {
+          img: '../../assets/cat_expr_03.jpg',
+          zh: '「咦…真是的，干嘛一直戳本喵呀！（悄悄摇了摇尾巴）」',
+          ko: '「칫… 정말, 왜 자꾸 찌르는 거야! (몰래 꼬리를 살랑거린다)」'
+        },
+        {
+          img: '../../assets/cat_expr_09.jpg',
+          zh: '「刚、刚才只是路过看看你在干嘛，才没有偷瞄你呢！」',
+          ko: '「바, 방금은 그냥 지나가다 본 것뿐이야, 몰래 쳐다본 거 아니거든!」'
+        },
+        {
+          img: '../../assets/cat_expr_10.jpg',
+          zh: '「再不哄我的话，本喵就要假装生气趴在桌子上不理你咯…」',
+          ko: '「얼른 안 달래주면 삐져서 책상에 엎드려 있을 거야…」'
+        }
+      ],
+      max: {
+        img: '../../assets/cat_expr_06.jpg',
+        zh: '「✨ 治愈值满格！好吧……谢谢你今天一直看着我、记住我。最喜欢你啦（小声）💜」',
+        ko: '「✨ 치유 게이지 100%! 좋아… 오늘 계속 날 기억해 줘서 고마워. 사실 많이 좋아해 (속닥)💜」'
+      }
+    };
+
+    function spawnPop(event, text) {
+      const pop = document.createElement('div');
+      pop.className = 'float-pop';
+      pop.textContent = text;
+      let x = window.innerWidth / 2;
+      let y = window.innerHeight / 2;
+      if (event && typeof event.clientX === 'number' && event.clientX > 0) {
+        x = event.clientX;
+        y = event.clientY;
+      } else {
+        const btn = document.getElementById('cat-tap-btn');
+        if (btn) {
+          const r = btn.getBoundingClientRect();
+          x = r.left + r.width / 2;
+          y = r.top + r.height / 3;
+        }
+      }
+      pop.style.left = x + 'px';
+      pop.style.top = y + 'px';
+      document.body.appendChild(pop);
+      setTimeout(() => pop.remove(), 860);
+    }
+
+    function getStageText(mood) {
+      if (mood >= 100) return { zh: '💜 彻底软化!', ko: '💜 완전 행복!' };
+      if (mood >= 70) return { zh: '✨ 偷偷开心', ko: '✨ 몰래 신남' };
+      if (mood >= 40) return { zh: '😳 有点动摇', ko: '😳 살짝 흔들림' };
+      return { zh: '😾 傲娇观察中', ko: '😾 츤데레 관찰중' };
+    }
+
+    function updateFeedUI() {
+      document.getElementById('stat-fish').textContent = state.fishTotal;
+      document.getElementById('stat-combo').textContent = 'x' + state.combo;
+      const st = getStageText(state.mood);
+      document.getElementById('stat-stage').textContent = getLang() === 'ko' ? st.ko : st.zh;
+      document.getElementById('mood-pct').textContent = state.mood + '%';
+      document.getElementById('mood-fill').style.width = state.mood + '%';
+    }
+
+    let lastReaction = null;
+
+    function applyReaction(item) {
+      lastReaction = item;
+      document.getElementById('cat-img').src = item.img;
+      document.getElementById('cat-bubble').innerHTML =
+        `<span data-zh>${item.zh}</span><span data-ko>${item.ko}</span>`;
+    }
+
+    function interact(kind, event) {
+      state.combo += 1;
+      let delta = 6;
+      let popText = '✨ 喵呜~';
+      if (kind === 'fish') {
+        state.fishTotal += 1;
+        delta = 12;
+        popText = '+1 🐟 小鱼干!';
+      } else if (kind === 'pat') {
+        delta = 8;
+        popText = '🖐️ +8% 治愈';
+      } else if (kind === 'praise') {
+        delta = 18;
+        popText = '🧥 斗篷超帅 +18%!';
+      } else {
+        popText = '🐾 戳一戳 +6%';
+      }
+
+      state.mood = Math.min(100, state.mood + delta);
+      saveState();
+      updateFeedUI();
+      playChime(kind);
+      spawnPop(event, popText);
+
+      const tapBtn = document.getElementById('cat-tap-btn');
+      tapBtn.classList.remove('boing');
+      void tapBtn.offsetWidth;
+      tapBtn.classList.add('boing');
+
+      if (state.mood >= 100) {
+        applyReaction(FEED_REACTIONS.max);
+      } else {
+        const list = FEED_REACTIONS[kind] || FEED_REACTIONS.tap;
+        const pick = list[Math.floor(Math.random() * list.length)];
+        applyReaction(pick);
+      }
+    }
+
+    function resetMood() {
+      state.mood = 20;
+      state.combo = 0;
+      saveState();
+      updateFeedUI();
+      applyReaction({
+        img: '../../assets/cat_expr_01.jpg',
+        zh: '「哼……重新开始计算！这次你要先递小鱼干还是先夸我的斗篷？」',
+        ko: '「흥… 처음부터 다시야! 이번엔 생선부터 줄 거야, 망토 칭찬부터 할 거야?」'
+      });
+      playChime('pat');
+    }
+
+    const FORTUNES = [
+      {
+        img: '../../assets/cat_expr_06.jpg',
+        luckZh: '🌟 大吉 · 扑蝶幸运签',
+        luckKo: '🌟 대길 · 나비 잡기 행운',
+        titleZh: '《今日愿望像蝴蝶一样飞进怀里！》',
+        titleKo: '《오늘의 소원이 나비처럼 품에 쏙!》',
+        descZh: '球球用爪子帮你按住了一只闪闪发光的幸运蝴蝶！今天无论学习、汇报还是和朋友聊天，都会收获意料之外的夸奖和好消息。',
+        descKo: '치우치우가 반짝이는 행운의 나비를 앞발로 꽉 잡아줬어요! 오늘 발표나 공부, 친구와의 대화에서 기분 좋은 칭찬을 듣게 될 거예요.',
+        colorZh: '星夜紫', colorKo: '스타 퍼플',
+        itemZh: '双倍小鱼干', itemKo: '더블 생선 간식',
+        partnerZh: '水獭·露', partnerKo: '수달·루'
+      },
+      {
+        img: '../../assets/cat_expr_01.jpg',
+        luckZh: '💜 上吉 · 斗篷发光签',
+        luckKo: '💜 상길 · 빛나는 망토 운세',
+        titleZh: '《被大家一眼记住的主角光环！》',
+        titleKo: '《모두의 기억에 남는 주인공 아우라!》',
+        descZh: '紫色骷髅扣在今天格外闪亮！平时默默付出的小细节今天会被大家注意到，记得昂首挺胸接受赞美，别只顾着脸红害羞哦。',
+        descKo: '보라색 해골 버클이 오늘따라 유난히 반짝입니다! 묵묵히 해온 노력을 주변 사람들이 알아봐 주는 하루가 될 거예요.',
+        colorZh: '薰衣草紫', colorKo: '라벤더',
+        itemZh: '骷髅徽章', itemKo: '해골 브로치',
+        partnerZh: '柴犬·困', partnerKo: '시바견·곤'
+      },
+      {
+        img: '../../assets/cat_expr_08.jpg',
+        luckZh: '📔 吉 · 秘密笔记签',
+        luckKo: '📔 길 · 비밀 노트 운세',
+        titleZh: '《灵感翻倍的情绪观察日》',
+        titleKo: '《영감이 샘솟는 감정 관찰의 날》',
+        descZh: '球球把你的幸运日写进了黑色小笔记本里。今天直觉超级敏锐，非常适合做决定、改作业或整理桌面，效率比平时高两倍！',
+        descKo: '치우치우가 검은 수첩에 당신의 행운을 기록했어요. 직감이 아주 예리해지는 날이니 과제 정리나 중요한 결정에 딱 좋아요!',
+        colorZh: '银渐层灰', colorKo: '실버 그레이',
+        itemZh: '黑色记录本', itemKo: '검은 수첩',
+        partnerZh: '赤狐·九尾', partnerKo: '적호·구미호'
+      },
+      {
+        img: '../../assets/cat_expr_07.jpg',
+        luckZh: '🐟 治愈吉 · 午睡充电签',
+        luckKo: '🐟 힐링길 · 낮잠 충전 운세',
+        titleZh: '《没有不开心，只是需要被抱抱充电》',
+        titleKo: '《기분 안 나빠… 그냥 포근한 휴식이 필요해》',
+        descZh: '球球梦见了一整盘香喷喷的小鱼干。今天如果感到有点疲惫，就允许自己理直气壮地休息十分钟、喝一口温热的甜饮吧！',
+        descKo: '치우치우가 꿈속에서 고소한 생선 한 접시를 보았어요. 오늘 조금 피곤하다면 당당하게 10분간 쉬면서 달콤한 간식을 즐겨보세요!',
+        colorZh: '奶油白', colorKo: '크림 화이트',
+        itemZh: '热牛奶 / 奶茶', itemKo: '따뜻한 우유',
+        partnerZh: '乌鸦·默可', partnerKo: '까마귀·모쿠'
+      },
+      {
+        img: '../../assets/cat_expr_04.jpg',
+        luckZh: '✨ 惊喜吉 · 门后探头签',
+        luckKo: '✨ 깜짝길 · 문 뒤 빼꼼 운세',
+        titleZh: '《转角会遇到在意你的人！》',
+        titleKo: '《모퉁이에서 반가운 소식을 만날 거예요!》',
+        descZh: '门缝外传来温柔的脚步声——今天可能会收到老朋友的问候，或者在以为没人注意的地方发现有人默默替你留了一颗糖。',
+        descKo: '문틈 너머로 반가운 발걸음이 들려와요. 오랜 친구의 연락이나 누군가의 세심한 배려를 발견하게 될 하루입니다!',
+        colorZh: '琥珀金', colorKo: '앰버 골드',
+        itemZh: '柠檬糖果', itemKo: '레몬 사탕',
+        partnerZh: '白兔·安月', partnerKo: '흰 토끼·안월'
+      },
+      {
+        img: '../../assets/cat_expr_02.jpg',
+        luckZh: '🔥 傲娇吉 · 嘴硬心软签',
+        luckKo: '🔥 츤데레길 · 겉바속촉 운세',
+        titleZh: '《“才不是呢！”——好运其实正在靠近》',
+        titleKo: '《“아니거든!” 사실 행운이 다가오는 중》',
+        descZh: '虽然嘴上说着“才不要帮忙”，但其实心里早就偷偷把事情安排妥当了！今天别忘了把温柔也留给自己一份，坦率说一句想吃好吃的吧。',
+        descKo: '말로는 괜찮다고 해도 사실 마음속으론 다 챙기고 있었죠? 오늘은 자신에게도 솔직하게 맛있는 걸 선물해 주세요.',
+        colorZh: '樱花粉', colorKo: '체리 핑크',
+        itemZh: '猫爪挂件', itemKo: '고양이 발바닥 키링',
+        partnerZh: '鲨鱼·潮安', partnerKo: '상어·차오안'
+      }
+    ];
+
+    let lastFortuneIdx = -1;
+
+    function drawFortune(event) {
+      let idx = Math.floor(Math.random() * FORTUNES.length);
+      if (FORTUNES.length > 1 && idx === lastFortuneIdx) {
+        idx = (idx + 1) % FORTUNES.length;
+      }
+      lastFortuneIdx = idx;
+      const f = FORTUNES[idx];
+
+      state.fortuneCount += 1;
+      saveState();
+
+      document.getElementById('fortune-img').src = f.img;
+      document.getElementById('fortune-luck').innerHTML =
+        `<span data-zh>${f.luckZh}</span><span data-ko>${f.luckKo}</span>`;
+      document.getElementById('fortune-title').innerHTML =
+        `<span data-zh>${f.titleZh}</span><span data-ko>${f.titleKo}</span>`;
+      document.getElementById('fortune-desc').innerHTML =
+        `<span data-zh>${f.descZh}</span><span data-ko>${f.descKo}</span>`;
+      document.getElementById('fortune-meta').innerHTML = `
+        <span class="meta-chip"><span data-zh>🎨 幸运色：${f.colorZh}</span><span data-ko>🎨 행운색: ${f.colorKo}</span></span>
+        <span class="meta-chip"><span data-zh>🧸 幸运物：${f.itemZh}</span><span data-ko>🧸 행운템: ${f.itemKo}</span></span>
+        <span class="meta-chip"><span data-zh>🐾 幸运伙伴：${f.partnerZh}</span><span data-ko>🐾 행운 동료: ${f.partnerKo}</span></span>
+      `;
+
+      const card = document.getElementById('fortune-card');
+      card.classList.remove('shake');
+      void card.offsetWidth;
+      card.classList.add('shake');
+
+      playChime('fortune');
+      spawnPop(event, '🔮 猫运签已抽取!');
+    }
+
+    updateSoundLabel();
+    updateFeedUI();
+  </script>
+</body>
+</html>
