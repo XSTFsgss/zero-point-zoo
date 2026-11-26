@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN" data-lang="zh">
 <head>
 <meta charset="UTF-8" />
@@ -3484,6 +3484,7 @@ grid-template-columns: 1fr;
 <div class="kun-room-subtitle">
 <span class="backpack-tag">🎒 <span data-zh>陪伴型旅行家</span><span data-ko>동행 여행자</span></span>
 <span class="bond-tag">💛 <span data-zh>主角身边的生命连接挚友</span><span data-ko>주인공 옆의 생명을 잇는 단짝 동반자</span></span>
+<button type="button" onclick="switchKunTab(6); document.getElementById('wplan-btn-6').scrollIntoView({behavior:'smooth', block:'nearest'});" class="backpack-tag" style="background:rgba(245,166,35,0.22); color:#F5A623; border:1.5px solid #F5A623; cursor:pointer; font-weight:900; transition:transform 0.2s;" title="点击查看手机动态壁纸与周边 / 모바일 라이브 배경화면 및 굿즈 보기">📱 <span data-zh>专属手机动态壁纸 (已上线) ➔</span><span data-ko>전용 라이브 배경화면 (수록 완료) ➔</span></button>
 </div>
 <!-- One-Word Personality Capsule Badges (#F5A623) -->
 <div class="kun-personality-Block">
@@ -3574,21 +3575,21 @@ grid-template-columns: 1fr;
 </div>
 </button>
 <button type="button" class="w-plan-col w5a" id="wplan-btn-10" onclick="switchKunTab(10)">
-<div class="w-plan-code"><span>W5 P</span><span>24×3</span></div>
+<div class="w-plan-code"><span>W5 P</span><span>12款</span></div>
 <div class="w-plan-zh"><span data-zh>表情包</span><span data-ko>이모티콘</span></div>
 <div class="w-plan-ko">이모티콘 · emoticons</div>
 <div class="w-plan-desc">
-<span data-zh>24种×3套及下载（预留与预览矩阵）</span>
-<span data-ko>24종 × 3세트와 다운로드</span>
+<span data-zh>★ 专属高清表情已收录 (12款及ZIP下载)</span>
+<span data-ko>★ 전용 이모티콘 12종 수록 및 다운로드</span>
 </div>
 </button>
 <button type="button" class="w-plan-col w5b" id="wplan-btn-6" onclick="switchKunTab(6)">
-<div class="w-plan-code"><span>W5 P</span><span>GOODS</span></div>
+<div class="w-plan-code"><span>W5 P</span><span>LIVE+GOODS</span></div>
 <div class="w-plan-zh"><span data-zh>周边</span><span data-ko>굿즈</span></div>
 <div class="w-plan-ko">굿즈 · goods</div>
 <div class="w-plan-desc">
-<span data-zh>壁纸、实体周边提案（公仔/护符/壁纸）</span>
-<span data-ko>배경화면, 실물 굿즈 제안</span>
+<span data-zh>★ 手机动态壁纸已上线 + 实体周边提案</span>
+<span data-ko>★ 모바일 라이브 배경화면 + 실물 굿즈 제안</span>
 </div>
 </button>
 </div>
@@ -3946,10 +3947,10 @@ grid-template-columns: 1fr;
 <div class="kun-expr-card">
 <span class="expr-tag"><span data-zh>基础表情 03 · 기본 3</span><span data-ko>기본 표정 03 · 基础 3</span></span>
 <div class="expr-img-wrap">
-<img src="assets/kun_expr_3.jpg" alt="好奇歪头与困惑" />
+<img src="assets/kun_expr_3.jpg" alt="焦急慌乱与紧张冒汗" />
 </div>
-<h4><span data-zh>好奇歪头 · 呆萌疑惑</span><span data-ko>호기심 가득 갸우뚱</span></h4>
-<p><span data-zh>遇到打不开的门或新奇规则时，耳朵微垂歪头思考。</span><span data-ko>열리지 않는 문이나 낯선 규칙 앞에서 귀를 살짝 내리고 고민합니다.</span></p>
+<h4><span data-zh>焦急慌乱 · 紧张冒汗</span><span data-ko>당황하며 땀 뻘뻘</span></h4>
+<p><span data-zh>遇到突发状况或棘手难题时，耳朵微垂、头顶冒出乱麻与冷汗的焦急模样。</span><span data-ko>돌발 상황이나 어려운 문제 앞에서 귀를 내리고 진땀을 흘리며 당황하는 모습입니다.</span></p>
 </div>
 <!-- Basic 4 -->
 <div class="kun-expr-card">
@@ -3964,10 +3965,10 @@ grid-template-columns: 1fr;
 <div class="kun-expr-card signature">
 <span class="expr-tag gold"><span data-zh>★ 标志性表情 · 시그니처 1</span><span data-ko>★ 시그니처 표정 · 标志性 1</span></span>
 <div class="expr-img-wrap">
-<img src="assets/kun_expr_sig.jpg" alt="眨眼灿笑并挥爪邀请" />
+<img src="assets/kun_sticker_01.jpg" onerror="this.onerror=null;this.src='assets/kun_expr_sig.jpg'" alt="飞扑拥抱邀请同行" />
 </div>
-<h4><span data-zh>Wink 灿笑 + 双爪扑来邀请</span><span data-ko>윙크 미소 + 앞발 내밀어 동행 초대</span></h4>
-<p><span data-zh>冒出小爱心，向前奔跑张开双爪，感染力满分的招牌同行邀请！</span><span data-ko>하트를 날리며 앞으로 달려와 앞발을 내미는 시그니처 초대 표정!</span></p>
+<h4><span data-zh>灿烂大笑 + 双爪飞扑邀请</span><span data-ko>환한 미소 + 두 앞발 벌려 동행 초대</span></h4>
+<p><span data-zh>冒出粉色小爱心，向前奔跑张开双爪，感染力满分的招牌同行邀请！</span><span data-ko>분홍 하트를 날리며 앞으로 달려와 두 앞발을 벌리는 시그니처 초대 표정!</span></p>
 </div>
 </div>
 </div>
@@ -4016,7 +4017,7 @@ grid-template-columns: 1fr;
 </div>
 <h4><span data-zh>内心 · 抱紧行囊安静倾听与守护</span><span data-ko>내면 · 배낭을 품에 안고 조용히 경청·수호</span></h4>
 <p>
-<span data-zh>取下大背包抱在身前乖巧坐下，与姿势 1 的外放形成鲜明内收对比，展现失落时的脆弱与安静守护的温柔。</span>
+<span data-zh>取下大背包紧紧抱在身前乖巧坐下，与姿势 1 的外放形成内收对比，眨眼微笑着安静倾听、温柔守护每一份旅途珍藏。</span>
 <span data-ko>배낭을 앞으로 안고 얌전히 앉아 경청하는 모습. 포즈 1의 확장과 대비되는 수축 동세로 내면의 온기와 수호를 표현합니다.</span>
 </p>
 </div>
@@ -4216,45 +4217,248 @@ grid-template-columns: 1fr;
 </div>
 </div>
 </div>
-<!-- ================= TAB 10: W5 P 表情包 (이모티콘 / 24种×3套及下载) ================= -->
+<!-- ================= TAB 10: W5 P 表情包 (이모티콘 / 12款专属表情及下载) ================= -->
 <div class="kun-tab-panel" id="kun-tab-10" role="tabpanel">
 <div class="kun-panel-header">
 <div>
-<span class="kun-panel-step">W5 P · 이모티콘 · EMOTICONS · 24종 × 3세트와 다운로드</span>
+<span class="kun-panel-step">W5 P · 이모티콘 · EMOTICONS · 전용 이모티콘 12종 및 다운로드</span>
 <h3>
-<span data-zh>W5 P · 表情包企划 · 24种 × 3套（共72枚）主题表情包预览与下载</span>
-<span data-ko>W5 P · 이모티콘 기획 · 24종 × 3세트 (총 72종) 테마 프리뷰 및 다운로드</span>
+<span data-zh>W5 P · 表情包 · 柴犬·困（已收录 12 款专属表情与打包下载）</span>
+<span data-ko>W5 P · 이모티콘 · 시바견 곤 (전용 이모티콘 12종 수록 및 다운로드)</span>
 </h3>
 </div>
-<button type="button" class="copy-prompt-btn" style="padding:8px 18px; font-size:0.86rem;" onclick="alert('📦 柴犬·困 (시바견 곤) 24종×3세트 이모티콘 패키지 슬롯입니다!')">
-<span data-zh>⬇ 下载表情包合集 (ZIP)</span><span data-ko>⬇ 이모티콘 3세트 다운로드 (ZIP)</span>
-</button>
+<div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+<a href="assets/kun_emoticons.zip" download="kun_emoticons.zip" class="copy-prompt-btn" style="padding:8px 18px; font-size:0.86rem; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+<span data-zh>⬇ 下载 柴犬·困 表情包全集 (ZIP)</span><span data-ko>⬇ 시바견 곤 이모티콘 전체 다운로드 (ZIP)</span>
+</a>
+<span class="kun-charm-pill">😊 <span data-zh>点击任意表情可放大查看高清原图</span><span data-ko>클릭하여 고화질 원본 보기</span></span>
 </div>
-<div class="w1-subnav">
+</div>
+<div class="w1-subnav" id="kun-emo-filter-bar">
 <span style="color:#F5A623; font-weight:900; font-size:0.85rem; display:flex; align-items:center; margin-right:8px;">
-<span data-zh>选择表情包套组 (3套)：</span><span data-ko>이모티콘 세트 선택 (3세트):</span>
+<span data-zh>分类筛选：</span><span data-ko>테마 분류:</span>
 </span>
-<button type="button" class="w1-sub-btn active"><span data-zh>SET 01 · 阳光同行日常篇 (24种)</span><span data-ko>SET 01 · 햇살 동행 일상편 (24종)</span></button>
-<button type="button" class="w1-sub-btn"><span data-zh>SET 02 · 探险吃货与背包篇 (24种)</span><span data-ko>SET 02 · 탐험 먹방 &amp; 배낭편 (24종)</span></button>
-<button type="button" class="w1-sub-btn"><span data-zh>SET 03 · 零点守夜反差撒娇篇 (24种)</span><span data-ko>SET 03 · 자정 반전 애교편 (24종)</span></button>
+<button type="button" class="w1-sub-btn active" onclick="filterKunEmoticons('all', this)"><span data-zh>全部表情 (12款)</span><span data-ko>전체 보기 (12종)</span></button>
+<button type="button" class="w1-sub-btn" onclick="filterKunEmoticons('daily', this)"><span data-zh>SET 01 · 阳光同行日常篇 (5款)</span><span data-ko>SET 01 · 햇살 동행 일상편 (5종)</span></button>
+<button type="button" class="w1-sub-btn" onclick="filterKunEmoticons('adventure', this)"><span data-zh>SET 02 · 探险吃货与背包篇 (4款)</span><span data-ko>SET 02 · 탐험 먹방 &amp; 배낭편 (4종)</span></button>
+<button type="button" class="w1-sub-btn" onclick="filterKunEmoticons('mood', this)"><span data-zh>SET 03 · 小情绪与反差萌篇 (3款)</span><span data-ko>SET 03 · 반전 감정 &amp; 애교편 (3종)</span></button>
 </div>
-<div class="emoticon-grid-24">
-<div class="emoticon-cell"><img src="assets/kun_expr_sig.jpg" alt="01" /><span>#01 一起走吧! / 함께 가자!</span></div>
-<div class="emoticon-cell"><img src="assets/kun_expr_1.jpg" alt="02" /><span>#02 元气挥爪 / 안녕!</span></div>
-<div class="emoticon-cell"><img src="assets/kun_expr_2.jpg" alt="03" /><span>#03 星星眼期待 / 기대돼!</span></div>
-<div class="emoticon-cell"><img src="assets/kun_expr_3.jpg" alt="04" /><span>#04 好奇歪头 / 갸우뚱?</span></div>
-<div class="emoticon-cell"><img src="assets/kun_expr_4.jpg" alt="05" /><span>#05 垂耳失落 / 시무룩..</span></div>
-<div class="emoticon-cell"><img src="assets/kun_pose_1.jpg" alt="06" /><span>#06 跃起出发 / 출발!</span></div>
-<div class="emoticon-cell"><img src="assets/kun_pose_2.jpg" alt="07" /><span>#07 回头等你 / 따라와~</span></div>
-<div class="emoticon-cell"><img src="assets/kun_pose_3.jpg" alt="08" /><span>#08 抱包委屈 / 외로워..</span></div>
-<div class="emoticon-cell"><img src="assets/kun_form_final.jpg" alt="09" /><span>#09 伸爪击掌 / 하이파이브!</span></div>
-<div class="emoticon-cell"><img src="assets/kun_new_comic_1.jpg" alt="10" /><span>#10 腰好酸… / 허리 아파..</span></div>
-<div class="emoticon-cell"><img src="assets/kun_new_comic_2.jpg" alt="11" /><span>#11 零食不能忘 / 간식 최고!</span></div>
-<div class="emoticon-cell"><img src="assets/kun_new_comic_3.jpg" alt="12" /><span>#12 吃饱躺平 / 배불러 행복해</span></div>
+<div class="emoticon-grid-24" id="kun-emoticon-grid" style="grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); gap:16px; margin-top:16px;">
+<div class="emoticon-cell" data-emo-cat="daily" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '一起走吧 · 飞扑拥抱')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_01.jpg" alt="一起走吧 · 飞扑拥抱" style="width:142px; height:142px; object-fit:contain; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#01 <span data-zh>一起走吧 · 飞扑拥抱</span><span data-ko>함께 가자! · 와락 포옹</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="daily" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '元气挥爪 · 嗨你好呀')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_02.jpg" alt="元气挥爪 · 嗨你好呀" style="width:142px; height:142px; object-fit:contain; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#02 <span data-zh>元气挥爪 · 嗨你好呀</span><span data-ko>안녕! · 반가운 인사</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="daily" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '闪亮期待 · 加油打气')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_03.jpg" alt="闪亮期待 · 加油打气" style="width:142px; height:142px; object-fit:contain; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#03 <span data-zh>闪亮期待 · 加油打气</span><span data-ko>반짝 기대 · 파이팅!</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="mood" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '焦急冒汗 · 怎么办呀')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_04.jpg" alt="焦急冒汗 · 怎么办呀" style="width:142px; height:142px; object-fit:contain; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#04 <span data-zh>焦急冒汗 · 怎么办呀</span><span data-ko>땀 뻘뻘 · 어떡하지..</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="mood" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '垂耳失落 · 委委屈屈')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_05.jpg" alt="垂耳失落 · 委委屈屈" style="width:142px; height:142px; object-fit:contain; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#05 <span data-zh>垂耳失落 · 委委屈屈</span><span data-ko>시무룩 · 훌쩍훌쩍..</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="daily" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '欢呼雀跃 · 快乐出发')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_06.jpg" alt="欢呼雀跃 · 快乐出发" style="width:142px; height:142px; object-fit:contain; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#06 <span data-zh>欢呼雀跃 · 快乐出发</span><span data-ko>신난다! · 힘차게 출발</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="daily" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '回头等你 · 快跟上哟')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_07.jpg" alt="回头等你 · 快跟上哟" style="width:142px; height:142px; object-fit:contain; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#07 <span data-zh>回头等你 · 快跟上哟</span><span data-ko>따라와~ · 뒤돌아 확인</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="adventure" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '抱紧背包 · 乖巧守候')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_08.jpg" alt="抱紧背包 · 乖巧守候" style="width:142px; height:142px; object-fit:contain; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#08 <span data-zh>抱紧背包 · 乖巧守候</span><span data-ko>소중한 배낭 · 얌전 대기</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="mood" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '眨眼卖萌 · 随时待命')" title="点击查看高清原图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_form_final.jpg" alt="眨眼卖萌 · 随时待命" style="width:142px; height:142px; object-fit:cover; border-radius:16px; background:#FFFDF7; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#09 <span data-zh>眨眼卖萌 · 随时待命</span><span data-ko>윙크 뿜뿜 · 준비 완료!</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="adventure" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '气喘吁吁 · 包好重呀')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_10.jpg" onerror="this.onerror=null;this.src='assets/kun_emo_10.jpg'" alt="气喘吁吁 · 包好重呀" style="width:142px; height:142px; object-fit:cover; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#10 <span data-zh>气喘吁吁 · 包好重呀</span><span data-ko>헉헉.. · 배낭 무거워!</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="adventure" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '两眼放光 · 发现美食')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_11.jpg" onerror="this.onerror=null;this.src='assets/kun_emo_11.jpg'" alt="两眼放光 · 发现美食" style="width:142px; height:142px; object-fit:cover; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#11 <span data-zh>两眼放光 · 发现美食</span><span data-ko>눈이 번쩍 · 맛집 발견!</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="adventure" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '吃饱躺平 · 幸福满分')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_12.jpg" onerror="this.onerror=null;this.src='assets/kun_emo_12.jpg'" alt="吃饱躺平 · 幸福满分" style="width:142px; height:142px; object-fit:cover; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#12 <span data-zh>吃饱躺平 · 幸福满分</span><span data-ko>배불러~ · 행복 만땅!</span></span>
+</div>
 </div>
 <div class="kun-note-strip" style="margin-top:16px;">
-<span data-zh>✦ <b>W5 P 表情包预留矩阵说明：</b>上方展示前 12 枚核心动态/静态表情切片，完整「24种 × 3套（阳光同行篇 / 探险吃货篇 / 反差守护篇）」共 72 枚表情贴图与 PNG 透明包已预留标准网格与一键打包下载接口。</span>
-<span data-ko>✦ <b>W5 P 이모티콘 슬롯 안내:</b> 핵심 표정 12종 프리뷰 및 24종 × 3세트(총 72종) 전체 이모티콘 팩 다운로드 슬롯이 완비되어 있습니다.</span>
+<span data-zh>✦ <b>W5 P 表情包说明：</b>已收录柴犬·困全部 12 款单人高清表情贴图（涵盖「阳光同行日常篇 · 探险吃货与背包篇 · 小情绪与反差萌篇」三大主题），每一枚图文严格对应，支持分类筛选、点击放大预览及一键下载完整 ZIP 包。</span>
+<span data-ko>✦ <b>W5 P 이모티콘 안내:</b> 시바견 곤 전용 고화질 단독 이모티콘 12종(일상 동행 · 탐험 먹방 · 반전 감정 3가지 테마)이 수록되어 있으며, 테마별 필터링, 원본 확대 보기 및 전체 ZIP 다운로드를 지원합니다.</span>
+</div>
+</div>
+<!-- ================= TAB 6: W5 P 周边 (굿즈 / 手机动态壁纸 + 实体周边提案) ================= -->
+<div class="kun-tab-panel" id="kun-tab-6" role="tabpanel">
+<div class="kun-panel-header">
+<div>
+<span class="kun-panel-step">W5 P · 굿즈 · LIVE WALLPAPER &amp; GOODS · 모바일 라이브 배경화면 및 실물 굿즈</span>
+<h3>
+<span data-zh>W5 P · 周边企划 · 柴犬·困 手机动态壁纸 &amp; 实体周边提案</span>
+<span data-ko>W5 P · 굿즈 기획 · 시바견 곤 모바일 라이브 배경화면 &amp; 실물 굿즈 제안</span>
+</h3>
+</div>
+<div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+<a href="assets/kun_live_wallpaper.mp4" download="柴犬困_手机动态壁纸.mp4" class="copy-prompt-btn" style="padding:8px 18px; font-size:0.86rem; text-decoration:none; display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg, #F5A623 0%, #D98218 100%); color:#1E162B; font-weight:900; border-color:#FFF3D1;">
+<span data-zh>⬇ 下载高清手机动态壁纸 (MP4)</span><span data-ko>⬇ 모바일 라이브 배경화면 다운로드 (MP4)</span>
+</a>
+<span class="kun-charm-pill">📱 <span data-zh>9:16 竖屏无缝循环动态锁屏</span><span data-ko>9:16 세로형 무한 루프 잠금화면</span></span>
+</div>
+</div>
+
+<div class="kun-two-col-cards" style="align-items:stretch;">
+<!-- Left Column: 9:16 Mobile Live Lock-Screen Wallpaper Interactive Preview -->
+<div class="kun-info-card" style="border:2px solid #F5A623; background:linear-gradient(170deg, rgba(48,36,68,0.92) 0%, rgba(24,18,34,0.96) 100%); display:flex; flex-direction:column; justify-content:space-between;">
+<div>
+<div class="kun-card-title" style="justify-content:space-between; flex-wrap:wrap;">
+<div style="display:flex; align-items:center; gap:12px;">
+<span class="card-icon">📱</span>
+<div>
+<h4><span data-zh>手机动态壁纸 · 《贴贴屏幕！粉嫩肉垫问候篇》</span><span data-ko>모바일 라이브 배경화면 · 《화면 콕! 분홍 젤리 발바닥 인사》</span></h4>
+<small><span data-zh>9:16 竖屏高清实机锁屏效果预览 · 自动循环播放</span><span data-ko>9:16 세로형 스마트폰 잠금화면 실시간 프리뷰 · 자동 무한 재생</span></small>
+</div>
+</div>
+<button type="button" id="kun-wp-ui-btn" onclick="toggleKunWallpaperUI()" class="copy-prompt-btn" style="padding:5px 12px; font-size:0.76rem; cursor:pointer;">
+<span data-zh>🕒 切换纯净原画 / 锁屏时钟</span><span data-ko>🕒 잠금화면 시계 숨김/표시</span>
+</button>
+</div>
+
+<!-- Realistic Mobile Phone Lock-Screen Frame -->
+<div style="display:flex; justify-content:center; margin:18px 0 16px;">
+<div style="position:relative; width:100%; max-width:292px; aspect-ratio:9/16; border-radius:38px; border:4px solid #F5A623; background:#120E1A; box-shadow:0 22px 48px rgba(0,0,0,0.72), 0 0 32px rgba(245,166,35,0.28); overflow:hidden;">
+<!-- Dynamic Island Pill -->
+<div style="position:absolute; top:10px; left:50%; transform:translateX(-50%); width:82px; height:22px; border-radius:999px; background:rgba(12,9,18,0.9); border:1px solid rgba(255,255,255,0.12); z-index:4; pointer-events:none; display:flex; align-items:center; justify-content:flex-end; padding-right:8px;">
+<span style="width:7px; height:7px; border-radius:50%; background:#2C3E7B; display:inline-block;"></span>
+</div>
+
+<!-- Looping Dynamic Wallpaper Video -->
+<video id="kun-live-wp-video" autoplay muted loop playsinline preload="auto" poster="assets/kun_form_final.jpg" onclick="if(this.paused){this.play();}else{this.pause();}" title="点击暂停/继续播放动态壁纸" style="width:100%; height:100%; object-fit:cover; display:block; cursor:pointer;">
+<source src="assets/kun_live_wallpaper.mp4" type="video/mp4">
+</video>
+
+<!-- Optional Mobile Lock-Screen Clock & Controls Overlay -->
+<div id="kun-wp-lock-overlay" style="position:absolute; inset:0; pointer-events:none; z-index:3; display:flex; flex-direction:column; justify-content:space-between; padding:40px 18px 12px; background:linear-gradient(180deg, rgba(16,12,24,0.34) 0%, transparent 26%, transparent 78%, rgba(16,12,24,0.46) 100%); transition:opacity 0.28s ease;">
+<div style="text-align:center;">
+<div style="font-size:0.72rem; font-weight:800; letter-spacing:0.08em; color:#FFFDF7; text-shadow:0 2px 8px rgba(0,0,0,0.75); opacity:0.95;">
+🔒 <span data-zh>ZERO POINT ZOO · 阳光营地</span><span data-ko>ZERO POINT ZOO · 햇살 캠프</span>
+</div>
+<div style="font-size:2.7rem; font-weight:900; line-height:1.05; letter-spacing:2px; color:#FFFDF7; text-shadow:0 4px 16px rgba(0,0,0,0.72); font-family:var(--font-rounded);">00:00</div>
+<div style="display:inline-block; margin-top:4px; padding:2px 10px; border-radius:999px; background:rgba(30,22,43,0.58); backdrop-filter:blur(6px); border:1px solid rgba(245,166,35,0.55); font-size:0.7rem; font-weight:800; color:#FFF3D1;">
+<span data-zh>☀️ 今天也，一起走吧！</span><span data-ko>☀️ 오늘도, 함께 가자!</span>
+</div>
+</div>
+
+<div>
+<div style="display:flex; justify-content:space-between; align-items:center; padding:0 4px; margin-bottom:10px;">
+<span style="width:36px; height:36px; border-radius:50%; background:rgba(20,15,30,0.58); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.22); display:inline-flex; align-items:center; justify-content:center; font-size:0.92rem;">🔦</span>
+<span style="font-size:0.68rem; font-weight:700; color:#FFFDF7; text-shadow:0 2px 6px rgba(0,0,0,0.85);">
+<span data-zh>轻触屏幕收获肉垫贴贴</span><span data-ko>화면을 깨우면 곤이 인사해요</span>
+</span>
+<span style="width:36px; height:36px; border-radius:50%; background:rgba(20,15,30,0.58); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.22); display:inline-flex; align-items:center; justify-content:center; font-size:0.92rem;">📷</span>
+</div>
+<div style="width:104px; height:4px; border-radius:999px; background:rgba(255,255,255,0.9); margin:0 auto; box-shadow:0 1px 4px rgba(0,0,0,0.5);"></div>
+</div>
+</div>
+</div>
+</div>
+
+<p style="font-size:0.88rem; color:var(--text-Soft); line-height:1.65; margin-bottom:14px;">
+<span data-zh><b>画面亮点：</b>困透过贴满爱心❤️、星星⭐与小花🌸贴纸的圆形舷窗玻璃，眨着弯弯笑眼将软乎乎的脸蛋与粉嫩肉垫前爪紧紧贴在手机屏幕上——每次点亮手机锁屏，都能收到困困隔着屏幕的治愈贴贴与同行问候！</span>
+<span data-ko><b>디자인 포인트:</b> 하트·별·꽃 스티커가 붙은 둥근 유리창 너머로 곤이 윙크하며 통통한 볼과 분홍 젤리 발바닥을 스마트폰 화면에 ‘콕!’ 맞대고 반갑게 인사하는 힐링 라이브 잠금화면입니다.</span>
+</p>
+</div>
+
+<a href="assets/kun_live_wallpaper.mp4" download="柴犬困_手机动态壁纸.mp4" class="kun-enter-room-btn" style="text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px; padding:12px 18px; font-size:0.94rem; font-weight:900;">
+<span data-zh>⬇ 一键保存手机动态壁纸原片 (MP4 · 9:16)</span>
+<span data-ko>⬇ 모바일 라이브 배경화면 원본 저장 (MP4 · 9:16)</span>
+</a>
+</div>
+
+<!-- Right Column: Physical Merchandise Proposals + Wallpaper Setup Tips -->
+<div class="kun-info-card" style="display:flex; flex-direction:column; justify-content:space-between; gap:16px;">
+<div>
+<div class="kun-card-title">
+<span class="card-icon">🎁</span>
+<div>
+<h4><span data-zh>实体周边企划提案（公仔 / 护符 / 贴屏挂件）</span><span data-ko>실물 굿즈 디자인 제안 (인형 / 부적 / 키링)</span></h4>
+<small><span data-zh>围绕「陪伴旅行 · 粉嫩肉垫 · 幸运护符」三大角色符号延展</span><span data-ko>동행 여행 · 분홍 젤리 발바닥 · 행운 부적 핵심 모티브 확장</span></small>
+</div>
+</div>
+
+<div style="display:flex; flex-direction:column; gap:12px;">
+<!-- Goods Item 01 -->
+<div style="display:flex; gap:14px; align-items:center; background:rgba(30,22,43,0.72); border:1.5px solid rgba(245,166,35,0.38); border-radius:16px; padding:12px 14px;">
+<img src="assets/kun_form_final.jpg" alt="柴犬困毛绒公仔提案" onclick="openComicModal(this.src, 'GOODS 01 · 20cm 柴犬困毛绒公仔（含可拆卸大背包）')" style="width:72px; height:72px; object-fit:cover; border-radius:14px; background:#FFFDF7; border:2px solid #F5A623; flex-shrink:0; cursor:pointer;" />
+<div>
+<div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:4px;">
+<span style="background:#F5A623; color:#1E162B; font-size:0.7rem; font-weight:900; padding:2px 8px; border-radius:8px;">GOODS 01</span>
+<strong style="color:#FFF3D1; font-size:0.95rem;"><span data-zh>20cm 柴犬困棉花公仔（含可拆卸探险背包）</span><span data-ko>20cm 시바견 곤 봉제 인형 (탈부착 여행 배낭)</span></strong>
+</div>
+<p style="font-size:0.83rem; color:var(--text-Soft); line-height:1.5; margin:0;">
+<span data-zh>还原暖黄连帽风衣与胸前小柴犬金属铭牌，背后大容量立体双肩包支持磁吸拆卸，可收纳耳机与零钱。</span>
+<span data-ko>노란 후드 바람막이와 시바 메달을 정교하게 재현했으며, 등 뒤의 입체 배낭은 탈부착 수납 파우치로 활용 가능합니다.</span>
+</p>
+</div>
+</div>
+
+<!-- Goods Item 02 -->
+<div style="display:flex; gap:14px; align-items:center; background:rgba(30,22,43,0.72); border:1.5px solid rgba(224,90,71,0.48); border-radius:16px; padding:12px 14px;">
+<img src="assets/kun_sticker_08.jpg" alt="阳光满途幸运御守护符" onclick="openComicModal(this.src, 'GOODS 02 · 「阳光满途」织锦刺绣平安御守护符')" style="width:72px; height:72px; object-fit:contain; border-radius:14px; background:#222631; border:2px solid #E05A47; flex-shrink:0; cursor:pointer;" />
+<div>
+<div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:4px;">
+<span style="background:#E05A47; color:#FFF; font-size:0.7rem; font-weight:900; padding:2px 8px; border-radius:8px;">GOODS 02</span>
+<strong style="color:#FFF3D1; font-size:0.95rem;"><span data-zh>「阳光满途」织锦刺绣幸运御守护符</span><span data-ko>‘햇살 가득’ 자수 행운 부적 키링</span></strong>
+</div>
+<p style="font-size:0.83rem; color:var(--text-Soft); line-height:1.5; margin:0;">
+<span data-zh>复刻困背包侧边悬挂的红色平安护符，正面烫金刺绣柴犬笑脸与肉垫印记，内置随机每日鼓励吉签卡。</span>
+<span data-ko>곤의 배낭에 달린 붉은 행운 부적을 실물화하여 금박 시바 자수와 랜덤 응원 운세 카드를 담았습니다.</span>
+</p>
+</div>
+</div>
+
+<!-- Goods Item 03 -->
+<div style="display:flex; gap:14px; align-items:center; background:rgba(30,22,43,0.72); border:1.5px solid rgba(245,166,35,0.38); border-radius:16px; padding:12px 14px;">
+<img src="assets/kun_sticker_01.jpg" alt="贴屏粉嫩肉垫捏捏乐与透卡立牌" onclick="openComicModal(this.src, 'GOODS 03 · 贴屏粉嫩肉垫硅胶挂件 & 舷窗透卡亚克力立牌')" style="width:72px; height:72px; object-fit:contain; border-radius:14px; background:#222631; border:2px solid #F5A623; flex-shrink:0; cursor:pointer;" />
+<div>
+<div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:4px;">
+<span style="background:#F5A623; color:#1E162B; font-size:0.7rem; font-weight:900; padding:2px 8px; border-radius:8px;">GOODS 03</span>
+<strong style="color:#FFF3D1; font-size:0.95rem;"><span data-zh>贴屏肉垫慢回弹挂件 &amp; 舷窗亚克力透卡</span><span data-ko>분홍 발바닥 말랑 키링 &amp; 투명 포토카드 스탠드</span></strong>
+</div>
+<p style="font-size:0.83rem; color:var(--text-Soft); line-height:1.5; margin:0;">
+<span data-zh>提取动态壁纸同款「贴屏粉嫩肉垫 + 圆形舷窗贴纸」视觉制作高透打卡框与Q弹硅胶捏捏乐钥匙扣。</span>
+<span data-ko>라이브 배경화면 속 ‘유리창 콕 발바닥’ 장면을 그대로 살린 투명 아크릴 포토프레임과 말랑 젤리 키링입니다.</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Mobile Wallpaper Setup Guide Box -->
+<div style="background:rgba(245,166,35,0.1); border:1.5px dashed rgba(245,166,35,0.55); border-radius:16px; padding:14px 16px;">
+<div style="font-size:0.84rem; font-weight:900; color:#F5A623; margin-bottom:6px;">
+📲 <span data-zh>手机动态锁屏壁纸设置指南</span><span data-ko>모바일 라이브 배경화면 설정 가이드</span>
+</div>
+<div style="font-size:0.8rem; color:var(--text-Soft); line-height:1.6;">
+<div>• <b>Android：</b><span data-zh>下载 MP4 至手机相册 → 打开视频点击右上角「设为壁纸 / 动态锁屏」即可生效。</span><span data-ko>MP4 저장 후 갤러리 메뉴에서 ‘배경화면으로 설정 → 잠금화면’을 선택하세요.</span></div>
+<div style="margin-top:3px;">• <b>iPhone (iOS)：</b><span data-zh>保存 MP4 后使用 intoLive 等工具转为「实况照片 (Live Photo)」，在锁屏壁纸中选用即可按压动态播放。</span><span data-ko>intoLive 앱 등으로 Live Photo 변환 후 잠금화면으로 지정하면 터치 시 움직입니다.</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="kun-note-strip" style="margin-top:18px;">
+<span data-zh>✦ <b>W5 P 周边企划说明：</b>已正式上线柴犬·困专属 9:16 竖屏高清手机动态壁纸（支持锁屏时钟实机预览与 MP4 原片下载），并配套规划公仔、刺绣护符与贴屏肉垫挂件三大核心实体周边。</span>
+<span data-ko>✦ <b>W5 P 굿즈 기획 안내:</b> 시바견 곤 전용 9:16 모바일 라이브 배경화면(잠금화면 시계 프리뷰 및 MP4 원본 다운로드 지원)과 봉제 인형·행운 부적·발바닥 키링 실물 굿즈 제안이 수록되어 있습니다.</span>
 </div>
 </div>
 </div>
@@ -5432,6 +5636,28 @@ function switchKunTab(tabNum) {
     const wb = document.getElementById('wplan-btn-' + wKey);
     if (wb) wb.classList.toggle('active', wKey === tabNum);
   });
+  if (tabNum === 6) {
+    const wpVid = document.getElementById('kun-live-wp-video');
+    if (wpVid) { wpVid.play().catch(() => {}); }
+  }
+}
+function filterKunEmoticons(cat, btnEl) {
+  const bar = document.getElementById('kun-emo-filter-bar');
+  if (bar && btnEl) {
+    bar.querySelectorAll('.w1-sub-btn').forEach(b => b.classList.toggle('active', b === btnEl));
+  }
+  const grid = document.getElementById('kun-emoticon-grid');
+  if (!grid) return;
+  grid.querySelectorAll('.emoticon-cell').forEach(cell => {
+    const match = (cat === 'all' || cell.getAttribute('data-emo-cat') === cat);
+    cell.style.display = match ? '' : 'none';
+  });
+}
+function toggleKunWallpaperUI() {
+  const ov = document.getElementById('kun-wp-lock-overlay');
+  if (!ov) return;
+  const hidden = ov.style.opacity === '0';
+  ov.style.opacity = hidden ? '1' : '0';
 }
 function setKunPackMode(mode) {
 const box = document.getElementById('kun-app-pack-result');
