@@ -4329,25 +4329,25 @@ grid-template-columns: 1fr;
 </div>
 </div>
 <button type="button" id="kun-wp-ui-btn" onclick="toggleKunWallpaperUI()" class="copy-prompt-btn" style="padding:5px 12px; font-size:0.76rem; cursor:pointer;">
-<span data-zh>🕒 切换纯净原画 / 锁屏时钟</span><span data-ko>🕒 잠금화면 시계 숨김/표시</span>
+<span data-zh>🕒 显示/隐藏锁屏时钟预览</span><span data-ko>🕒 잠금화면 시계 표시/숨김</span>
 </button>
 </div>
 
-<!-- Realistic Mobile Phone Lock-Screen Frame -->
+<!-- Realistic Mobile Phone Lock-Screen Frame (Pure Continuous Looping Dynamic Wallpaper) -->
 <div style="display:flex; justify-content:center; margin:18px 0 16px;">
-<div style="position:relative; width:100%; max-width:292px; aspect-ratio:9/16; border-radius:38px; border:4px solid #F5A623; background:#120E1A; box-shadow:0 22px 48px rgba(0,0,0,0.72), 0 0 32px rgba(245,166,35,0.28); overflow:hidden;">
-<!-- Dynamic Island Pill -->
-<div style="position:absolute; top:10px; left:50%; transform:translateX(-50%); width:82px; height:22px; border-radius:999px; background:rgba(12,9,18,0.9); border:1px solid rgba(255,255,255,0.12); z-index:4; pointer-events:none; display:flex; align-items:center; justify-content:flex-end; padding-right:8px;">
-<span style="width:7px; height:7px; border-radius:50%; background:#2C3E7B; display:inline-block;"></span>
+<div onclick="ensureKunWallpaperPlaying()" style="position:relative; width:100%; max-width:292px; aspect-ratio:9/16; border-radius:38px; border:4px solid #F5A623; background:radial-gradient(circle at center, #2A203D 0%, #120E1A 100%); box-shadow:0 22px 48px rgba(0,0,0,0.72), 0 0 32px rgba(245,166,35,0.28); overflow:hidden;">
+<!-- Subtle LIVE Looping Indicator Pill (auto-fades or stays tiny in corner) -->
+<div style="position:absolute; top:12px; right:14px; z-index:4; pointer-events:none; padding:2px 8px; border-radius:999px; background:rgba(20,15,30,0.52); backdrop-filter:blur(4px); border:1px solid rgba(245,166,35,0.55); font-size:0.65rem; font-weight:900; color:#FFF3D1; display:inline-flex; align-items:center; gap:4px;">
+<span style="width:6px; height:6px; border-radius:50%; background:#35D07F; box-shadow:0 0 6px #35D07F; display:inline-block;"></span>LIVE
 </div>
 
-<!-- Looping Dynamic Wallpaper Video -->
-<video id="kun-live-wp-video" autoplay muted loop playsinline preload="auto" poster="assets/kun_form_final.jpg" onclick="if(this.paused){this.play();}else{this.pause();}" title="点击暂停/继续播放动态壁纸" style="width:100%; height:100%; object-fit:cover; display:block; cursor:pointer;">
-<source src="assets/kun_live_wallpaper.mp4" type="video/mp4">
+<!-- Always-On Seamless Looping Dynamic Wallpaper Video (No misleading static poster!) -->
+<video id="kun-live-wp-video" src="assets/kun_live_wallpaper.mp4?v=live2026" autoplay muted loop playsinline webkit-playsinline preload="auto" disablePictureInPicture controlslist="nodownload nofullscreen noremoteplayback" style="width:100%; height:100%; object-fit:cover; display:block; pointer-events:none;">
+<source src="assets/kun_live_wallpaper.mp4?v=live2026" type="video/mp4">
 </video>
 
-<!-- Optional Mobile Lock-Screen Clock & Controls Overlay -->
-<div id="kun-wp-lock-overlay" style="position:absolute; inset:0; pointer-events:none; z-index:3; display:flex; flex-direction:column; justify-content:space-between; padding:40px 18px 12px; background:linear-gradient(180deg, rgba(16,12,24,0.34) 0%, transparent 26%, transparent 78%, rgba(16,12,24,0.46) 100%); transition:opacity 0.28s ease;">
+<!-- Optional Mobile Lock-Screen Clock & Controls Overlay (Default hidden so pure wallpaper shines unobstructed!) -->
+<div id="kun-wp-lock-overlay" style="opacity:0; position:absolute; inset:0; pointer-events:none; z-index:3; display:flex; flex-direction:column; justify-content:space-between; padding:34px 18px 12px; background:linear-gradient(180deg, rgba(16,12,24,0.32) 0%, transparent 24%, transparent 78%, rgba(16,12,24,0.44) 100%); transition:opacity 0.28s ease;">
 <div style="text-align:center;">
 <div style="font-size:0.72rem; font-weight:800; letter-spacing:0.08em; color:#FFFDF7; text-shadow:0 2px 8px rgba(0,0,0,0.75); opacity:0.95;">
 🔒 <span data-zh>ZERO POINT ZOO · 阳光营地</span><span data-ko>ZERO POINT ZOO · 햇살 캠프</span>
@@ -5637,10 +5637,85 @@ function switchKunTab(tabNum) {
     if (wb) wb.classList.toggle('active', wKey === tabNum);
   });
   if (tabNum === 6) {
-    const wpVid = document.getElementById('kun-live-wp-video');
-    if (wpVid) { wpVid.play().catch(() => {}); }
+    ensureKunWallpaperPlaying();
+    requestAnimationFrame(() => ensureKunWallpaperPlaying());
+    setTimeout(ensureKunWallpaperPlaying, 120);
   }
 }
+function ensureKunWallpaperPlaying() {
+  const wpVid = document.getElementById('kun-live-wp-video');
+  if (!wpVid) return;
+  wpVid.muted = true;
+  wpVid.defaultMuted = true;
+  wpVid.loop = true;
+  wpVid.playsInline = true;
+  if (wpVid.readyState === 0 && wpVid.networkState === 3) {
+    wpVid.load();
+  }
+  const p = wpVid.play();
+  if (p && typeof p.catch === 'function') {
+    p.catch(() => {
+      wpVid.muted = true;
+      setTimeout(() => { wpVid.play().catch(() => {}); }, 180);
+    });
+  }
+}
+(function initKunLiveWallpaperLoop() {
+  const wpVid = document.getElementById('kun-live-wp-video');
+  if (!wpVid) return;
+  wpVid.muted = true;
+  wpVid.defaultMuted = true;
+  wpVid.loop = true;
+  wpVid.playsInline = true;
+
+  // Enforce seamless infinite loop even if browser fires ended or pauses unexpectedly
+  wpVid.addEventListener('ended', () => {
+    wpVid.currentTime = 0;
+    wpVid.play().catch(() => {});
+  });
+  wpVid.addEventListener('pause', () => {
+    const tab6 = document.getElementById('kun-tab-6');
+    if (tab6 && tab6.classList.contains('active') && !document.hidden) {
+      wpVid.play().catch(() => {});
+    }
+  });
+  wpVid.addEventListener('canplay', () => {
+    const tab6 = document.getElementById('kun-tab-6');
+    if (tab6 && tab6.classList.contains('active')) {
+      wpVid.play().catch(() => {});
+    }
+  });
+  document.addEventListener('visibilitychange', () => {
+    const tab6 = document.getElementById('kun-tab-6');
+    if (!document.hidden && tab6 && tab6.classList.contains('active')) {
+      ensureKunWallpaperPlaying();
+    }
+  });
+
+  // Preload into memory Blob so 2s loop is 100% instant & zero-stutter even from hidden tab
+  const mp4Url = 'assets/kun_live_wallpaper.mp4?v=live2026';
+  fetch(mp4Url)
+    .then(r => (r.ok ? r.blob() : Promise.reject(r.status)))
+    .then(blob => {
+      if (blob && blob.size > 100000) {
+        const tab6 = document.getElementById('kun-tab-6');
+        const isActive = tab6 && tab6.classList.contains('active');
+        if (!isActive || wpVid.paused || wpVid.readyState < 2) {
+          const blobUrl = URL.createObjectURL(blob);
+          wpVid.src = blobUrl;
+          wpVid.muted = true;
+          wpVid.loop = true;
+          wpVid.load();
+          if (isActive) {
+            ensureKunWallpaperPlaying();
+          }
+        }
+      }
+    })
+    .catch(() => {
+      wpVid.load();
+    });
+})();
 function filterKunEmoticons(cat, btnEl) {
   const bar = document.getElementById('kun-emo-filter-bar');
   if (bar && btnEl) {
