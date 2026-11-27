@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>娜娜小海獭的健康一句话手账</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 庆祝彩带烟花画布 -->
+  <canvas id="celebration-canvas"></canvas>
+
+  <div class="app-container">
+    <!-- 顶部状态栏 -->
+    <header class="header-bar">
+      <div class="brand-badge">
+        <div class="brand-icon-ring">🦦</div>
+        <div>
+          <h1 class="brand-title">小海獭健康日记</h1>
+          <p class="brand-subtitle">每天一句话 · 心情印章 · 满10天鼓掌激励</p>
+        </div>
+      </div>
+      <div class="header-controls">
+        <button id="btn-sound-toggle" class="icon-btn" title="声音开关">🔔</button>
+        <button id="btn-quick-write" class="text-btn">✍️ 写今日一句</button>
+      </div>
+    </header>
+
+    <!-- 两栏主布局 -->
+    <main class="main-layout">
+      <!-- 左栏：伴侣小海獭卡片与进度激励 -->
+      <aside class="otter-card" id="otter-card">
+        <div class="celebration-glow"></div>
+
+        <!-- 小海獭立绘与鼓掌图层 -->
+        <div class="otter-visual-box" id="otter-visual-box" title="点击和小海獭互动一下吧！">
+          <img src="assets/otter.jpg" alt="小海獭娜娜" class="otter-sticker-img" id="otter-img">
+          
+          <!-- 达成10天后的欢呼鼓掌动效叠加层 -->
+          <div class="clapping-hands-overlay" id="clapping-hands-overlay">
+            <span class="clap-paw-left">👏</span>
+            <span class="clap-burst-stars">✨</span>
+            <span class="clap-paw-right">👏</span>
+          </div>
+        </div>
+
+        <!-- 角色气泡对话 -->
+        <div class="otter-speech-bubble" id="otter-speech-bubble">
+          <p id="otter-speech-text">小海獭歪头：“今天喝足水、动一动了吗？写下一句话，把今天的健康印章盖在日历上吧！”</p>
+        </div>
+
+        <!-- 满10天打卡进度 -->
+        <div class="progress-card">
+          <div class="progress-header">
+            <span>本月健康目标</span>
+            <span class="progress-count" id="progress-text">0 / 10</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+          <div class="progress-milestone-marker">
+            <span>开始记录</span>
+            <span>满10天海獭鼓掌 👏</span>
+          </div>
+        </div>
+
+        <!-- 达成10天鼓掌荣誉徽章 -->
+        <div class="achievement-banner" id="achievement-banner">
+          <span class="achievement-icon">🎖️</span>
+          <div>
+            <div class="achievement-text-title">月度健康达人！</div>
+            <div class="achievement-text-desc">太棒了！已满10天，海獭娜娜在日历上为你热烈鼓掌！</div>
+          </div>
+        </div>
+
+        <!-- 快捷操作区 -->
+        <div class="quick-action-group">
+          <button id="btn-demo-fill" class="btn-primary-action" title="一键生成10天数据，立即体验海獭鼓掌庆祝！">
+            ✨ 一键体验满10天 (看鼓掌)
+          </button>
+          <button id="btn-demo-clear" class="btn-secondary-action">
+            🗑️ 清空所有打卡记录
+          </button>
+        </div>
+      </aside>
+
+      <!-- 右栏：月历与盖章视图 -->
+      <section class="calendar-card">
+        <!-- 月历顶部操作栏 -->
+        <div class="calendar-topbar">
+          <div class="month-selector">
+            <button id="btn-prev-month" class="nav-month-btn" title="上个月">◀</button>
+            <h2 id="current-month-display" class="current-month-display">2026年 11月</h2>
+            <button id="btn-next-month" class="nav-month-btn" title="下个月">▶</button>
+            <button id="btn-today" class="today-chip-btn">今天</button>
+          </div>
+          <div class="month-summary-badge" id="month-count-badge">
+            本月打卡: 0 天
+          </div>
+        </div>
+
+        <!-- 星期表头 -->
+        <div class="calendar-weekdays">
+          <span>一</span>
+          <span>二</span>
+          <span>三</span>
+          <span>四</span>
+          <span>五</span>
+          <span>六</span>
+          <span>日</span>
+        </div>
+
+        <!-- 日历单元格网格 -->
+        <div class="calendar-grid" id="calendar-grid">
+          <!-- 由 app.js 动态渲染各日期与印章 -->
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- 模态弹窗：写日记/查看日记与盖章 -->
+  <div class="modal-backdrop" id="diary-modal">
+    <div class="diary-modal-box">
+      <!-- 弹窗顶栏 -->
+      <div class="modal-header">
+        <div class="modal-date-tag">
+          <span class="modal-date-full" id="modal-date-full">2026年11月23日</span>
+          <span class="modal-date-weekday" id="modal-date-weekday">星期一</span>
+        </div>
+        <button class="close-modal-btn" id="btn-close-modal" title="关闭">✕</button>
+      </div>
+
+      <!-- 纯阅读模式卡片 (已写日记时默认展示) -->
+      <div id="view-mode-card" class="view-mode-card" style="display: none;">
+        <div id="view-stamp-highlight" class="view-stamp-highlight"></div>
+        <div class="view-diary-content" id="view-diary-content"></div>
+        <div>
+          <div style="font-size: 12px; font-weight: 700; color: var(--warm-brown); margin-bottom: 6px;">健康打卡标签：</div>
+          <div class="health-tags-wrap" id="view-tags-wrap"></div>
+        </div>
+        <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
+          <button id="btn-switch-to-edit" class="btn-secondary-action">✏️ 修改日记与印章</button>
+        </div>
+      </div>
+
+      <!-- 填写/编辑模式表单 -->
+      <div id="edit-mode-form" class="edit-mode-form">
+        <!-- 印章表情选择 -->
+        <div class="stamp-picker-section">
+          <div class="section-label">
+            <span>💮 选择今日健康心情印章</span>
+          </div>
+          <div class="stamp-options-grid" id="stamp-options-grid">
+            <!-- 动态生成印章单选按钮 -->
+          </div>
+        </div>
+
+        <!-- 健康小习惯快选标签 -->
+        <div class="health-tags-section">
+          <div class="section-label">
+            <span>🌱 今日健康打卡（可多选）</span>
+          </div>
+          <div class="health-tags-wrap" id="health-tags-wrap">
+            <!-- 动态生成标签 -->
+          </div>
+        </div>
+
+        <!-- 一句话日记输入框 -->
+        <div class="diary-input-section">
+          <div class="section-label">
+            <span>✍️ 写下一句健康感悟</span>
+          </div>
+          <div class="diary-textarea-box">
+            <textarea 
+              id="diary-input-text" 
+              class="diary-textarea" 
+              maxlength="100" 
+              placeholder="用简短的一句话，记录今天的身体感觉、饮食或运动小确幸..."></textarea>
+            <div class="char-counter" id="char-count">0/100</div>
+          </div>
+          <div class="inspiration-tip-box">
+            <span style="font-size: 11px; color: #B58448;">💡 灵感建议 (点击填入)：</span>
+            <span id="inspire-tip-text" style="cursor: pointer; flex: 1; margin: 0 6px;"></span>
+            <button id="btn-refresh-inspire" class="inspire-refresh-btn" type="button">换一换</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 弹窗底栏操作 -->
+      <div class="modal-footer">
+        <button id="btn-delete-entry" class="btn-delete" style="display: none;">🗑️ 删除记录</button>
+        <button id="btn-save-stamp" class="btn-save-stamp">💮 盖下今日印章</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 浮动提示组件 -->
+  <div class="toast-notice" id="toast-notice"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
