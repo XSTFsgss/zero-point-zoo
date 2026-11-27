@@ -4868,6 +4868,7 @@ app: {
 }
 },
 shark: {
+hideGoods: true,
 avatar: 'assets/char_shark.jpg',
 creatorZh: '创作者：朱熠霏 주예비（202323035）03 个人角色主页',
 creatorKo: '창작자: 주예비 朱熠霏（202323035）03 개인 캐릭터 페이지',
@@ -4973,6 +4974,7 @@ app: {
 }
 },
 fox: {
+hideGoods: true,
 avatar: 'assets/char_fox.jpg',
 creatorZh: '创作者：王小丫 왕소아（202323038）04 个人角色主页',
 creatorKo: '창작자: 왕소아 王小丫（202323038）04 개인 캐릭터 페이지',
@@ -5844,10 +5846,12 @@ function renderMemberGoods(m) {
 function openMemberRoom(id) {
   const parts = id.split('-w');
   const actualId = parts[0];
-  const targetTab = parts[1] ? parseInt(parts[1]) : 1;
+  let targetTab = parts[1] ? parseInt(parts[1]) : 1;
   const m = MEMBERS_DATA[actualId];
   if (!m) { openKunRoom(); return; }
   currentMemberId = actualId;
+  const hideGoods = !!m.hideGoods;
+  if (hideGoods && targetTab === 6) targetTab = 1;
 
   document.getElementById('m-avatar').src = m.avatar;
   document.getElementById('m-creator').innerHTML = `<span data-zh>${m.creatorZh}</span><span data-ko>${m.creatorKo}</span>`;
@@ -5934,6 +5938,16 @@ function openMemberRoom(id) {
   renderMemberApp(m);
   renderMemberEmoticons(m);
   renderMemberGoods(m);
+  const btn6 = document.getElementById('mw-btn-6');
+  const panel6 = document.getElementById('mw-panel-6');
+  if (btn6) {
+    btn6.style.display = hideGoods ? 'none' : '';
+    const bar = btn6.closest('.w-plan-overview-bar');
+    if (bar) bar.style.gridTemplateColumns = hideGoods ? 'repeat(5, 1fr)' : '';
+  }
+  if (panel6) {
+    panel6.style.display = hideGoods ? 'none' : '';
+  }
   switchMemberWTab(targetTab);
 
   document.documentElement.setAttribute('data-view', 'member');
@@ -5944,6 +5958,8 @@ function openMemberRoom(id) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 function switchMemberWTab(idx) {
+  const m = currentMemberId ? MEMBERS_DATA[currentMemberId] : null;
+  if (m && m.hideGoods && idx === 6) idx = 1;
   for (let i = 1; i <= 6; i++) {
     const b = document.getElementById('mw-btn-' + i);
     const p = document.getElementById('mw-panel-' + i);
