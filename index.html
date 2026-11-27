@@ -4670,7 +4670,18 @@ emoticons: [
   { img: 'assets/shark_expr_12.png', zh: '昏黄调饮 · 沉思', ko: '바텐더의 회상' }
 ],
 emoticonZip: 'assets/shark_emoticons.zip',
-emoticonZipName: 'shark_emoticons.zip'
+emoticonZipName: 'shark_emoticons.zip',
+app: {
+  icon: '🦈',
+  themeColor: '#F5A623',
+  titleZh: '샤샤수면 · SleepyShark (深海睡眠记录与助眠)',
+  titleKo: '샤샤수면 · SleepyShark (심해 수면 트래커 & 힐링 사운드)',
+  subtitleZh: '智能跨午夜时长计算 · 温暖零说教情绪关怀 · 7日睡眠趋势图表 · 5轨深海多声道白噪音调音台 · 所长亲密度互动',
+  subtitleKo: '스마트 자정 계산 · 온화한 무훈계 감정 케어 · 7일 수면 트렌드 분석 · 5트랙 심해 백색소음 믹서 · 상어 소장과의 따뜻한 동행',
+  tagsZh: ['智能跨午夜计算', '零说教情绪反馈', '7日睡眠趋势', '432Hz舒曼共振', '5轨多声道白噪音', '所长羁绊投喂'],
+  tagsKo: ['스마트자정계산', '무훈계감정케어', '7일수면트렌드', '432Hz슈만공명', '5트랙백색소음', '상어소장친밀도'],
+  url: 'apps/shark-app/index.html'
+}
 },
 fox: {
 avatar: 'assets/char_fox.jpg',
@@ -5130,16 +5141,27 @@ function renderMemberApp(m) {
       btnDesc.innerHTML = `<span data-zh>★ ${m.app.titleZh} (已上线)</span><span data-ko>★ ${m.app.titleKo} (서비스 중)</span>`;
     }
 
-    const tagsZhHtml = m.app.tagsZh ? m.app.tagsZh.map(t => `<span class="backpack-tag" style="background:rgba(82,196,156,0.15); border:1px solid #52C49C; color:#52C49C; font-size:0.78rem;">#${t}</span>`).join('') : '';
-    const tagsKoHtml = m.app.tagsKo ? m.app.tagsKo.map(t => `<span class="backpack-tag" style="background:rgba(82,196,156,0.15); border:1px solid #52C49C; color:#52C49C; font-size:0.78rem;">#${t}</span>`).join('') : '';
+    const appIcon = m.app.icon || (currentMemberId === 'shark' ? '🦈' : (currentMemberId === 'otter' ? '🦦' : '🕹️'));
+    const themeColor = m.app.themeColor || (currentMemberId === 'shark' ? '#F5A623' : '#52C49C');
+    const btnBg = currentMemberId === 'shark' 
+      ? 'linear-gradient(135deg, #F5A623 0%, #D48806 100%)' 
+      : 'linear-gradient(135deg, #52C49C 0%, #2E8B6B 100%)';
+    const btnColor = currentMemberId === 'shark' ? '#1E162B' : '#FFF';
+    const cardBorder = currentMemberId === 'shark' ? 'rgba(245,166,35,0.45)' : 'rgba(82,196,156,0.4)';
+    const cardBg = currentMemberId === 'shark'
+      ? 'linear-gradient(135deg, rgba(245,166,35,0.12) 0%, rgba(30,22,43,0.7) 100%)'
+      : 'linear-gradient(135deg, rgba(82,196,156,0.08) 0%, rgba(245,166,35,0.06) 100%)';
+
+    const tagsZhHtml = m.app.tagsZh ? m.app.tagsZh.map(t => `<span class="backpack-tag" style="background:${themeColor}22; border:1px solid ${themeColor}; color:${themeColor}; font-size:0.78rem;">#${t}</span>`).join('') : '';
+    const tagsKoHtml = m.app.tagsKo ? m.app.tagsKo.map(t => `<span class="backpack-tag" style="background:${themeColor}22; border:1px solid ${themeColor}; color:${themeColor}; font-size:0.78rem;">#${t}</span>`).join('') : '';
 
     container.innerHTML = `
-      <div class="kun-info-card" style="padding: 20px 24px; margin-bottom: 20px; border: 2px solid rgba(82,196,156,0.4); background: linear-gradient(135deg, rgba(82,196,156,0.08) 0%, rgba(245,166,35,0.06) 100%);">
+      <div class="kun-info-card" style="padding: 20px 24px; margin-bottom: 20px; border: 2px solid ${cardBorder}; background: ${cardBg};">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
           <div>
             <div style="display:flex; align-items:center; gap:8px;">
-              <span style="font-size:1.6rem;">🦦</span>
-              <h4 style="color:#52C49C; font-size:1.3rem; font-weight:900; margin:0;">
+              <span style="font-size:1.6rem;">${appIcon}</span>
+              <h4 style="color:${themeColor}; font-size:1.3rem; font-weight:900; margin:0;">
                 <span data-zh>${m.app.titleZh}</span>
                 <span data-ko>${m.app.titleKo}</span>
               </h4>
@@ -5150,7 +5172,7 @@ function renderMemberApp(m) {
             </p>
           </div>
           <div style="display:flex; gap:10px;">
-            <a href="${m.app.url}" target="_blank" class="copy-prompt-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg, #52C49C 0%, #2E8B6B 100%); border-color:#D9FFF1; color:#FFF; font-weight:800; padding:8px 16px;">
+            <a href="${m.app.url}" target="_blank" class="copy-prompt-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; background:${btnBg}; border-color:${themeColor}; color:${btnColor}; font-weight:800; padding:8px 16px;">
               <span data-zh>↗ 新标签页独立全屏打开</span>
               <span data-ko>↗ 새 창 전체화면 열기</span>
             </a>
@@ -5163,7 +5185,7 @@ function renderMemberApp(m) {
       </div>
       
       <!-- 嵌入式应用主视窗 -->
-      <div style="position:relative; width:100%; border-radius:18px; overflow:hidden; border:2px solid rgba(217, 164, 65, 0.4); box-shadow:0 14px 40px rgba(0,0,0,0.45); background:#FFFDF7;">
+      <div style="position:relative; width:100%; border-radius:18px; overflow:hidden; border:2px solid rgba(217, 164, 65, 0.4); box-shadow:0 14px 40px rgba(0,0,0,0.45); background:#0F141B;">
         <div style="display:flex; justify-content:space-between; align-items:center; background:#2A2338; padding:8px 16px; border-bottom:1px solid rgba(217,164,65,0.25);">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="width:11px; height:11px; border-radius:50%; background:#FF5F56; display:inline-block;"></span>
@@ -5172,15 +5194,15 @@ function renderMemberApp(m) {
             <span style="font-size:0.8rem; color:#D9C3A3; margin-left:8px; font-family:monospace;">${m.app.url}</span>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
-            <button onclick="const f=document.getElementById('otter-app-iframe'); if(f) f.src=f.src;" class="copy-prompt-btn" style="padding:4px 10px; font-size:0.75rem; background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.2); color:#FFF; cursor:pointer;" title="重新加载">
+            <button onclick="const f=document.getElementById('member-app-iframe'); if(f) f.src=f.src;" class="copy-prompt-btn" style="padding:4px 10px; font-size:0.75rem; background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.2); color:#FFF; cursor:pointer;" title="重新加载">
               ↻ 刷新应用
             </button>
           </div>
         </div>
         <iframe 
-          id="otter-app-iframe" 
+          id="member-app-iframe" 
           src="${m.app.url}" 
-          style="width:100%; height:860px; border:none; display:block;"
+          style="width:100%; height:880px; border:none; display:block;"
           title="${m.app.titleZh}">
         </iframe>
       </div>

@@ -4358,7 +4358,7 @@ grid-template-columns: 1fr;
 <div class="w-plan-code"><span>W4 P</span><span>04</span></div>
 <div class="w-plan-zh"><span data-zh>应用</span><span data-ko>앱</span></div>
 <div class="w-plan-ko">앱 · app</div>
-<div class="w-plan-desc"><span data-zh>使用角色制作的应用1个</span><span data-ko>캐릭터를 활용한 앱 1개</span></div>
+<div class="w-plan-desc" id="m-w4-btn-desc"><span data-zh>使用角色制作的应用1个</span><span data-ko>캐릭터를 활용한 앱 1개</span></div>
 </button>
 <button type="button" class="w-plan-col w5a" id="mw-btn-5" onclick="switchMemberWTab(5)">
 <div class="w-plan-code"><span>W5 P</span><span>05</span></div>
@@ -4463,14 +4463,16 @@ grid-template-columns: 1fr;
 <div class="kun-panel-header">
 <div>
 <span class="kun-panel-step">W4 P · 앱 · APP · 캐릭터를 활용한 앱 1개</span>
-<h3><span data-zh>W4 P · 角色应用预留位（使用角色制作的应用 1 个）</span><span data-ko>W4 P · 캐릭터 활용 앱 슬롯 (캐릭터를 활용한 앱 1개)</span></h3>
+<h3 id="m-w4-heading"><span data-zh>W4 P · 角色应用预留位（使用角色制作的应用 1 个）</span><span data-ko>W4 P · 캐릭터 활용 앱 슬롯 (캐릭터를 활용한 앱 1개)</span></h3>
 </div>
-<span class="kun-charm-pill">🕹️ <span data-zh>角色专属互动 Web App 容器</span><span data-ko>캐릭터 인터랙티브 웹앱 컨테이너</span></span>
+<span class="kun-charm-pill" id="m-w4-badge">🕹️ <span data-zh>角色专属互动 Web App 容器</span><span data-ko>캐릭터 인터랙티브 웹앱 컨테이너</span></span>
 </div>
+<div id="m-app-container">
 <div class="kun-info-card" style="text-align:center; padding:44px 24px; border-style:dashed;">
 <div style="font-size:3rem; margin-bottom:12px;">💻</div>
 <h4 style="color:#F5A623; font-size:1.25rem; margin-bottom:8px;"><span data-zh>W4 P · 角色专属互动应用挂载区 (캐릭터 활용 앱 1개)</span><span data-ko>W4 P · 캐릭터 활용 앱 1개 임베드 영역</span></h4>
 <p style="color:var(--text-Soft); max-width:620px; margin:0 auto; font-size:0.92rem;"><span data-zh>此处已预留标准应用容器（支持直接嵌入角色小游戏、情绪测试器、占卜互动或日常实用小工具）。</span><span data-ko>캐릭터의 고유 능력을 활용한 미니게임, 감정 기록기 또는 유틸리티 앱 1개가 탑재될 전용 영역입니다.</span></p>
+</div>
 </div>
 </div>
 <!-- Member W5 P Panel 1: 表情包 (이모티콘 / emoticons) -->
@@ -4668,7 +4670,18 @@ emoticons: [
   { img: 'assets/shark_expr_12.png', zh: '昏黄调饮 · 沉思', ko: '바텐더의 회상' }
 ],
 emoticonZip: 'assets/shark_emoticons.zip',
-emoticonZipName: 'shark_emoticons.zip'
+emoticonZipName: 'shark_emoticons.zip',
+app: {
+  icon: '🦈',
+  themeColor: '#F5A623',
+  titleZh: '샤샤수면 · SleepyShark (深海睡眠记录与助眠)',
+  titleKo: '샤샤수면 · SleepyShark (심해 수면 트래커 & 힐링 사운드)',
+  subtitleZh: '智能跨午夜时长计算 · 温暖零说教情绪关怀 · 7日睡眠趋势图表 · 5轨深海多声道白噪音调音台 · 所长亲密度互动',
+  subtitleKo: '스마트 자정 계산 · 온화한 무훈계 감정 케어 · 7일 수면 트렌드 분석 · 5트랙 심해 백색소음 믹서 · 상어 소장과의 따뜻한 동행',
+  tagsZh: ['智能跨午夜计算', '零说教情绪反馈', '7日睡眠趋势', '432Hz舒曼共振', '5轨多声道白噪音', '所长羁绊投喂'],
+  tagsKo: ['스마트자정계산', '무훈계감정케어', '7일수면트렌드', '432Hz슈만공명', '5트랙백색소음', '상어소장친밀도'],
+  url: 'apps/shark-app/index.html'
+}
 },
 fox: {
 avatar: 'assets/char_fox.jpg',
@@ -4802,7 +4815,81 @@ neverKo: '🚫 하지 않는 말: “슬픔은 의미가 없으며, 누구도 �
 propsZh: '盛满眼泪的透明泪水壶、满满的零食口袋',
 propsKo: '눈물이 담긴 투명 물병, 가득 찬 간식 주머니',
 storyZh: '<p><b>【角色故事 · 캐릭터 스토리】</b>戴着圆帽的浅棕水獭露是团队里的开心果，只要发出笑声或摇晃随身的透明水壶，就能将快乐传递给周围的人。然而水壶里装的其实是过往的眼泪——她的能力唯独对自己无效，而且她始终克制着能力，从不强迫悲伤的同伴假装开心。</p><p style="margin-top:8px;"><b>【专属头衔 · 직함】</b>零点动物园 · 首席气氛治愈师 / 제로 포인트 동물원 · 수석 분위기 힐러</p>',
-recipeZh: '<p><b>【角色素材表 · 재료표】</b>45% 化泪为欢的透明水壶 + 30% 口袋里永远装满的甜味零食 + 15% 尊重他人悲伤的温柔克制 + 10% 独自消化低落的坚强。</p><p style="margin-top:8px;"><b>【角色关系 · 관계도】</b>和柴犬·困是最佳阳光饭搭子，在困身边她不用摇水壶也能发自内心地大笑。</p>'
+recipeZh: '<p><b>【角色素材表 · 재료표】</b>45% 化泪为欢的透明水壶 + 30% 口袋里永远装满的甜味零食 + 15% 尊重他人悲伤的温柔克制 + 10% 独自消化低落的坚强。</p><p style="margin-top:8px;"><b>【角色关系 · 관계도】</b>和柴犬·困是最佳阳光饭搭子，在困身边她不用摇水壶也能发自内心地大笑。</p>',
+comics: [
+  {
+    epZh: '★ EPISODE 01 · 海滩螃蟹篇',
+    epKo: '★ EPISODE 01 · 해변의 꽃게 편',
+    titleZh: '《啊！有螃蟹！？》',
+    titleKo: '《어?! 게다!?》',
+    img: 'assets/otter_comic_1.jpg',
+    alt: '四格漫画：啊！有螃蟹！？',
+    storyZh: '<b>剧情亮点：</b>水獭露在沙滩散步时偶遇小螃蟹，被挥舞双钳的小螃蟹一路追赶得大呼小叫！然而在沙滩石头上躺下后，看着呆萌的小螃蟹们，露忍不住扑哧大笑：“太可爱了！虽然很可怕，但我才不害怕呢！”今天在海边也是活力满满的一天！',
+    storyKo: '<b>스토리 포인트:</b> 해변을 산책하던 수달 루가 귀여운 아기 꽃게들을 발견하고 집게발에 쫓겨 신나게 도망칩니다! 하지만 바위에 편안히 누워 호기심 가득한 꽃게들을 바라보며 까르르 웃음을 터뜨립니다. "너무 귀여워! 조금 무섭지만 난 하나도 안 무서워!" 오늘도 해변에서 즐거운 추억을 한가득 쌓았습니다!',
+    dialogues: [
+      { cut: '1컷', zh: '露：啊！有螃蟹！？（嚷嚷）', ko: '루: 어?! 게다!? (끼익!)' },
+      { cut: '2컷', zh: '露：啊啊啊！！螃蟹在追我！', ko: '루: 으아아아!! 게가 쫓아온다!' },
+      { cut: '3컷', zh: '露：哈哈哈！太可爱了！虽然很可怕但我才不害怕！', ko: '루: 하하하! 너무 귀여워! 그래도 난 무섭지 않아!' },
+      { cut: '4컷', zh: '露：今天也好有趣！哈哈哈~❤', ko: '루: 오늘도 재밌다! ㅋㅋㅋ❤' }
+    ]
+  },
+  {
+    epZh: '★ EPISODE 02 · 海边拾贝篇',
+    epKo: '★ EPISODE 02 · 해변의 조개 편',
+    titleZh: '《我来海边啦！好漂亮的贝壳！》',
+    titleKo: '《바다에 왔어요! 예쁜 조개다!》',
+    img: 'assets/otter_comic_2.jpg',
+    alt: '四格漫画：我来海边啦！好漂亮的贝壳！',
+    storyZh: '<b>剧情亮点：</b>水獭露提着心爱的贝壳小包来到海边度假，在浪花拍打的沙滩上惊喜地捡起了一枚又一枚五彩斑斓的漂亮贝壳。把宝贝们紧紧抱在怀里，露露出了发自内心的甜美笑容，迎着金色的晚霞许下心愿：“真的好开心！下次我一定还要再来！”',
+    storyKo: '<b>스토리 포인트:</b> 수달 루가 조개 모양 가방을 들고 바닷가로 나들이를 떠났습니다! 백사장을 거닐다 발견한 반짝이는 예쁜 조개껍질을 양손 가득 소중하게 안고 눈부신 미소를 짓는 루. 황금빛으로 물드는 바다 노을을 바라보며 "정말 기분 좋아요! 다음에도 또 놀러 올게요!"라고 다짐합니다.',
+    dialogues: [
+      { cut: '1컷', zh: '露：我来海边啦！', ko: '루: 바다에 왔어요!' },
+      { cut: '2컷', zh: '露：哇！好漂亮的贝壳！', ko: '루: 와! 예쁜 조개다!' },
+      { cut: '3컷', zh: '露：真的好开心！❤', ko: '루: 정말 기분 좋아요!❤' },
+      { cut: '4컷', zh: '露：下次我还会再来的！', ko: '루: 다음에도 또 올게요!❤' }
+    ]
+  }
+],
+animation: {
+  src: 'assets/otter-short01.mp4',
+  altSrc: 'assets/otter_video_1.mp4',
+  titleZh: '《水獭·露 · 专属动画短片 #01》',
+  titleKo: '《수달·루 전용 숏폼 애니메이션 #01》',
+  aspectRatio: '9/16'
+},
+animation2: {
+  src: 'assets/otter-short02.mp4',
+  altSrc: 'assets/otter_video_2.mp4',
+  titleZh: '《水獭·露 · 专属动画短片 #02》',
+  titleKo: '《수달·루 전용 숏폼 애니메이션 #02》',
+  aspectRatio: '9/16',
+  width: 720,
+  height: 1280,
+  isLandscape: false
+},
+emoticons: [
+  { img: 'assets/otter_expr_01.jpg', zh: '托腮托腮 · 乖巧卖萌', ko: '볼 콕콕 · 얌전얌전' },
+  { img: 'assets/otter_expr_02.jpg', zh: '含泪委屈 · 扁嘴抽泣', ko: '글썽글썽 · 시무룩..' },
+  { img: 'assets/otter_expr_03.jpg', zh: '叉腰嘟嘴 · 气鼓鼓', ko: '새침도도 · 씩씩!' },
+  { img: 'assets/otter_expr_04.jpg', zh: '眯眼浅笑 · 治愈暖阳', ko: '눈웃음 · 방긋방긋' },
+  { img: 'assets/otter_expr_05.jpg', zh: '开怀大笑 · 欢乐满分', ko: '하하호호 · 박장대소' },
+  { img: 'assets/otter_expr_06.jpg', zh: '抱包酣睡 · 香甜好梦', ko: '코오코오 · 꿀잠 중' },
+  { img: 'assets/otter_expr_07.jpg', zh: '双手攥拳 · 惊喜惊叹', ko: '깜짝이야! · 두근두근' },
+  { img: 'assets/otter_expr_08.jpg', zh: '高举贝壳 · 炫耀宝贝', ko: '조개 번쩍! · 자랑자랑' },
+  { img: 'assets/otter_expr_09.jpg', zh: '俏皮吐舌 · 鬼脸搞怪', ko: '메롱~ · 장난꾸러기' },
+  { img: 'assets/otter_expr_10.jpg', zh: '双拳握紧 · 元气加油', ko: '파이팅! · 힘내자 힘!' }
+],
+emoticonZip: 'assets/otter_emoticons.zip',
+emoticonZipName: 'otter_emoticons.zip',
+app: {
+  titleZh: '水獭·露的健康一句话手账',
+  titleKo: '수달·루의 한 줄 건강 다이어리',
+  subtitleZh: '按日期写健康一句话日记 · 心情印章盖印 · 满10格海獭鼓掌激励',
+  subtitleKo: '날짜별 한 줄 건강 일기 · 실감 나는 감정 도장 · 10일 달성 시 박수 응원',
+  tagsZh: ['健康一句话', '心情印章', '满10格鼓掌激励', '本地自动保存', '音效合成'],
+  tagsKo: ['한줄다이어리', '감정도장', '10일박수응원', '로컬자동저장', '자체효과음'],
+  url: 'apps/otter-diary/index.html'
+}
 }
 };
 function setLanguage(lang) {
@@ -5036,6 +5123,110 @@ function renderMemberAnimation(m) {
   }
 }
 
+function renderMemberApp(m) {
+  const container = document.getElementById('m-app-container');
+  const heading = document.getElementById('m-w4-heading');
+  const badge = document.getElementById('m-w4-badge');
+  const btnDesc = document.getElementById('m-w4-btn-desc');
+  if (!container) return;
+
+  if (m.app) {
+    if (heading) {
+      heading.innerHTML = `<span data-zh>W4 P · 应用 · ${m.app.titleZh}</span><span data-ko>W4 P · 앱 · ${m.app.titleKo}</span>`;
+    }
+    if (badge) {
+      badge.innerHTML = `🕹️ <span data-zh>已上线专属互动 Web App</span><span data-ko>전용 인터랙티브 웹앱 서비스 중</span>`;
+    }
+    if (btnDesc) {
+      btnDesc.innerHTML = `<span data-zh>★ ${m.app.titleZh} (已上线)</span><span data-ko>★ ${m.app.titleKo} (서비스 중)</span>`;
+    }
+
+    const appIcon = m.app.icon || (currentMemberId === 'shark' ? '🦈' : (currentMemberId === 'otter' ? '🦦' : '🕹️'));
+    const themeColor = m.app.themeColor || (currentMemberId === 'shark' ? '#F5A623' : '#52C49C');
+    const btnBg = currentMemberId === 'shark' 
+      ? 'linear-gradient(135deg, #F5A623 0%, #D48806 100%)' 
+      : 'linear-gradient(135deg, #52C49C 0%, #2E8B6B 100%)';
+    const btnColor = currentMemberId === 'shark' ? '#1E162B' : '#FFF';
+    const cardBorder = currentMemberId === 'shark' ? 'rgba(245,166,35,0.45)' : 'rgba(82,196,156,0.4)';
+    const cardBg = currentMemberId === 'shark'
+      ? 'linear-gradient(135deg, rgba(245,166,35,0.12) 0%, rgba(30,22,43,0.7) 100%)'
+      : 'linear-gradient(135deg, rgba(82,196,156,0.08) 0%, rgba(245,166,35,0.06) 100%)';
+
+    const tagsZhHtml = m.app.tagsZh ? m.app.tagsZh.map(t => `<span class="backpack-tag" style="background:${themeColor}22; border:1px solid ${themeColor}; color:${themeColor}; font-size:0.78rem;">#${t}</span>`).join('') : '';
+    const tagsKoHtml = m.app.tagsKo ? m.app.tagsKo.map(t => `<span class="backpack-tag" style="background:${themeColor}22; border:1px solid ${themeColor}; color:${themeColor}; font-size:0.78rem;">#${t}</span>`).join('') : '';
+
+    container.innerHTML = `
+      <div class="kun-info-card" style="padding: 20px 24px; margin-bottom: 20px; border: 2px solid ${cardBorder}; background: ${cardBg};">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:1.6rem;">${appIcon}</span>
+              <h4 style="color:${themeColor}; font-size:1.3rem; font-weight:900; margin:0;">
+                <span data-zh>${m.app.titleZh}</span>
+                <span data-ko>${m.app.titleKo}</span>
+              </h4>
+            </div>
+            <p style="color:var(--text-Soft); font-size:0.92rem; margin:6px 0 0 0;">
+              <span data-zh>${m.app.subtitleZh}</span>
+              <span data-ko>${m.app.subtitleKo}</span>
+            </p>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <a href="${m.app.url}" target="_blank" class="copy-prompt-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; background:${btnBg}; border-color:${themeColor}; color:${btnColor}; font-weight:800; padding:8px 16px;">
+              <span data-zh>↗ 新标签页独立全屏打开</span>
+              <span data-ko>↗ 새 창 전체화면 열기</span>
+            </a>
+          </div>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px;">
+          <span data-zh>${tagsZhHtml}</span>
+          <span data-ko>${tagsKoHtml}</span>
+        </div>
+      </div>
+      
+      <!-- 嵌入式应用主视窗 -->
+      <div style="position:relative; width:100%; border-radius:18px; overflow:hidden; border:2px solid rgba(217, 164, 65, 0.4); box-shadow:0 14px 40px rgba(0,0,0,0.45); background:#0F141B;">
+        <div style="display:flex; justify-content:space-between; align-items:center; background:#2A2338; padding:8px 16px; border-bottom:1px solid rgba(217,164,65,0.25);">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="width:11px; height:11px; border-radius:50%; background:#FF5F56; display:inline-block;"></span>
+            <span style="width:11px; height:11px; border-radius:50%; background:#FFBD2E; display:inline-block;"></span>
+            <span style="width:11px; height:11px; border-radius:50%; background:#27C93F; display:inline-block;"></span>
+            <span style="font-size:0.8rem; color:#D9C3A3; margin-left:8px; font-family:monospace;">${m.app.url}</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <button onclick="const f=document.getElementById('member-app-iframe'); if(f) f.src=f.src;" class="copy-prompt-btn" style="padding:4px 10px; font-size:0.75rem; background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.2); color:#FFF; cursor:pointer;" title="重新加载">
+              ↻ 刷新应用
+            </button>
+          </div>
+        </div>
+        <iframe 
+          id="member-app-iframe" 
+          src="${m.app.url}" 
+          style="width:100%; height:880px; border:none; display:block;"
+          title="${m.app.titleZh}">
+        </iframe>
+      </div>
+    `;
+  } else {
+    if (heading) {
+      heading.innerHTML = `<span data-zh>W4 P · 角色应用预留位（使用角色制作的应用 1 个）</span><span data-ko>W4 P · 캐릭터 활용 앱 슬롯 (캐릭터를 활용한 앱 1개)</span>`;
+    }
+    if (badge) {
+      badge.innerHTML = `🕹️ <span data-zh>角色专属互动 Web App 容器</span><span data-ko>캐릭터 인터랙티브 웹앱 컨테이너</span>`;
+    }
+    if (btnDesc) {
+      btnDesc.innerHTML = `<span data-zh>使用角色制作的应用1个</span><span data-ko>캐릭터를 활용한 앱 1개</span>`;
+    }
+    container.innerHTML = `
+      <div class="kun-info-card" style="text-align:center; padding:44px 24px; border-style:dashed;">
+        <div style="font-size:3rem; margin-bottom:12px;">💻</div>
+        <h4 style="color:#F5A623; font-size:1.25rem; margin-bottom:8px;"><span data-zh>W4 P · 角色专属互动应用挂载区 (캐릭터 활용 앱 1个)</span><span data-ko>W4 P · 캐릭터 활용 앱 1개 임베드 영역</span></h4>
+        <p style="color:var(--text-Soft); max-width:620px; margin:0 auto; font-size:0.92rem;"><span data-zh>此处已预留标准应用容器（支持直接嵌入角色小游戏、情绪测试器、占卜互动或日常实用小工具）。</span><span data-ko>캐릭터의 고유 능력을 활용한 미니게임, 감정 기록기 또는 유틸리티 앱 1개가 탑재될 전용 영역입니다.</span></p>
+      </div>
+    `;
+  }
+}
+
 function renderMemberEmoticons(m) {
   const container = document.getElementById('m-emoticons-container');
   const heading = document.getElementById('m-w5-heading');
@@ -5113,6 +5304,9 @@ function openMemberRoom(id) {
     const animCount = (m.animation ? 1 : 0) + (m.animation2 ? 1 : 0);
     badgesHtml += `<button type="button" onclick="switchMemberWTab(3)" class="backpack-tag" style="background:rgba(245,166,35,0.22); color:#F5A623; border:1.5px solid #F5A623; cursor:pointer; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击切换至动画短片 / 클릭하여 숏폼 영상 보기"><span data-zh>🎬 专属动画 (${animCount}部) ➔</span><span data-ko>🎬 전용 영상 (${animCount}편) ➔</span></button>`;
   }
+  if (m.app) {
+    badgesHtml += `<button type="button" onclick="switchMemberWTab(4)" class="backpack-tag" style="background:rgba(82,196,156,0.22); color:#52C49C; border:1.5px solid #52C49C; cursor:pointer; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击切换至专属应用 / 클릭하여 전용 앱 보기"><span data-zh>🕹️ 专属应用 (已上线) ➔</span><span data-ko>🕹️ 전용 앱 (서비스 중) ➔</span></button>`;
+  }
   if (m.emoticons && m.emoticons.length > 0) {
     badgesHtml += `<button type="button" onclick="switchMemberWTab(5)" class="backpack-tag" style="background:rgba(245,166,35,0.22); color:#F5A623; border:1.5px solid #F5A623; cursor:pointer; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击切换至表情包 / 클릭하여 이모티콘 보기"><span data-zh>😊 专属表情包 (${m.emoticons.length}款) ➔</span><span data-ko>😊 전용 이모티콘 (${m.emoticons.length}종) ➔</span></button>`;
   }
@@ -5174,6 +5368,7 @@ function openMemberRoom(id) {
 
   renderMemberComics(m);
   renderMemberAnimation(m);
+  renderMemberApp(m);
   renderMemberEmoticons(m);
   switchMemberWTab(targetTab);
 
