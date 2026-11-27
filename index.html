@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN" data-lang="zh">
 <head>
 <meta charset="UTF-8" />
@@ -3484,6 +3484,7 @@ grid-template-columns: 1fr;
 <div class="kun-room-subtitle">
 <span class="backpack-tag">🎒 <span data-zh>陪伴型旅行家</span><span data-ko>동행 여행자</span></span>
 <span class="bond-tag">💛 <span data-zh>主角身边的生命连接挚友</span><span data-ko>주인공 옆의 생명을 잇는 단짝 동반자</span></span>
+<button type="button" onclick="switchKunTab(6); document.getElementById('wplan-btn-6').scrollIntoView({behavior:'smooth', block:'nearest'});" class="backpack-tag" style="background:rgba(245,166,35,0.22); color:#F5A623; border:1.5px solid #F5A623; cursor:pointer; font-weight:900; transition:transform 0.2s;" title="点击查看手机动态壁纸与周边 / 모바일 라이브 배경화면 및 굿즈 보기">📱 <span data-zh>专属手机动态壁纸 (已上线) ➔</span><span data-ko>전용 라이브 배경화면 (수록 완료) ➔</span></button>
 </div>
 <!-- One-Word Personality Capsule Badges (#F5A623) -->
 <div class="kun-personality-Block">
@@ -3574,21 +3575,21 @@ grid-template-columns: 1fr;
 </div>
 </button>
 <button type="button" class="w-plan-col w5a" id="wplan-btn-10" onclick="switchKunTab(10)">
-<div class="w-plan-code"><span>W5 P</span><span>24×3</span></div>
+<div class="w-plan-code"><span>W5 P</span><span>12款</span></div>
 <div class="w-plan-zh"><span data-zh>表情包</span><span data-ko>이모티콘</span></div>
 <div class="w-plan-ko">이모티콘 · emoticons</div>
 <div class="w-plan-desc">
-<span data-zh>24种×3套及下载（预留与预览矩阵）</span>
-<span data-ko>24종 × 3세트와 다운로드</span>
+<span data-zh>★ 专属高清表情已收录 (12款及ZIP下载)</span>
+<span data-ko>★ 전용 이모티콘 12종 수록 및 다운로드</span>
 </div>
 </button>
 <button type="button" class="w-plan-col w5b" id="wplan-btn-6" onclick="switchKunTab(6)">
-<div class="w-plan-code"><span>W5 P</span><span>GOODS</span></div>
+<div class="w-plan-code"><span>W5 P</span><span>LIVE+GOODS</span></div>
 <div class="w-plan-zh"><span data-zh>周边</span><span data-ko>굿즈</span></div>
 <div class="w-plan-ko">굿즈 · goods</div>
 <div class="w-plan-desc">
-<span data-zh>壁纸、实体周边提案（公仔/护符/壁纸）</span>
-<span data-ko>배경화면, 실물 굿즈 제안</span>
+<span data-zh>★ 手机动态壁纸已上线 + 实体周边提案</span>
+<span data-ko>★ 모바일 라이브 배경화면 + 실물 굿즈 제안</span>
 </div>
 </button>
 </div>
@@ -3946,10 +3947,10 @@ grid-template-columns: 1fr;
 <div class="kun-expr-card">
 <span class="expr-tag"><span data-zh>基础表情 03 · 기본 3</span><span data-ko>기본 표정 03 · 基础 3</span></span>
 <div class="expr-img-wrap">
-<img src="assets/kun_expr_3.jpg" alt="好奇歪头与困惑" />
+<img src="assets/kun_expr_3.jpg" alt="焦急慌乱与紧张冒汗" />
 </div>
-<h4><span data-zh>好奇歪头 · 呆萌疑惑</span><span data-ko>호기심 가득 갸우뚱</span></h4>
-<p><span data-zh>遇到打不开的门或新奇规则时，耳朵微垂歪头思考。</span><span data-ko>열리지 않는 문이나 낯선 규칙 앞에서 귀를 살짝 내리고 고민합니다.</span></p>
+<h4><span data-zh>焦急慌乱 · 紧张冒汗</span><span data-ko>당황하며 땀 뻘뻘</span></h4>
+<p><span data-zh>遇到突发状况或棘手难题时，耳朵微垂、头顶冒出乱麻与冷汗的焦急模样。</span><span data-ko>돌발 상황이나 어려운 문제 앞에서 귀를 내리고 진땀을 흘리며 당황하는 모습입니다.</span></p>
 </div>
 <!-- Basic 4 -->
 <div class="kun-expr-card">
@@ -3964,10 +3965,10 @@ grid-template-columns: 1fr;
 <div class="kun-expr-card signature">
 <span class="expr-tag gold"><span data-zh>★ 标志性表情 · 시그니처 1</span><span data-ko>★ 시그니처 표정 · 标志性 1</span></span>
 <div class="expr-img-wrap">
-<img src="assets/kun_expr_sig.jpg" alt="眨眼灿笑并挥爪邀请" />
+<img src="assets/kun_sticker_01.jpg" onerror="this.onerror=null;this.src='assets/kun_expr_sig.jpg'" alt="飞扑拥抱邀请同行" />
 </div>
-<h4><span data-zh>Wink 灿笑 + 双爪扑来邀请</span><span data-ko>윙크 미소 + 앞발 내밀어 동행 초대</span></h4>
-<p><span data-zh>冒出小爱心，向前奔跑张开双爪，感染力满分的招牌同行邀请！</span><span data-ko>하트를 날리며 앞으로 달려와 앞발을 내미는 시그니처 초대 표정!</span></p>
+<h4><span data-zh>灿烂大笑 + 双爪飞扑邀请</span><span data-ko>환한 미소 + 두 앞발 벌려 동행 초대</span></h4>
+<p><span data-zh>冒出粉色小爱心，向前奔跑张开双爪，感染力满分的招牌同行邀请！</span><span data-ko>분홍 하트를 날리며 앞으로 달려와 두 앞발을 벌리는 시그니처 초대 표정!</span></p>
 </div>
 </div>
 </div>
@@ -4016,7 +4017,7 @@ grid-template-columns: 1fr;
 </div>
 <h4><span data-zh>内心 · 抱紧行囊安静倾听与守护</span><span data-ko>내면 · 배낭을 품에 안고 조용히 경청·수호</span></h4>
 <p>
-<span data-zh>取下大背包抱在身前乖巧坐下，与姿势 1 的外放形成鲜明内收对比，展现失落时的脆弱与安静守护的温柔。</span>
+<span data-zh>取下大背包紧紧抱在身前乖巧坐下，与姿势 1 的外放形成内收对比，眨眼微笑着安静倾听、温柔守护每一份旅途珍藏。</span>
 <span data-ko>배낭을 앞으로 안고 얌전히 앉아 경청하는 모습. 포즈 1의 확장과 대비되는 수축 동세로 내면의 온기와 수호를 표현합니다.</span>
 </p>
 </div>
@@ -4216,45 +4217,248 @@ grid-template-columns: 1fr;
 </div>
 </div>
 </div>
-<!-- ================= TAB 10: W5 P 表情包 (이모티콘 / 24种×3套及下载) ================= -->
+<!-- ================= TAB 10: W5 P 表情包 (이모티콘 / 12款专属表情及下载) ================= -->
 <div class="kun-tab-panel" id="kun-tab-10" role="tabpanel">
 <div class="kun-panel-header">
 <div>
-<span class="kun-panel-step">W5 P · 이모티콘 · EMOTICONS · 24종 × 3세트와 다운로드</span>
+<span class="kun-panel-step">W5 P · 이모티콘 · EMOTICONS · 전용 이모티콘 12종 및 다운로드</span>
 <h3>
-<span data-zh>W5 P · 表情包企划 · 24种 × 3套（共72枚）主题表情包预览与下载</span>
-<span data-ko>W5 P · 이모티콘 기획 · 24종 × 3세트 (총 72종) 테마 프리뷰 및 다운로드</span>
+<span data-zh>W5 P · 表情包 · 柴犬·困（已收录 12 款专属表情与打包下载）</span>
+<span data-ko>W5 P · 이모티콘 · 시바견 곤 (전용 이모티콘 12종 수록 및 다운로드)</span>
 </h3>
 </div>
-<button type="button" class="copy-prompt-btn" style="padding:8px 18px; font-size:0.86rem;" onclick="alert('📦 柴犬·困 (시바견 곤) 24종×3세트 이모티콘 패키지 슬롯입니다!')">
-<span data-zh>⬇ 下载表情包合集 (ZIP)</span><span data-ko>⬇ 이모티콘 3세트 다운로드 (ZIP)</span>
-</button>
+<div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+<a href="assets/kun_emoticons.zip" download="kun_emoticons.zip" class="copy-prompt-btn" style="padding:8px 18px; font-size:0.86rem; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+<span data-zh>⬇ 下载 柴犬·困 表情包全集 (ZIP)</span><span data-ko>⬇ 시바견 곤 이모티콘 전체 다운로드 (ZIP)</span>
+</a>
+<span class="kun-charm-pill">😊 <span data-zh>点击任意表情可放大查看高清原图</span><span data-ko>클릭하여 고화질 원본 보기</span></span>
 </div>
-<div class="w1-subnav">
+</div>
+<div class="w1-subnav" id="kun-emo-filter-bar">
 <span style="color:#F5A623; font-weight:900; font-size:0.85rem; display:flex; align-items:center; margin-right:8px;">
-<span data-zh>选择表情包套组 (3套)：</span><span data-ko>이모티콘 세트 선택 (3세트):</span>
+<span data-zh>分类筛选：</span><span data-ko>테마 분류:</span>
 </span>
-<button type="button" class="w1-sub-btn active"><span data-zh>SET 01 · 阳光同行日常篇 (24种)</span><span data-ko>SET 01 · 햇살 동행 일상편 (24종)</span></button>
-<button type="button" class="w1-sub-btn"><span data-zh>SET 02 · 探险吃货与背包篇 (24种)</span><span data-ko>SET 02 · 탐험 먹방 &amp; 배낭편 (24종)</span></button>
-<button type="button" class="w1-sub-btn"><span data-zh>SET 03 · 零点守夜反差撒娇篇 (24种)</span><span data-ko>SET 03 · 자정 반전 애교편 (24종)</span></button>
+<button type="button" class="w1-sub-btn active" onclick="filterKunEmoticons('all', this)"><span data-zh>全部表情 (12款)</span><span data-ko>전체 보기 (12종)</span></button>
+<button type="button" class="w1-sub-btn" onclick="filterKunEmoticons('daily', this)"><span data-zh>SET 01 · 阳光同行日常篇 (5款)</span><span data-ko>SET 01 · 햇살 동행 일상편 (5종)</span></button>
+<button type="button" class="w1-sub-btn" onclick="filterKunEmoticons('adventure', this)"><span data-zh>SET 02 · 探险吃货与背包篇 (4款)</span><span data-ko>SET 02 · 탐험 먹방 &amp; 배낭편 (4종)</span></button>
+<button type="button" class="w1-sub-btn" onclick="filterKunEmoticons('mood', this)"><span data-zh>SET 03 · 小情绪与反差萌篇 (3款)</span><span data-ko>SET 03 · 반전 감정 &amp; 애교편 (3종)</span></button>
 </div>
-<div class="emoticon-grid-24">
-<div class="emoticon-cell"><img src="assets/kun_expr_sig.jpg" alt="01" /><span>#01 一起走吧! / 함께 가자!</span></div>
-<div class="emoticon-cell"><img src="assets/kun_expr_1.jpg" alt="02" /><span>#02 元气挥爪 / 안녕!</span></div>
-<div class="emoticon-cell"><img src="assets/kun_expr_2.jpg" alt="03" /><span>#03 星星眼期待 / 기대돼!</span></div>
-<div class="emoticon-cell"><img src="assets/kun_expr_3.jpg" alt="04" /><span>#04 好奇歪头 / 갸우뚱?</span></div>
-<div class="emoticon-cell"><img src="assets/kun_expr_4.jpg" alt="05" /><span>#05 垂耳失落 / 시무룩..</span></div>
-<div class="emoticon-cell"><img src="assets/kun_pose_1.jpg" alt="06" /><span>#06 跃起出发 / 출발!</span></div>
-<div class="emoticon-cell"><img src="assets/kun_pose_2.jpg" alt="07" /><span>#07 回头等你 / 따라와~</span></div>
-<div class="emoticon-cell"><img src="assets/kun_pose_3.jpg" alt="08" /><span>#08 抱包委屈 / 외로워..</span></div>
-<div class="emoticon-cell"><img src="assets/kun_form_final.jpg" alt="09" /><span>#09 伸爪击掌 / 하이파이브!</span></div>
-<div class="emoticon-cell"><img src="assets/kun_new_comic_1.jpg" alt="10" /><span>#10 腰好酸… / 허리 아파..</span></div>
-<div class="emoticon-cell"><img src="assets/kun_new_comic_2.jpg" alt="11" /><span>#11 零食不能忘 / 간식 최고!</span></div>
-<div class="emoticon-cell"><img src="assets/kun_new_comic_3.jpg" alt="12" /><span>#12 吃饱躺平 / 배불러 행복해</span></div>
+<div class="emoticon-grid-24" id="kun-emoticon-grid" style="grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); gap:16px; margin-top:16px;">
+<div class="emoticon-cell" data-emo-cat="daily" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '一起走吧 · 飞扑拥抱')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_01.jpg" alt="一起走吧 · 飞扑拥抱" style="width:142px; height:142px; object-fit:contain; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#01 <span data-zh>一起走吧 · 飞扑拥抱</span><span data-ko>함께 가자! · 와락 포옹</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="daily" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '元气挥爪 · 嗨你好呀')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_02.jpg" alt="元气挥爪 · 嗨你好呀" style="width:142px; height:142px; object-fit:contain; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#02 <span data-zh>元气挥爪 · 嗨你好呀</span><span data-ko>안녕! · 반가운 인사</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="daily" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '闪亮期待 · 加油打气')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_03.jpg" alt="闪亮期待 · 加油打气" style="width:142px; height:142px; object-fit:contain; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#03 <span data-zh>闪亮期待 · 加油打气</span><span data-ko>반짝 기대 · 파이팅!</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="mood" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '焦急冒汗 · 怎么办呀')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_04.jpg" alt="焦急冒汗 · 怎么办呀" style="width:142px; height:142px; object-fit:contain; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#04 <span data-zh>焦急冒汗 · 怎么办呀</span><span data-ko>땀 뻘뻘 · 어떡하지..</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="mood" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '垂耳失落 · 委委屈屈')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_05.jpg" alt="垂耳失落 · 委委屈屈" style="width:142px; height:142px; object-fit:contain; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#05 <span data-zh>垂耳失落 · 委委屈屈</span><span data-ko>시무룩 · 훌쩍훌쩍..</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="daily" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '欢呼雀跃 · 快乐出发')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_06.jpg" alt="欢呼雀跃 · 快乐出发" style="width:142px; height:142px; object-fit:contain; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#06 <span data-zh>欢呼雀跃 · 快乐出发</span><span data-ko>신난다! · 힘차게 출발</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="daily" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '回头等你 · 快跟上哟')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_07.jpg" alt="回头等你 · 快跟上哟" style="width:142px; height:142px; object-fit:contain; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#07 <span data-zh>回头等你 · 快跟上哟</span><span data-ko>따라와~ · 뒤돌아 확인</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="adventure" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '抱紧背包 · 乖巧守候')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_08.jpg" alt="抱紧背包 · 乖巧守候" style="width:142px; height:142px; object-fit:contain; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#08 <span data-zh>抱紧背包 · 乖巧守候</span><span data-ko>소중한 배낭 · 얌전 대기</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="mood" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '眨眼卖萌 · 随时待命')" title="点击查看高清原图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_form_final.jpg" alt="眨眼卖萌 · 随时待命" style="width:142px; height:142px; object-fit:cover; border-radius:16px; background:#FFFDF7; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#09 <span data-zh>眨眼卖萌 · 随时待命</span><span data-ko>윙크 뿜뿜 · 준비 완료!</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="adventure" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '气喘吁吁 · 包好重呀')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_10.jpg" onerror="this.onerror=null;this.src='assets/kun_emo_10.jpg'" alt="气喘吁吁 · 包好重呀" style="width:142px; height:142px; object-fit:cover; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#10 <span data-zh>气喘吁吁 · 包好重呀</span><span data-ko>헉헉.. · 배낭 무거워!</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="adventure" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '两眼放光 · 发现美食')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_11.jpg" onerror="this.onerror=null;this.src='assets/kun_emo_11.jpg'" alt="两眼放光 · 发现美食" style="width:142px; height:142px; object-fit:cover; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#11 <span data-zh>两眼放光 · 发现美食</span><span data-ko>눈이 번쩍 · 맛집 발견!</span></span>
+</div>
+<div class="emoticon-cell" data-emo-cat="adventure" style="cursor:pointer; padding:14px 10px;" onclick="openComicModal(this.querySelector('img').src, '吃饱躺平 · 幸福满分')" title="点击查看 720P 高清大图 / 클릭하여 고화질 원본 보기">
+  <img src="assets/kun_sticker_12.jpg" onerror="this.onerror=null;this.src='assets/kun_emo_12.jpg'" alt="吃饱躺平 · 幸福满分" style="width:142px; height:142px; object-fit:cover; border-radius:16px; background:#222631; padding:4px; border:2px solid #F5A623; margin-bottom:10px; image-rendering:-webkit-optimize-contrast;" />
+  <span style="font-size:0.82rem; font-weight:700;">#12 <span data-zh>吃饱躺平 · 幸福满分</span><span data-ko>배불러~ · 행복 만땅!</span></span>
+</div>
 </div>
 <div class="kun-note-strip" style="margin-top:16px;">
-<span data-zh>✦ <b>W5 P 表情包预留矩阵说明：</b>上方展示前 12 枚核心动态/静态表情切片，完整「24种 × 3套（阳光同行篇 / 探险吃货篇 / 反差守护篇）」共 72 枚表情贴图与 PNG 透明包已预留标准网格与一键打包下载接口。</span>
-<span data-ko>✦ <b>W5 P 이모티콘 슬롯 안내:</b> 핵심 표정 12종 프리뷰 및 24종 × 3세트(총 72종) 전체 이모티콘 팩 다운로드 슬롯이 완비되어 있습니다.</span>
+<span data-zh>✦ <b>W5 P 表情包说明：</b>已收录柴犬·困全部 12 款单人高清表情贴图（涵盖「阳光同行日常篇 · 探险吃货与背包篇 · 小情绪与反差萌篇」三大主题），每一枚图文严格对应，支持分类筛选、点击放大预览及一键下载完整 ZIP 包。</span>
+<span data-ko>✦ <b>W5 P 이모티콘 안내:</b> 시바견 곤 전용 고화질 단독 이모티콘 12종(일상 동행 · 탐험 먹방 · 반전 감정 3가지 테마)이 수록되어 있으며, 테마별 필터링, 원본 확대 보기 및 전체 ZIP 다운로드를 지원합니다.</span>
+</div>
+</div>
+<!-- ================= TAB 6: W5 P 周边 (굿즈 / 手机动态壁纸 + 实体周边提案) ================= -->
+<div class="kun-tab-panel" id="kun-tab-6" role="tabpanel">
+<div class="kun-panel-header">
+<div>
+<span class="kun-panel-step">W5 P · 굿즈 · LIVE WALLPAPER &amp; GOODS · 모바일 라이브 배경화면 및 실물 굿즈</span>
+<h3>
+<span data-zh>W5 P · 周边企划 · 柴犬·困 手机动态壁纸 &amp; 实体周边提案</span>
+<span data-ko>W5 P · 굿즈 기획 · 시바견 곤 모바일 라이브 배경화면 &amp; 실물 굿즈 제안</span>
+</h3>
+</div>
+<div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+<a href="assets/kun_live_wallpaper.mp4" download="柴犬困_手机动态壁纸.mp4" class="copy-prompt-btn" style="padding:8px 18px; font-size:0.86rem; text-decoration:none; display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg, #F5A623 0%, #D98218 100%); color:#1E162B; font-weight:900; border-color:#FFF3D1;">
+<span data-zh>⬇ 下载高清手机动态壁纸 (MP4)</span><span data-ko>⬇ 모바일 라이브 배경화면 다운로드 (MP4)</span>
+</a>
+<span class="kun-charm-pill">📱 <span data-zh>9:16 竖屏无缝循环动态锁屏</span><span data-ko>9:16 세로형 무한 루프 잠금화면</span></span>
+</div>
+</div>
+
+<div class="kun-two-col-cards" style="align-items:stretch;">
+<!-- Left Column: 9:16 Mobile Live Lock-Screen Wallpaper Interactive Preview -->
+<div class="kun-info-card" style="border:2px solid #F5A623; background:linear-gradient(170deg, rgba(48,36,68,0.92) 0%, rgba(24,18,34,0.96) 100%); display:flex; flex-direction:column; justify-content:space-between;">
+<div>
+<div class="kun-card-title" style="justify-content:space-between; flex-wrap:wrap;">
+<div style="display:flex; align-items:center; gap:12px;">
+<span class="card-icon">📱</span>
+<div>
+<h4><span data-zh>手机动态壁纸 · 《贴贴屏幕！粉嫩肉垫问候篇》</span><span data-ko>모바일 라이브 배경화면 · 《화면 콕! 분홍 젤리 발바닥 인사》</span></h4>
+<small><span data-zh>9:16 竖屏高清实机锁屏效果预览 · 自动循环播放</span><span data-ko>9:16 세로형 스마트폰 잠금화면 실시간 프리뷰 · 자동 무한 재생</span></small>
+</div>
+</div>
+<button type="button" id="kun-wp-ui-btn" onclick="toggleKunWallpaperUI()" class="copy-prompt-btn" style="padding:5px 12px; font-size:0.76rem; cursor:pointer;">
+<span data-zh>🕒 显示/隐藏锁屏时钟预览</span><span data-ko>🕒 잠금화면 시계 표시/숨김</span>
+</button>
+</div>
+
+<!-- Realistic Mobile Phone Lock-Screen Frame (Pure Continuous Looping Dynamic Wallpaper) -->
+<div style="display:flex; justify-content:center; margin:18px 0 16px;">
+<div onclick="ensureKunWallpaperPlaying()" style="position:relative; width:100%; max-width:292px; aspect-ratio:9/16; border-radius:38px; border:4px solid #F5A623; background:radial-gradient(circle at center, #2A203D 0%, #120E1A 100%); box-shadow:0 22px 48px rgba(0,0,0,0.72), 0 0 32px rgba(245,166,35,0.28); overflow:hidden;">
+<!-- Subtle LIVE Looping Indicator Pill (auto-fades or stays tiny in corner) -->
+<div style="position:absolute; top:12px; right:14px; z-index:4; pointer-events:none; padding:2px 8px; border-radius:999px; background:rgba(20,15,30,0.52); backdrop-filter:blur(4px); border:1px solid rgba(245,166,35,0.55); font-size:0.65rem; font-weight:900; color:#FFF3D1; display:inline-flex; align-items:center; gap:4px;">
+<span style="width:6px; height:6px; border-radius:50%; background:#35D07F; box-shadow:0 0 6px #35D07F; display:inline-block;"></span>LIVE
+</div>
+
+<!-- Always-On Seamless Looping Dynamic Wallpaper Video (No misleading static poster!) -->
+<video id="kun-live-wp-video" src="assets/kun_live_wallpaper.mp4?v=live2026" autoplay muted loop playsinline webkit-playsinline preload="auto" disablePictureInPicture controlslist="nodownload nofullscreen noremoteplayback" style="width:100%; height:100%; object-fit:cover; display:block; pointer-events:none;">
+<source src="assets/kun_live_wallpaper.mp4?v=live2026" type="video/mp4">
+</video>
+
+<!-- Optional Mobile Lock-Screen Clock & Controls Overlay (Default hidden so pure wallpaper shines unobstructed!) -->
+<div id="kun-wp-lock-overlay" style="opacity:0; position:absolute; inset:0; pointer-events:none; z-index:3; display:flex; flex-direction:column; justify-content:space-between; padding:34px 18px 12px; background:linear-gradient(180deg, rgba(16,12,24,0.32) 0%, transparent 24%, transparent 78%, rgba(16,12,24,0.44) 100%); transition:opacity 0.28s ease;">
+<div style="text-align:center;">
+<div style="font-size:0.72rem; font-weight:800; letter-spacing:0.08em; color:#FFFDF7; text-shadow:0 2px 8px rgba(0,0,0,0.75); opacity:0.95;">
+🔒 <span data-zh>ZERO POINT ZOO · 阳光营地</span><span data-ko>ZERO POINT ZOO · 햇살 캠프</span>
+</div>
+<div style="font-size:2.7rem; font-weight:900; line-height:1.05; letter-spacing:2px; color:#FFFDF7; text-shadow:0 4px 16px rgba(0,0,0,0.72); font-family:var(--font-rounded);">00:00</div>
+<div style="display:inline-block; margin-top:4px; padding:2px 10px; border-radius:999px; background:rgba(30,22,43,0.58); backdrop-filter:blur(6px); border:1px solid rgba(245,166,35,0.55); font-size:0.7rem; font-weight:800; color:#FFF3D1;">
+<span data-zh>☀️ 今天也，一起走吧！</span><span data-ko>☀️ 오늘도, 함께 가자!</span>
+</div>
+</div>
+
+<div>
+<div style="display:flex; justify-content:space-between; align-items:center; padding:0 4px; margin-bottom:10px;">
+<span style="width:36px; height:36px; border-radius:50%; background:rgba(20,15,30,0.58); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.22); display:inline-flex; align-items:center; justify-content:center; font-size:0.92rem;">🔦</span>
+<span style="font-size:0.68rem; font-weight:700; color:#FFFDF7; text-shadow:0 2px 6px rgba(0,0,0,0.85);">
+<span data-zh>轻触屏幕收获肉垫贴贴</span><span data-ko>화면을 깨우면 곤이 인사해요</span>
+</span>
+<span style="width:36px; height:36px; border-radius:50%; background:rgba(20,15,30,0.58); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.22); display:inline-flex; align-items:center; justify-content:center; font-size:0.92rem;">📷</span>
+</div>
+<div style="width:104px; height:4px; border-radius:999px; background:rgba(255,255,255,0.9); margin:0 auto; box-shadow:0 1px 4px rgba(0,0,0,0.5);"></div>
+</div>
+</div>
+</div>
+</div>
+
+<p style="font-size:0.88rem; color:var(--text-Soft); line-height:1.65; margin-bottom:14px;">
+<span data-zh><b>画面亮点：</b>困透过贴满爱心❤️、星星⭐与小花🌸贴纸的圆形舷窗玻璃，眨着弯弯笑眼将软乎乎的脸蛋与粉嫩肉垫前爪紧紧贴在手机屏幕上——每次点亮手机锁屏，都能收到困困隔着屏幕的治愈贴贴与同行问候！</span>
+<span data-ko><b>디자인 포인트:</b> 하트·별·꽃 스티커가 붙은 둥근 유리창 너머로 곤이 윙크하며 통통한 볼과 분홍 젤리 발바닥을 스마트폰 화면에 ‘콕!’ 맞대고 반갑게 인사하는 힐링 라이브 잠금화면입니다.</span>
+</p>
+</div>
+
+<a href="assets/kun_live_wallpaper.mp4" download="柴犬困_手机动态壁纸.mp4" class="kun-enter-room-btn" style="text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px; padding:12px 18px; font-size:0.94rem; font-weight:900;">
+<span data-zh>⬇ 一键保存手机动态壁纸原片 (MP4 · 9:16)</span>
+<span data-ko>⬇ 모바일 라이브 배경화면 원본 저장 (MP4 · 9:16)</span>
+</a>
+</div>
+
+<!-- Right Column: Physical Merchandise Proposals + Wallpaper Setup Tips -->
+<div class="kun-info-card" style="display:flex; flex-direction:column; justify-content:space-between; gap:16px;">
+<div>
+<div class="kun-card-title">
+<span class="card-icon">🎁</span>
+<div>
+<h4><span data-zh>实体周边企划提案（公仔 / 护符 / 贴屏挂件）</span><span data-ko>실물 굿즈 디자인 제안 (인형 / 부적 / 키링)</span></h4>
+<small><span data-zh>围绕「陪伴旅行 · 粉嫩肉垫 · 幸运护符」三大角色符号延展</span><span data-ko>동행 여행 · 분홍 젤리 발바닥 · 행운 부적 핵심 모티브 확장</span></small>
+</div>
+</div>
+
+<div style="display:flex; flex-direction:column; gap:12px;">
+<!-- Goods Item 01 -->
+<div style="display:flex; gap:14px; align-items:center; background:rgba(30,22,43,0.72); border:1.5px solid rgba(245,166,35,0.38); border-radius:16px; padding:12px 14px;">
+<img src="assets/kun_form_final.jpg" alt="柴犬困毛绒公仔提案" onclick="openComicModal(this.src, 'GOODS 01 · 20cm 柴犬困毛绒公仔（含可拆卸大背包）')" style="width:72px; height:72px; object-fit:cover; border-radius:14px; background:#FFFDF7; border:2px solid #F5A623; flex-shrink:0; cursor:pointer;" />
+<div>
+<div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:4px;">
+<span style="background:#F5A623; color:#1E162B; font-size:0.7rem; font-weight:900; padding:2px 8px; border-radius:8px;">GOODS 01</span>
+<strong style="color:#FFF3D1; font-size:0.95rem;"><span data-zh>20cm 柴犬困棉花公仔（含可拆卸探险背包）</span><span data-ko>20cm 시바견 곤 봉제 인형 (탈부착 여행 배낭)</span></strong>
+</div>
+<p style="font-size:0.83rem; color:var(--text-Soft); line-height:1.5; margin:0;">
+<span data-zh>还原暖黄连帽风衣与胸前小柴犬金属铭牌，背后大容量立体双肩包支持磁吸拆卸，可收纳耳机与零钱。</span>
+<span data-ko>노란 후드 바람막이와 시바 메달을 정교하게 재현했으며, 등 뒤의 입체 배낭은 탈부착 수납 파우치로 활용 가능합니다.</span>
+</p>
+</div>
+</div>
+
+<!-- Goods Item 02 -->
+<div style="display:flex; gap:14px; align-items:center; background:rgba(30,22,43,0.72); border:1.5px solid rgba(224,90,71,0.48); border-radius:16px; padding:12px 14px;">
+<img src="assets/kun_sticker_08.jpg" alt="阳光满途幸运御守护符" onclick="openComicModal(this.src, 'GOODS 02 · 「阳光满途」织锦刺绣平安御守护符')" style="width:72px; height:72px; object-fit:contain; border-radius:14px; background:#222631; border:2px solid #E05A47; flex-shrink:0; cursor:pointer;" />
+<div>
+<div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:4px;">
+<span style="background:#E05A47; color:#FFF; font-size:0.7rem; font-weight:900; padding:2px 8px; border-radius:8px;">GOODS 02</span>
+<strong style="color:#FFF3D1; font-size:0.95rem;"><span data-zh>「阳光满途」织锦刺绣幸运御守护符</span><span data-ko>‘햇살 가득’ 자수 행운 부적 키링</span></strong>
+</div>
+<p style="font-size:0.83rem; color:var(--text-Soft); line-height:1.5; margin:0;">
+<span data-zh>复刻困背包侧边悬挂的红色平安护符，正面烫金刺绣柴犬笑脸与肉垫印记，内置随机每日鼓励吉签卡。</span>
+<span data-ko>곤의 배낭에 달린 붉은 행운 부적을 실물화하여 금박 시바 자수와 랜덤 응원 운세 카드를 담았습니다.</span>
+</p>
+</div>
+</div>
+
+<!-- Goods Item 03 -->
+<div style="display:flex; gap:14px; align-items:center; background:rgba(30,22,43,0.72); border:1.5px solid rgba(245,166,35,0.38); border-radius:16px; padding:12px 14px;">
+<img src="assets/kun_sticker_01.jpg" alt="贴屏粉嫩肉垫捏捏乐与透卡立牌" onclick="openComicModal(this.src, 'GOODS 03 · 贴屏粉嫩肉垫硅胶挂件 & 舷窗透卡亚克力立牌')" style="width:72px; height:72px; object-fit:contain; border-radius:14px; background:#222631; border:2px solid #F5A623; flex-shrink:0; cursor:pointer;" />
+<div>
+<div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:4px;">
+<span style="background:#F5A623; color:#1E162B; font-size:0.7rem; font-weight:900; padding:2px 8px; border-radius:8px;">GOODS 03</span>
+<strong style="color:#FFF3D1; font-size:0.95rem;"><span data-zh>贴屏肉垫慢回弹挂件 &amp; 舷窗亚克力透卡</span><span data-ko>분홍 발바닥 말랑 키링 &amp; 투명 포토카드 스탠드</span></strong>
+</div>
+<p style="font-size:0.83rem; color:var(--text-Soft); line-height:1.5; margin:0;">
+<span data-zh>提取动态壁纸同款「贴屏粉嫩肉垫 + 圆形舷窗贴纸」视觉制作高透打卡框与Q弹硅胶捏捏乐钥匙扣。</span>
+<span data-ko>라이브 배경화면 속 ‘유리창 콕 발바닥’ 장면을 그대로 살린 투명 아크릴 포토프레임과 말랑 젤리 키링입니다.</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Mobile Wallpaper Setup Guide Box -->
+<div style="background:rgba(245,166,35,0.1); border:1.5px dashed rgba(245,166,35,0.55); border-radius:16px; padding:14px 16px;">
+<div style="font-size:0.84rem; font-weight:900; color:#F5A623; margin-bottom:6px;">
+📲 <span data-zh>手机动态锁屏壁纸设置指南</span><span data-ko>모바일 라이브 배경화면 설정 가이드</span>
+</div>
+<div style="font-size:0.8rem; color:var(--text-Soft); line-height:1.6;">
+<div>• <b>Android：</b><span data-zh>下载 MP4 至手机相册 → 打开视频点击右上角「设为壁纸 / 动态锁屏」即可生效。</span><span data-ko>MP4 저장 후 갤러리 메뉴에서 ‘배경화면으로 설정 → 잠금화면’을 선택하세요.</span></div>
+<div style="margin-top:3px;">• <b>iPhone (iOS)：</b><span data-zh>保存 MP4 后使用 intoLive 等工具转为「实况照片 (Live Photo)」，在锁屏壁纸中选用即可按压动态播放。</span><span data-ko>intoLive 앱 등으로 Live Photo 변환 후 잠금화면으로 지정하면 터치 시 움직입니다.</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="kun-note-strip" style="margin-top:18px;">
+<span data-zh>✦ <b>W5 P 周边企划说明：</b>已正式上线柴犬·困专属 9:16 竖屏高清手机动态壁纸（支持锁屏时钟实机预览与 MP4 原片下载），并配套规划公仔、刺绣护符与贴屏肉垫挂件三大核心实体周边。</span>
+<span data-ko>✦ <b>W5 P 굿즈 기획 안내:</b> 시바견 곤 전용 9:16 모바일 라이브 배경화면(잠금화면 시계 프리뷰 및 MP4 원본 다운로드 지원)과 봉제 인형·행운 부적·발바닥 키링 실물 굿즈 제안이 수록되어 있습니다.</span>
 </div>
 </div>
 </div>
@@ -4370,7 +4574,7 @@ grid-template-columns: 1fr;
 <div class="w-plan-code"><span>W5 P</span><span>06</span></div>
 <div class="w-plan-zh"><span data-zh>周边</span><span data-ko>굿즈</span></div>
 <div class="w-plan-ko">굿즈 · goods</div>
-<div class="w-plan-desc"><span data-zh>壁纸、实体周边提案</span><span data-ko>배경화면, 실물 굿즈 제안</span></div>
+<div class="w-plan-desc" id="m-w6-btn-desc"><span data-zh>壁纸、实体周边提案</span><span data-ko>배경화면, 실물 굿즈 제안</span></div>
 </button>
 </div>
 <!-- Member W1 P Panel: 角色介绍 (캐릭터 소개 / about) -->
@@ -4498,10 +4702,11 @@ grid-template-columns: 1fr;
 <div class="kun-panel-header">
 <div>
 <span class="kun-panel-step">W5 P · 굿즈 · GOODS · 배경화면, 실물 굿즈 제안</span>
-<h3><span data-zh>W5 P · 周边预留位（壁纸、实体周边提案）</span><span data-ko>W5 P · 굿즈 전용 슬롯 (배경화면, 실물 굿즈 제안)</span></h3>
+<h3 id="m-w6-heading"><span data-zh>W5 P · 周边预留位（壁纸、实体周边提案）</span><span data-ko>W5 P · 굿즈 전용 슬롯 (배경화면, 실물 굿즈 제안)</span></h3>
 </div>
-<span class="kun-charm-pill">🎁 <span data-zh>高清壁纸 + 实体周边企划展位</span><span data-ko>배경화면 + 실물 굿즈 제안 슬롯</span></span>
+<span class="kun-charm-pill" id="m-w6-badge">🎁 <span data-zh>高清壁纸 + 实体周边企划展位</span><span data-ko>배경화면 + 실물 굿즈 제안 슬롯</span></span>
 </div>
+<div id="m-goods-container">
 <div class="kun-two-col-cards">
 <div class="kun-info-card" style="text-align:center; padding:36px 24px; border-style:dashed;">
 <div style="font-size:2.5rem; margin-bottom:10px;">🖼️</div>
@@ -4512,6 +4717,7 @@ grid-template-columns: 1fr;
 <div style="font-size:2.5rem; margin-bottom:10px;">🧸</div>
 <h4 style="color:#F5A623; margin-bottom:8px;"><span data-zh>实体周边提案预留位 (실물 굿즈 제안)</span><span data-ko>실물 굿즈 디자인 제안 슬롯</span></h4>
 <p style="color:var(--text-Soft); font-size:0.88rem;"><span data-zh>预留毛绒玩偶、亚克力立牌、徽章挂件等角色专属实体周边企划图位。</span><span data-ko>봉제 인형, 아크릴 스탠드, 키링 등 실물 굿즈 목업이 배치될 영역입니다.</span></p>
+</div>
 </div>
 </div>
 </div>
@@ -4563,12 +4769,12 @@ grid-template-columns: 1fr;
 <script>
 const MEMBERS_DATA = {
 cat: {
-avatar: 'assets/char_cat.jpg',
+avatar: 'assets/cat_standee.jpg',
 creatorZh: '👤 创作者：李桂婷 LI GUITING · MEMBER 02 个人角色主页',
 creatorKo: '👤 창작자: 이계정 LI GUITING · MEMBER 02 개인 캐릭터 페이지',
 titleZh: '白猫 · 球球 (흰 고양이 · 치우치우)',
 titleKo: '흰 고양이 · 치우치우 (白猫 · 球球)',
-roleZh: '银灰短发精致白猫 · 观察记录者 · 核心情绪：妒羡 (질투·선망)',
+roleZh: '银渐层精致白猫 · 观察记录者 · 核心情绪：妒羡 (질투·선망)',
 roleKo: '은회색 단발의 섬세한 고양이 · 관찰 기록자 · 핵심 감정: 질투·선망',
 sayZh: '「“为什么每次被你们记住的，都不是我？”」',
 sayKo: '「“왜 매번 여러분이 기억해 주시는 건 제가 아닌가요?”」',
@@ -4576,8 +4782,90 @@ neverZh: '🚫 绝不会说：“只要没人注意我，我就已经很满足�
 neverKo: '🚫 하지 않는 말: “아무도 저를 신경 쓰지 않기만 해도 충분히 만족합니다.”',
 propsZh: '紫色骷髅扣斗篷（感知情绪与周围环境变化）、同伴情绪观察笔记',
 propsKo: '보라색 해골 버클 망토(감정 및 환경 변화 감지), 동료 감정 관찰 노트',
-storyZh: '<p><b>【角色故事 · 캐릭터 스토리】</b>球球是一只渴望被注视与铭记的精致白猫。在每日零点重置的迷宫里，她被「妒羡」束缚，总是羡慕同伴们鲜明的能力，表面上假装高冷不在乎、偶尔故意搅局，实则每天都在笔记本上偷偷记录六位伙伴的情绪变化，并在背后默默补救。</p><p style="margin-top:8px;"><b>【专属头衔 · 직함】</b>零点动物园 · 首席情绪观察记录官 / 제로 포인트 동물원 · 수석 감정 관찰 기록관</p>',
-recipeZh: '<p><b>【角色素材表 · 재료표】</b>45% 渴望被记住的傲娇真心 + 30% 感知情绪波动的紫色骷髅扣斗篷 + 15% 偷偷写满同伴名字的观察日记 + 10% 嘴硬心软的事后补救。</p><p style="margin-top:8px;"><b>【角色关系 · 관계도】</b>羡慕水獭·露的感染力，常被柴犬·困直球夸奖斗篷好看而害羞脸红。</p>'
+storyZh: '<p><b>【角色故事 · 캐릭터 스토리】</b>球球是一只渴望被注视与铭记的精致银渐层白猫。在每日零点重置的迷宫里，她被「妒羡」束缚，总是羡慕同伴们鲜明的能力，表面上假装高冷不在乎、偶尔故意搅局，实则每天都在笔记本上偷偷记录六位伙伴的情绪变化，并在背后默默补救。</p><p style="margin-top:8px;"><b>【专属头衔 · 직함】</b>零点动物园 · 首席情绪观察记录官 / 제로 포인트 동물원 · 수석 감정 관찰 기록관</p>',
+recipeZh: '<p><b>【角色素材表 · 재료표】</b>45% 渴望被记住的傲娇真心 + 30% 感知情绪波动的紫色骷髅扣斗篷 + 15% 偷偷写满同伴名字的观察日记 + 10% 嘴硬心软的事后补救。</p><p style="margin-top:8px;"><b>【角色关系 · 관계도】</b>羡慕水獭·露的感染力，常被柴犬·困直球夸奖斗篷好看而害羞脸红。</p>',
+comics: [
+  {
+    epZh: '★ EPISODE 01 · 情绪感知篇',
+    epKo: '★ EPISODE 01 · 감정 감지 편',
+    titleZh: '《你不必把情绪藏起来的》',
+    titleKo: '《감정을 숨기지 않아도 괜찮아》',
+    img: 'assets/cat_comic_1.png',
+    alt: '四格漫画：你不必把情绪藏起来的',
+    storyZh: '<b>剧情亮点：</b>赤狐九尾故作元气地笑着说“我今天心情超好！”，却没逃过白猫球球敏锐的情绪感知——她一眼看穿了九尾笑容背后沉重悲伤的伪装，轻轻走到九尾身边安慰道：“你在勉强自己笑，你其实很难过……你不必把情绪藏起来的。”傲娇外表下藏着最细腻温柔的共情力。',
+    storyKo: '<b>스토리 포인트:</b> 구미호가 애써 밝은 척 “오늘 정말 기분 좋아!”라고 웃어 보이지만, 치우치우는 그의 무겁고 슬픈 속마음을 단번에 알아챕니다. 조용히 다가가 “억지로 웃고 있잖아. 감정을 숨기지 않아도 괜찮아.”라며 따뜻하게 위로해 줍니다.',
+    dialogues: [
+      { cut: '1컷', zh: '九尾：我今天心情超好！（球球感知：他的情绪是沉重悲伤。）', ko: '구미호: 오늘 정말 기분 좋아! (그의 감정은 무겁고 슬퍼.)' },
+      { cut: '2컷', zh: '球球：我感受到他的情绪是沉重悲伤的……', ko: '치우치우: 그의 감정은 무겁고 슬퍼…' },
+      { cut: '3컷', zh: '球球：你在勉强自己笑，你其实很难过。', ko: '큐큐: 억지로 웃고 있잖아. 슬퍼하고 있어.' },
+      { cut: '4컷', zh: '球球：你不必把情绪藏起来的。', ko: '큐큐: 감정을 숨기지 않아도 괜찮아.' }
+    ]
+  },
+  {
+    epZh: '★ EPISODE 02 · 妒羡心事篇',
+    epKo: '★ EPISODE 02 · 질투와 시선 편',
+    titleZh: '《我才不想和你玩…？》',
+    titleKo: '《너랑 놀고 싶지 않아…?》',
+    img: 'assets/cat_comic_2.jpg',
+    alt: '四格漫画：我才不想和你玩…？',
+    storyZh: '<b>剧情亮点：</b>九尾兴高采烈地邀请球球“一起玩吧！”，嘴硬傲娇的球球却冷冰冰地拒绝“不要，我才不想和你玩”。没过多久，软萌的白兔安月跑来邀请失落的九尾一起玩耍。躲在树后的球球默默看着他们有说有笑的身影，眼底藏不住既羡慕又别扭的小小妒羡。',
+    storyKo: '<b>스토리 포인트:</b> 구미호가 “큐큐야! 같이 놀자!”라고 다가오자 츤데레 치우치우는 “싫어. 너랑 놀고 싶지 않아.”라며 차갑게 거절합니다. 잠시 후 토끼 안월이 구미호와 함께 어울리는 모습을 보며 나무 뒤에 숨어 부러움과 질투 어린 시선으로 바라봅니다.',
+    dialogues: [
+      { cut: '1컷', zh: '九尾：球球呀！一起玩吧！ / 球球：不要，我才不想和你玩。', ko: '여우: 큐큐야! 같이 놀자! / 큐큐: 싫어. 너랑 놀고 싶지 않아.' },
+      { cut: '2컷', zh: '（被拒绝后低头失落走开的九尾……）', ko: '(거절당하고 시무룩해진 여우…)' },
+      { cut: '3컷', zh: '安月：九尾呀，不想和我一起玩吗？', ko: '토끼: 여우야, 나랑 놀고 싶지 않아?' },
+      { cut: '4컷', zh: '安月：九尾呀！一起玩吧！（球球躲在树后默默看着……）', ko: '토끼: 여우야! 같이 놀자! (나무 뒤에서 몰래 지켜보는 큐큐…)' }
+    ]
+  }
+],
+animation: {
+  src: 'assets/cat-short01.mov',
+  titleZh: '《白猫·球球 · 专属动画短片 #01（树荫下的妒羡与加入）》',
+  titleKo: '《흰 고양이 · 치우치우 전용 애니메이션 #01》',
+  aspectRatio: '16/9',
+  isLandscape: true,
+  mimeType: ''
+},
+animation2: {
+  src: 'assets/cat-short02.mov',
+  titleZh: '《白猫·球球 · 专属动画短片 #02（木地板可爱手势舞）》',
+  titleKo: '《흰 고양이 · 치우치우 전용 애니메이션 #02》',
+  aspectRatio: '16/9',
+  isLandscape: true,
+  mimeType: ''
+},
+emoticons: [
+  { img: 'assets/cat_expr_01.jpg', zh: '傲娇 · 别过脸', ko: '새침 · 츤데레' },
+  { img: 'assets/cat_expr_02.jpg', zh: '生气 · 才不是呢！', ko: '화남 · 아니거든!' },
+  { img: 'assets/cat_expr_03.jpg', zh: '嫌弃 · 咦…真是…', ko: '질색 · 칫… 정말…' },
+  { img: 'assets/cat_expr_04.jpg', zh: '惊讶 · 探头 !?!', ko: '깜짝 · 빼꼼 !?!' },
+  { img: 'assets/cat_expr_05.jpg', zh: '你们在看我吗…？', ko: '나 보고 있는 거야…?' },
+  { img: 'assets/cat_expr_06.jpg', zh: '抓到一只！扑蝶', ko: '한 마리 잡았다!' },
+  { img: 'assets/cat_expr_07.jpg', zh: 'Zzz · 我没有不开心…', ko: '쿨쿨 · 기분 안 나빠…' },
+  { img: 'assets/cat_expr_08.jpg', zh: '调皮 · 威严记录', ko: '장난꾸러기 · 위엄' },
+  { img: 'assets/cat_expr_09.jpg', zh: '嫉妒 · 捉迷藏偷看', ko: '질투 · 숨바꼭질' },
+  { img: 'assets/cat_expr_10.jpg', zh: '闹别扭 · 假装漠不关心', ko: '삐짐 · 무관심' }
+],
+emoticonZip: 'assets/cat_emoticons.zip',
+emoticonZipName: 'cat_emoticons.zip',
+app: {
+  icon: '🐱',
+  accent: '#B392F0',
+  accentDark: '#6C4AB6',
+  accentSoft: 'rgba(179,146,240,0.16)',
+  accentBg: 'linear-gradient(135deg, rgba(156,124,244,0.14) 0%, rgba(245,166,35,0.08) 100%)',
+  border: 'rgba(179,146,240,0.45)',
+  btnBorder: '#EAE0FF',
+  badgeBg: 'rgba(156,124,244,0.22)',
+  height: '760px',
+  titleZh: '球球的情绪小鱼干屋 & 猫咪运势占卜',
+  titleKo: '치우치우의 생선가게 & 오늘의 고양이 운세',
+  subtitleZh: '点击投喂小鱼干 / 摸头哄猫减压 · 摇动紫色斗篷抽取今日猫运签（支持双语与音效）',
+  subtitleKo: '생선 간식 주기 & 쓰담쓰담 힐링 미니게임 · 보라색 망토 오늘의 고양이 운세 뽑기',
+  tagsZh: ['投喂小鱼干', '傲娇哄猫减压', '今日猫咪占卜', '双语切换', 'Web Audio萌音'],
+  tagsKo: ['간식주기게임', '힐링터치', '오늘의운세', '한중이중언어', '자체효과음'],
+  url: 'apps/cat-app/index.html'
+}
 },
 shark: {
 avatar: 'assets/char_shark.jpg',
@@ -4674,6 +4962,7 @@ emoticonZipName: 'shark_emoticons.zip',
 app: {
   icon: '🦈',
   themeColor: '#F5A623',
+  badgeBg: 'rgba(245,166,35,0.22)',
   titleZh: '샤샤수면 · SleepyShark (深海睡眠记录与助眠)',
   titleKo: '샤샤수면 · SleepyShark (심해 수면 트래커 & 힐링 사운드)',
   subtitleZh: '智能跨午夜时长计算 · 温暖零说教情绪关怀 · 7日睡眠趋势图表 · 5轨深海多声道白噪音调音台 · 所长亲密度互动',
@@ -4768,6 +5057,7 @@ emoticonZipName: 'fox_emoticons.zip',
 app: {
   icon: '🦊',
   themeColor: '#FF7A00',
+  badgeBg: 'rgba(255,122,0,0.22)',
   titleZh: '点心/午餐决定轮盘 · 꼬마 여우의 점심 메뉴 룰렛 (Fox Lunch Roulette)',
   titleKo: '점심 메뉴 결정 룰렛 · 꼬마 여우의 맛집 탐험대 (Lunch Roulette & Explorer)',
   subtitleZh: '告别选择困难 · HTML5 Canvas 动态减速自旋轮盘 · 真实机械齿轮音效 · 500m 美食雷达地图 · 饱腹感能量槽与饮食日记 · 自定义心愿菜单库',
@@ -4796,20 +5086,166 @@ recipeZh: '<p><b>【角色素材表 · 재료표】</b>55% 永不褪色的记忆
 },
 rabbit: {
 avatar: 'assets/char_rabbit.jpg',
-creatorZh: '👤 创作者：梁露宇 양로우 · MEMBER 06 个人角色主页',
-creatorKo: '👤 창작자: 양로우 梁露宇 · MEMBER 06 개인 캐릭터 페이지',
+creatorZh: '👤 创作者：梁露宇 양로우（202323040）· MEMBER 06 个人角色主页',
+creatorKo: '👤 창작자: 양로우 梁露宇（202323040）· MEMBER 06 개인 캐릭터 페이지',
 titleZh: '白兔 · 安月 (흰 토끼 · 안월)',
 titleKo: '흰 토끼 · 안월 (白兔 · 安月)',
-roleZh: '长耳柔软Q版白兔 · 五秒先知 · 核心情绪：恐惧 (두려움)',
-roleKo: '긴 귀와 부드러운 외형의 흰 토끼 · 위험 예지자 · 핵심 감정: 두려움',
+roleZh: '探索者 · 观察记录员 · 预警者 · 核心情绪：恐惧 (두려움)',
+roleKo: '탐험가 · 관찰 기록원 · 위험 예지자 · 핵심 감정: 두려움',
+sloganZh: '细心观察星夜变化，握紧黄色对讲机守护同伴。',
+sloganKo: '별밤의 미세한 변화를 관찰하고, 노란 무전기로 동료를 지킨다.',
+keywordsZh: ['细腻', '谨慎', '敏感', '勇敢'],
+keywordsKo: ['섬세함', '신중함', '예민함', '용기'],
+card1TitleZh: '一、基础信息卡片 &amp; 角色背景故事',
+card1TitleKo: '1. 기본 정보 카드 &amp; 캐릭터 배경 스토리',
+card1SubZh: '零点动物园 MEMBER 06 · 观察者 &amp; 预警者',
+card1SubKo: '제로 포인트 동물원 MEMBER 06 · 관찰자 &amp; 예지자',
+card2TitleZh: '二、核心设定卡片',
+card2TitleKo: '2. 핵심 설정 카드',
+card2SubZh: '性格特征、标志性元素、习惯动作、代表道具与专属头衔',
+card2SubKo: '성격 특성, 상징 요소, 습관 행동, 대표 소품 및 전용 칭호',
 sayZh: '「“等、等一下！前面好像有什么东西……”」',
 sayKo: '「“잠깐, 잠깐만요! 앞에 뭔가 있는 것 같은데요……”」',
 neverZh: '🚫 绝不会说：“就算看到危险，我也懒得提醒你们。”',
 neverKo: '🚫 하지 않는 말: “위험해 보여도 굳이 일러드릴 생각이 없습니다.”',
-propsZh: '黄色手持小警报器、记录本、避难标记贴',
-propsKo: '노란색 소형 경보기, 기록장, 대피 표식 스티커',
-storyZh: '<p><b>【角色故事 · 캐릭터 스토리】</b>垂着长耳朵的柔软白兔安月，对周围的风吹草动极度敏感，拥有提前预判未来 5 秒内危险的特殊能力。虽然因为「恐惧」而常常瑟瑟发抖，分不清真实预言与噩梦，但她每次都会鼓起勇气拉响手中的小警报器保护全体同伴。</p><p style="margin-top:8px;"><b>【专属头衔 · 직함】</b>零点动物园 · 五秒先知 &amp; 避难所吹哨人 / 5초 미래 위험 예지자</p>',
-recipeZh: '<p><b>【角色素材表 · 재료표】</b>50% 提前5秒感知危险的长耳朵雷达 + 25% 随时拉响的黄色手持警报器 + 15% 贴满安全屋的避难标记贴 + 10% 颤抖却从不退缩的善良。</p><p style="margin-top:8px;"><b>【角色关系 · 관계도】</b>每当害怕发抖时，柴犬·困总是第一个冲上来握住她的手并借给她平安护符。</p>'
+propsZh: '黄色对讲机、笔记本、背包及探索装备',
+propsKo: '노란색 무전기, 관찰 노트, 배낭 및 탐험 장비',
+storyZh: '<div style="background:rgba(255,255,255,0.03); border:1px solid rgba(245,166,35,0.22); border-radius:12px; padding:16px; margin-bottom:14px;"><div style="font-weight:750; font-size:1.05rem; color:#F5A623; margin-bottom:12px; display:flex; align-items:center; gap:8px;"><span style="display:inline-block; width:4px; height:18px; background:#F5A623; border-radius:2px;"></span><span data-zh>基础信息卡片</span><span data-ko>기본 정보 카드</span></div><div style="display:flex; flex-direction:column; gap:10px; font-size:0.93rem; line-height:1.65;"><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline;"><span style="color:var(--text-Soft); min-width:85px; font-weight:600;"><span data-zh>角色名称：</span><span data-ko>캐릭터 이름:</span></span><span style="color:var(--text); font-weight:700;">安月（白兔）/ 안월 (흰 토끼)</span></div><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline;"><span style="color:var(--text-Soft); min-width:85px; font-weight:600;"><span data-zh>职业身份：</span><span data-ko>직업 신분:</span></span><span style="color:var(--text);"><span data-zh>探索者、观察记录员</span><span data-ko>탐험가, 관찰 기록원</span></span></div><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline;"><span style="color:var(--text-Soft); min-width:85px; font-weight:600;"><span data-zh>成员与学号：</span><span data-ko>멤버 및 학번:</span></span><span style="color:var(--text); font-weight:700;">梁露宇（양로우），202323040</span></div><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline;"><span style="color:var(--text-Soft); min-width:85px; font-weight:600;"><span data-zh>角色定位：</span><span data-ko>캐릭터 포지션:</span></span><span style="color:var(--text); flex:1;"><span data-zh>观察者、预警者。负责观察环境、记录线索，并预判即将发生的危险，为团队提供危险预警。</span><span data-ko>관찰자, 경보자. 환경을 살피고 단서를 기록하며 곧 다가올 위험을 예지해 팀에 경보를 전달함.</span></span></div><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:center;"><span style="color:var(--text-Soft); min-width:85px; font-weight:600;"><span data-zh>代表色：</span><span data-ko>대표 색상:</span></span><span style="display:inline-flex; align-items:center; gap:8px; flex-wrap:wrap;"><span data-zh>白色、灰蓝色、黄色</span><span data-ko>화이트, 슬레이트 블루, 옐로우</span><span style="display:inline-flex; gap:5px; align-items:center; margin-left:4px;"><span style="display:inline-block; width:16px; height:16px; border-radius:50%; background:#FAF6EE; border:1.5px solid rgba(0,0,0,0.25);" title="白色 #FAF6EE"></span><span style="display:inline-block; width:16px; height:16px; border-radius:50%; background:#8FA4BC; border:1.5px solid rgba(255,255,255,0.4);" title="灰蓝色 #8FA4BC"></span><span style="display:inline-block; width:16px; height:16px; border-radius:50%; background:#F6DC80; border:1.5px solid rgba(0,0,0,0.2);" title="黄色 #F6DC80"></span></span></span></div></div></div><div style="background:rgba(255,255,255,0.03); border:1px solid rgba(245,166,35,0.22); border-radius:12px; padding:16px;"><div style="font-weight:750; font-size:1.05rem; color:#F5A623; margin-bottom:10px; display:flex; align-items:center; gap:8px;"><span style="display:inline-block; width:4px; height:18px; background:#F5A623; border-radius:2px;"></span><span data-zh>三、角色背景故事</span><span data-ko>3. 캐릭터 배경 스토리</span></div><p style="margin-bottom:8px;"><span data-zh>安月生活在“零点动物园”这一特殊世界中。零点动物园是一座吞噬废弃城市的神秘牢笼，也是一座不断变化的迷宫。这里的地形与生态每天凌晨都会随机重组，环境充满未知与危险。在这个世界里，每天零点所有存在的情绪都会归零十分钟；未能及时归位的存在将沦为没有灵魂的空壳，而每一种特殊能力也都伴随着不可逆的代价。</span><span data-ko>안월은 폐허가 된 도시를 삼킨 신비한 미궁 ‘제로 포인트 동물원’에서 살아갑니다. 매일 자정 지형과 생태가 무작위로 재조합되고, 모든 존재의 감정이 10분간 초기화되는 위험한 세계입니다.</span></p><p style="margin-bottom:8px;"><span data-zh>作为一只白兔，安月拥有敏锐的观察能力，能够察觉环境中的细微变化，并预判未来数秒内可能发生的危险。她在团队中承担探索、观察、记录和预警的职责，通过黄色对讲机传递危险信息，并用笔记本记录发现的线索。安月的核心情绪是恐惧。她容易担心，也会对未知情况保持警惕，但她并没有因此放弃自己的职责，而是努力观察环境、判断危险，并及时提醒同伴。</span><span data-ko>흰 토끼 안월은 예민한 관찰력으로 몇 초 뒤의 위험을 예지해 노란 무전기로 알리고 노트에 단서를 기록합니다. 핵심 감정은 ‘두려움’이지만, 동료들을 지키기 위해 끝까지 책임을 다합니다.</span></p><p style="color:#F6DC80; font-weight:700;"><span data-zh>角色专属口头禅：“等、等一下！前面好像有什么东西……”</span><span data-ko>전용 말버릇: “잠깐, 잠깐만요! 앞에 뭔가 있는 것 같은데요……”</span></p></div>',
+recipeZh: '<div style="background:rgba(255,255,255,0.03); border:1px solid rgba(245,166,35,0.22); border-radius:12px; padding:16px;"><div style="font-weight:750; font-size:1.05rem; color:#F5A623; margin-bottom:12px; display:flex; align-items:center; gap:8px;"><span style="display:inline-block; width:4px; height:18px; background:#F5A623; border-radius:2px;"></span><span data-zh>核心设定卡片</span><span data-ko>핵심 설정 카드</span></div><div style="display:flex; flex-direction:column; gap:10px; font-size:0.93rem; line-height:1.65;"><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline;"><span style="color:var(--text-Soft); min-width:115px; font-weight:600;"><span data-zh>1. 性格特征：</span><span data-ko>1. 성격 특성:</span></span><span style="color:var(--text); flex:1;"><span data-zh>细腻、谨慎、敏感、勇敢。能够察觉周围环境中的细微变化，容易因发现异常而过度担心；核心情绪为“恐惧”，胆小敏感同时具有提前预警意识。</span><span data-ko>섬세함, 신중함, 예민함, 용기. 핵심 감정은 ‘두려움’으로 겁이 많고 예민하지만, 위험을 미리 포착해 알리는 사명감을 지니고 있음.</span></span></div><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline;"><span style="color:var(--text-Soft); min-width:115px; font-weight:600;"><span data-zh>2. 标志性元素：</span><span data-ko>2. 상징 요소:</span></span><span style="color:var(--text); flex:1;"><span data-zh>白色兔子形象、修长兔耳（内侧呈粉色）、大眼睛、头顶蓬松毛发、灰蓝色服装、黄色对讲机、背包及探索装备。</span><span data-ko>흰 토끼 외형, 안쪽이 분홍빛인 긴 귀, 큰 눈과 앞머리 털, 슬레이트 블루 탐험복, 노란 무전기, 배낭 및 탐험 장비.</span></span></div><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline;"><span style="color:var(--text-Soft); min-width:115px; font-weight:600;"><span data-zh>3. 习惯动作：</span><span data-ko>3. 습관 행동:</span></span><span style="color:var(--text); flex:1;"><span data-zh>观察周围环境留意细微变化；发现异常时竖起耳朵；警觉时握紧黄色对讲机；发现线索后记录；通过对讲机提醒同伴。</span><span data-ko>주변 관찰, 이상 감지 시 귀를 쫑긋 세움, 경계 시 노란 무전기를 꽉 쥠, 단서 기록 후 무전기로 동료에게 알림.</span></span></div><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline;"><span style="color:var(--text-Soft); min-width:115px; font-weight:600;"><span data-zh>4. 代表道具：</span><span data-ko>4. 대표 소품:</span></span><span style="color:var(--text); flex:1;"><span data-zh>黄色对讲机（传递危险信息）、笔记本（记录并保存线索）、背包（携带探索所需物品）。</span><span data-ko>노란색 무전기(위험 전달), 관찰 노트(단서 기록), 배낭(탐험 장비 휴대).</span></span></div><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline;"><span style="color:var(--text-Soft); min-width:115px; font-weight:600;"><span data-zh>5. 专属头衔：</span><span data-ko>5. 전용 칭호:</span></span><span style="color:var(--text); flex:1; font-weight:700; color:#F6DC80;"><span data-zh>观察者 · 预警者</span><span data-ko>관찰자 · 위험 예지자</span></span></div></div></div>',
+comics: [
+  {
+    epZh: '★ EPISODE 01 · 探险装备篇',
+    epKo: '★ EPISODE 01 · 탐험 가방 편',
+    titleZh: '《安月的探险包》',
+    titleKo: '《안월의 탐험 가방》',
+    img: 'assets/rabbit_comic_1.jpg',
+    alt: '白兔·安月 四格漫画：安月的探险包',
+    storyZh: '<b>剧情亮点：</b>胆小却极其谨慎的白兔安月在出发探索前，认真清点自己的随身斜挎包：地图与观察笔记本用来记录每处细节，黄色对讲机与指南针确保与同伴时刻联络不迷路，急救包与水壶则守护每次出发的安全感。',
+    storyKo: '<b>스토리 포인트:</b> 겁은 많지만 누구보다 신중한 흰 토끼 안월이 탐험을 떠나기 전 가방을 꼼꼼히 점검합니다. 지도와 관찰 노트, 노란 무전기와 나침반, 구급상자와 물병까지 챙기며 안전하게 출발할 준비를 마칩니다.',
+    dialogues: [
+      { cut: '1컷', zh: '安月：安月的探险包', ko: '안월: 안월의 탐험 가방' },
+      { cut: '2컷', zh: '安月：随身记录：地图与笔记本', ko: '안월: 휴대 기록: 지도와 노트' },
+      { cut: '3컷', zh: '安月：保持联络：对讲机与指南针', ko: '안월: 연락 유지: 무전기와 나침반' },
+      { cut: '4컷', zh: '安月：安全出发：急救包与水壶', ko: '안월: 안전한 출발: 구급상자와 물병' }
+    ]
+  },
+  {
+    epZh: '★ EPISODE 02 · 晨间发现篇',
+    epKo: '★ EPISODE 02 · 아침 탐험 기록 편',
+    titleZh: '《晨间探索记录》',
+    titleKo: '《아침 탐험 일기》',
+    img: 'assets/rabbit_comic_2.jpg',
+    alt: '白兔·安月 四格漫画：晨间探索记录',
+    storyZh: '<b>剧情亮点：</b>清晨元气满满说“早上好！”出门巡查的安月，敏锐地注意到了石墙小径旁一朵不起眼的小白花。虽然总是带着谨慎的小问号，但她立刻蹲下用相机拍下这份小小惊喜，并坐下来在观察笔记本上完成今天的探索记录。',
+    storyKo: '<b>스토리 포인트:</b> 상쾌하게 아침 인사를 건네고 순찰에 나선 안월은 돌담길 옆 작은 들꽃을 예민하게 발견합니다. 조심스레 카메라로 작은 놀라움을 담고, 관찰 노트에 오늘의 기록을 뿌듯하게 완성합니다.',
+    dialogues: [
+      { cut: '1컷', zh: '安月：早上好！', ko: '안월: 좋은 아침!' },
+      { cut: '2컷', zh: '安月：咦？', ko: '안월: 어?' },
+      { cut: '3컷', zh: '安月：发现小小惊喜。', ko: '안월: 작은 놀라움을 발견했어.' },
+      { cut: '4컷', zh: '安月：今日记录完成！', ko: '안월: 오늘의 기록 완료!' }
+    ]
+  }
+],
+app: {
+  icon: '🐰',
+  accent: '#B794F4',
+  accentDark: '#6B46C1',
+  accentSoft: 'rgba(246,220,128,0.16)',
+  accentBg: 'linear-gradient(135deg, rgba(46,36,84,0.72) 0%, rgba(246,220,128,0.08) 100%)',
+  border: 'rgba(246,220,128,0.45)',
+  btnBorder: '#FCEAA8',
+  badgeBg: 'rgba(183,148,244,0.22)',
+  height: '860px',
+  titleZh: '安月 AN YUE · 星夜探索陪伴 APP',
+  titleKo: '안월 AN YUE · 별밤 탐험 동행 앱',
+  subtitleZh: '星夜场景互动 · 角色档案表情 · 手绘观察日记卡 · 黄色对讲机异常警报（完整手机交互原型）',
+  subtitleKo: '별밤 탐험 인터랙션 · 캐릭터 표정 도감 · 손그림 관찰 일기 · 노란 무전기 이상 경보 앱',
+  tagsZh: ['星夜探索陪伴', '手绘日记记录卡', '黄色对讲机警报', '部位触摸互动', '原创角色原型'],
+  tagsKo: ['별밤탐험동행', '손그림관찰일기', '노란무전기경보', '부위터치반응', '오리지널IP앱'],
+  url: 'apps/rabbit-app/index.html'
+},
+animation: {
+  src: 'assets/rabbit-short01.mp4',
+  titleZh: '《白兔·安月 · 专属动画短片 #01》',
+  titleKo: '《흰 토끼 · 안월 전용 애니메이션 #01》',
+  aspectRatio: '16/9',
+  isLandscape: true
+},
+animation2: {
+  src: 'assets/rabbit-short02.mp4',
+  titleZh: '《白兔·安月 · 专属动画短片 #02》',
+  titleKo: '《흰 토끼 · 안월 전용 애니메이션 #02》',
+  aspectRatio: '16/9',
+  isLandscape: true
+},
+emoticons: [
+  { img: 'assets/rabbit_expr_01.png', zh: '开心欢呼 · 举手', ko: '만세 · 신남!' },
+  { img: 'assets/rabbit_expr_02.png', zh: '害羞偷笑 · 眯眼', ko: '히히 · 부끄' },
+  { img: 'assets/rabbit_expr_03.png', zh: '叉腰鼓腮 · 生气', ko: '흥! · 뾰루퉁' },
+  { img: 'assets/rabbit_expr_04.png', zh: '垂耳委屈 · 哭泣', ko: '훌쩍 · 울먹' },
+  { img: 'assets/rabbit_expr_05.png', zh: '惊吓捂嘴 · ！！', ko: '깜짝이야!!' },
+  { img: 'assets/rabbit_expr_06.png', zh: '脸红捂脸 · 害羞', ko: '발그레 · 부끄' },
+  { img: 'assets/rabbit_expr_07.png', zh: '歪头沉思 · ？', ko: '음..? · 의문' },
+  { img: 'assets/rabbit_expr_08.png', zh: '元气挥手 · 早安', ko: '좋은 아침!' },
+  { img: 'assets/rabbit_expr_09.png', zh: '垂耳疲惫 · 晕乎', ko: '어질어질..' },
+  { img: 'assets/rabbit_expr_10.png', zh: '捧手祈愿 · 拜托', ko: '제발~ · 부탁' },
+  { img: 'assets/rabbit_expr_11.png', zh: '星星眼 · 期待', ko: '반짝반짝!' },
+  { img: 'assets/rabbit_expr_12.png', zh: '抱枕熟睡 · 晚安', ko: '잘 자요.. Zzz' }
+],
+emoticonZip: 'assets/rabbit_emoticons.zip',
+emoticonZipName: 'rabbit_emoticons.zip',
+wallpapers: [
+  {
+    img: 'assets/rabbit_wallpaper_1.jpg',
+    ratio: '16:9 横屏桌面壁纸',
+    ratioKo: '16:9 데스크톱 배경화면',
+    titleZh: '《星月萤火 · 观测笔记壁纸》',
+    titleKo: '《별달 반딧불 · 관찰 일기 배경화면》',
+    descZh: '弯月星轨与荧光草地之间，安月手握黄色对讲机与观察笔记本静静记录夜色变化。',
+    descKo: '초승달과 반딧불이 숲 속에서 노란 무전기와 노트를 들고 밤을 기록하는 안월.'
+  },
+  {
+    img: 'assets/rabbit_wallpaper_2.jpg',
+    ratio: '9:16 竖屏手机壁纸',
+    ratioKo: '9:16 모바일 잠금화면',
+    titleZh: '《林荫花海 · 午后观察壁纸》',
+    titleKo: '《나무 그늘 꽃밭 · 오후 관찰 배경화면》',
+    descZh: '大树浓荫与蒲公英花丛中，安月抱着线圈笔记本写下今日探索发现，对讲机与背包在身旁静静守候。',
+    descKo: '큰 나무 아래 꽃밭에서 노트를 펼치고 탐험 기록을 적는 안월.'
+  }
+],
+goods: [
+  {
+    code: 'GOODS 01',
+    icon: '🧸',
+    titleZh: '20cm 安月探索者毛绒公仔',
+    titleKo: '20cm 안월 탐험가 봉제 인형',
+    tagZh: '桌面摆件 / 陪伴玩偶',
+    tagKo: '데스크 피규어 / 동행 인형',
+    descZh: '还原安月经典白兔形象与灰蓝色探险服，搭配黄色对讲机及随身装备，柔软亲肤，可作为桌面摆件或随身陪伴玩偶。',
+    descKo: '안월의 클래식 흰 토끼 외형과 슬레이트 블루 탐험복, 노란 무전기 및 장비를 재현한 부드러운 20cm 봉제 인형.'
+  },
+  {
+    code: 'GOODS 02',
+    icon: '📡',
+    titleZh: '安月黄色对讲机亚克力挂件',
+    titleKo: '안월 노란 무전기 아크릴 키링',
+    tagZh: '透明亚克力 / 角色识别物',
+    tagKo: '투명 아크릴 / 시그니처 아이템',
+    descZh: '以安月标志性黄色对讲机为设计原型，搭配安月Q版形象，采用透明亚克力材质，突出角色专属识别元素。',
+    descKo: '안월의 상징인 노란 무전기와 SD 캐릭터를 투명 아크릴로 제작해 개성을 살린 키링.'
+  },
+  {
+    code: 'GOODS 03',
+    icon: '📓',
+    titleZh: '安月探索记录本 & 表情贴纸套装',
+    titleKo: '안월 탐험 기록 노트 & 이모티콘 스티커 세트',
+    tagZh: '文具套装 / 12款专属贴纸',
+    tagKo: '문구 세트 / 12종 전용 스티커',
+    descZh: '以探索笔记本为主题，搭配安月12款专属表情贴纸，融入星星、月亮及脚印元素，兼具实用性与收藏价值。',
+    descKo: '탐험 노트를 테마로 별·달·발자국 요소와 12종 안월 표정 스티커를 담은 실용 문구 세트.'
+  }
+]
 },
 otter: {
 avatar: 'assets/char_otter.jpg',
@@ -4893,6 +5329,7 @@ emoticons: [
 emoticonZip: 'assets/otter_emoticons.zip',
 emoticonZipName: 'otter_emoticons.zip',
 app: {
+  icon: '🦦',
   titleZh: '水獭·露的健康一句话手账',
   titleKo: '수달·루의 한 줄 건강 다이어리',
   subtitleZh: '按日期写健康一句话日记 · 心情印章盖印 · 满10格海獭鼓掌激励',
@@ -5029,9 +5466,10 @@ function renderMemberAnimation(m) {
     }
     if (badge) {
       if (hasBoth) {
+        const isLand1 = m.animation && (m.animation.isLandscape || m.animation.aspectRatio === '16/9');
         const isMixed = (m.animation2 && (m.animation2.isLandscape || m.animation2.aspectRatio === '16/9'));
-        const badgeZh = isMixed ? '已收录 9:16 竖屏 + 16:9 横屏双格式动画' : '已收录专属动画短片（共 2 部 · 原画幅比例）';
-        const badgeKo = isMixed ? '9:16 세로형 + 16:9 와이드 영상 수록 완료' : '전용 숏폼 애니메이션 2편 수록 완료 (원작 비율)';
+        const badgeZh = (isLand1 && isMixed) ? '已收录 2 部 16:9 横屏专属动画短片' : (isMixed ? '已收录 9:16 竖屏 + 16:9 横屏双格式动画' : '已收录专属动画短片（共 2 部 · 原画幅比例）');
+        const badgeKo = (isLand1 && isMixed) ? '16:9 와이드 전용 애니메이션 2편 수록 완료' : (isMixed ? '9:16 세로형 + 16:9 와이드 영상 수록 완료' : '전용 숏폼 애니메이션 2편 수록 완료 (원작 비율)');
         badge.innerHTML = `🎬 <span data-zh>${badgeZh}</span><span data-ko>${badgeKo}</span>`;
       } else {
         badge.innerHTML = `🎬 <span data-zh>已收录专属 9:16 竖屏短片</span><span data-ko>전용 9:16 숏폼 영상 수록 완료</span>`;
@@ -5046,16 +5484,20 @@ function renderMemberAnimation(m) {
     let html = `<div class="shortform-grid" style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:24px;">`;
 
     if (m.animation) {
-      const anim1Ratio = m.animation.aspectRatio || '9/16';
+      const isLand1 = m.animation.isLandscape || m.animation.aspectRatio === '16/9';
+      const anim1Ratio = m.animation.aspectRatio || (isLand1 ? '16/9' : '9/16');
+      const anim1MaxWidth = isLand1 ? '580px' : (m.animation.maxWidth || '295px');
+      const badgeFormat1 = isLand1 ? '16:9 ANIMATION' : '9:16 SHORT';
+      const type1Attr = m.animation.mimeType !== undefined ? (m.animation.mimeType ? ` type="${m.animation.mimeType}"` : '') : ' type="video/mp4"';
       html += `
-<div class="shortform-phone" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:${anim1Ratio}; border-radius:32px; border:3px solid #F5A623; width:100%; max-width:295px;">
+<div class="shortform-phone ${isLand1 ? 'landscape' : ''}" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:${anim1Ratio}; max-width:${anim1MaxWidth}; max-height:none; width:100%; border-radius:32px; border:3px solid #F5A623;">
   <video controls playsinline loop preload="metadata" style="width:100%; height:100%; object-fit:contain; background:#000; border-radius:28px; display:block;">
-    <source src="${m.animation.src}#t=0.001" type="video/mp4">
-    <source src="${m.animation.src}" type="video/mp4">
-    ${m.animation.altSrc ? `<source src="${m.animation.altSrc}" type="video/mp4">` : ''}
+    <source src="${m.animation.src}#t=0.001"${type1Attr}>
+    <source src="${m.animation.src}"${type1Attr}>
+    ${m.animation.altSrc ? `<source src="${m.animation.altSrc}"${type1Attr}>` : ''}
   </video>
   <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(15,10,25,0.92) 25%); padding:18px 16px 14px; pointer-events:none;">
-    <span class="compare-badge gold" style="font-size:0.75rem; pointer-events:auto;">🎬 9:16 SHORT #01</span>
+    <span class="compare-badge gold" style="font-size:0.75rem; pointer-events:auto;">🎬 ${badgeFormat1} #01</span>
     <h4 style="color:#FFF3D1; font-size:1rem; margin:6px 0 3px; text-shadow:0 2px 4px rgba(0,0,0,0.8);">
       <span data-zh>${m.animation.titleZh}</span><span data-ko>${m.animation.titleKo}</span>
     </h4>
@@ -5068,12 +5510,13 @@ function renderMemberAnimation(m) {
       const anim2Ratio = m.animation2.aspectRatio || (isLand ? '16/9' : '9/16');
       const anim2MaxWidth = isLand ? '580px' : (m.animation2.maxWidth || '295px');
       const badgeFormat = isLand ? '16:9' : (m.animation2.aspectRatio || '9:16');
+      const type2Attr = m.animation2.mimeType !== undefined ? (m.animation2.mimeType ? ` type="${m.animation2.mimeType}"` : '') : ' type="video/mp4"';
       html += `
 <div class="shortform-phone ${isLand ? 'landscape' : ''}" style="padding:0; overflow:hidden; position:relative; background:#000; box-shadow:0 18px 42px rgba(0,0,0,0.7); aspect-ratio:${anim2Ratio}; max-width:${anim2MaxWidth}; max-height:none; width:100%; border-radius:32px; border:3px solid #F5A623;">
   <video controls playsinline loop preload="metadata" style="width:100%; height:100%; object-fit:contain; background:#000; border-radius:28px; display:block;">
-    <source src="${m.animation2.src}#t=0.001" type="video/mp4">
-    <source src="${m.animation2.src}" type="video/mp4">
-    ${m.animation2.altSrc ? `<source src="${m.animation2.altSrc}" type="video/mp4">` : ''}
+    <source src="${m.animation2.src}#t=0.001"${type2Attr}>
+    <source src="${m.animation2.src}"${type2Attr}>
+    ${m.animation2.altSrc ? `<source src="${m.animation2.altSrc}"${type2Attr}>` : ''}
   </video>
   <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(15,10,25,0.92) 25%); padding:18px 16px 14px; pointer-events:none;">
     <span class="compare-badge gold" style="font-size:0.75rem; pointer-events:auto;">🎬 ${badgeFormat} ANIMATION #02</span>
@@ -5152,31 +5595,31 @@ function renderMemberApp(m) {
       btnDesc.innerHTML = `<span data-zh>★ ${m.app.titleZh} (已上线)</span><span data-ko>★ ${m.app.titleKo} (서비스 중)</span>`;
     }
 
-    const appIcon = m.app.icon || (currentMemberId === 'fox' ? '🦊' : (currentMemberId === 'shark' ? '🦈' : (currentMemberId === 'otter' ? '🦦' : '🕹️')));
-    const themeColor = m.app.themeColor || (currentMemberId === 'fox' ? '#FF7A00' : (currentMemberId === 'shark' ? '#F5A623' : '#52C49C'));
-    const btnBg = currentMemberId === 'fox'
-      ? 'linear-gradient(135deg, #FF7A00 0%, #EA580C 100%)'
-      : (currentMemberId === 'shark' 
-        ? 'linear-gradient(135deg, #F5A623 0%, #D48806 100%)' 
-        : 'linear-gradient(135deg, #52C49C 0%, #2E8B6B 100%)');
-    const btnColor = currentMemberId === 'shark' ? '#1E162B' : '#FFF';
-    const cardBorder = currentMemberId === 'fox' ? 'rgba(255,122,0,0.5)' : (currentMemberId === 'shark' ? 'rgba(245,166,35,0.45)' : 'rgba(82,196,156,0.4)');
-    const cardBg = currentMemberId === 'fox'
+    const appIcon = m.app.icon || (currentMemberId === 'fox' ? '🦊' : (currentMemberId === 'shark' ? '🦈' : (currentMemberId === 'otter' ? '🦦' : (currentMemberId === 'cat' ? '🐱' : (currentMemberId === 'rabbit' ? '🐰' : '🕹️')))));
+    const accent = m.app.accent || m.app.themeColor || (currentMemberId === 'fox' ? '#FF7A00' : (currentMemberId === 'shark' ? '#F5A623' : '#52C49C'));
+    const accentDark = m.app.accentDark || (currentMemberId === 'fox' ? '#EA580C' : (currentMemberId === 'shark' ? '#D48806' : '#2E8B6B'));
+    const accentSoft = m.app.accentSoft || `${accent}22`;
+    const accentBg = m.app.accentBg || (currentMemberId === 'fox'
       ? 'linear-gradient(135deg, rgba(255,122,0,0.15) 0%, rgba(30,22,43,0.7) 100%)'
       : (currentMemberId === 'shark'
         ? 'linear-gradient(135deg, rgba(245,166,35,0.12) 0%, rgba(30,22,43,0.7) 100%)'
-        : 'linear-gradient(135deg, rgba(82,196,156,0.08) 0%, rgba(245,166,35,0.06) 100%)');
+        : 'linear-gradient(135deg, rgba(82,196,156,0.08) 0%, rgba(245,166,35,0.06) 100%)'));
+    const borderCol = m.app.border || (currentMemberId === 'fox' ? 'rgba(255,122,0,0.5)' : (currentMemberId === 'shark' ? 'rgba(245,166,35,0.45)' : 'rgba(82,196,156,0.4)'));
+    const btnBorder = m.app.btnBorder || accent;
+    const btnColor = currentMemberId === 'shark' ? '#1E162B' : '#FFF';
+    const appHeight = m.app.height || '880px';
+    const frameBg = currentMemberId === 'otter' ? '#FFFDF7' : '#0F141B';
 
-    const tagsZhHtml = m.app.tagsZh ? m.app.tagsZh.map(t => `<span class="backpack-tag" style="background:${themeColor}22; border:1px solid ${themeColor}; color:${themeColor}; font-size:0.78rem;">#${t}</span>`).join('') : '';
-    const tagsKoHtml = m.app.tagsKo ? m.app.tagsKo.map(t => `<span class="backpack-tag" style="background:${themeColor}22; border:1px solid ${themeColor}; color:${themeColor}; font-size:0.78rem;">#${t}</span>`).join('') : '';
+    const tagsZhHtml = m.app.tagsZh ? m.app.tagsZh.map(t => `<span class="backpack-tag" style="background:${accentSoft}; border:1px solid ${accent}; color:${accent}; font-size:0.78rem;">#${t}</span>`).join('') : '';
+    const tagsKoHtml = m.app.tagsKo ? m.app.tagsKo.map(t => `<span class="backpack-tag" style="background:${accentSoft}; border:1px solid ${accent}; color:${accent}; font-size:0.78rem;">#${t}</span>`).join('') : '';
 
     container.innerHTML = `
-      <div class="kun-info-card" style="padding: 20px 24px; margin-bottom: 20px; border: 2px solid ${cardBorder}; background: ${cardBg};">
+      <div class="kun-info-card" style="padding: 20px 24px; margin-bottom: 20px; border: 2px solid ${borderCol}; background: ${accentBg};">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
           <div>
             <div style="display:flex; align-items:center; gap:8px;">
               <span style="font-size:1.6rem;">${appIcon}</span>
-              <h4 style="color:${themeColor}; font-size:1.3rem; font-weight:900; margin:0;">
+              <h4 style="color:${accent}; font-size:1.3rem; font-weight:900; margin:0;">
                 <span data-zh>${m.app.titleZh}</span>
                 <span data-ko>${m.app.titleKo}</span>
               </h4>
@@ -5187,7 +5630,7 @@ function renderMemberApp(m) {
             </p>
           </div>
           <div style="display:flex; gap:10px;">
-            <a href="${m.app.url}" target="_blank" class="copy-prompt-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; background:${btnBg}; border-color:${themeColor}; color:${btnColor}; font-weight:800; padding:8px 16px;">
+            <a href="${m.app.url}" target="_blank" class="copy-prompt-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg, ${accent} 0%, ${accentDark} 100%); border-color:${btnBorder}; color:${btnColor}; font-weight:800; padding:8px 16px;">
               <span data-zh>↗ 新标签页独立全屏打开</span>
               <span data-ko>↗ 새 창 전체화면 열기</span>
             </a>
@@ -5198,9 +5641,8 @@ function renderMemberApp(m) {
           <span data-ko>${tagsKoHtml}</span>
         </div>
       </div>
-      
       <!-- 嵌入式应用主视窗 -->
-      <div style="position:relative; width:100%; border-radius:18px; overflow:hidden; border:2px solid rgba(217, 164, 65, 0.4); box-shadow:0 14px 40px rgba(0,0,0,0.45); background:#0F141B;">
+      <div style="position:relative; width:100%; border-radius:18px; overflow:hidden; border:2px solid rgba(217, 164, 65, 0.4); box-shadow:0 14px 40px rgba(0,0,0,0.45); background:${frameBg};">
         <div style="display:flex; justify-content:space-between; align-items:center; background:#2A2338; padding:8px 16px; border-bottom:1px solid rgba(217,164,65,0.25);">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="width:11px; height:11px; border-radius:50%; background:#FF5F56; display:inline-block;"></span>
@@ -5217,7 +5659,7 @@ function renderMemberApp(m) {
         <iframe 
           id="member-app-iframe" 
           src="${m.app.url}" 
-          style="width:100%; height:880px; border:none; display:block;"
+          style="width:100%; height:${appHeight}; border:none; display:block;"
           title="${m.app.titleZh}">
         </iframe>
       </div>
@@ -5298,6 +5740,107 @@ function renderMemberEmoticons(m) {
 </div>`;
   }
 }
+
+function renderMemberGoods(m) {
+  const container = document.getElementById('m-goods-container');
+  const heading = document.getElementById('m-w6-heading');
+  const badge = document.getElementById('m-w6-badge');
+  const btnDesc = document.getElementById('m-w6-btn-desc');
+  if (!container) return;
+
+  if ((m.wallpapers && m.wallpapers.length > 0) || (m.goods && m.goods.length > 0)) {
+    if (heading) {
+      heading.innerHTML = `<span data-zh>W5 P · 壁纸与实体周边企划 · ${m.titleZh}</span><span data-ko>W5 P · 배경화면 및 실물 굿즈 기획 · ${m.titleKo}</span>`;
+    }
+    if (badge) {
+      badge.innerHTML = `🎁 <span data-zh>已收录 ${m.wallpapers ? m.wallpapers.length : 0} 款主题壁纸 + ${m.goods ? m.goods.length : 0} 项周边企划</span><span data-ko>배경화면 ${m.wallpapers ? m.wallpapers.length : 0}종 + 굿즈 기획 ${m.goods ? m.goods.length : 0}종 수록</span>`;
+    }
+    if (btnDesc) {
+      btnDesc.innerHTML = `<span data-zh>★ 壁纸与周边企划已收录</span><span data-ko>★ 배경화면 &amp; 굿즈 수록</span>`;
+    }
+
+    let html = '';
+    if (m.wallpapers && m.wallpapers.length > 0) {
+      html += `
+      <div class="kun-info-card" style="margin-bottom:20px; border:2px solid rgba(246,220,128,0.45); background:linear-gradient(135deg, rgba(46,36,84,0.68) 0%, rgba(24,18,46,0.92) 100%);">
+        <div class="kun-card-title" style="margin-bottom:14px;">
+          <span class="card-icon">🖼️</span>
+          <div>
+            <h4><span data-zh>专属探索壁纸（横屏桌面 + 竖屏手机）</span><span data-ko>전용 탐험 배경화면 (데스크톱 + 모바일)</span></h4>
+            <small><span data-zh>点击图片可放大预览 · 支持保存原图作为电脑/手机壁纸</span><span data-ko>이미지를 클릭하면 크게 볼 수 있으며 원본 저장이 가능합니다</span></small>
+          </div>
+        </div>
+        <div class="kun-two-col-cards">
+          ${m.wallpapers.map((wp) => `
+            <div style="background:rgba(20,15,38,0.75); border:1.5px solid rgba(246,220,128,0.32); border-radius:16px; overflow:hidden; display:flex; flex-direction:column;">
+              <div style="cursor:pointer; background:#120E24; display:flex; align-items:center; justify-content:center; height:240px; overflow:hidden;" onclick="openComicModal('${wp.img}', '${wp.titleZh}')" title="点击查看大图 / 클릭하여 원본 보기">
+                <img src="${wp.img}" alt="${wp.titleZh}" style="width:100%; height:100%; object-fit:contain; display:block;" />
+              </div>
+              <div style="padding:14px; display:flex; flex-direction:column; gap:6px; flex:1;">
+                <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;">
+                  <span class="backpack-tag" style="background:rgba(246,220,128,0.18); color:#F6DC80; border:1px solid rgba(246,220,128,0.45); font-size:0.75rem;"><span data-zh>${wp.ratio}</span><span data-ko>${wp.ratioKo}</span></span>
+                  <a href="${wp.img}" download class="copy-prompt-btn" style="padding:4px 10px; font-size:0.75rem; text-decoration:none;">⬇ <span data-zh>下载壁纸</span><span data-ko>저장</span></a>
+                </div>
+                <h5 style="margin:2px 0 0; color:#FAF6EE; font-size:1rem;"><span data-zh>${wp.titleZh}</span><span data-ko>${wp.titleKo}</span></h5>
+                <p style="margin:0; font-size:0.86rem; color:var(--text-Soft); line-height:1.55;"><span data-zh>${wp.descZh}</span><span data-ko>${wp.descKo}</span></p>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>`;
+    }
+
+    if (m.goods && m.goods.length > 0) {
+      html += `
+      <div class="kun-info-card" style="border:2px solid rgba(143,164,188,0.42);">
+        <div class="kun-card-title" style="margin-bottom:14px;">
+          <span class="card-icon">🧸</span>
+          <div>
+            <h4><span data-zh>实体周边企划提案（公仔 / 挂件 / 文具）</span><span data-ko>실물 굿즈 기획 제안 (인형 / 키링 / 문구)</span></h4>
+            <small><span data-zh>围绕「探索陪伴 · 观察记录 · 星月治愈」三大角色特色延展</span><span data-ko>「탐험 동행 · 관찰 기록 · 별달 힐링」 3대 키워드 기반 굿즈 라인업</span></small>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:14px;">
+          ${m.goods.map((g) => `
+            <div style="background:rgba(24,18,46,0.72); border:1.5px solid rgba(246,220,128,0.3); border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:8px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:1.7rem;">${g.icon}</span>
+                <span class="backpack-tag" style="background:rgba(245,166,35,0.2); color:#F6DC80; border:1px solid rgba(246,220,128,0.45); font-size:0.75rem; font-weight:800;">${g.code}</span>
+              </div>
+              <h5 style="margin:0; color:#FAF6EE; font-size:1.02rem; line-height:1.4;"><span data-zh>${g.titleZh}</span><span data-ko>${g.titleKo}</span></h5>
+              <span style="font-size:0.78rem; color:#B8C7D9; font-weight:700;"><span data-zh>${g.tagZh}</span><span data-ko>${g.tagKo}</span></span>
+              <p style="margin:0; font-size:0.86rem; color:var(--text-Soft); line-height:1.6;"><span data-zh>${g.descZh}</span><span data-ko>${g.descKo}</span></p>
+            </div>
+          `).join('')}
+        </div>
+      </div>`;
+    }
+    container.innerHTML = html;
+  } else {
+    if (heading) {
+      heading.innerHTML = `<span data-zh>W5 P · 周边预留位（壁纸、实体周边提案）</span><span data-ko>W5 P · 굿즈 전용 슬롯 (배경화면, 실물 굿즈 제안)</span>`;
+    }
+    if (badge) {
+      badge.innerHTML = `🎁 <span data-zh>高清壁纸 + 实体周边企划展位</span><span data-ko>배경화면 + 실물 굿즈 제안 슬롯</span>`;
+    }
+    if (btnDesc) {
+      btnDesc.innerHTML = `<span data-zh>壁纸、实体周边提案</span><span data-ko>배경화면, 실물 굿즈 제안</span>`;
+    }
+    container.innerHTML = `
+<div class="kun-two-col-cards">
+<div class="kun-info-card" style="text-align:center; padding:36px 24px; border-style:dashed;">
+<div style="font-size:2.5rem; margin-bottom:10px;">🖼️</div>
+<h4 style="color:#F5A623; margin-bottom:8px;"><span data-zh>PC / 手机高清主题壁纸预留位 (배경화면 제안)</span><span data-ko>PC / 모바일 배경화면 제안 슬롯</span></h4>
+<p style="color:var(--text-Soft); font-size:0.88rem;"><span data-zh>预留 16:9 桌面壁纸与 9:16 手机锁屏壁纸展示及原图下载位。</span><span data-ko>16:9 데스크톱 및 9:16 모바일 잠금화면 배경화면 프리뷰 및 다운로드 슬롯입니다.</span></p>
+</div>
+<div class="kun-info-card" style="text-align:center; padding:36px 24px; border-style:dashed;">
+<div style="font-size:2.5rem; margin-bottom:10px;">🧸</div>
+<h4 style="color:#F5A623; margin-bottom:8px;"><span data-zh>实体周边提案预留位 (실물 굿즈 제안)</span><span data-ko>실물 굿즈 디자인 제안 슬롯</span></h4>
+<p style="color:var(--text-Soft); font-size:0.88rem;"><span data-zh>预留毛绒玩偶、亚克力立牌、徽章挂件等角色专属实体周边企划图位。</span><span data-ko>봉제 인형, 아크릴 스탠드, 키링 등 실물 굿즈 목업이 배치될 영역입니다.</span></p>
+</div>
+</div>`;
+  }
+}
 function openMemberRoom(id) {
   const parts = id.split('-w');
   const actualId = parts[0];
@@ -5320,10 +5863,15 @@ function openMemberRoom(id) {
     badgesHtml += `<button type="button" onclick="switchMemberWTab(3)" class="backpack-tag" style="background:rgba(245,166,35,0.22); color:#F5A623; border:1.5px solid #F5A623; cursor:pointer; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击切换至动画短片 / 클릭하여 숏폼 영상 보기"><span data-zh>🎬 专属动画 (${animCount}部) ➔</span><span data-ko>🎬 전용 영상 (${animCount}편) ➔</span></button>`;
   }
   if (m.app) {
-    badgesHtml += `<button type="button" onclick="switchMemberWTab(4)" class="backpack-tag" style="background:rgba(82,196,156,0.22); color:#52C49C; border:1.5px solid #52C49C; cursor:pointer; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击切换至专属应用 / 클릭하여 전용 앱 보기"><span data-zh>🕹️ 专属应用 (已上线) ➔</span><span data-ko>🕹️ 전용 앱 (서비스 중) ➔</span></button>`;
+    const appBadgeCol = m.app.accent || m.app.themeColor || '#52C49C';
+    const appBadgeBg = m.app.badgeBg || 'rgba(82,196,156,0.22)';
+    badgesHtml += `<button type="button" onclick="switchMemberWTab(4)" class="backpack-tag" style="background:${appBadgeBg}; color:${appBadgeCol}; border:1.5px solid ${appBadgeCol}; cursor:pointer; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击切换至专属应用 / 클릭하여 전용 앱 보기"><span data-zh>🕹️ 专属应用 (已上线) ➔</span><span data-ko>🕹️ 전용 앱 (서비스 중) ➔</span></button>`;
   }
   if (m.emoticons && m.emoticons.length > 0) {
     badgesHtml += `<button type="button" onclick="switchMemberWTab(5)" class="backpack-tag" style="background:rgba(245,166,35,0.22); color:#F5A623; border:1.5px solid #F5A623; cursor:pointer; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击切换至表情包 / 클릭하여 이모티콘 보기"><span data-zh>😊 专属表情包 (${m.emoticons.length}款) ➔</span><span data-ko>😊 전용 이모티콘 (${m.emoticons.length}종) ➔</span></button>`;
+  }
+  if ((m.wallpapers && m.wallpapers.length > 0) || (m.goods && m.goods.length > 0)) {
+    badgesHtml += `<button type="button" onclick="switchMemberWTab(6)" class="backpack-tag" style="background:rgba(246,220,128,0.2); color:#F6DC80; border:1.5px solid #F6DC80; cursor:pointer; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击查看壁纸与周边企划 / 클릭하여 배경화면 및 굿즈 보기"><span data-zh>🎁 壁纸与周边企划 ➔</span><span data-ko>🎁 배경화면 &amp; 굿즈 ➔</span></button>`;
   }
   document.getElementById('m-badges').innerHTML = badgesHtml;
 
@@ -5385,6 +5933,7 @@ function openMemberRoom(id) {
   renderMemberAnimation(m);
   renderMemberApp(m);
   renderMemberEmoticons(m);
+  renderMemberGoods(m);
   switchMemberWTab(targetTab);
 
   document.documentElement.setAttribute('data-view', 'member');
@@ -5446,6 +5995,103 @@ function switchKunTab(tabNum) {
     const wb = document.getElementById('wplan-btn-' + wKey);
     if (wb) wb.classList.toggle('active', wKey === tabNum);
   });
+  if (tabNum === 6) {
+    ensureKunWallpaperPlaying();
+    requestAnimationFrame(() => ensureKunWallpaperPlaying());
+    setTimeout(ensureKunWallpaperPlaying, 120);
+  }
+}
+function ensureKunWallpaperPlaying() {
+  const wpVid = document.getElementById('kun-live-wp-video');
+  if (!wpVid) return;
+  wpVid.muted = true;
+  wpVid.defaultMuted = true;
+  wpVid.loop = true;
+  wpVid.playsInline = true;
+  if (wpVid.readyState === 0 && wpVid.networkState === 3) {
+    wpVid.load();
+  }
+  const p = wpVid.play();
+  if (p && typeof p.catch === 'function') {
+    p.catch(() => {
+      wpVid.muted = true;
+      setTimeout(() => { wpVid.play().catch(() => {}); }, 180);
+    });
+  }
+}
+(function initKunLiveWallpaperLoop() {
+  const wpVid = document.getElementById('kun-live-wp-video');
+  if (!wpVid) return;
+  wpVid.muted = true;
+  wpVid.defaultMuted = true;
+  wpVid.loop = true;
+  wpVid.playsInline = true;
+
+  // Enforce seamless infinite loop even if browser fires ended or pauses unexpectedly
+  wpVid.addEventListener('ended', () => {
+    wpVid.currentTime = 0;
+    wpVid.play().catch(() => {});
+  });
+  wpVid.addEventListener('pause', () => {
+    const tab6 = document.getElementById('kun-tab-6');
+    if (tab6 && tab6.classList.contains('active') && !document.hidden) {
+      wpVid.play().catch(() => {});
+    }
+  });
+  wpVid.addEventListener('canplay', () => {
+    const tab6 = document.getElementById('kun-tab-6');
+    if (tab6 && tab6.classList.contains('active')) {
+      wpVid.play().catch(() => {});
+    }
+  });
+  document.addEventListener('visibilitychange', () => {
+    const tab6 = document.getElementById('kun-tab-6');
+    if (!document.hidden && tab6 && tab6.classList.contains('active')) {
+      ensureKunWallpaperPlaying();
+    }
+  });
+
+  // Preload into memory Blob so 2s loop is 100% instant & zero-stutter even from hidden tab
+  const mp4Url = 'assets/kun_live_wallpaper.mp4?v=live2026';
+  fetch(mp4Url)
+    .then(r => (r.ok ? r.blob() : Promise.reject(r.status)))
+    .then(blob => {
+      if (blob && blob.size > 100000) {
+        const tab6 = document.getElementById('kun-tab-6');
+        const isActive = tab6 && tab6.classList.contains('active');
+        if (!isActive || wpVid.paused || wpVid.readyState < 2) {
+          const blobUrl = URL.createObjectURL(blob);
+          wpVid.src = blobUrl;
+          wpVid.muted = true;
+          wpVid.loop = true;
+          wpVid.load();
+          if (isActive) {
+            ensureKunWallpaperPlaying();
+          }
+        }
+      }
+    })
+    .catch(() => {
+      wpVid.load();
+    });
+})();
+function filterKunEmoticons(cat, btnEl) {
+  const bar = document.getElementById('kun-emo-filter-bar');
+  if (bar && btnEl) {
+    bar.querySelectorAll('.w1-sub-btn').forEach(b => b.classList.toggle('active', b === btnEl));
+  }
+  const grid = document.getElementById('kun-emoticon-grid');
+  if (!grid) return;
+  grid.querySelectorAll('.emoticon-cell').forEach(cell => {
+    const match = (cat === 'all' || cell.getAttribute('data-emo-cat') === cat);
+    cell.style.display = match ? '' : 'none';
+  });
+}
+function toggleKunWallpaperUI() {
+  const ov = document.getElementById('kun-wp-lock-overlay');
+  if (!ov) return;
+  const hidden = ov.style.opacity === '0';
+  ov.style.opacity = hidden ? '1' : '0';
 }
 function setKunPackMode(mode) {
 const box = document.getElementById('kun-app-pack-result');
