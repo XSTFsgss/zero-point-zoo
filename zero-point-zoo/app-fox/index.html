@@ -1,0 +1,2132 @@
+﻿<!DOCTYPE html>
+<html lang="ko" class="light">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+  <meta content="mobile_tab" name="shell-type"/>
+  <title>점심 메뉴 룰렛 · 꼬마 여우의 맛집 탐험대 (Lunch Roulette)</title>
+
+  <!-- Google Fonts & Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#ea580c",
+            "primary-container": "#cc4900",
+            "primary-fixed": "#ffdbce",
+            "primary-fixed-dim": "#ffb599",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#370e00",
+            "on-primary-fixed-variant": "#7f2b00",
+            "secondary": "#006c49",
+            "secondary-fixed": "#6ffbbe",
+            "secondary-container": "#6cf8bb",
+            "secondary-fixed-dim": "#4edea3",
+            "on-secondary": "#ffffff",
+            "on-secondary-container": "#00714d",
+            "on-secondary-fixed": "#002113",
+            "on-secondary-fixed-variant": "#005236",
+            "tertiary": "#b90538",
+            "tertiary-container": "#dc2c4f",
+            "tertiary-fixed": "#ffdadb",
+            "tertiary-fixed-dim": "#ffb2b7",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-container": "#fffbff",
+            "surface": "#fbf9f1",
+            "surface-bright": "#fbf9f1",
+            "surface-dim": "#dcdad2",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f5f4ec",
+            "surface-container": "#f0eee6",
+            "surface-container-high": "#eae8e0",
+            "surface-container-highest": "#e4e3db",
+            "surface-variant": "#e4e3db",
+            "on-surface": "#1b1c17",
+            "on-surface-variant": "#5a4138",
+            "inverse-surface": "#30312c",
+            "inverse-on-surface": "#f3f1e9",
+            "outline": "#8e7166",
+            "outline-variant": "#e2bfb2",
+            "error": "#ba1a1a",
+            "error-container": "#ffdad6",
+            "on-error": "#ffffff",
+            "on-error-container": "#93000a"
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "margin": "1rem"
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '"Noto Sans KR"', 'sans-serif'],
+            headline: ['"Plus Jakarta Sans"', '"Noto Sans KR"', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', '"Noto Sans KR"', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    @layer base {
+      html, body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #f3f1e9;
+        font-family: 'Plus Jakarta Sans', 'Noto Sans KR', sans-serif;
+        color: #1b1c17;
+      }
+      body {
+        overscroll-behavior: none;
+      }
+      .pb-safe { padding-bottom: max(env(safe-area-inset-bottom, 0px), 16px); }
+      .pt-safe { padding-top: max(env(safe-area-inset-top, 0px), 8px); }
+    }
+    ::-webkit-scrollbar { display: none; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .wheel-canvas-container {
+      position: relative;
+      filter: drop-shadow(0 14px 28px rgba(163, 57, 0, 0.16));
+    }
+    .wheel-glow {
+      box-shadow: 0 0 35px rgba(234, 88, 12, 0.25);
+    }
+    .fade-transition {
+      transition: opacity 0.2s ease-in-out;
+    }
+    @keyframes pulse-slow {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.15); opacity: 0.4; }
+    }
+    .animate-pulse-slow {
+      animation: pulse-slow 3s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-surface-dim min-h-screen flex justify-center selection:bg-primary-fixed">
+
+  <!-- Mobile Frame Container (Centered on desktop, full-width on mobile) -->
+  <div class="w-full max-w-md min-h-screen bg-surface flex flex-col relative shadow-2xl overflow-x-hidden">
+
+    <!-- TOP HEADER -->
+    <header class="fixed top-0 max-w-md w-full z-50 pt-safe bg-surface/90 backdrop-blur-xl shadow-[0_1px_12px_rgba(41,37,36,0.06)] border-b border-outline-variant/20">
+      <div class="h-16 px-4 flex items-center justify-between">
+        <button class="flex items-center justify-center w-11 h-11 rounded-full bg-surface-container-low hover:bg-surface-container active:scale-95 transition-all text-on-surface" onclick="navigateView('roulette')" title="메인 룰렛으로 돌아가기">
+          <span class="material-symbols-outlined text-[20px]" id="header-back-icon">refresh</span>
+        </button>
+        <div class="flex flex-col items-center justify-center text-center">
+          <h1 class="font-bold text-[17px] text-on-surface tracking-tight leading-tight" id="header-title">점심 메뉴 결정 룰렛</h1>
+          <span class="text-[10px] text-primary font-semibold flex items-center gap-0.5">
+            <span class="material-symbols-outlined text-[12px] fill">pets</span>
+            <span>꼬마 여우의 맛집 탐험대</span>
+          </span>
+        </div>
+        <div class="flex items-center gap-1">
+          <button onclick="toggleWheelSound(this)" class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container-low hover:bg-surface-container active:scale-95 transition-all text-on-surface" title="회전 사운드 토글">
+            <span class="material-symbols-outlined text-[19px]" id="header-sound-icon">volume_up</span>
+          </button>
+          <div class="relative flex items-center justify-center w-10 h-10 cursor-pointer" onclick="navigateView('diary')" title="먹방 일지 열기">
+            <div class="relative p-0.5 rounded-full bg-primary-fixed ring-2 ring-primary/30">
+              <img alt="Fox Explorer Avatar" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPkoszB6pI_y45HxzRN-A3mmMW7cl9s0qRQ22zbEk3_GQJnnxoRqVh75_zoAmZRo-fTz1jJzjXkLIgO2pSUvQ2nhFbg4ATufJO87TH_0nTOyXgoo3LdF8VZNdY5qAri79zoMyuzU_EYFQ3qkRRmN5uueD_EaM8XFgrt3m7q2plg8_pY0TeJYiEDRPBBUJCjMf5XcKJICTGla4U0_sInL-oZjbWC81PgtpUwj1xQ7aJNwBjYxTNVQXBbQ"/>
+              <span class="absolute -bottom-0.5 -right-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-primary ring-2 ring-surface text-[8px] text-on-primary font-bold leading-none">⚡</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN VIEWPORT CONTAINER -->
+    <main class="flex flex-col relative w-full pt-16 pb-24 bg-surface flex-grow overflow-x-hidden">
+<div class="view-panel flex flex-col w-full fade-transition" id="view-roulette">
+<!-- Fox Companion Speech Bar -->
+<section class="px-margin pt-space-md pb-space-xs">
+<div class="bg-surface-container-low rounded-2xl p-space-md shadow-sm relative overflow-hidden flex items-center gap-space-md">
+<div class="relative shrink-0">
+<div class="w-14 h-14 rounded-2xl p-1 bg-surface-container-lowest shadow-sm flex items-center justify-center overflow-hidden">
+<img alt="Fox Companion" class="w-full h-full object-cover rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPkoszB6pI_y45HxzRN-A3mmMW7cl9s0qRQ22zbEk3_GQJnnxoRqVh75_zoAmZRo-fTz1jJzjXkLIgO2pSUvQ2nhFbg4ATufJO87TH_0nTOyXgoo3LdF8VZNdY5qAri79zoMyuzU_EYFQ3qkRRmN5uueD_EaM8XFgrt3m7q2plg8_pY0TeJYiEDRPBBUJCjMf5XcKJICTGla4U0_sInL-oZjbWC81PgtpUwj1xQ7aJNwBjYxTNVQXBbQ"/>
+</div>
+<span class="absolute -bottom-1 -right-1 bg-primary text-on-primary text-[10px] font-bold px-1.5 py-0.2 rounded-full shadow-sm">
+              Lv.8
+            </span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1 mb-1">
+<span class="font-headline-sm text-[15px] font-bold text-on-surface truncate">꼬마 여우 탐험가</span>
+<span class="font-label-sm text-[10px] bg-primary-fixed text-on-primary-fixed px-1.5 py-0.5 rounded-full shrink-0">⚡ 확률 균등</span>
+</div>
+<p class="font-body-sm text-[12px] text-on-surface-variant leading-tight truncate">
+              현재 템플릿: <span class="text-primary font-bold" id="current-active-preset-title">직장인 평일 점심 메뉴판</span> (8개)
+            </p>
+</div>
+<button class="shrink-0 px-2.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1 active:scale-95 transition-transform" onclick="navigateView('menus')">
+<span class="material-symbols-outlined text-[14px]">tune</span>
+<span>룰렛 변경</span>
+</button>
+</div>
+</section>
+<!-- Main Wheel Canvas Card -->
+<section class="px-margin py-space-sm flex flex-col items-center justify-center relative">
+<div class="wheel-canvas-container relative flex items-center justify-center my-2">
+<!-- Outer Wheel Dial Pointer -->
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
+<div class="w-7 h-8 bg-gradient-to-b from-tertiary to-primary rounded-t-sm shadow-md flex items-center justify-center clip-pointer" style="clip-path: polygon(50% 100%, 0 0, 100% 0);"></div>
+<span class="w-2.5 h-2.5 rounded-full bg-surface-bright border-2 border-primary -mt-7 z-30 shadow-sm"></span>
+</div>
+<!-- Wheel Canvas (Dynamic HTML5 Canvas) -->
+<canvas class="rounded-full shadow-xl bg-surface-container-lowest border-4 border-surface-container-high" height="310" id="roulette-canvas" width="310"></canvas>
+<!-- Central GO Spin Button -->
+<div class="absolute z-30 flex items-center justify-center">
+<button class="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-display font-extrabold text-[22px] tracking-wider shadow-[0_6px_20px_rgba(163,57,0,0.4)] flex flex-col items-center justify-center active:scale-90 transition-transform border-4 border-surface-bright" id="spin-btn" onclick="startSpinAnimation()">
+<span>GO</span>
+<span class="text-[9px] -mt-1 font-semibold tracking-normal uppercase opacity-90">돌리기</span>
+</button>
+</div>
+</div>
+<!-- Wheel Controls Quick Strip -->
+<div class="w-full flex items-center justify-between px-space-xs mt-3">
+<div class="flex items-center gap-1.5">
+<button class="px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface font-label-sm text-label-sm flex items-center gap-1 active:scale-95 transition-all" onclick="shuffleWheelItems()">
+<span class="material-symbols-outlined text-[15px]">shuffle</span>
+<span>순서 섞기</span>
+</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface font-label-sm text-label-sm flex items-center gap-1 active:scale-95 transition-all" onclick="toggleWheelSound(this)">
+<span class="material-symbols-outlined text-[15px]" id="wheel-sound-icon">volume_up</span>
+<span id="sound-text">회전 사운드</span>
+</button>
+</div>
+<button class="px-3 py-1.5 rounded-full bg-secondary-fixed/40 text-on-secondary-fixed-variant font-label-sm text-label-sm font-bold flex items-center gap-1 active:scale-95 transition-all" onclick="navigateView('radar')">
+<span class="material-symbols-outlined text-[15px]">radar</span>
+<span>주변 맛집 레이더</span>
+</button>
+</div>
+</section>
+<!-- Today's Hunger & Mood Booster Pills -->
+<section class="px-margin pt-space-xs pb-space-sm">
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<span class="font-headline-sm text-[14px] text-on-surface">🎲 후보 메뉴 실시간 편집</span>
+<span class="font-label-sm text-on-surface-variant">클릭하여 임시 제외</span>
+</div>
+<div class="flex flex-wrap gap-1.5" id="wheel-chips-container">
+<!-- Populated dynamically via JS -->
+</div>
+</div>
+</section>
+</div>
+<!-- ========================================== -->
+<!-- VIEW 2: RADAR & DELIVERY (맛집 & 배달) -->
+<!-- ========================================== -->
+<div class="view-panel hidden flex flex-col w-full fade-transition pb-6" id="view-radar">
+
+<!-- Fox Explorer Dialogue Guide Section -->
+<section class="px-4 pt-3 pb-2">
+<div class="relative bg-surface-container-lowest rounded-2xl p-3.5 border border-outline-variant/60 shadow-[0_4px_20px_-4px_rgba(163,57,0,0.12)]">
+<div class="flex items-center gap-3.5">
+<!-- Fox Character Avatar -->
+<div class="relative flex-shrink-0 w-14 h-14 rounded-2xl bg-primary-fixed border border-primary/20 flex items-center justify-center overflow-hidden shadow-inner">
+<img alt="꼬마 여우 탐험가 프로필" class="w-full h-full object-cover object-top scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaGKayTHo5FPTEVW0q7zif1NSwvhMEqEwDuYj9swNefPECS-GUazwPLAMRs86I1Tc59xN1lIqO8vszDgyR66GlhfYHQsyLjj15lrwL9W0dvZ86Dyn82WGTDZXJUQOyOV6Ba-3nnLN6fyyhDvvoxypheajkJElEza-ap5F-2HqHdVwEYadsdkPxonKPWV2TW2TNS_AXBQUlcVN_S4S5z-thKKdUTZJd6nXeK2G9KRfpzJG9VM7Q16Ihlw"/>
+<span class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-secondary text-white flex items-center justify-center text-[10px] font-bold shadow-sm">✨</span>
+</div>
+<!-- Fox Speech Bubble Content -->
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1 mb-0.5">
+<span class="text-[11px] font-bold text-primary tracking-wide flex items-center gap-1">
+<span>꼬마 여우 탐험가</span>
+<span class="text-on-surface-variant font-normal">Lv.8</span>
+</span>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"></span>
+<span>LIVE 1.0km</span>
+</span>
+</div>
+<p class="text-[13px] text-on-surface font-semibold leading-snug">
+            “냄새를 맡았어! 룰렛에서 당첨된 <span class="text-primary font-extrabold underline underline-offset-2">얼큰 마라 훠궈</span>가 근처 350m에 있어, 전용 할인 쿠폰도 챙겨뒀지! 배고프지~? 갓 구운 고기와 따끈한 국물 어때요?”
+          </p>
+</div>
+</div>
+<!-- Mode Selector Switch Capsule: Dine-in Map vs Fast Delivery -->
+<div class="mt-3 p-1 rounded-full bg-surface-container flex gap-1 border border-outline-variant/40" id="modeSwitchContainer">
+<button class="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-full text-on-surface-variant hover:text-on-surface font-semibold text-[13px] transition-all active:scale-95" id="btnDineIn" onclick="toggleRadarMode('dinein')">
+<span class="material-symbols-outlined text-[17px]">storefront</span>
+<span>매장 방문 (맛집 지도)</span>
+</button>
+<button class="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-full bg-surface-container-lowest text-secondary font-bold text-[13px] shadow-sm transition-all active:scale-95" id="btnDelivery" onclick="toggleRadarMode('delivery')">
+<span class="material-symbols-outlined text-[17px]">moped</span>
+<span>배달 주문 (배달)</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Interactive Styled Vector Map Canvas Section -->
+<section class="px-4 py-2" id="mapSection">
+<div class="relative w-full h-[310px] rounded-2xl overflow-hidden bg-[#eae5d8] border border-outline-variant/60 shadow-[0_4px_16px_rgba(27,28,23,0.06)] select-none">
+<!-- Vector Map Graphic Simulation -->
+<svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="76" id="streetMapPattern" patternunits="userSpaceOnUse" width="76">
+<path d="M 76 0 L 0 0 0 76" fill="none" stroke="#dcd6c8" stroke-width="7"></path>
+<path d="M 0 38 L 76 38" fill="none" stroke="#ded8ca" stroke-dasharray="3,3" stroke-width="2"></path>
+</pattern>
+</defs>
+<!-- Background street pattern -->
+<rect fill="url(#streetMapPattern)" height="100%" width="100%"></rect>
+<!-- Park green areas -->
+<path d="M 12 36 Q 64 8, 120 48 T 160 130 L 24 148 Z" fill="#d4ebd8" opacity="0.85"></path>
+<path d="M 230 170 Q 285 140, 350 200 T 390 300 L 210 290 Z" fill="#d4ebd8" opacity="0.75"></path>
+<!-- River/Waterfront canal -->
+<path d="M -15 240 C 90 215, 170 265, 410 235" fill="none" stroke="#c0dbe6" stroke-linecap="round" stroke-width="14"></path>
+<path d="M -15 240 C 90 215, 170 265, 410 235" fill="none" stroke="#e0f2fe" stroke-dasharray="4,6" stroke-width="2"></path>
+<!-- Dynamic route trail from user to Hotpot -->
+<path d="M 188 152 C 196 128, 222 110, 248 94" fill="none" stroke="#a33900" stroke-dasharray="5,4" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<!-- Center User Location Pulse & Radar Scan Wave -->
+<div class="absolute top-[49%] left-[49%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none z-10">
+<div class="relative flex items-center justify-center">
+<!-- Radar scan ripple waves -->
+<span class="animate-radar-wave absolute w-16 h-16 rounded-full bg-primary/25 pointer-events-none"></span>
+<span class="animate-radar-wave-delayed absolute w-16 h-16 rounded-full bg-primary/20 pointer-events-none"></span>
+<!-- Pin Center core -->
+<div class="relative w-6 h-6 rounded-full bg-primary flex items-center justify-center shadow-lg ring-4 ring-white">
+<div class="w-2.5 h-2.5 rounded-full bg-white"></div>
+</div>
+</div>
+<span class="mt-1 px-2.5 py-0.5 rounded-full bg-white/95 backdrop-blur-sm text-on-surface font-bold text-[10px] shadow-sm whitespace-nowrap border border-outline-variant/60 flex items-center gap-1">
+<span class="text-primary">📍</span> 테크노밸리 B동 (내 위치)
+        </span>
+</div>
+<!-- Hotspot Pin 1: 사천 전통 훠궈 -->
+<button class="absolute top-12 right-9 flex flex-col items-center group active:scale-95 transition-transform z-20" onclick="focusVendor('hotpot')">
+<div class="px-2.5 py-1 rounded-full bg-primary text-white font-bold text-[11px] shadow-md flex items-center gap-1 ring-2 ring-white">
+<span>🍲 사천 전통 훠궈</span>
+<span class="bg-primary-container text-white px-1.5 py-0.2 rounded-full text-[9px]">22% OFF</span>
+</div>
+<div class="w-2 h-2 bg-primary rotate-45 -mt-1 ring-1 ring-primary/40"></div>
+<span class="text-[9px] font-extrabold text-on-surface bg-white/95 px-1.5 py-0.5 rounded-full mt-0.5 shadow-sm border border-outline-variant/40">
+          4.9★ 350m
+        </span>
+</button>
+<!-- Hotspot Pin 2: 숯불 흑돼지 구이 -->
+<button class="absolute top-24 left-4 flex flex-col items-center group active:scale-95 transition-transform z-20" onclick="focusVendor('bbq')">
+<div class="px-2.5 py-1 rounded-full bg-white text-on-surface font-bold text-[11px] shadow-md flex items-center gap-1 border border-outline-variant/40">
+<span>🥩 숯불 흑돼지 구이</span>
+<span class="bg-secondary-container text-on-secondary-container px-1 py-0.2 rounded-full text-[9px]">냉면 서비스</span>
+</div>
+<div class="w-2 h-2 bg-white rotate-45 -mt-1 border-r border-b border-outline-variant/40"></div>
+<span class="text-[9px] font-bold text-on-surface-variant bg-white/95 px-1.5 py-0.5 rounded-full mt-0.5 shadow-sm">
+          4.8★ 210m
+        </span>
+</button>
+<!-- Hotspot Pin 3: 돈코츠 라멘 -->
+<button class="absolute bottom-16 left-20 flex flex-col items-center group active:scale-95 transition-transform z-20" onclick="focusVendor('ramen')">
+<div class="px-2.5 py-1 rounded-full bg-white text-on-surface font-bold text-[11px] shadow-md flex items-center gap-1 border border-outline-variant/40">
+<span>🍜 돈코츠 라멘</span>
+<span class="bg-surface-variant text-on-surface-variant px-1 py-0.2 rounded-full text-[9px]">대기 없음</span>
+</div>
+<div class="w-2 h-2 bg-white rotate-45 -mt-1 border-r border-b border-outline-variant/40"></div>
+<span class="text-[9px] font-bold text-on-surface-variant bg-white/95 px-1.5 py-0.5 rounded-full mt-0.5 shadow-sm">
+          4.7★ 180m
+        </span>
+</button>
+<!-- Hotspot Pin 4: 프레시 웜보울 -->
+<button class="absolute bottom-12 right-7 flex flex-col items-center group active:scale-95 transition-transform z-20" onclick="focusVendor('salad')">
+<div class="px-2.5 py-1 rounded-full bg-white text-on-surface font-bold text-[11px] shadow-md flex items-center gap-1 border border-outline-variant/40">
+<span>🥗 프레시 웜보울</span>
+<span class="bg-primary-fixed text-on-primary-fixed px-1 py-0.2 rounded-full text-[9px] font-bold">1,000원 할인</span>
+</div>
+<div class="w-2 h-2 bg-white rotate-45 -mt-1 border-r border-b border-outline-variant/40"></div>
+<span class="text-[9px] font-bold text-on-surface-variant bg-white/95 px-1.5 py-0.5 rounded-full mt-0.5 shadow-sm">
+          4.6★ 400m
+        </span>
+</button>
+<!-- Map Floating Top Overlay Badge & Relocate Tool -->
+<div class="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between pointer-events-none z-20">
+<div class="pointer-events-auto flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md shadow-sm border border-outline-variant/60">
+<span class="material-symbols-outlined text-primary text-[16px]">radar</span>
+<span class="text-[11px] font-bold text-on-surface">현재 당첨: 마라 훠궈</span>
+</div>
+<button class="pointer-events-auto w-8 h-8 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-on-surface shadow-sm border border-outline-variant/60 active:scale-95 transition-all" onclick="showToast('현재 위치로 다시 맞췄어요 📍')">
+<span class="material-symbols-outlined text-[18px]">my_location</span>
+</button>
+</div>
+<!-- Bottom Map Status Notification Bar -->
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between px-3 py-1.5 rounded-xl bg-white/95 backdrop-blur-md shadow-sm border border-outline-variant/50 z-20">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[15px] animate-spin" style="animation-duration: 4s;">sync</span>
+<span class="text-[11px] font-medium text-on-surface">오늘 룰렛 결과와 실시간 연동 중</span>
+</div>
+<a class="text-[11px] text-primary font-bold px-2.5 py-0.5 rounded-full bg-primary-fixed hover:bg-primary-fixed-dim transition-colors" data-path="roulette" href="#">
+          메뉴 다시 추천 ›
+        </a>
+</div>
+</div>
+</section>
+<!-- Quick Filter Category Chips -->
+<section class="py-2.5">
+<div class="flex gap-2 overflow-x-auto px-4 no-scrollbar">
+<button class="flex-shrink-0 px-3.5 py-1.5 rounded-full bg-primary text-white font-bold text-[12px] shadow-sm flex items-center gap-1 active:scale-95 transition-all" onclick="filterChip(this)">
+<span>전체 근처</span>
+<span class="px-1.5 py-0.2 rounded-full bg-white/20 text-[10px]">18</span>
+</button>
+<button class="flex-shrink-0 px-3 py-1.5 rounded-full bg-surface-container-lowest text-on-surface font-semibold text-[12px] border border-outline-variant/60 shadow-xs flex items-center gap-1 hover:bg-surface-container active:scale-95 transition-all" onclick="filterChip(this)">
+<span>🔥 방금 뽑힌 훠궈</span>
+</button>
+<button class="flex-shrink-0 px-3 py-1.5 rounded-full bg-surface-container-lowest text-on-surface font-semibold text-[12px] border border-outline-variant/60 shadow-xs flex items-center gap-1 hover:bg-surface-container active:scale-95 transition-all" onclick="filterChip(this)">
+<span class="material-symbols-outlined text-[15px] text-secondary">directions_walk</span>
+<span>도보 5분 이내</span>
+</button>
+<button class="flex-shrink-0 px-3 py-1.5 rounded-full bg-surface-container-lowest text-on-surface font-semibold text-[12px] border border-outline-variant/60 shadow-xs flex items-center gap-1 hover:bg-surface-container active:scale-95 transition-all" onclick="filterChip(this)">
+<span class="material-symbols-outlined text-[15px] text-primary">local_fire_department</span>
+<span>인기 맛집</span>
+</button>
+</div>
+</section>
+<!-- Exclusive Delivery Coupons Carousel (배달 할인 쿠폰팩) -->
+<section class="px-4 py-2">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-baseline gap-1.5">
+<h2 class="text-[16px] font-bold text-on-surface tracking-tight">배달 할인 쿠폰팩</h2>
+<span class="text-[11px] text-on-surface-variant font-medium">배달 할인 쿠폰</span>
+</div>
+<span class="text-[11px] font-bold text-primary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">savings</span>
+<span>오늘 탐험가를 위해 약 6,500원 절약 완료</span>
+</span>
+</div>
+<!-- Scrollable Ticket List -->
+<div class="flex gap-3 overflow-x-auto pb-1 no-scrollbar">
+<!-- Voucher 1: 배달의민족 단독 -->
+<div class="flex-shrink-0 w-64 rounded-2xl bg-surface-container-lowest p-3.5 border border-primary/20 shadow-[0_4px_16px_rgba(163,57,0,0.08)] flex flex-col justify-between relative overflow-hidden">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-1.5">
+<span class="w-6 h-6 rounded-full bg-[#2AC1BC] flex items-center justify-center text-[11px] text-white font-black">배민</span>
+<span class="font-bold text-[13px] text-on-surface">배달의민족 · 룰렛 단독</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed">30,000원 이상</span>
+</div>
+<div class="my-2.5 flex items-baseline gap-1">
+<span class="text-[14px] text-primary font-bold">₩</span>
+<span class="text-[28px] text-primary font-black leading-none tracking-tight">4,000</span>
+<span class="text-[11px] text-on-surface-variant ml-1 font-medium">할인 (30,000원 이상 주문 시)</span>
+</div>
+<button class="w-full py-2 rounded-full bg-primary text-white font-bold text-[12px] flex items-center justify-center gap-1 active:scale-95 transition-all shadow-xs" onclick="claimVoucher(this, '배민 4,000원 할인 쿠폰')">
+<span>쿠폰 받기 및 이동</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</button>
+</div>
+<!-- Voucher 2: 요기요 특별 쿠폰 -->
+<div class="flex-shrink-0 w-64 rounded-2xl bg-surface-container-lowest p-3.5 border border-secondary/20 shadow-[0_4px_16px_rgba(0,108,73,0.08)] flex flex-col justify-between relative overflow-hidden">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-1.5">
+<span class="w-6 h-6 rounded-full bg-[#FA0050] flex items-center justify-center text-[11px] text-white font-black">요기</span>
+<span class="font-bold text-[13px] text-on-surface">요기요 · 첫주문</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container">첫주문 전용</span>
+</div>
+<div class="my-2.5 flex items-baseline gap-1">
+<span class="text-[14px] text-secondary font-bold">₩</span>
+<span class="text-[28px] text-secondary font-black leading-none tracking-tight">2,500</span>
+<span class="text-[11px] text-on-surface-variant ml-1 font-medium">첫주문 2,500원 할인</span>
+</div>
+<button class="w-full py-2 rounded-full bg-secondary text-white font-bold text-[12px] flex items-center justify-center gap-1 active:scale-95 transition-all shadow-xs" onclick="claimVoucher(this, '요기요 첫주문 2,500원 할인 쿠폰')">
+<span>쿠폰 받기</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Gourmet Food Recommendations List (추천 맛집 & 배달 리스트) -->
+<section class="px-4 pt-2 pb-6 flex flex-col gap-3.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<h2 class="text-[17px] font-bold text-on-surface tracking-tight">추천 맛집 &amp; 배달 리스트</h2>
+<span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant">거리순</span>
+</div>
+<button class="text-[12px] text-primary font-bold flex items-center gap-0.5 active:scale-95" onclick="showToast('평점 높은 순으로 정렬되었어요 🌟')">
+<span>스마트 추천</span>
+<span class="material-symbols-outlined text-[15px]">tune</span>
+</button>
+</div>
+<!-- Card 1: 사천 마라 전통 훠궈 본점 (Roulette #1) -->
+<article class="bg-surface-container-lowest rounded-2xl p-3.5 border border-outline-variant/60 shadow-[0_4px_16px_-2px_rgba(163,57,0,0.07)] flex flex-col gap-2.5">
+<div class="flex gap-3">
+<div class="relative w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 bg-surface-container">
+<img alt="사천 마라 전통 훠궈 본점" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoGD_xkJLR-6BCLPm3Tcb0cnvW9DjiWSuL9cuC1PY_bgNvWTae5_UtTMAUlH6qf4sjGI5rBIPpYTyTnRNH4ahWDiDJGOmpg51_xYh2-VGMbTKCMFbF_gzTFhtQlS_94lirvRIkiWRJksrRAqkT5kpK7aOXC54WgQCEDvS7Bb3kjnUQL82RBMf7qb5A9ZWqGVqqfN2NtYhQQpZv_mATtgV9FOlPfXd7Fb5DoYJHUtT_"/>
+<span class="absolute top-1 left-1 px-1.5 py-0.5 rounded-full bg-primary text-white font-extrabold text-[9px] shadow-sm">
+            룰렛 추천 1위
+          </span>
+</div>
+<div class="flex-1 min-w-0 flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between gap-1">
+<h3 class="font-bold text-[15px] text-on-surface truncate">🍲 사천 마라 전통 훠궈 본점</h3>
+<span class="text-[11px] font-bold text-secondary bg-secondary-container px-1.5 py-0.2 rounded-full whitespace-nowrap">영업중</span>
+</div>
+<p class="text-[12px] text-on-surface-variant truncate mt-0.5">1인 특선 샤브 세트 · 신선한 소고기와 야채</p>
+</div>
+<div class="flex items-center gap-1.5 text-[12px] mt-1">
+<span class="flex items-center gap-0.5 font-bold text-primary">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.9★</span>
+</span>
+<span class="text-outline">·</span>
+<span class="text-on-surface-variant">320m 도보 4분</span>
+</div>
+<div class="flex flex-wrap gap-1 mt-1">
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">1인 18,000원</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-bold">3,000원 할인 쿠폰</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-1 flex items-center gap-2 border-t border-outline-variant/30">
+<a class="flex-1 py-2 px-3 rounded-full bg-primary text-white font-bold text-[12px] flex items-center justify-center gap-1 active:scale-95 transition-all shadow-xs" href="https://baemin.com" target="_blank">
+<span class="material-symbols-outlined text-[16px]">moped</span>
+<span>배달의민족 · 28분 도착</span>
+</a>
+<button class="py-2 px-3.5 rounded-full bg-surface-container text-on-surface font-bold text-[12px] flex items-center justify-center gap-1 hover:bg-surface-container-high active:scale-95 transition-all" onclick="openNavigation('사천 마라 전통 훠궈 본점')">
+<span class="material-symbols-outlined text-[16px] text-primary">navigation</span>
+<span>네이버 지도 길찾기</span>
+</button>
+</div>
+</article>
+<!-- Card 2: 한양 숯불 바베큐 도시락 -->
+<article class="bg-surface-container-lowest rounded-2xl p-3.5 border border-outline-variant/60 shadow-[0_4px_16px_-2px_rgba(163,57,0,0.07)] flex flex-col gap-2.5">
+<div class="flex gap-3">
+<div class="relative w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 bg-surface-container">
+<img alt="한양 숯불 바베큐 도시락" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7R8WYFFMDHX03oTee2tvJNphm7ykMZgB8s3WApTbjwm-_QHouQyzUE45sQc9HnoOufjk9E5s1oB2u1e8cAuIvoVsxFdkSR2LFWqOTw4bS3mDBF1yksd22edCTtWhrVU0XrFgdrGjst5inzqvs6dN2vyEuQbz-8HAdXJUgTQ4uW2tLploZx4px-aoLvwC7TOjYYtRyu5D9VgmX8bcfY7KJ6VlAJ55BZkKPPxFJmfAr"/>
+<span class="absolute top-1 left-1 px-1.5 py-0.5 rounded-full bg-secondary text-white font-extrabold text-[9px] shadow-sm">
+            월 3,000+ 주문
+          </span>
+</div>
+<div class="flex-1 min-w-0 flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between gap-1">
+<h3 class="font-bold text-[15px] text-on-surface truncate">🥩 한양 숯불 바베큐 도시락</h3>
+<span class="text-[11px] font-bold text-primary bg-primary-fixed px-1.5 py-0.2 rounded-full whitespace-nowrap">초고속 조리</span>
+</div>
+<p class="text-[12px] text-on-surface-variant truncate mt-0.5">두툼한 삼겹살 직화구이 도시락 + 깊은 맛 된장찌개 세트</p>
+</div>
+<div class="flex items-center gap-1.5 text-[12px] mt-1">
+<span class="flex items-center gap-0.5 font-bold text-primary">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.8★</span>
+</span>
+<span class="text-outline">·</span>
+<span class="text-on-surface-variant">450m 자전거 2분</span>
+</div>
+<div class="flex flex-wrap gap-1 mt-1">
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">1인 12,000원</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-container font-medium">무료배달</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-1 flex items-center gap-2 border-t border-outline-variant/30">
+<a class="flex-1 py-2 px-3 rounded-full bg-secondary text-white font-bold text-[12px] flex items-center justify-center gap-1 active:scale-95 transition-all shadow-xs" href="https://baemin.com" target="_blank">
+<span class="material-symbols-outlined text-[16px]">delivery_dining</span>
+<span>배달의민족 · 25분 (무료배달)</span>
+</a>
+<button class="py-2 px-3.5 rounded-full bg-surface-container text-on-surface font-bold text-[12px] flex items-center justify-center gap-1 hover:bg-surface-container-high active:scale-95 transition-all" onclick="openNavigation('한양 숯불 바베큐 도시락')">
+<span class="material-symbols-outlined text-[16px] text-secondary">shopping_bag</span>
+<span>매장 방문 포장</span>
+</button>
+</div>
+</article>
+<!-- Card 3: 이치란풍 흑마늘 돈코츠 라멘 -->
+<article class="bg-surface-container-lowest rounded-2xl p-3.5 border border-outline-variant/60 shadow-[0_4px_16px_-2px_rgba(163,57,0,0.07)] flex flex-col gap-2.5">
+<div class="flex gap-3">
+<div class="relative w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 bg-surface-container">
+<img alt="이치란풍 흑마늘 돈코츠 라멘" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDevnrNlrhEX1xyzEWhzjxoSgdK1A4BZY-0wrMGa6EB_obJ8iD-oVeE9lyfjqL8OXFj8IrDYEiIylImq2B2Q4spvoVjdT7cJTy00FqtOmZhO5HAy9WCBtcS85DeJsNeuxePIpJIdKX21GPTwljG-dK7pkcOnn-wbukGtLN2_e2gRi70L6d-OLFEza2dNQFdBQJfTTAvAdH8VkTRGndRX7Xrqrvj4IO3vG-jg7pAcT2F"/>
+<span class="absolute top-1 left-1 px-1.5 py-0.5 rounded-full bg-surface-variant text-on-surface-variant font-extrabold text-[9px] shadow-sm">
+            도보 180m
+          </span>
+</div>
+<div class="flex-1 min-w-0 flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between gap-1">
+<h3 class="font-bold text-[15px] text-on-surface truncate">🍜 이치란풍 흑마늘 돈코츠 라멘</h3>
+<span class="text-[11px] font-bold text-primary bg-primary-fixed px-1.5 py-0.2 rounded-full whitespace-nowrap">직장인 인기</span>
+</div>
+<p class="text-[12px] text-on-surface-variant truncate mt-0.5">12시간 우려낸 진한 사골육수 · 수제 차슈와 반숙란 토핑</p>
+</div>
+<div class="flex items-center gap-1.5 text-[12px] mt-1">
+<span class="flex items-center gap-0.5 font-bold text-primary">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.7★</span>
+</span>
+<span class="text-outline">·</span>
+<span class="text-on-surface-variant">도보 180m</span>
+</div>
+<div class="flex flex-wrap gap-1 mt-1">
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">1인 10,500원</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-container font-medium">계란 서비스</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-1 flex items-center gap-2 border-t border-outline-variant/30">
+<button class="flex-1 py-2 px-3 rounded-full bg-primary text-white font-bold text-[12px] flex items-center justify-center gap-1 active:scale-95 transition-all shadow-xs" onclick="handleOrderModal('이치란풍 흑마늘 돈코츠 라멘')">
+<span class="material-symbols-outlined text-[16px]">shopping_bag</span>
+<span>포장/배달 주문 9,900원~</span>
+</button>
+<button class="py-2 px-3.5 rounded-full bg-surface-container text-on-surface font-bold text-[12px] flex items-center justify-center gap-1 hover:bg-surface-container-high active:scale-95 transition-all" onclick="takeQueueNumber('이치란풍 흑마늘 돈코츠 라멘')">
+<span class="material-symbols-outlined text-[16px] text-tertiary">confirmation_number</span>
+<span>온라인 줄서기</span>
+</button>
+</div>
+</article>
+<!-- Card 4: 프레시 샐러드 & 웜보울 -->
+<article class="bg-surface-container-lowest rounded-2xl p-3.5 border border-outline-variant/60 shadow-[0_4px_16px_-2px_rgba(163,57,0,0.07)] flex flex-col gap-2.5">
+<div class="flex gap-3">
+<div class="relative w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 bg-surface-container">
+<img alt="프레시 샐러드 &amp; 웜보울" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDq1XDWVFrtvG8AhOwSryO2bGr6dAyuDWowo2QmpIC-YzdUiTocydBn8rWC7wvmBsbBZxlin9qNtj1_g8JfCT-U7VtXsqYVd179GHCRnBazGCHCwoEs6SXQWuCe0LrHWi4YWwBO_iFEoewfUki-sGBxJkQ0KstKkuSB4COohcCZLIHfgwhn1ZZCyatkYON7UJ43fNJh3ZFtIgKBNvU8L2293hj7LGcAgKqpjRUeri_X"/>
+<span class="absolute top-1 left-1 px-1.5 py-0.5 rounded-full bg-secondary text-white font-extrabold text-[9px] shadow-sm">
+            월 2,000+ 주문
+          </span>
+</div>
+<div class="flex-1 min-w-0 flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between gap-1">
+<h3 class="font-bold text-[15px] text-on-surface truncate">🥗 프레시 샐러드 &amp; 웜보울</h3>
+<span class="text-[11px] font-bold text-secondary bg-secondary-container px-1.5 py-0.2 rounded-full whitespace-nowrap">식단관리 1위</span>
+</div>
+<p class="text-[12px] text-on-surface-variant truncate mt-0.5">완숙 아보카도 + 저온 수비드 닭가슴살 · 약 380kcal</p>
+</div>
+<div class="flex items-center gap-1.5 text-[12px] mt-1">
+<span class="flex items-center gap-0.5 font-bold text-primary">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.6★</span>
+</span>
+<span class="text-outline">·</span>
+<span class="text-on-surface-variant">400m 도보 5분</span>
+</div>
+<div class="flex flex-wrap gap-1 mt-1">
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">1인 11,000원</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-container font-medium">오리엔탈 드레싱</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-1 flex items-center gap-2 border-t border-outline-variant/30">
+<button class="flex-1 py-2 px-3 rounded-full bg-primary text-white font-bold text-[12px] flex items-center justify-center gap-1 active:scale-95 transition-all shadow-xs" onclick="handleOrderModal('프레시 샐러드 &amp; 웜보울')">
+<span class="material-symbols-outlined text-[16px]">moped</span>
+<span>배달 주문 · 30분</span>
+</button>
+<button class="py-2 px-3.5 rounded-full bg-surface-container text-on-surface font-bold text-[12px] flex items-center justify-center gap-1 hover:bg-surface-container-high active:scale-95 transition-all" onclick="openNavigation('프레시 샐러드 &amp; 웜보울')">
+<span class="material-symbols-outlined text-[16px] text-primary">navigation</span>
+<span>길안내</span>
+</button>
+</div>
+</article>
+</section>
+<!-- Floating Quick Interaction Capsule Bar -->
+<div class="fixed bottom-[4.5rem] left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 p-1.5 rounded-full bg-surface-container-lowest/95 backdrop-blur-xl border border-outline-variant/60 shadow-[0_8px_24px_-4px_rgba(163,57,0,0.22)]">
+<button class="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-surface-container text-on-surface font-bold text-[12px] hover:bg-surface-container-high active:scale-95 transition-all" onclick="shakeToRefresh()">
+<span class="material-symbols-outlined text-[17px] text-primary animate-spin" style="animation-duration: 6s;">shuffle</span>
+<span>흔들어서 다른 맛집 찾기</span>
+</button>
+<a class="flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-white font-bold text-[12px] shadow-sm hover:bg-primary-container active:scale-95 transition-all" data-path="roulette" href="#">
+<span class="material-symbols-outlined text-[17px]">casino</span>
+<span>룰렛으로 돌아가기</span>
+</a>
+</div>
+<!-- Micro Interaction Feedback Toast -->
+<div class="fixed top-20 left-1/2 -translate-x-1/2 z-50 transform transition-all duration-300 px-4 py-2.5 rounded-full bg-surface-container-lowest/95 text-on-surface font-bold text-[12px] shadow-xl border border-outline-variant/60 flex items-center gap-2 opacity-0 -translate-y-6 pointer-events-none" id="foxToast">
+<span class="text-[16px]">🦊</span>
+<span id="toastMessage">배달 무료배송 및 대형 할인 쿠폰을 적용했어요!</span>
+</div>
+
+</div>
+<!-- ========================================== -->
+<!-- VIEW 3: DIARY (먹방 일지 & 캘린더) -->
+<!-- ========================================== -->
+<div class="view-panel hidden flex flex-col w-full fade-transition pb-6" id="view-diary">
+<div class="flex flex-col w-full pb-10">
+<!-- Top Profile & Satiety Meter Banner -->
+<div class="px-margin pt-4 pb-2">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-[0_4px_20px_-2px_rgba(163,57,0,0.06),0_2px_6px_-1px_rgba(41,37,36,0.04)] relative overflow-hidden">
+<!-- Ambient decorative gradient tint -->
+<div class="absolute -right-12 -top-12 w-36 h-36 rounded-full bg-primary-fixed opacity-40 blur-2xl pointer-events-none"></div>
+<!-- Header row: Avatar + Level + Energy Bar -->
+<div class="flex items-start gap-3 relative z-10">
+<!-- Fox Avatar Frame with Level Ribbon -->
+<div class="relative shrink-0">
+<div class="w-16 h-16 rounded-2xl overflow-hidden bg-primary-fixed p-1 shadow-md">
+<img alt="꼬마 여우 탐험가" class="w-full h-full object-cover rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaGKayTHo5FPTEVW0q7zif1NSwvhMEqEwDuYj9swNefPECS-GUazwPLAMRs86I1Tc59xN1lIqO8vszDgyR66GlhfYHQsyLjj15lrwL9W0dvZ86Dyn82WGTDZXJUQOyOV6Ba-3nnLN6fyyhDvvoxypheajkJElEza-ap5F-2HqHdVwEYadsdkPxonKPWV2TW2TNS_AXBQUlcVN_S4S5z-thKKdUTZJd6nXeK2G9KRfpzJG9VM7Q16Ihlw"/>
+</div>
+<span class="absolute -bottom-2 -right-1 bg-primary text-on-primary font-label-sm text-label-sm px-2 py-0.5 rounded-full shadow-sm flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[10px]" style='font-variation-settings: "FILL" 1;'>stars</span>
+            Lv.8
+          </span>
+</div>
+<!-- Info & Satiety Meter -->
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1">
+<div class="flex items-center gap-1.5 min-w-0">
+<h2 class="font-headline-sm text-headline-sm text-on-surface truncate">꼬마 여우 탐험가</h2>
+<span class="font-label-sm text-label-sm text-primary bg-primary-fixed/60 px-1.5 py-0.5 rounded-md shrink-0">미식 탐험가</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-bold shrink-0">포만감 85%</span>
+</div>
+<!-- Satiety Meter Bar -->
+<div class="mt-2 w-full">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-primary" style='font-variation-settings: "FILL" 1;'>restaurant</span>
+                포만감 수치
+              </span>
+<span class="font-label-sm text-label-sm text-primary font-bold">85% · 탐험 에너지 완충! ⚡</span>
+</div>
+<div class="w-full h-3 rounded-full bg-surface-container overflow-hidden p-0.5 flex items-center">
+<div class="h-full rounded-full bg-gradient-to-r from-primary to-primary-container transition-all duration-500" style="width: 85%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Fox Explorer Speech Bubble -->
+<div class="mt-3 relative z-10 bg-surface-container-low rounded-lg p-3 text-on-surface flex items-start gap-2.5">
+<span class="text-lg leading-none shrink-0 mt-0.5">💬</span>
+<div class="min-w-0">
+<p class="font-body-sm text-body-sm text-on-surface leading-snug">
+            “이번 달 벌써 <strong class="text-primary font-bold">19끼</strong> 맛집 탐험 완료! 오늘 점심엔 칼칼한 1인 훠궈를 먹었더니 가방 속 탐험 에너지가 빵빵하게 충전됐어~ 배불러요! 🍲”
+          </p>
+</div>
+</div>
+<!-- 3 Key Metric Quick Cards -->
+<div class="grid grid-cols-3 gap-2 mt-3 pt-3 border-t-0 relative z-10">
+<div class="bg-surface-container-lowest/80 rounded-lg p-2 flex flex-col items-center justify-center text-center shadow-sm">
+<span class="text-xs font-medium text-on-surface-variant">연속 기록</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold mt-0.5">7 <span class="font-label-sm text-label-sm text-on-surface-variant font-normal">일</span></span>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-container/40 px-1 py-0.2 rounded mt-1">식도락 선봉장</span>
+</div>
+<div class="bg-surface-container-lowest/80 rounded-lg p-2 flex flex-col items-center justify-center text-center shadow-sm">
+<span class="text-xs font-medium text-on-surface-variant">중복 방지</span>
+<span class="font-headline-sm text-headline-sm text-secondary font-bold mt-0.5">23 <span class="font-label-sm text-label-sm text-on-surface-variant font-normal">회</span></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-1 py-0.2 rounded mt-1">입맛 자유</span>
+</div>
+<div class="bg-surface-container-lowest/80 rounded-lg p-2 flex flex-col items-center justify-center text-center shadow-sm">
+<span class="text-xs font-medium text-on-surface-variant">룰렛 절약</span>
+<span class="font-headline-sm text-headline-sm text-tertiary font-bold mt-0.5">₩35,400</span>
+<span class="font-label-sm text-label-sm text-tertiary bg-tertiary-fixed/60 px-1 py-0.2 rounded mt-1">할인 혜택</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Gourmet Calendar View -->
+<div class="px-margin mt-3">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-[0_4px_20px_-2px_rgba(41,37,36,0.06),0_2px_6px_-1px_rgba(41,37,36,0.04)]">
+<!-- Calendar Control Header -->
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">2024년 5월</h3>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">주간 평균 만족도 ★★★★★</p>
+</div>
+</div>
+<!-- Month Switcher & View Pill Toggle -->
+<div class="flex items-center gap-1 bg-surface-container-low p-1 rounded-full">
+<button aria-label="이전 주" class="w-7 h-7 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<span class="font-label-sm text-label-sm px-2 text-primary font-bold">제 3 주</span>
+<button aria-label="다음 주" class="w-7 h-7 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Weekday Headers -->
+<div class="grid grid-cols-7 text-center mb-2">
+<span class="font-label-sm text-label-sm text-tertiary font-bold">일</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-bold">월</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-bold">화</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-bold">수</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-bold">목</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-bold">금</span>
+<span class="font-label-sm text-label-sm text-primary font-bold">토</span>
+</div>
+<!-- Calendar Days Grid (Current focused week: May 12-18) -->
+<div class="grid grid-cols-7 gap-1.5 text-center">
+<!-- 5/12 Sun -->
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-surface-container-low/70 transition-all cursor-pointer active:scale-95">
+<span class="font-label-sm text-label-sm text-tertiary">12</span>
+<span class="text-base my-0.5 leading-none">🥩</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-fixed-dim"></span>
+</div>
+<!-- 5/13 Mon -->
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-surface-container-low/70 transition-all cursor-pointer active:scale-95">
+<span class="font-label-sm text-label-sm text-on-surface-variant">13</span>
+<span class="text-base my-0.5 leading-none">🍜</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed-dim"></span>
+</div>
+<!-- 5/14 Tue -->
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-surface-container-low/70 transition-all cursor-pointer active:scale-95">
+<span class="font-label-sm text-label-sm text-on-surface-variant">14</span>
+<span class="text-base my-0.5 leading-none">🥗</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+</div>
+<!-- 5/15 Wed -->
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-surface-container-low/70 transition-all cursor-pointer active:scale-95">
+<span class="font-label-sm text-label-sm text-on-surface-variant">15</span>
+<span class="text-base my-0.5 leading-none">🍱</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-fixed-dim"></span>
+</div>
+<!-- 5/16 Thu -->
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-surface-container-low/70 transition-all cursor-pointer active:scale-95">
+<span class="font-label-sm text-label-sm text-on-surface-variant">16</span>
+<span class="text-base my-0.5 leading-none">🍔</span>
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed-dim"></span>
+</div>
+<!-- 5/17 Fri - TODAY (Selected) -->
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-primary-fixed text-on-primary-fixed shadow-md relative scale-105 ring-2 ring-primary">
+<span class="font-label-sm text-label-sm font-bold flex items-center gap-0.5">
+            17
+            <span class="text-[9px]">🐾</span>
+</span>
+<span class="text-base my-0.5 leading-none">🍲</span>
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="absolute -top-1.5 -right-1 bg-primary text-on-primary font-label-sm text-[8px] px-1 py-0.2 rounded-full">오늘</span>
+</div>
+<!-- 5/18 Sat -->
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-surface-container-low/40 transition-all cursor-pointer opacity-80">
+<span class="font-label-sm text-label-sm text-primary">18</span>
+<span class="text-base my-0.5 leading-none text-outline-variant">?</span>
+<span class="w-1.5 h-1.5 rounded-full bg-surface-container-high"></span>
+</div>
+</div>
+<!-- Quick Taste Frequency Summary -->
+<div class="mt-4 pt-3 bg-surface-container-low rounded-lg p-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2 min-w-0">
+<span class="text-sm">🥢</span>
+<p class="font-body-sm text-body-sm text-on-surface truncate">
+            이번 주 최다 빈도: <strong class="text-primary font-bold">면 요리 &amp; 아시안 푸드</strong> (3회)
+          </p>
+</div>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-fixed/50 px-2 py-0.5 rounded-full shrink-0 font-bold">
+          영양 균형 달성
+        </span>
+</div>
+</div>
+</div>
+<!-- Today Selected Day Food Card (오늘의 점심 기록) -->
+<div class="px-margin mt-4">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-1.5">
+<span class="text-base">📅</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">5월 17일 · 오늘의 점심 기록</h3>
+</div>
+<span class="font-label-sm text-label-sm text-primary bg-primary-fixed/80 px-2 py-0.5 rounded-full font-bold">
+        룰렛 적중! 🎯
+      </span>
+</div>
+<!-- Main Journal Card -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_6px_24px_-4px_rgba(163,57,0,0.08),0_2px_8px_-1px_rgba(41,37,36,0.04)]">
+<!-- Food Photo with Stamped Badge -->
+<div class="relative w-full h-44 bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Steaming Sichuan spicy mini hotpot with bubbling red chili broth, tender beef slices, enoki mushrooms, quail eggs, and fresh cilantro, warm ambient restaurant dining lighting, mouth-watering macro food photography, warm terracotta hues" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkpatlAwmvhj9ihuupk9SyTvibImy5BXg4SVBMXmERULKyoEDIE6FcMPopyDjen-HGMB-zD8IfCp8rSoahUR_Qs-h3rLIWiVehlOGTK_PPUL4GvbjXvtTFdwR-RydnuY24UtlCbQWng85v9FEDfNMF5fwnU-Or3xqPUGMRXv-KSnA86rqfYofX7LruNgF_azubQ0YpULeUMkQGResn8rcKlVoX_oDrIujqph1yVSLT"/>
+<!-- Live Photo Stamp / Tag -->
+<div class="absolute top-3 left-3 bg-inverse-surface/85 backdrop-blur-md text-inverse-on-surface px-2.5 py-1 rounded-full flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary-fixed">verified</span>
+<span class="font-label-sm text-label-sm font-bold tracking-wide">실시간 방문 인증 · 테크노밸리점</span>
+</div>
+<!-- Fox Satisfied Badge Stamp -->
+<div class="absolute bottom-3 right-3 bg-primary text-on-primary font-label-sm text-label-sm px-3 py-1 rounded-full shadow-md flex items-center gap-1 font-bold">
+<span>🐾 여우의 원픽</span>
+<span>5.0</span>
+</div>
+</div>
+<!-- Food & Order Meta -->
+<div class="p-space-md">
+<div class="flex items-start justify-between gap-2">
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">사천 마라 전통 훠궈 · 1인 소고기 전골 세트</h4>
+<div class="flex items-center gap-2 mt-1 text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-0.5 text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                12:25 PM
+              </span>
+<span>·</span>
+<span class="flex items-center gap-0.5 text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+                회사에서 320m
+              </span>
+</div>
+</div>
+<!-- Price Tag -->
+<div class="text-right shrink-0">
+<span class="font-label-sm text-label-sm line-through text-outline">₩22,000</span>
+<div class="font-headline-sm text-headline-sm text-tertiary font-bold">₩18,000</div>
+</div>
+</div>
+<!-- Tags Row -->
+<div class="flex flex-wrap gap-1.5 mt-2.5">
+<span class="font-label-sm text-label-sm bg-primary-fixed/60 text-on-primary-fixed px-2 py-0.5 rounded-full font-bold">#얼큰칼칼</span>
+<span class="font-label-sm text-label-sm bg-secondary-fixed/50 text-on-secondary-fixed px-2 py-0.5 rounded-full font-bold">#푸짐한양</span>
+<span class="font-label-sm text-label-sm bg-tertiary-fixed/60 text-on-tertiary-fixed px-2 py-0.5 rounded-full font-bold">#룰렛100%적중</span>
+<span class="font-label-sm text-label-sm bg-surface-container text-on-surface-variant px-2 py-0.5 rounded-full font-bold">#배민할인쿠폰</span>
+</div>
+<!-- Personal Journal / Tasting Note -->
+<div class="mt-3 bg-surface-container-low rounded-lg p-3 text-on-surface">
+<div class="flex items-center gap-1.5 mb-1 text-primary">
+<span class="material-symbols-outlined text-[16px]">edit_note</span>
+<span class="font-label-md text-label-md">여우의 맛 평가 한마디</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface leading-relaxed">
+            “오늘 점심 뭐 먹을지 고민될 땐 역시 룰렛이 최고야! 국물도 진하고 소고기 듬뿍에 4,000원 할인까지 받아서 알차게 완밥! 오후 업무도 파이팅!”
+          </p>
+</div>
+<!-- Action Buttons Row -->
+<div class="grid grid-cols-3 gap-2 mt-4 pt-1">
+<button class="flex items-center justify-center gap-1 py-2 px-1 rounded-full bg-surface-container-high hover:bg-surface-container active:scale-95 transition-all text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">stylus_note</span>
+            일지 수정하기
+          </button>
+<button class="flex items-center justify-center gap-1 py-2 px-1 rounded-full bg-surface-container-high hover:bg-surface-container active:scale-95 transition-all text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">add_a_photo</span>
+            사진 추가
+          </button>
+<button class="flex items-center justify-center gap-1 py-2 px-1 rounded-full bg-primary-fixed hover:bg-primary-fixed-dim active:scale-95 transition-all text-on-primary-fixed font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">share</span>
+            먹방 카드 공유
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Taste Analysis & Anti-Duplicate Warning (입맛 취향 분석 & 방지 레이더) -->
+<div class="px-margin mt-4">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-[0_4px_20px_-2px_rgba(163,57,0,0.06),0_2px_6px_-1px_rgba(41,37,36,0.04)]">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="text-base">📊</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">5월 입맛 취향 분포</h3>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-bold">총 19끼 기록</span>
+</div>
+<!-- Progress Distribution Stack -->
+<div class="w-full h-3 rounded-full bg-surface-container flex overflow-hidden p-0.5 gap-0.5 mb-3">
+<div class="h-full rounded-l-full bg-primary" style="width: 38%;" title="탕/국물요리 38%"></div>
+<div class="h-full bg-tertiary" style="width: 28%;" title="고기/구이 28%"></div>
+<div class="h-full bg-secondary" style="width: 18%;" title="다이어트/클린 18%"></div>
+<div class="h-full rounded-r-full bg-primary-container" style="width: 16%;" title="버거/패스트푸드 16%"></div>
+</div>
+<!-- Category Legend Grid -->
+<div class="grid grid-cols-2 gap-2 text-xs">
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low">
+<span class="flex items-center gap-1.5 text-on-surface font-medium truncate">
+<span class="w-2.5 h-2.5 rounded-full bg-primary shrink-0"></span>
+            🍲 탕/국물요리
+          </span>
+<span class="font-bold text-on-surface">38%</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low">
+<span class="flex items-center gap-1.5 text-on-surface font-medium truncate">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary shrink-0"></span>
+            🥩 고기/구이
+          </span>
+<span class="font-bold text-on-surface">28%</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low">
+<span class="flex items-center gap-1.5 text-on-surface font-medium truncate">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary shrink-0"></span>
+            🥗 다이어트/클린
+          </span>
+<span class="font-bold text-on-surface">18%</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low">
+<span class="flex items-center gap-1.5 text-on-surface font-medium truncate">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container shrink-0"></span>
+            🍔 버거/패스트푸드
+          </span>
+<span class="font-bold text-on-surface">16%</span>
+</div>
+</div>
+<!-- Smart Anti-Duplicate Alert Card -->
+<div class="mt-3.5 bg-primary-fixed/40 rounded-lg p-3 flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">tips_and_updates</span>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm text-primary font-bold tracking-wide">꼬마 여우의 밸런스 레이더</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 leading-snug">
+            이번 주 자극적인 음식을 <strong class="text-on-surface font-bold">2회</strong> 드셨어요! 내일 룰렛은 <span class="font-bold text-on-surface">[클린 샐러드]</span>나 <span class="font-bold text-on-surface">[건강 포케]</span>를 골라보는 건 어떨까요?
+          </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Check-in Logs Carousel / Feed -->
+<div class="px-margin mt-4">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-1.5">
+<span class="text-base">📸</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">이전 먹방 기록</h3>
+</div>
+<a class="font-label-sm text-label-sm text-primary font-bold flex items-center" href="#">
+        전체보기 (19건)
+        <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+<!-- Mini History List -->
+<div class="space-y-2.5">
+<!-- Item 1: Yesterday -->
+<div class="bg-surface-container-lowest rounded-xl p-3 shadow-sm flex items-center justify-between gap-3">
+<div class="w-14 h-14 rounded-lg bg-surface-container overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Artisanal ramen bowl with rich tonkotsu broth, chashu pork, bamboo shoots, soft boiled egg, warm cozy wooden counter ambiance, mouthwatering close-up" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMSwRSDOSneRbNlwvU1RhTdXpusTp3e26_0C48iXFeWZbSo7fIJ-RDlk5QlT0gc7U2JPamzGb8hKBk4G1MCr3SqzQL45KltDumKbEt0_7Oh-kDLJy2diffF2PR3Ez-bsHvqXjbPmcb8n417j3SXnlDv-aahyQegpx5xZsriocg_AIiVkHA0ubw1ctukoKqtxBTSVPss5KiWLoErTN2A28LRVeZIcoEJ6fWKr0kUmoJ"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<h5 class="font-label-lg text-label-lg text-on-surface truncate">이치란풍 흑마늘 돈코츠 라멘</h5>
+<span class="font-label-sm text-label-sm text-on-surface-variant shrink-0">어제 12:40</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate mt-0.5">국물이 진하고 반숙란이 예술! 비 오는 날 찰떡궁합</p>
+<div class="flex items-center gap-1 text-primary text-xs mt-1">
+<span class="material-symbols-outlined text-[13px]" style='font-variation-settings: "FILL" 1;'>star</span>
+<span class="font-bold">4.8</span>
+<span class="text-on-surface-variant text-[11px] ml-1">· 결제금액 ₩10,500</span>
+</div>
+</div>
+</div>
+<!-- Item 2: Two days ago -->
+<div class="bg-surface-container-lowest rounded-xl p-3 shadow-sm flex items-center justify-between gap-3">
+<div class="w-14 h-14 rounded-lg bg-surface-container overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Fresh vibrant green avocado and smoked chicken salad bowl with quinoa, cherry tomatoes, soft cheese, natural daytime café sunlight, healthy gourmet plating" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYb4OmdFgQYPIkDIJr3akTb0nS9mxz16llvammTb3jUegLqtZ_NU9MfGNcrtDeD1sT2SMV7hP5i-5nAbpI-rgp7TFYj9t0T6Gqp9nyZ_MS55Fc5dmMc5roV36LvPo_x48-Jc06RQITJE1XHDMgn_HLosqIiS6QdVwiJ4VWunxilxzfysVE5LGG4m8QGjNg_PBJdO3eFTbpXZP5vayBT6SNp0vJsfL-fvz4nYbeq71Q"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<h5 class="font-label-lg text-label-lg text-on-surface truncate">그린 포레스트 훈제 닭가슴살 샐러드</h5>
+<span class="font-label-sm text-label-sm text-on-surface-variant shrink-0">5월 15일</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate mt-0.5">발사믹 드레싱이 깔끔해서 식단 관리할 때 최고</p>
+<div class="flex items-center gap-1 text-primary text-xs mt-1">
+<span class="material-symbols-outlined text-[13px]" style='font-variation-settings: "FILL" 1;'>star</span>
+<span class="font-bold">4.6</span>
+<span class="text-on-surface-variant text-[11px] ml-1">· 결제금액 ₩11,000</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Floating Call-to-Actions (Quick Check-in & Roulette Link) -->
+<div class="px-margin mt-5">
+<div class="flex items-center gap-2">
+<!-- Quick Record Button -->
+<button class="flex-1 h-12 rounded-full bg-surface-container-highest text-on-surface hover:bg-surface-variant active:scale-98 transition-all flex items-center justify-center gap-1.5 shadow-sm font-label-lg text-label-lg">
+<span class="material-symbols-outlined text-[20px] text-primary">add_circle</span>
+<span>한 끼 기록하기</span>
+</button>
+<!-- Jump to Roulette for Dinner -->
+<a class="flex-1 h-12 rounded-full bg-primary text-on-primary hover:bg-primary-container active:scale-98 transition-all flex items-center justify-center gap-1.5 shadow-md font-label-lg text-label-lg" data-path="roulette" href="#">
+<span class="material-symbols-outlined text-[20px]">casino</span>
+<span>저녁 룰렛 돌리기 🎯</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- VIEW 4: MENU LAB (나만의 메뉴판 & 커스텀 메뉴판) -->
+<!-- ========================================== -->
+<div class="view-panel hidden flex flex-col w-full fade-transition pb-6" id="view-menus">
+
+<!-- 1. 꼬마 여우의 요리 연구소 카드 및 핵심 통계 -->
+<div class="bg-gradient-to-br from-white via-[#fffdfa] to-orange-50/50 rounded-3xl p-4 shadow-warm border border-orange-100/80 relative overflow-hidden">
+<!-- 장식용 배경 블러 -->
+<div class="absolute -right-10 -bottom-10 w-32 h-32 bg-orange-200/25 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-start gap-3.5 relative z-10">
+<!-- 꼬마 여우 탐험가 아바타 -->
+<div class="relative shrink-0">
+<div class="w-16 h-16 rounded-2xl overflow-hidden shadow-md border-2 border-orange-200 bg-orange-50">
+<img alt="꼬마 여우 탐험가" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOaoXkVOisBgxqdaqUAM-ppEOhVN2persEV90yIgbUNqlFhMce2YvEabuRdP4WMnvgUslJz914OvhHeVeFjKePpvOl6Vo9TS9E1CA7wr6YXC9QY_ftXvgHgrTZYqn7JmnjNKlqtymC1LO2VPylMgJPQhV0g-qdFPs6xsLXjArR4Me35gEgiLi1K0VydCDycsce05rHHjeKz1SxKfIexDzjEVwlFcdAzca2P9GzENhhEG0bDceo7cukpA"/>
+</div>
+<span class="absolute -bottom-2 -right-1 bg-gradient-to-r from-orange-600 to-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm">
+            Lv.8
+          </span>
+</div>
+<!-- 텍스트 및 대화 말풍선 -->
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-1.5 mb-1.5 flex-wrap">
+<h2 class="text-base font-extrabold text-gray-900 tracking-tight">꼬마 여우의 요리 연구소</h2>
+<span class="bg-orange-100 text-primary text-[11px] font-bold px-2 py-0.5 rounded-full">주방 시크릿</span>
+<span class="inline-flex items-center gap-0.5 text-[11px] font-semibold text-amber-600">
+<span class="material-symbols-outlined text-[13px] fill text-amber-500">sparkles</span>
+              탐험 중
+            </span>
+</div>
+<!-- 말풍선 -->
+<div class="bg-white/90 backdrop-blur-sm rounded-2xl rounded-tl-sm p-2.5 text-xs text-gray-700 leading-relaxed border border-orange-200/60 shadow-sm relative">
+<p>“나만의 탐험 메뉴 시크릿! 현재 <span class="font-extrabold text-primary text-sm">38</span>가지 맛집 요리가 등록되어 있어, 언제든 룰렛 템플릿을 변경할 수 있어~ 🍗”</p>
+</div>
+</div>
+</div>
+<!-- 핵심 통계 지표 -->
+<div class="grid grid-cols-4 gap-2 mt-4 pt-3.5 border-t border-orange-100/70 text-center relative z-10">
+<div class="bg-orange-50/60 rounded-xl py-2 px-1">
+<div class="text-[10px] text-gray-500 font-medium">현재 룰렛</div>
+<div class="text-[13px] font-extrabold text-primary truncate mt-0.5">활력 점심</div>
+</div>
+<div class="bg-amber-50/50 rounded-xl py-2 px-1">
+<div class="text-[10px] text-gray-500 font-medium">맞춤 템플릿</div>
+<div class="text-[13px] font-extrabold text-gray-800 mt-0.5"><span class="text-primary text-base">4</span> 개</div>
+</div>
+<div class="bg-rose-50/50 rounded-xl py-2 px-1">
+<div class="text-[10px] text-gray-500 font-medium">위시리스트</div>
+<div class="text-[13px] font-extrabold text-rose-600 mt-0.5"><span class="text-base font-extrabold">16</span> 개</div>
+</div>
+<div class="bg-emerald-50/50 rounded-xl py-2 px-1">
+<div class="text-[10px] text-gray-500 font-medium">누적 회전</div>
+<div class="text-[13px] font-extrabold text-emerald-700 mt-0.5"><span class="text-base font-extrabold">89</span> 회</div>
+</div>
+</div>
+</div>
+<!-- 여우의 영양 밸런스 팁 배너 -->
+<div class="bg-amber-50/90 border border-amber-200/70 rounded-2xl px-3.5 py-2.5 flex items-center justify-between text-xs text-amber-900 shadow-sm">
+<div class="flex items-center gap-2 overflow-hidden">
+<span class="text-base shrink-0">🦊💡</span>
+<p class="truncate"><span class="font-bold text-amber-800">여우의 밸런스 팁:</span> 최근 클린푸드 비율이 낮아요, 샐러드를 추가해보세요!</p>
+</div>
+<button class="shrink-0 text-primary font-bold text-xs bg-white px-2.5 py-1 rounded-lg border border-amber-200 shadow-2xs hover:bg-orange-50 transition active:scale-95 ml-2" onclick="switchTab('wishlist')">선택하기</button>
+</div>
+<!-- 2. 세그먼트 탭 전환 및 새로 만들기 버튼 -->
+<div class="flex items-center justify-between gap-2 pt-1">
+<div class="flex p-1 bg-surface-container rounded-2xl border border-[#e2bfb2]/30 flex-1 shadow-inner">
+<button class="flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-1.5 bg-primary text-white shadow-sm" id="tab-btn-templates" onclick="switchTab('templates')">
+<span class="material-symbols-outlined text-[16px]">pie_chart</span>
+<span>룰렛 템플릿</span>
+<span class="bg-white/20 text-white text-[10px] px-1.5 py-0.2 rounded-full font-bold">4</span>
+</button>
+<button class="flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-1.5 text-gray-600 hover:text-gray-900" id="tab-btn-wishlist" onclick="switchTab('wishlist')">
+<span class="material-symbols-outlined text-[16px]">favorite</span>
+<span>먹방 위시리스트</span>
+<span class="bg-gray-200/80 text-gray-700 text-[10px] px-1.5 py-0.2 rounded-full font-bold">16</span>
+</button>
+</div>
+<button class="bg-gradient-to-r from-primary to-orange-600 text-white px-3.5 py-2 rounded-2xl font-bold text-xs shadow-md shadow-orange-500/20 flex items-center gap-1 active:scale-95 shrink-0 transition" onclick="openCreateModal()">
+<span class="material-symbols-outlined text-[17px]">add</span>
+<span>새로 만들기</span>
+</button>
+</div>
+<!-- 3. 룰렛 템플릿 보관함 뷰 -->
+<div class="space-y-3 transition-opacity duration-200" id="view-templates">
+<!-- 템플릿 1: 평일 점심 -->
+<div class="bg-white rounded-3xl p-4 border-2 border-orange-200/70 shadow-warm relative overflow-hidden">
+<div class="flex items-start justify-between mb-2.5">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-xl bg-orange-100 text-primary flex items-center justify-center font-bold text-base">🍱</span>
+<div>
+<div class="flex items-center gap-1.5">
+<h3 class="font-extrabold text-[15px] text-gray-900">직장인 파워 평일 점심</h3>
+<span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-1.5 py-0.5 rounded-md">적용 중</span>
+</div>
+<p class="text-[11px] text-gray-500">빠르고 든든한 8가지 요리 · 점심 고민 해결</p>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<span class="text-[11px] font-bold text-orange-600 bg-orange-50 border border-orange-200 px-2 py-0.5 rounded-full">자주 사용</span>
+<span class="text-[11px] font-bold text-blue-600 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-full">확률 균등</span>
+</div>
+</div>
+<!-- 요리 태그 칩 -->
+<div class="flex flex-wrap gap-1.5 my-3">
+<span class="bg-surface-container text-gray-800 text-xs px-2.5 py-1 rounded-xl font-medium border border-gray-200/60">마라탕 🍲</span>
+<span class="bg-surface-container text-gray-800 text-xs px-2.5 py-1 rounded-xl font-medium border border-gray-200/60">돈코츠 라멘 🍜</span>
+<span class="bg-surface-container text-gray-800 text-xs px-2.5 py-1 rounded-xl font-medium border border-gray-200/60">와규 버거 &amp; 감자튀김 🍔</span>
+<span class="bg-surface-container text-gray-800 text-xs px-2.5 py-1 rounded-xl font-medium border border-gray-200/60">닭가슴살 샐러드 🥗</span>
+<span class="bg-surface-container text-gray-800 text-xs px-2.5 py-1 rounded-xl font-medium border border-gray-200/60">닭볶음 덮밥 🍚</span>
+<span class="bg-surface-container text-gray-800 text-xs px-2.5 py-1 rounded-xl font-medium border border-gray-200/60">소고기 쌀국수 🥩</span>
+<span class="text-xs text-gray-400 self-center font-bold px-1">+2개 더</span>
+</div>
+<!-- 작업 영역 -->
+<div class="flex items-center justify-between pt-2.5 border-t border-gray-100">
+<div class="text-[11px] text-gray-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-gray-400">history</span>
+            오늘 2회 회전됨
+          </div>
+<div class="flex items-center gap-2">
+<button class="p-1.5 text-gray-500 hover:text-gray-800 rounded-lg hover:bg-gray-100 transition" onclick="showToast('【직장인 파워 평일 점심】 편집 중...')">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</button>
+<button class="bg-primary hover:bg-primary-dark text-white font-bold text-xs px-3.5 py-1.5 rounded-xl shadow-sm flex items-center gap-1 active:scale-95 transition" onclick="loadTemplateToRoulette('직장인 파워 평일 점심')">
+<span class="material-symbols-outlined text-[15px] fill">play_circle</span>
+<span>룰렛에 장착하기</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 템플릿 2: 디저트 & 음료 -->
+<div class="bg-white rounded-3xl p-4 border border-[#e2bfb2]/50 shadow-sm hover:shadow-md transition">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center font-bold text-base">🧋</span>
+<div>
+<h3 class="font-extrabold text-[15px] text-gray-900">오후 당충전 디저트 &amp; 음료</h3>
+<p class="text-[11px] text-gray-500">오후 3시 졸음 격퇴 달콤 충전</p>
+</div>
+</div>
+<span class="text-[11px] font-bold text-pink-600 bg-pink-50 border border-pink-200 px-2 py-0.5 rounded-full">고당도 힐링</span>
+</div>
+<div class="flex flex-wrap gap-1.5 my-3">
+<span class="bg-[#fbf9f1] text-gray-800 text-xs px-2.5 py-1 rounded-xl font-medium border border-gray-200/70">망고 포멜로 사고 🥭</span>
+<span class="bg-[#fbf9f1] text-gray-800 text-xs px-2.5 py-1 rounded-xl font-medium border border-gray-200/70">코코넛 라떼 ☕</span>
+<span class="bg-[#fbf9f1] text-gray-800 text-xs px-2.5 py-1 rounded-xl font-medium border border-gray-200/70">말차 팬케이크 🥞</span>
+<span class="bg-[#fbf9f1] text-gray-800 text-xs px-2.5 py-1 rounded-xl font-medium border border-gray-200/70">딥로스팅 아메리카노 🧊</span>
+</div>
+<div class="flex items-center justify-between pt-2.5 border-t border-gray-100">
+<div class="text-[11px] text-gray-400">최근 사용: 어제 15:30</div>
+<button class="bg-orange-50 hover:bg-orange-100 text-primary border border-orange-200 font-bold text-xs px-3.5 py-1.5 rounded-xl shadow-xs flex items-center gap-1 active:scale-95 transition" onclick="loadTemplateToRoulette('오후 당충전 디저트 &amp; 음료')">
+<span class="material-symbols-outlined text-[15px]">swap_horiz</span>
+<span>돌리러 가기</span>
+</button>
+</div>
+</div>
+<!-- 템플릿 3: 다이어트 클린 식단 -->
+<div class="bg-white rounded-3xl p-4 border border-[#e2bfb2]/50 shadow-sm hover:shadow-md transition">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-base">🥑</span>
+<div>
+<h3 class="font-extrabold text-[15px] text-gray-900">건강 다이어트 클린 식단</h3>
+<p class="text-[11px] text-gray-500">저탄수화물 &amp; 고단백 밸런스</p>
+</div>
+</div>
+<span class="text-[11px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">클린 식단</span>
+</div>
+<div class="flex flex-wrap gap-1.5 my-3">
+<span class="bg-[#fbf9f1] text-gray-800 text-xs px-2.5 py-1 rounded-xl font-medium border border-gray-200/70">아보카도 닭가슴살 🥑</span>
+<span class="bg-[#fbf9f1] text-gray-800 text-xs px-2.5 py-1 rounded-xl font-medium border border-gray-200/70">레인보우 웜 샐러드 🥗</span>
+<span class="bg-[#fbf9f1] text-gray-800 text-xs px-2.5 py-1 rounded-xl font-medium border border-gray-200/70">메밀 해물 온면 🍜</span>
+<span class="bg-[#fbf9f1] text-gray-800 text-xs px-2.5 py-1 rounded-xl font-medium border border-gray-200/70">수비드 연어 스테이크 🐟</span>
+</div>
+<div class="flex items-center justify-between pt-2.5 border-t border-gray-100">
+<div class="text-[11px] text-gray-400">예상 칼로리 &lt; 480 kcal</div>
+<button class="bg-orange-50 hover:bg-orange-100 text-primary border border-orange-200 font-bold text-xs px-3.5 py-1.5 rounded-xl shadow-xs flex items-center gap-1 active:scale-95 transition" onclick="loadTemplateToRoulette('건강 다이어트 클린 식단')">
+<span class="material-symbols-outlined text-[15px]">swap_horiz</span>
+<span>룰렛에 장착하기</span>
+</button>
+</div>
+</div>
+<!-- 템플릿 4: 주말 모임 치팅 -->
+<div class="bg-white rounded-3xl p-4 border border-[#e2bfb2]/50 shadow-sm hover:shadow-md transition">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-base">🍲</span>
+<div>
+<h3 class="font-extrabold text-[15px] text-gray-900">주말 불금 치팅 먹방</h3>
+<p class="text-[11px] text-gray-500">친구 모임 · 맛있는 폭식 파티</p>
+</div>
+</div>
+<span class="text-[11px] font-bold text-purple-600 bg-purple-50 border border-purple-200 px-2 py-0.5 rounded-full">모임 추천</span>
+</div>
+<div class="flex flex-wrap gap-1.5 my-3">
+<span class="bg-[#fbf9f1] text-gray-800 text-xs px-2.5 py-1 rounded-xl font-medium border border-gray-200/70">정통 마라 훠궈 🌶️</span>
+<span class="bg-[#fbf9f1] text-gray-800 text-xs px-2.5 py-1 rounded-xl font-medium border border-gray-200/70">숯불 두툼 삼겹살 🥩</span>
+<span class="bg-[#fbf9f1] text-gray-800 text-xs px-2.5 py-1 rounded-xl font-medium border border-gray-200/70">화덕 마르게리따 피자 🍕</span>
+<span class="bg-[#fbf9f1] text-gray-800 text-xs px-2.5 py-1 rounded-xl font-medium border border-gray-200/70">지글지글 해물 뚝배기 🥘</span>
+</div>
+<div class="flex items-center justify-between pt-2.5 border-t border-gray-100">
+<div class="text-[11px] text-gray-400">엄선 요리 6개 등록됨</div>
+<button class="bg-orange-50 hover:bg-orange-100 text-primary border border-orange-200 font-bold text-xs px-3.5 py-1.5 rounded-xl shadow-xs flex items-center gap-1 active:scale-95 transition" onclick="loadTemplateToRoulette('주말 불금 치팅 먹방')">
+<span class="material-symbols-outlined text-[15px]">swap_horiz</span>
+<span>룰렛에 장착하기</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 4. 먹방 위시리스트 뷰 -->
+<div class="space-y-3.5 hidden transition-opacity duration-200" id="view-wishlist">
+<!-- 안내 헤더 -->
+<div class="bg-gradient-to-r from-amber-50 to-orange-50/70 p-4 rounded-3xl border border-orange-200/60 flex items-start gap-3">
+<span class="text-2xl p-2 bg-white rounded-2xl shadow-xs border border-orange-100">📋</span>
+<div>
+<h3 class="text-sm font-extrabold text-gray-900">꼬마 여우의 가보고 싶은 위시리스트</h3>
+<p class="text-xs text-gray-600 mt-1 leading-relaxed">아직 못 가본 맛집이나 꼭 먹고 싶은 메뉴들! 체크 후 한 번의 터치로 오늘의 룰렛에 쏙 넣어보세요.</p>
+</div>
+</div>
+<!-- 빠른 입력 필드 -->
+<div class="bg-white p-2.5 rounded-2xl shadow-sm border border-orange-200/80 flex items-center gap-2">
+<div class="flex-1 flex items-center gap-2 px-2 text-gray-400">
+<span class="material-symbols-outlined text-[20px] text-primary">add_circle</span>
+<input class="w-full text-xs text-gray-800 placeholder-gray-400 bg-transparent border-none p-0 focus:outline-none focus:ring-0" id="dish-input" placeholder="먹고 싶은 메뉴나 맛집 이름 입력 (예: 생소고기 훠궈)" type="text"/>
+</div>
+<button class="bg-primary hover:bg-primary-dark text-white font-bold text-xs px-4 py-2 rounded-xl shadow-sm active:scale-95 transition" onclick="addWishItem()">
+          추가
+        </button>
+</div>
+<!-- 일괄 작업 툴바 -->
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="text-xs text-gray-500 font-medium">선택됨: <strong class="text-primary font-bold" id="selected-count">2</strong> 개</span>
+<button class="text-xs text-gray-700 font-bold hover:text-primary transition underline decoration-dotted" id="select-all-btn" onclick="toggleSelectAll()">전체 선택</button>
+</div>
+<button class="bg-orange-100/90 text-primary border border-orange-300 font-bold text-xs px-3 py-1.5 rounded-xl flex items-center gap-1.5 active:scale-95 transition shadow-2xs" onclick="importSelectedToRoulette()">
+<span class="material-symbols-outlined text-[16px]">input</span>
+<span>현재 룰렛에 채우기</span>
+</button>
+</div>
+<!-- 위시리스트 아이템들 -->
+<div class="space-y-2.5" id="wishlist-container">
+<!-- 아이템 1 -->
+<div class="wish-item bg-white p-3.5 rounded-2xl border border-orange-200 shadow-xs flex items-center justify-between transition hover:border-orange-300">
+<div class="flex items-center gap-3">
+<input checked="" class="w-5 h-5 rounded-lg text-primary focus:ring-primary border-gray-300 rounded cursor-pointer accent-orange-600" onchange="updateCount()" type="checkbox"/>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-sm font-bold text-gray-900">한우 소고기 샤브샤브 · 즉석 손질</span>
+<span class="text-xs">🥩</span>
+</div>
+<div class="text-[11px] text-gray-500 flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[13px] text-rose-500 fill">location_on</span>
+<span>강남역 4번 출구 · 친구가 극찬한 인생 소고기 맛집</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[11px] bg-orange-50 text-primary font-bold px-2 py-0.5 rounded-full border border-orange-200">먹고싶음 3회</span>
+<button class="text-gray-400 hover:text-gray-600 p-1" onclick="showToast('옵션: 한우 소고기 샤브샤브')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- 아이템 2 -->
+<div class="wish-item bg-white p-3.5 rounded-2xl border border-orange-200 shadow-xs flex items-center justify-between transition hover:border-orange-300">
+<div class="flex items-center gap-3">
+<input checked="" class="w-5 h-5 rounded-lg text-primary focus:ring-primary border-gray-300 rounded cursor-pointer accent-orange-600" onchange="updateCount()" type="checkbox"/>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-sm font-bold text-gray-900">화덕 마르게리따 피자</span>
+<span class="text-xs">🍕</span>
+</div>
+<div class="text-[11px] text-gray-500 flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[13px] text-rose-500 fill">location_on</span>
+<span>나폴리 전통 씬도우 · 부팔라 생모짜렐라 치즈 듬뿍</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[11px] bg-amber-50 text-amber-700 font-bold px-2 py-0.5 rounded-full border border-amber-200">지난주 찜</span>
+<button class="text-gray-400 hover:text-gray-600 p-1" onclick="showToast('옵션: 화덕 마르게리따 피자')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- 아이템 3 -->
+<div class="wish-item bg-white p-3.5 rounded-2xl border border-gray-200/80 shadow-xs flex items-center justify-between transition hover:border-orange-200">
+<div class="flex items-center gap-3">
+<input class="w-5 h-5 rounded-lg text-primary focus:ring-primary border-gray-300 rounded cursor-pointer accent-orange-600" onchange="updateCount()" type="checkbox"/>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-sm font-bold text-gray-800">원조 매콤 닭꼬치 &amp; 꼬치구이</span>
+<span class="text-xs">🍢</span>
+</div>
+<div class="text-[11px] text-gray-500 flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[13px] text-rose-500 fill">location_on</span>
+<span>도보 400m · 불향 가득 특제 양념 소스</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[11px] bg-gray-100 text-gray-700 font-medium px-2 py-0.5 rounded-full">동료 추천</span>
+<button class="text-gray-400 hover:text-gray-600 p-1" onclick="showToast('옵션: 원조 매콤 닭꼬치')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- 아이템 4 -->
+<div class="wish-item bg-white p-3.5 rounded-2xl border border-gray-200/80 shadow-xs flex items-center justify-between transition hover:border-orange-200">
+<div class="flex items-center gap-3">
+<input class="w-5 h-5 rounded-lg text-primary focus:ring-primary border-gray-300 rounded cursor-pointer accent-orange-600" onchange="updateCount()" type="checkbox"/>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-sm font-bold text-gray-800">말차 퐁당 수플레 팬케이크</span>
+<span class="text-xs">🥞</span>
+</div>
+<div class="text-[11px] text-gray-500 flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[13px] text-rose-500 fill">location_on</span>
+<span>골목길 디저트 카페 · 주말 티타임 한정 메뉴</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[11px] bg-emerald-50 text-emerald-700 font-medium px-2 py-0.5 rounded-full">별점 4.9</span>
+<button class="text-gray-400 hover:text-gray-600 p-1" onclick="showToast('옵션: 말차 퐁당 수플레 팬케이크')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</main>
+<!-- MODAL: SPIN WINNER (당첨 결과 팝업) -->
+<!-- ========================================== -->
+<div class="fixed inset-0 z-50 bg-inverse-surface/60 backdrop-blur-sm flex items-center justify-center p-4 hidden" id="winner-modal">
+<div class="bg-surface-container-lowest rounded-3xl w-full max-w-sm p-6 shadow-2xl flex flex-col items-center text-center animate-in zoom-in-95 duration-200 border-2 border-primary/20">
+<span class="text-4xl animate-bounce">🎉</span>
+<span class="font-label-sm text-primary font-bold uppercase tracking-wider mt-1">오늘의 행운 메뉴 탄생!</span>
+<h2 class="font-headline-lg text-display-mobile text-on-surface mt-1" id="modal-winner-title">🍕 화덕 피자</h2>
+<p class="font-body-md text-on-surface-variant text-sm mt-1 px-2" id="modal-winner-desc">와! 대박 맛있는 메뉴가 나왔어요! 당장 먹으러 가볼까요?</p>
+<!-- Store Voucher Preview Card -->
+<div class="w-full bg-surface-container-low rounded-2xl p-3 my-4 flex items-center justify-between text-left">
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center text-primary text-xl">
+            🏷️
+          </div>
+<div>
+<div class="font-label-md font-bold text-on-surface">전용 즉시할인 쿠폰 지급 완료</div>
+<div class="text-[11px] text-on-surface-variant">반경 500m 매장 및 배달 공용 사용 가능</div>
+</div>
+</div>
+<span class="bg-secondary text-on-secondary font-label-sm text-[10px] font-bold px-2 py-1 rounded-full">-2,000원</span>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-2 w-full">
+<button class="w-full py-3 rounded-full bg-primary text-on-primary font-label-md text-label-md font-bold shadow-md flex items-center justify-center gap-1.5 active:scale-95 transition-all" onclick="handleWinnerGoRadar()">
+<span class="material-symbols-outlined text-[18px]">explore</span>
+<span>주변 맛집 보기</span>
+</button>
+<button class="w-full py-2.5 rounded-full bg-secondary text-on-secondary font-label-md text-label-md font-bold flex items-center justify-center gap-1 active:scale-95 transition-all" onclick="handleWinnerGoDiary()">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>이걸로 결정! 먹방 일지에 기록</span>
+</button>
+<button class="w-full py-1.5 text-on-surface-variant font-label-sm text-label-sm hover:underline" onclick="closeWinnerModal()">
+          다시 돌리기
+        </button>
+</div>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- MODAL: CREATE WHEEL (새 맞춤 룰렛 만들기) -->
+<!-- ========================================== -->
+<div class="fixed inset-0 z-50 bg-inverse-surface/40 backdrop-blur-sm hidden flex items-end justify-center" id="create-modal">
+<div class="bg-surface-container-lowest rounded-t-3xl w-full max-w-lg p-space-md flex flex-col gap-space-md shadow-2xl animate-in slide-in-from-bottom duration-200">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="text-xl">🦊✨</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">새 나만의 룰렛 만들기</h3>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface" onclick="closeCreateModal()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-3">
+<div>
+<label class="font-label-sm text-label-sm text-on-surface-variant mb-1 block">룰렛 이름</label>
+<input class="w-full bg-surface-container-low rounded-xl px-3.5 py-2.5 font-body-md text-body-md text-on-surface focus:outline-none" id="modal-name-input" placeholder="새로운 룰렛 이름을 입력해주세요..." type="text"/>
+</div>
+<div>
+<label class="font-label-sm text-label-sm text-on-surface-variant mb-1 block">추천 키워드</label>
+<div class="flex gap-2">
+<button class="px-2.5 py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface" onclick="document.getElementById('modal-name-input').value='든든한 갓성비 백반판'">⚡ 갓성비 점심</button>
+<button class="px-2.5 py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface" onclick="document.getElementById('modal-name-input').value='심야 불맛 숯불 야식판'">🔥 야식 파티</button>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 pt-2">
+<button class="flex-1 py-2.5 rounded-full bg-surface-container text-on-surface font-label-md text-label-md" onclick="closeCreateModal()">취소</button>
+<button class="flex-1 py-2.5 rounded-full bg-primary text-on-primary font-label-md text-label-md font-bold shadow-md" onclick="confirmCreateWheel()">생성하고 룰렛에 적용</button>
+</div>
+</div>
+</div>
+<!-- TOAST NOTIFICATION -->
+<div class="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-inverse-surface text-inverse-on-surface px-4 py-2 rounded-full font-label-md text-label-md shadow-lg flex items-center gap-2 pointer-events-none transition-opacity duration-300 opacity-0" id="toast-notify">
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed">check_circle</span>
+<span id="toast-msg">임시 제외되었습니다</span>
+</div>
+<!-- ========================================== -->
+
+<nav class="fixed bottom-0 max-w-md w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-4px_20px_rgba(41,37,36,0.06)] border-t border-outline-variant/20">
+<div class="flex justify-around items-center h-16 px-space-xs">
+<!-- Tab 1: 룰렛 -->
+<button class="flex flex-col items-center justify-center gap-0.5 flex-1 h-12 text-primary font-bold transition-all active:scale-95" id="tab-btn-roulette" onclick="navigateView('roulette')">
+<div class="tab-indicator w-10 h-7 rounded-full bg-primary-fixed/60 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]" style='font-variation-settings: "FILL" 1;'>casino</span>
+</div>
+<span class="font-label-sm text-[11px]">룰렛</span>
+</button>
+<!-- Tab 2: 맛집&배달 -->
+<button class="flex flex-col items-center justify-center gap-0.5 flex-1 h-12 text-on-surface-variant hover:text-on-surface transition-all active:scale-95" id="tab-btn-radar" onclick="navigateView('radar')">
+<div class="tab-indicator w-10 h-7 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">explore</span>
+</div>
+<span class="font-label-sm text-[11px]">맛집&amp;배달</span>
+</button>
+<!-- Tab 3: 먹방 일지 -->
+<button class="flex flex-col items-center justify-center gap-0.5 flex-1 h-12 text-on-surface-variant hover:text-on-surface transition-all active:scale-95" id="tab-btn-diary" onclick="navigateView('diary')">
+<div class="tab-indicator w-10 h-7 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+</div>
+<span class="font-label-sm text-[11px]">먹방 일지</span>
+</button>
+<!-- Tab 4: 메뉴판 -->
+<button class="flex flex-col items-center justify-center gap-0.5 flex-1 h-12 text-on-surface-variant hover:text-on-surface transition-all active:scale-95" id="tab-btn-menus" onclick="navigateView('menus')">
+<div class="tab-indicator w-10 h-7 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">restaurant_menu</span>
+</div>
+<span class="font-label-sm text-[11px]">메뉴판</span>
+</button>
+</div>
+</nav>
+  <!-- INTERACTIVE APPLICATION SCRIPT -->
+  <script>
+    // State & Presets
+    const PRESETS = {
+      workday: {
+        key: "workday",
+        title: "직장인 평일 점심 메뉴판",
+        items: [
+          "샤브샤브",
+          "돈코츠 라멘",
+          "닭가슴살 샐러드",
+          "돌솥비빔밥",
+          "화덕 피자",
+          "마라탕",
+          "수제버거 & 감자튀김",
+          "숯불 바베큐 도시락"
+        ]
+      },
+      tea: {
+        key: "tea",
+        title: "오후 힐링 디저트 & 음료판",
+        items: ["☕ 코코넛 라떼", "🧋 펄 버블티", "🍋 레몬에이드", "🍵 말차 라떼", "🧊 아메리카노", "🥭 망고 스무디"]
+      },
+      fitness: {
+        key: "fitness",
+        title: "식단관리 클린 식단판",
+        items: ["🥑 퀴노아 보울", "🐟 연어 샐러드", "🌯 통밀 브리또", "🦐 새우 포케", "🥣 그릭 요거트", "🥩 부채살 플레이트"]
+      },
+      weekend: {
+        key: "weekend",
+        title: "주말 모임 & 파티 요리판",
+        items: ["🍲 버섯 샤브 전골", "🥩 숙성 스테이크", "🍢 숯불 꼬치구이", "🦀 모둠 해물찜", "🍲 똠얌 전골", "🍻 맥주 펍 플래터"]
+      }
+    };
+
+    let currentPresetKey = 'workday';
+    let currentWheelItems = [...PRESETS.workday.items];
+    let currentAngle = 0;
+    let isSpinning = false;
+    let lastWinner = "화덕 피자";
+    let soundEnabled = true;
+
+    // Web Audio Sound Synthesizer
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playTickSound() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(540, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.04);
+        gain.gain.setValueAtTime(0.18, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.04);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.045);
+      } catch (e) { }
+    }
+
+    function playWinSound() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+        notes.forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.09);
+          gain.gain.setValueAtTime(0.25, ctx.currentTime + idx * 0.09);
+          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + idx * 0.09 + 0.35);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime + idx * 0.09);
+          osc.stop(ctx.currentTime + idx * 0.09 + 0.4);
+        });
+      } catch (e) { }
+    }
+
+    function playVoucherSound() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1320, ctx.currentTime + 0.15);
+        gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.2);
+      } catch (e) { }
+    }
+
+    // View Navigation Logic
+    function navigateView(viewName) {
+      const views = ['roulette', 'radar', 'diary', 'menus'];
+      views.forEach(v => {
+        const el = document.getElementById('view-' + v);
+        const tabBtn = document.getElementById('tab-btn-' + v);
+        if (el) {
+          if (v === viewName) {
+            el.classList.remove('hidden');
+          } else {
+            el.classList.add('hidden');
+          }
+        }
+        if (tabBtn) {
+          if (v === viewName) {
+            tabBtn.className = "flex flex-col items-center justify-center gap-0.5 flex-1 h-12 text-primary font-bold transition-all active:scale-95";
+            const indicator = tabBtn.querySelector('.tab-indicator');
+            if (indicator) indicator.className = "tab-indicator w-10 h-7 rounded-full bg-primary-fixed/60 flex items-center justify-center text-primary";
+          } else {
+            tabBtn.className = "flex flex-col items-center justify-center gap-0.5 flex-1 h-12 text-on-surface-variant hover:text-on-surface transition-all active:scale-95";
+            const indicator = tabBtn.querySelector('.tab-indicator');
+            if (indicator) indicator.className = "tab-indicator w-10 h-7 rounded-full flex items-center justify-center";
+          }
+        }
+      });
+
+      // Update header texts
+      const titleEl = document.getElementById('header-title');
+      const backIcon = document.getElementById('header-back-icon');
+
+      const headerBackBtn = document.querySelector('header button[title]');
+      if (viewName === 'roulette') {
+        if (titleEl) titleEl.innerText = "점심 메뉴 결정 룰렛";
+        if (backIcon) backIcon.innerText = "refresh";
+        if (headerBackBtn) {
+          headerBackBtn.title = "룰렛 순서 섞기";
+          headerBackBtn.onclick = () => { shuffleWheelItems(); };
+        }
+      } else if (viewName === 'radar') {
+        if (headerBackBtn) {
+          headerBackBtn.title = "메인 룰렛으로 돌아가기";
+          headerBackBtn.onclick = () => { navigateView('roulette'); };
+        }
+        if (titleEl) titleEl.innerText = "주변 맛집 & 배달 레이더";
+        if (backIcon) backIcon.innerText = "arrow_back";
+      } else if (viewName === 'diary') {
+        if (titleEl) titleEl.innerText = "꼬마 여우의 먹방 일지";
+        if (backIcon) backIcon.innerText = "arrow_back";
+      } else if (viewName === 'menus') {
+        if (titleEl) titleEl.innerText = "여우의 메뉴 연구소";
+        if (backIcon) backIcon.innerText = "arrow_back";
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Wheel Canvas Drawing
+    const WHEEL_COLORS = [
+      '#FFDBCF', '#FFE8D6', '#D1F4E0', '#FDE8E9',
+      '#FFF0D4', '#E2F1E8', '#FFDAD6', '#ECE6F0'
+    ];
+
+    function renderWheel() {
+      const canvas = document.getElementById('roulette-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const numSegments = currentWheelItems.length;
+      if (numSegments === 0) return;
+      const arcSize = (2 * Math.PI) / numSegments;
+      const radius = canvas.width / 2;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.save();
+      ctx.translate(radius, radius);
+      ctx.rotate(currentAngle);
+
+      for (let i = 0; i < numSegments; i++) {
+        const segAngle = i * arcSize;
+        ctx.beginPath();
+        ctx.fillStyle = WHEEL_COLORS[i % WHEEL_COLORS.length];
+        ctx.moveTo(0, 0);
+        ctx.arc(0, 0, radius, segAngle, segAngle + arcSize);
+        ctx.lineTo(0, 0);
+        ctx.fill();
+
+        ctx.strokeStyle = '#FFFFFF';
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+
+        // Label
+        ctx.save();
+        ctx.rotate(segAngle + arcSize / 2);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#261914';
+        ctx.font = 'bold 12px "Noto Sans KR", "Plus Jakarta Sans", sans-serif';
+        const label = currentWheelItems[i];
+        ctx.fillText(label, radius - 20, 4);
+        ctx.restore();
+      }
+
+      ctx.restore();
+      renderWheelChips();
+    }
+
+    function renderWheelChips() {
+      const container = document.getElementById('wheel-chips-container');
+      if (!container) return;
+      container.innerHTML = '';
+      currentWheelItems.forEach((item, idx) => {
+        const chip = document.createElement('button');
+        chip.className = "px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-[11px] flex items-center gap-1 active:scale-95 transition-all hover:bg-surface-container-high";
+        chip.innerHTML = <span></span><span class="material-symbols-outlined text-[12px] opacity-60">close</span>;
+        chip.onclick = () => {
+          if (currentWheelItems.length <= 2) {
+            showToast('룰렛에는 최소 2개 이상의 메뉴가 필요해요!');
+            return;
+          }
+          currentWheelItems.splice(idx, 1);
+          renderWheel();
+          showToast(「」 메뉴를 임시 제외했습니다);
+        };
+        container.appendChild(chip);
+      });
+    }
+
+    // Spin Animation
+    function startSpinAnimation() {
+      if (isSpinning) return;
+      isSpinning = true;
+      const spinBtn = document.getElementById('spin-btn');
+      if (spinBtn) spinBtn.disabled = true;
+
+      const extraRounds = 5 + Math.random() * 3;
+      const randomStopAngle = Math.random() * 2 * Math.PI;
+      const totalRotation = extraRounds * 2 * Math.PI + randomStopAngle;
+      
+      const startTime = performance.now();
+      const duration = 3800;
+      const startAngle = currentAngle;
+      let lastTickAngle = currentAngle;
+      const tickStep = (2 * Math.PI) / currentWheelItems.length;
+
+      function animate(time) {
+        const elapsed = time - startTime;
+        const t = Math.min(1, elapsed / duration);
+        const easeOut = 1 - Math.pow(1 - t, 3);
+        currentAngle = startAngle + totalRotation * easeOut;
+        renderWheel();
+
+        if (Math.abs(currentAngle - lastTickAngle) >= tickStep) {
+          playTickSound();
+          lastTickAngle = currentAngle;
+        }
+
+        if (t < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          isSpinning = false;
+          if (spinBtn) spinBtn.disabled = false;
+          calculateWinner();
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+
+    function calculateWinner() {
+      const numSegments = currentWheelItems.length;
+      const arcSize = (2 * Math.PI) / numSegments;
+      let normalized = (-(currentAngle % (2 * Math.PI)) - Math.PI / 2) % (2 * Math.PI);
+      if (normalized < 0) normalized += 2 * Math.PI;
+      const winningIndex = Math.floor(normalized / arcSize) % numSegments;
+      lastWinner = currentWheelItems[winningIndex];
+
+      playWinSound();
+
+      // Update Winner Modal
+      const titleEl = document.getElementById('modal-winner-title');
+      const descEl = document.getElementById('modal-winner-desc');
+      const modalEl = document.getElementById('winner-modal');
+      const targetTag = document.getElementById('radar-target-tag');
+
+      if (titleEl) titleEl.innerText = lastWinner;
+      if (descEl) descEl.innerText = "와! 꼬마 여우 추천 대박 맛있는 메뉴가 나왔어요! 당장 먹으러 가볼까요?";
+      if (modalEl) modalEl.classList.remove('hidden');
+      if (targetTag) targetTag.innerText = lastWinner;
+    }
+
+    function closeWinnerModal() {
+      const modalEl = document.getElementById('winner-modal');
+      if (modalEl) modalEl.classList.add('hidden');
+    }
+
+    function handleWinnerGoRadar() {
+      closeWinnerModal();
+      navigateView('radar');
+      showToast(🧭 「」 주변 맛집을 탐색 중입니다!);
+    }
+
+    function handleWinnerGoDiary() {
+      closeWinnerModal();
+      recordAndGoDiary(lastWinner + ' (선택 추천 맛집)', lastWinner);
+    }
+
+    // Load Presets into wheel
+    function loadPresetToWheel(key) {
+      if (!PRESETS[key]) return;
+      currentPresetKey = key;
+      currentWheelItems = [...PRESETS[key].items];
+      const pTitle = document.getElementById('current-active-preset-title');
+      if (pTitle) pTitle.innerText = PRESETS[key].title;
+      renderWheel();
+      showToast(🍱 「」을(를) 룰렛에 불러왔습니다!);
+      navigateView('roulette');
+    }
+
+    function loadTemplateToRoulette(templateName) {
+      // Map Korean preset name to key if needed
+      let matchedKey = 'workday';
+      if (templateName.includes('디저트') || templateName.includes('음료')) matchedKey = 'tea';
+      else if (templateName.includes('다이어트') || templateName.includes('클린')) matchedKey = 'fitness';
+      else if (templateName.includes('주말') || templateName.includes('치팅')) matchedKey = 'weekend';
+      loadPresetToWheel(matchedKey);
+    }
+
+    function shuffleWheelItems() {
+      currentWheelItems.sort(() => Math.random() - 0.5);
+      renderWheel();
+      showToast('🔀 룰렛 메뉴 순서를 골고루 섞었습니다');
+    }
+
+    function toggleWheelSound(btn) {
+      soundEnabled = !soundEnabled;
+      const soundIcons = document.querySelectorAll('#wheel-sound-icon, #header-sound-icon, .sound-icon');
+      soundIcons.forEach(icon => {
+        icon.innerText = soundEnabled ? 'volume_up' : 'volume_off';
+      });
+      const soundText = document.getElementById('sound-text');
+      if (soundText) soundText.innerText = soundEnabled ? '회전 사운드' : '무음 모드';
+      showToast(soundEnabled ? '🔔 룰렛 사운드가 켜졌습니다' : '🔕 룰렛이 무음 모드로 전환되었습니다');
+    }
+
+    // Diary & Record
+    function recordAndGoDiary(storeName, mealCategory) {
+      const dTitle = document.getElementById('diary-card-title');
+      const dDesc = document.getElementById('diary-card-desc');
+      const emoji = document.getElementById('calendar-today-emoji');
+      const hPercent = document.getElementById('hunger-percent');
+      const hProgress = document.getElementById('hunger-progress');
+
+      if (dTitle) dTitle.innerText = storeName;
+      if (dDesc) dDesc.innerText = 룰렛 한 방에【】당첨! 완벽하게 기분 좋은 든든한 한 끼 ✨;
+      if (emoji) emoji.innerText = mealCategory.includes('샤브') ? '🍲' : (mealCategory.includes('라멘') ? '🍜' : '🍕');
+      if (hPercent) hPercent.innerText = "100% 행복한 포만감";
+      if (hProgress) hProgress.style.width = "100%";
+
+      navigateView('diary');
+      showToast(🎉 오늘 점심 먹방 기록 완료: !);
+    }
+
+    // Interactive Calendar Day Selection in Diary
+    function selectDiaryDay(dayNum, mealName, emoji) {
+      const dTitle = document.getElementById('diary-card-title');
+      const dDesc = document.getElementById('diary-card-desc');
+      if (dTitle) dTitle.innerText = mealName;
+      if (dDesc) dDesc.innerText = 5월 일 기록:  깔끔하게 완식 완료! 🌟;
+      showToast(📅 5월 일 식단 기록 확인: );
+    }
+
+    // Boost Satiety Meter
+    function boostSatiety() {
+      playVoucherSound();
+      showToast('🍖 꼬마 여우에게 간식을 주어 포만감이 100%로 가득 찼어요!');
+    }
+
+    // Radar Map & Delivery Functions
+    function toggleRadarMode(mode) {
+      const btnDineIn = document.getElementById('btnDineIn') || document.getElementById('radar-tab-dinein');
+      const btnDelivery = document.getElementById('btnDelivery') || document.getElementById('radar-tab-takeout');
+      if (!btnDineIn || !btnDelivery) return;
+
+      if (mode === 'dinein') {
+        btnDineIn.className = "flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-full bg-surface-container-lowest text-primary font-bold text-[13px] shadow-sm transition-all active:scale-95";
+        btnDelivery.className = "flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-full text-on-surface-variant hover:text-on-surface font-semibold text-[13px] transition-all active:scale-95";
+        showToast("매장 방문 (맛집 지도) 모드로 변경되었어요 🗺️");
+      } else {
+        btnDelivery.className = "flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-full bg-surface-container-lowest text-secondary font-bold text-[13px] shadow-sm transition-all active:scale-95";
+        btnDineIn.className = "flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-full text-on-surface-variant hover:text-on-surface font-semibold text-[13px] transition-all active:scale-95";
+        showToast("배달 주문 (배달) 모드로 변경되었어요 🛵");
+      }
+    }
+
+    function focusVendor(type) {
+      const names = {
+        hotpot: '🍲 사천 전통 훠궈 (4.9★ 350m · 22% 할인)',
+        bbq: '🥩 숯불 흑돼지 구이 (4.8★ 210m · 냉면 서비스)',
+        ramen: '🍜 돈코츠 라멘 (4.7★ 180m · 대기 없음)',
+        salad: '🥗 프레시 웜보울 (4.6★ 400m · 1,000원 할인)'
+      };
+      playTickSound();
+      showToast("꼬마 여우 레이더 포커스: " + (names[type] || '선택한 맛집'));
+    }
+
+    function claimVoucher(btn, name) {
+      playVoucherSound();
+      btn.innerHTML = <span class="material-symbols-outlined text-[15px]">check</span><span>쿠폰함에 담김</span>;
+      btn.classList.remove('bg-primary', 'bg-secondary');
+      btn.classList.add('bg-surface-container', 'text-on-surface-variant');
+      showToast(축하해요!  발급 완료 ✨);
+    }
+
+    function openNavigation(name) {
+      showToast([] 길찾기 경로를 불러옵니다 🗺️);
+    }
+
+    function takeQueueNumber(name) {
+      playVoucherSound();
+      showToast(줄서기 등록 완료! 현재 대기 2팀 🎉);
+    }
+
+    function handleOrderModal(name) {
+      showToast([] 주문 플랫폼으로 이동합니다 🛵);
+    }
+
+    function shakeToRefresh() {
+      playTickSound();
+      showToast("흔들기 감지! 다른 맛집을 탐색 중이에요 🎲");
+    }
+
+    function filterChip(btn) {
+      const parent = btn.parentElement;
+      if (parent) {
+        Array.from(parent.children).forEach(el => {
+          el.className = "flex-shrink-0 px-3 py-1.5 rounded-full bg-surface-container-lowest text-on-surface font-semibold text-[12px] border border-outline-variant/60 shadow-xs flex items-center gap-1 hover:bg-surface-container active:scale-95 transition-all";
+        });
+      }
+      btn.className = "flex-shrink-0 px-3.5 py-1.5 rounded-full bg-primary text-white font-bold text-[12px] shadow-sm flex items-center gap-1 active:scale-95 transition-all";
+      showToast("필터 조건이 적용되었습니다 ⚡");
+    }
+
+    // Menu Lab Subtab (Templates vs Wishlist)
+    function switchTab(tabKey) {
+      const btnTemplates = document.getElementById('tab-btn-templates') || document.getElementById('tab-presets-btn');
+      const btnWishlist = document.getElementById('tab-btn-wishlist') || document.getElementById('tab-wishlist-btn');
+      const viewTemplates = document.getElementById('view-templates') || document.getElementById('subview-presets');
+      const viewWishlist = document.getElementById('view-wishlist') || document.getElementById('subview-wishlist');
+
+      if (tabKey === 'templates' || tabKey === 'presets') {
+        if (btnTemplates) btnTemplates.className = "flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-1.5 bg-primary text-white shadow-sm";
+        if (btnWishlist) btnWishlist.className = "flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-1.5 text-gray-600 hover:text-gray-900";
+        if (viewTemplates) viewTemplates.classList.remove('hidden');
+        if (viewWishlist) viewWishlist.classList.add('hidden');
+      } else {
+        if (btnWishlist) btnWishlist.className = "flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-1.5 bg-primary text-white shadow-sm";
+        if (btnTemplates) btnTemplates.className = "flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-1.5 text-gray-600 hover:text-gray-900";
+        if (viewWishlist) viewWishlist.classList.remove('hidden');
+        if (viewTemplates) viewTemplates.classList.add('hidden');
+      }
+    }
+    const switchMenuSubTab = switchTab;
+
+    // Wishlist functions
+    function updateCount() {
+      const checkboxes = document.querySelectorAll('#wishlist-container input[type="checkbox"]');
+      let count = 0;
+      checkboxes.forEach(cb => { if (cb.checked) count++; });
+      const counter = document.getElementById('selected-count');
+      if (counter) counter.innerText = count;
+    }
+    const updateWishCount = updateCount;
+
+    let allSelected = false;
+    function toggleSelectAll() {
+      const checkboxes = document.querySelectorAll('#wishlist-container input[type="checkbox"]');
+      allSelected = !allSelected;
+      checkboxes.forEach(cb => cb.checked = allSelected);
+      const btn = document.getElementById('select-all-btn');
+      if (btn) btn.innerText = allSelected ? '선택 해제' : '전체 선택';
+      updateCount();
+    }
+
+    function importSelectedToRoulette() {
+      const countEl = document.getElementById('selected-count');
+      const count = countEl ? parseInt(countEl.innerText) : 0;
+      if (count === 0) {
+        showToast('룰렛에 담을 요리를 먼저 선택해주세요!');
+        return;
+      }
+      const selected = [];
+      const checkboxes = document.querySelectorAll('#wishlist-container input[type="checkbox"]');
+      checkboxes.forEach(cb => {
+        if (cb.checked) {
+          const row = cb.closest('.wish-item') || cb.parentElement?.parentElement;
+          const nameEl = row?.querySelector('.font-bold') || row?.querySelector('span.text-sm');
+          if (nameEl) selected.push(nameEl.innerText.trim());
+        }
+      });
+      if (selected.length > 0) {
+        currentWheelItems = selected;
+        const titleEl = document.getElementById('current-active-preset-title');
+        if (titleEl) titleEl.innerText = "먹킷리스트 맞춤 룰렛";
+        renderWheel();
+        showToast(선택한 개 메뉴를 현재 룰렛에 반영했습니다!);
+        navigateView('roulette');
+      }
+    }
+    const batchPushToWheel = importSelectedToRoulette;
+
+    function addWishItem() {
+      const input = document.getElementById('dish-input') || document.getElementById('quick-wish-input');
+      if (!input) return;
+      const val = input.value.trim();
+      if (!val) {
+        showToast('메뉴나 맛집 이름을 입력해주세요!');
+        return;
+      }
+      const container = document.getElementById('wishlist-container');
+      if (!container) return;
+      const newCard = document.createElement('div');
+      newCard.className = "wish-item bg-white p-3.5 rounded-2xl border border-orange-200 shadow-xs flex items-center justify-between transition animate-pulse";
+      newCard.innerHTML = 
+        <div class="flex items-center gap-3">
+          <input type="checkbox" checked onchange="updateCount()" class="w-5 h-5 rounded-lg text-primary focus:ring-primary border-gray-300 cursor-pointer accent-orange-600">
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-sm font-bold text-gray-900"></span>
+              <span class="text-xs">✨</span>
+            </div>
+            <div class="text-[11px] text-gray-500 flex items-center gap-1 mt-0.5">
+              <span class="material-symbols-outlined text-[13px] text-primary fill">sparkles</span>
+              <span>방금 등록됨 · 갓 찜한 메뉴</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-[11px] bg-orange-50 text-primary font-bold px-2 py-0.5 rounded-full border border-orange-200">신규 등록</span>
+          <button onclick="showToast('옵션: ')" class="text-gray-400 hover:text-gray-600 p-1">
+            <span class="material-symbols-outlined text-[18px]">more_vert</span>
+          </button>
+        </div>
+      ;
+      container.prepend(newCard);
+      input.value = '';
+      setTimeout(() => newCard.classList.remove('animate-pulse'), 1000);
+      updateCount();
+      showToast(「」을(를) 위시리스트에 담았어요!);
+    }
+    const addQuickWish = addWishItem;
+
+    // Modal Helpers
+    function openCreateModal() {
+      const m = document.getElementById('create-modal');
+      if (m) m.classList.remove('hidden');
+    }
+    function closeCreateModal() {
+      const m = document.getElementById('create-modal');
+      if (m) m.classList.add('hidden');
+    }
+    function confirmCreateWheel() {
+      const input = document.getElementById('modal-name-input');
+      const name = (input && input.value.trim()) ? input.value.trim() : "나만의 맞춤 룰렛";
+      closeCreateModal();
+      const pTitle = document.getElementById('current-active-preset-title');
+      if (pTitle) pTitle.innerText = name;
+      showToast(🎉 「」 룰렛을 생성하여 적용했습니다!);
+      navigateView('roulette');
+    }
+
+    // Universal Floating Toast Notification
+    let toastTimer = null;
+    function showToast(text, icon = 'pets') {
+      // Check all toast elements
+      const t1 = document.getElementById('toast-notify');
+      const m1 = document.getElementById('toast-msg');
+      if (t1 && m1) {
+        m1.innerText = text;
+        t1.classList.remove('opacity-0');
+        t1.classList.add('opacity-100');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          t1.classList.remove('opacity-100');
+          t1.classList.add('opacity-0');
+        }, 2400);
+      }
+
+      const foxToast = document.getElementById('foxToast');
+      const foxMsg = document.getElementById('toastMessage');
+      if (foxToast && foxMsg) {
+        foxMsg.textContent = text;
+        foxToast.classList.remove('opacity-0', '-translate-y-6', 'pointer-events-none');
+        foxToast.classList.add('opacity-100', 'translate-y-0');
+        setTimeout(() => {
+          foxToast.classList.add('opacity-0', '-translate-y-6', 'pointer-events-none');
+          foxToast.classList.remove('opacity-100', 'translate-y-0');
+        }, 2400);
+      }
+
+      const toast4 = document.getElementById('toast');
+      const msg4 = document.getElementById('toast-msg');
+      if (toast4 && msg4) {
+        msg4.innerText = text;
+        toast4.classList.remove('opacity-0', 'scale-95');
+        toast4.classList.add('opacity-100', 'scale-100');
+        setTimeout(() => {
+          toast4.classList.remove('opacity-100', 'scale-100');
+          toast4.classList.add('opacity-0', 'scale-95');
+        }, 2400);
+      }
+    }
+
+    // Attach calendar day click listeners and initial setup
+    window.addEventListener('DOMContentLoaded', () => {
+      renderWheel();
+
+      // Hook up any buttons in View 3 (Diary)
+      const rouletteJumpBtns = document.querySelectorAll('[data-path="roulette"]');
+      rouletteJumpBtns.forEach(b => {
+        b.addEventListener('click', (e) => {
+          e.preventDefault();
+          navigateView('roulette');
+        });
+      });
+
+      // Hook up satiety meter click
+      const satietyBar = document.querySelector('.cursor-pointer, #hunger-progress');
+      if (satietyBar) {
+        satietyBar.addEventListener('click', boostSatiety);
+      }
+    });
+  </script>
+</body>
+</html>

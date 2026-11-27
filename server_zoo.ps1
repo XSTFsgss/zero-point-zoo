@@ -1,11 +1,11 @@
-$port = 8086
+﻿$port = 8086
 $prefix = "http://localhost:$port/"
 $listener = New-Object System.Net.HttpListener
 $listener.Prefixes.Add($prefix)
 $listener.Start()
 Write-Host "Zero-Point Zoo Server running at $prefix"
 
-$baseDir = "C:\Users\YANO\.gemini\antigravity\scratch\zero-point-zoo"
+$baseDir = "C:\Users\菜不菜\Documents\GitHub\zero-point-zoo"
 
 while ($listener.IsListening) {
     $context = $listener.GetContext()

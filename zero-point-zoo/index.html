@@ -4764,7 +4764,18 @@ emoticons: [
   { img: 'assets/fox_expr_14.jpg', zh: '警觉潜行 · 踱步', ko: '살금살금' }
 ],
 emoticonZip: 'assets/fox_emoticons.zip',
-emoticonZipName: 'fox_emoticons.zip'
+emoticonZipName: 'fox_emoticons.zip',
+app: {
+  icon: '🦊',
+  themeColor: '#FF7A00',
+  titleZh: '点心/午餐决定轮盘 · 꼬마 여우의 점심 메뉴 룰렛 (Fox Lunch Roulette)',
+  titleKo: '점심 메뉴 결정 룰렛 · 꼬마 여우의 맛집 탐험대 (Lunch Roulette & Explorer)',
+  subtitleZh: '告别选择困难 · HTML5 Canvas 动态减速自旋轮盘 · 真实机械齿轮音效 · 500m 美食雷达地图 · 饱腹感能量槽与饮食日记 · 自定义心愿菜单库',
+  subtitleKo: '선택 장애 완벽 해결 · HTML5 Canvas 부드러운 감속 룰렛 · 자체 신디사이저 회전 음효 · 500m 주변 맛집 레이더 · 먹방 일지 & 영양 밸런스 · 나만의 메뉴 연구소',
+  tagsZh: ['Canvas动态减速轮盘', '自研真实机械音效', '500m美食雷达地图', '饱腹感能量槽', '周历美食打卡', '4大预设模板与心愿单'],
+  tagsKo: ['캔버스동적룰렛', '자체합성효과음', '주변맛집레이더', '포만감에너지바', '주간캘린더일지', '4대프리셋&위시리스트'],
+  url: 'apps/fox-app/index.html'
+}
 },
 crow: {
 avatar: 'assets/char_crow.jpg',
@@ -5141,16 +5152,20 @@ function renderMemberApp(m) {
       btnDesc.innerHTML = `<span data-zh>★ ${m.app.titleZh} (已上线)</span><span data-ko>★ ${m.app.titleKo} (서비스 중)</span>`;
     }
 
-    const appIcon = m.app.icon || (currentMemberId === 'shark' ? '🦈' : (currentMemberId === 'otter' ? '🦦' : '🕹️'));
-    const themeColor = m.app.themeColor || (currentMemberId === 'shark' ? '#F5A623' : '#52C49C');
-    const btnBg = currentMemberId === 'shark' 
-      ? 'linear-gradient(135deg, #F5A623 0%, #D48806 100%)' 
-      : 'linear-gradient(135deg, #52C49C 0%, #2E8B6B 100%)';
+    const appIcon = m.app.icon || (currentMemberId === 'fox' ? '🦊' : (currentMemberId === 'shark' ? '🦈' : (currentMemberId === 'otter' ? '🦦' : '🕹️')));
+    const themeColor = m.app.themeColor || (currentMemberId === 'fox' ? '#FF7A00' : (currentMemberId === 'shark' ? '#F5A623' : '#52C49C'));
+    const btnBg = currentMemberId === 'fox'
+      ? 'linear-gradient(135deg, #FF7A00 0%, #EA580C 100%)'
+      : (currentMemberId === 'shark' 
+        ? 'linear-gradient(135deg, #F5A623 0%, #D48806 100%)' 
+        : 'linear-gradient(135deg, #52C49C 0%, #2E8B6B 100%)');
     const btnColor = currentMemberId === 'shark' ? '#1E162B' : '#FFF';
-    const cardBorder = currentMemberId === 'shark' ? 'rgba(245,166,35,0.45)' : 'rgba(82,196,156,0.4)';
-    const cardBg = currentMemberId === 'shark'
-      ? 'linear-gradient(135deg, rgba(245,166,35,0.12) 0%, rgba(30,22,43,0.7) 100%)'
-      : 'linear-gradient(135deg, rgba(82,196,156,0.08) 0%, rgba(245,166,35,0.06) 100%)';
+    const cardBorder = currentMemberId === 'fox' ? 'rgba(255,122,0,0.5)' : (currentMemberId === 'shark' ? 'rgba(245,166,35,0.45)' : 'rgba(82,196,156,0.4)');
+    const cardBg = currentMemberId === 'fox'
+      ? 'linear-gradient(135deg, rgba(255,122,0,0.15) 0%, rgba(30,22,43,0.7) 100%)'
+      : (currentMemberId === 'shark'
+        ? 'linear-gradient(135deg, rgba(245,166,35,0.12) 0%, rgba(30,22,43,0.7) 100%)'
+        : 'linear-gradient(135deg, rgba(82,196,156,0.08) 0%, rgba(245,166,35,0.06) 100%)');
 
     const tagsZhHtml = m.app.tagsZh ? m.app.tagsZh.map(t => `<span class="backpack-tag" style="background:${themeColor}22; border:1px solid ${themeColor}; color:${themeColor}; font-size:0.78rem;">#${t}</span>`).join('') : '';
     const tagsKoHtml = m.app.tagsKo ? m.app.tagsKo.map(t => `<span class="backpack-tag" style="background:${themeColor}22; border:1px solid ${themeColor}; color:${themeColor}; font-size:0.78rem;">#${t}</span>`).join('') : '';
