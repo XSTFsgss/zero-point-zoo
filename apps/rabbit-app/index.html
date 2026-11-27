@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#1A1432" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>安月 AN YUE · 原创 IP 探索陪伴 APP</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Desktop Portfolio Backdrop & Controls (hidden automatically on mobile viewports) -->
+  <div class="portfolio-backdrop" aria-hidden="true">
+    <div class="backdrop-stars"></div>
+    <div class="backdrop-glow glow-1"></div>
+    <div class="backdrop-glow glow-2"></div>
+  </div>
+
+  <aside class="portfolio-sidebar" id="portfolioSidebar">
+    <div class="portfolio-badge">ORIGINAL IP INTERACTIVE PROTOTYPE</div>
+    <h1 class="portfolio-title">安月 <span>AN YUE</span></h1>
+    <p class="portfolio-subtitle">探索者 · 观察记录员 · 异常线索记录者</p>
+    <p class="portfolio-desc">
+      结合角色陪伴、日常互动、手绘探索日记与异常警报叙事的原创 IP 手机应用原型。可点击屏幕内安月的耳朵、头部、黄色对讲机与观察笔记本触发真实交互。
+    </p>
+    <div class="portfolio-palette">
+      <span class="swatch" style="--c:#1E1736" title="深紫色 #1E1736"></span>
+      <span class="swatch" style="--c:#FAF6EE" title="奶油白 #FAF6EE"></span>
+      <span class="swatch" style="--c:#8FA4BC" title="浅灰蓝 #8FA4BC"></span>
+      <span class="swatch" style="--c:#F6DC80" title="淡黄色 #F6DC80"></span>
+      <span class="swatch" style="--c:#F2B4BA" title="耳内粉 #F2B4BA"></span>
+    </div>
+    <div class="portfolio-quick-nav">
+      <span class="quick-label">快速跳转展示模块</span>
+      <div class="quick-btns">
+        <button class="quick-chip" data-jump="home">01 首页探索</button>
+        <button class="quick-chip" data-jump="character">02 角色档案</button>
+        <button class="quick-chip" data-jump="diary">03 探索日记</button>
+        <button class="quick-chip" data-jump="alert">04 异常警报</button>
+        <button class="quick-chip" data-jump="interaction">05 互动工坊</button>
+      </div>
+    </div>
+    <div class="portfolio-meta">
+      <div>交互提示：点击角色不同部位、切换 4 种星夜场景、记录日记生成探索卡、触发警戒呼叫。</div>
+    </div>
+  </aside>
+
+  <!-- Mobile App Viewport Shell -->
+  <div class="phone-stage">
+    <div class="phone-bezel" id="appShell">
+      <!-- Phone Top Status Bar (iOS style aesthetic for mobile prototype) -->
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <span class="brand-moon">☾</span>
+          <span class="brand-name">AN YUE · 安月</span>
+        </div>
+        <div class="topbar-right">
+          <button class="icon-pill" id="soundToggleBtn" title="开关音效" aria-label="开关音效">
+            <span id="soundIcon">🔊</span>
+          </button>
+          <button class="alert-mini-pill" id="quickAlertBtn" title="异常发现快捷按钮">
+            <span class="pulse-dot"></span>
+            <span>异常警报</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Scrollable / Interactive View Container -->
+      <main class="app-main" id="appMain">
+        <!-- Rendered dynamically by js/app.js -->
+      </main>
+
+      <!-- Bottom Tab Navigation -->
+      <nav class="bottom-nav" aria-label="主导航">
+        <button class="nav-item active" data-tab="home">
+          <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8L12 3z"/>
+            <path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15z"/>
+          </svg>
+          <span>首页</span>
+        </button>
+        <button class="nav-item" data-tab="character">
+          <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 3c-1.5 0-2.5 2.5-2.5 5.5 0 1.4.4 2.6 1 3.5"/>
+            <path d="M15 3c1.5 0 2.5 2.5 2.5 5.5 0 1.4-.4 2.6-1 3.5"/>
+            <circle cx="12" cy="14.5" r="5.5"/>
+            <circle cx="10.2" cy="14" r=".7" fill="currentColor"/>
+            <circle cx="13.8" cy="14" r=".7" fill="currentColor"/>
+          </svg>
+          <span>档案</span>
+        </button>
+        <button class="nav-item" data-tab="diary">
+          <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="3.5" width="14" height="17" rx="2.5"/>
+            <path d="M9 8h6M9 12h6M9 16h4"/>
+            <path d="M3.5 7.5h2M3.5 12h2M3.5 16.5h2"/>
+          </svg>
+          <span>日记</span>
+        </button>
+        <button class="nav-item" data-tab="alert">
+          <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="7" y="8" width="10" height="13" rx="2.5"/>
+            <path d="M9.5 8V4.5a.8.8 0 0 1 1.6 0V8"/>
+            <circle cx="12" cy="13.5" r="2"/>
+            <path d="M4.5 11.5a6 6 0 0 1 0-5M19.5 11.5a6 6 0 0 0 0-5"/>
+          </svg>
+          <span>警报</span>
+        </button>
+        <button class="nav-item" data-tab="interaction">
+          <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20.5s-7-4.4-7-9.6A4.1 4.1 0 0 1 12 8.2a4.1 4.1 0 0 1 7 2.7c0 5.2-7 9.6-7 9.6z"/>
+          </svg>
+          <span>互动</span>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Modal Container for Exploration Record Card & Notebook Quick View -->
+  <div class="modal-overlay hidden" id="modalOverlay" role="dialog" aria-modal="true">
+    <div class="modal-sheet" id="modalContent"></div>
+  </div>
+
+  <!-- Floating Toast Feedback -->
+  <div class="toast-banner hidden" id="toastBanner"></div>
+
+  <script defer src="js/data.js"></script>
+  <script defer src="js/audio.js"></script>
+  <script defer src="js/app.js"></script>
+</body>
+</html>
