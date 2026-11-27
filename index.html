@@ -4574,7 +4574,7 @@ grid-template-columns: 1fr;
 <div class="w-plan-code"><span>W5 P</span><span>06</span></div>
 <div class="w-plan-zh"><span data-zh>周边</span><span data-ko>굿즈</span></div>
 <div class="w-plan-ko">굿즈 · goods</div>
-<div class="w-plan-desc"><span data-zh>壁纸、实体周边提案</span><span data-ko>배경화면, 실물 굿즈 제안</span></div>
+<div class="w-plan-desc" id="m-w6-btn-desc"><span data-zh>壁纸、实体周边提案</span><span data-ko>배경화면, 실물 굿즈 제안</span></div>
 </button>
 </div>
 <!-- Member W1 P Panel: 角色介绍 (캐릭터 소개 / about) -->
@@ -4702,10 +4702,11 @@ grid-template-columns: 1fr;
 <div class="kun-panel-header">
 <div>
 <span class="kun-panel-step">W5 P · 굿즈 · GOODS · 배경화면, 실물 굿즈 제안</span>
-<h3><span data-zh>W5 P · 周边预留位（壁纸、实体周边提案）</span><span data-ko>W5 P · 굿즈 전용 슬롯 (배경화면, 실물 굿즈 제안)</span></h3>
+<h3 id="m-w6-heading"><span data-zh>W5 P · 周边预留位（壁纸、实体周边提案）</span><span data-ko>W5 P · 굿즈 전용 슬롯 (배경화면, 실물 굿즈 제안)</span></h3>
 </div>
-<span class="kun-charm-pill">🎁 <span data-zh>高清壁纸 + 实体周边企划展位</span><span data-ko>배경화면 + 실물 굿즈 제안 슬롯</span></span>
+<span class="kun-charm-pill" id="m-w6-badge">🎁 <span data-zh>高清壁纸 + 实体周边企划展位</span><span data-ko>배경화면 + 실물 굿즈 제안 슬롯</span></span>
 </div>
+<div id="m-goods-container">
 <div class="kun-two-col-cards">
 <div class="kun-info-card" style="text-align:center; padding:36px 24px; border-style:dashed;">
 <div style="font-size:2.5rem; margin-bottom:10px;">🖼️</div>
@@ -4716,6 +4717,7 @@ grid-template-columns: 1fr;
 <div style="font-size:2.5rem; margin-bottom:10px;">🧸</div>
 <h4 style="color:#F5A623; margin-bottom:8px;"><span data-zh>实体周边提案预留位 (실물 굿즈 제안)</span><span data-ko>실물 굿즈 디자인 제안 슬롯</span></h4>
 <p style="color:var(--text-Soft); font-size:0.88rem;"><span data-zh>预留毛绒玩偶、亚克力立牌、徽章挂件等角色专属实体周边企划图位。</span><span data-ko>봉제 인형, 아크릴 스탠드, 키링 등 실물 굿즈 목업이 배치될 영역입니다.</span></p>
+</div>
 </div>
 </div>
 </div>
@@ -5060,20 +5062,32 @@ recipeZh: '<p><b>【角色素材表 · 재료표】</b>55% 永不褪色的记忆
 },
 rabbit: {
 avatar: 'assets/char_rabbit.jpg',
-creatorZh: '👤 创作者：梁露宇 양로우 · MEMBER 06 个人角色主页',
-creatorKo: '👤 창작자: 양로우 梁露宇 · MEMBER 06 개인 캐릭터 페이지',
+creatorZh: '👤 创作者：梁露宇 양로우（202323040）· MEMBER 06 个人角色主页',
+creatorKo: '👤 창작자: 양로우 梁露宇（202323040）· MEMBER 06 개인 캐릭터 페이지',
 titleZh: '白兔 · 安月 (흰 토끼 · 안월)',
 titleKo: '흰 토끼 · 안월 (白兔 · 安月)',
-roleZh: '长耳柔软Q版白兔 · 五秒先知 · 核心情绪：恐惧 (두려움)',
-roleKo: '긴 귀와 부드러운 외형의 흰 토끼 · 위험 예지자 · 핵심 감정: 두려움',
+roleZh: '探索者 · 观察记录员 · 预警者 · 核心情绪：恐惧 (두려움)',
+roleKo: '탐험가 · 관찰 기록원 · 위험 예지자 · 핵심 감정: 두려움',
+sloganZh: '细心观察星夜变化，握紧黄色对讲机守护同伴。',
+sloganKo: '별밤의 미세한 변화를 관찰하고, 노란 무전기로 동료를 지킨다.',
+keywordsZh: ['细腻', '谨慎', '敏感', '勇敢'],
+keywordsKo: ['섬세함', '신중함', '예민함', '용기'],
+card1TitleZh: '一、基础信息卡片 &amp; 角色背景故事',
+card1TitleKo: '1. 기본 정보 카드 &amp; 캐릭터 배경 스토리',
+card1SubZh: '零点动物园 MEMBER 06 · 观察者 &amp; 预警者',
+card1SubKo: '제로 포인트 동물원 MEMBER 06 · 관찰자 &amp; 예지자',
+card2TitleZh: '二、核心设定卡片',
+card2TitleKo: '2. 핵심 설정 카드',
+card2SubZh: '性格特征、标志性元素、习惯动作、代表道具与专属头衔',
+card2SubKo: '성격 특성, 상징 요소, 습관 행동, 대표 소품 및 전용 칭호',
 sayZh: '「“等、等一下！前面好像有什么东西……”」',
 sayKo: '「“잠깐, 잠깐만요! 앞에 뭔가 있는 것 같은데요……”」',
 neverZh: '🚫 绝不会说：“就算看到危险，我也懒得提醒你们。”',
 neverKo: '🚫 하지 않는 말: “위험해 보여도 굳이 일러드릴 생각이 없습니다.”',
-propsZh: '黄色手持小警报器、记录本、避难标记贴',
-propsKo: '노란색 소형 경보기, 기록장, 대피 표식 스티커',
-storyZh: '<p><b>【角色故事 · 캐릭터 스토리】</b>垂着长耳朵的柔软白兔安月，对周围的风吹草动极度敏感，拥有提前预判未来 5 秒内危险的特殊能力。虽然因为「恐惧」而常常瑟瑟发抖，分不清真实预言与噩梦，但她每次都会鼓起勇气拉响手中的小警报器保护全体同伴。</p><p style="margin-top:8px;"><b>【专属头衔 · 직함】</b>零点动物园 · 五秒先知 &amp; 避难所吹哨人 / 5초 미래 위험 예지자</p>',
-recipeZh: '<p><b>【角色素材表 · 재료표】</b>50% 提前5秒感知危险的长耳朵雷达 + 25% 随时拉响的黄色手持警报器 + 15% 贴满安全屋的避难标记贴 + 10% 颤抖却从不退缩的善良。</p><p style="margin-top:8px;"><b>【角色关系 · 관계도】</b>每当害怕发抖时，柴犬·困总是第一个冲上来握住她的手并借给她平安护符。</p>',
+propsZh: '黄色对讲机、笔记本、背包及探索装备',
+propsKo: '노란색 무전기, 관찰 노트, 배낭 및 탐험 장비',
+storyZh: '<div style="background:rgba(255,255,255,0.03); border:1px solid rgba(245,166,35,0.22); border-radius:12px; padding:16px; margin-bottom:14px;"><div style="font-weight:750; font-size:1.05rem; color:#F5A623; margin-bottom:12px; display:flex; align-items:center; gap:8px;"><span style="display:inline-block; width:4px; height:18px; background:#F5A623; border-radius:2px;"></span><span data-zh>基础信息卡片</span><span data-ko>기본 정보 카드</span></div><div style="display:flex; flex-direction:column; gap:10px; font-size:0.93rem; line-height:1.65;"><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline;"><span style="color:var(--text-Soft); min-width:85px; font-weight:600;"><span data-zh>角色名称：</span><span data-ko>캐릭터 이름:</span></span><span style="color:var(--text); font-weight:700;">安月（白兔）/ 안월 (흰 토끼)</span></div><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline;"><span style="color:var(--text-Soft); min-width:85px; font-weight:600;"><span data-zh>职业身份：</span><span data-ko>직업 신분:</span></span><span style="color:var(--text);"><span data-zh>探索者、观察记录员</span><span data-ko>탐험가, 관찰 기록원</span></span></div><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline;"><span style="color:var(--text-Soft); min-width:85px; font-weight:600;"><span data-zh>成员与学号：</span><span data-ko>멤버 및 학번:</span></span><span style="color:var(--text); font-weight:700;">梁露宇（양로우），202323040</span></div><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline;"><span style="color:var(--text-Soft); min-width:85px; font-weight:600;"><span data-zh>角色定位：</span><span data-ko>캐릭터 포지션:</span></span><span style="color:var(--text); flex:1;"><span data-zh>观察者、预警者。负责观察环境、记录线索，并预判即将发生的危险，为团队提供危险预警。</span><span data-ko>관찰자, 경보자. 환경을 살피고 단서를 기록하며 곧 다가올 위험을 예지해 팀에 경보를 전달함.</span></span></div><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:center;"><span style="color:var(--text-Soft); min-width:85px; font-weight:600;"><span data-zh>代表色：</span><span data-ko>대표 색상:</span></span><span style="display:inline-flex; align-items:center; gap:8px; flex-wrap:wrap;"><span data-zh>白色、灰蓝色、黄色</span><span data-ko>화이트, 슬레이트 블루, 옐로우</span><span style="display:inline-flex; gap:5px; align-items:center; margin-left:4px;"><span style="display:inline-block; width:16px; height:16px; border-radius:50%; background:#FAF6EE; border:1.5px solid rgba(0,0,0,0.25);" title="白色 #FAF6EE"></span><span style="display:inline-block; width:16px; height:16px; border-radius:50%; background:#8FA4BC; border:1.5px solid rgba(255,255,255,0.4);" title="灰蓝色 #8FA4BC"></span><span style="display:inline-block; width:16px; height:16px; border-radius:50%; background:#F6DC80; border:1.5px solid rgba(0,0,0,0.2);" title="黄色 #F6DC80"></span></span></span></div></div></div><div style="background:rgba(255,255,255,0.03); border:1px solid rgba(245,166,35,0.22); border-radius:12px; padding:16px;"><div style="font-weight:750; font-size:1.05rem; color:#F5A623; margin-bottom:10px; display:flex; align-items:center; gap:8px;"><span style="display:inline-block; width:4px; height:18px; background:#F5A623; border-radius:2px;"></span><span data-zh>三、角色背景故事</span><span data-ko>3. 캐릭터 배경 스토리</span></div><p style="margin-bottom:8px;"><span data-zh>安月生活在“零点动物园”这一特殊世界中。零点动物园是一座吞噬废弃城市的神秘牢笼，也是一座不断变化的迷宫。这里的地形与生态每天凌晨都会随机重组，环境充满未知与危险。在这个世界里，每天零点所有存在的情绪都会归零十分钟；未能及时归位的存在将沦为没有灵魂的空壳，而每一种特殊能力也都伴随着不可逆的代价。</span><span data-ko>안월은 폐허가 된 도시를 삼킨 신비한 미궁 ‘제로 포인트 동물원’에서 살아갑니다. 매일 자정 지형과 생태가 무작위로 재조합되고, 모든 존재의 감정이 10분간 초기화되는 위험한 세계입니다.</span></p><p style="margin-bottom:8px;"><span data-zh>作为一只白兔，安月拥有敏锐的观察能力，能够察觉环境中的细微变化，并预判未来数秒内可能发生的危险。她在团队中承担探索、观察、记录和预警的职责，通过黄色对讲机传递危险信息，并用笔记本记录发现的线索。安月的核心情绪是恐惧。她容易担心，也会对未知情况保持警惕，但她并没有因此放弃自己的职责，而是努力观察环境、判断危险，并及时提醒同伴。</span><span data-ko>흰 토끼 안월은 예민한 관찰력으로 몇 초 뒤의 위험을 예지해 노란 무전기로 알리고 노트에 단서를 기록합니다. 핵심 감정은 ‘두려움’이지만, 동료들을 지키기 위해 끝까지 책임을 다합니다.</span></p><p style="color:#F6DC80; font-weight:700;"><span data-zh>角色专属口头禅：“等、等一下！前面好像有什么东西……”</span><span data-ko>전용 말버릇: “잠깐, 잠깐만요! 앞에 뭔가 있는 것 같은데요……”</span></p></div>',
+recipeZh: '<div style="background:rgba(255,255,255,0.03); border:1px solid rgba(245,166,35,0.22); border-radius:12px; padding:16px;"><div style="font-weight:750; font-size:1.05rem; color:#F5A623; margin-bottom:12px; display:flex; align-items:center; gap:8px;"><span style="display:inline-block; width:4px; height:18px; background:#F5A623; border-radius:2px;"></span><span data-zh>核心设定卡片</span><span data-ko>핵심 설정 카드</span></div><div style="display:flex; flex-direction:column; gap:10px; font-size:0.93rem; line-height:1.65;"><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline;"><span style="color:var(--text-Soft); min-width:115px; font-weight:600;"><span data-zh>1. 性格特征：</span><span data-ko>1. 성격 특성:</span></span><span style="color:var(--text); flex:1;"><span data-zh>细腻、谨慎、敏感、勇敢。能够察觉周围环境中的细微变化，容易因发现异常而过度担心；核心情绪为“恐惧”，胆小敏感同时具有提前预警意识。</span><span data-ko>섬세함, 신중함, 예민함, 용기. 핵심 감정은 ‘두려움’으로 겁이 많고 예민하지만, 위험을 미리 포착해 알리는 사명감을 지니고 있음.</span></span></div><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline;"><span style="color:var(--text-Soft); min-width:115px; font-weight:600;"><span data-zh>2. 标志性元素：</span><span data-ko>2. 상징 요소:</span></span><span style="color:var(--text); flex:1;"><span data-zh>白色兔子形象、修长兔耳（内侧呈粉色）、大眼睛、头顶蓬松毛发、灰蓝色服装、黄色对讲机、背包及探索装备。</span><span data-ko>흰 토끼 외형, 안쪽이 분홍빛인 긴 귀, 큰 눈과 앞머리 털, 슬레이트 블루 탐험복, 노란 무전기, 배낭 및 탐험 장비.</span></span></div><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline;"><span style="color:var(--text-Soft); min-width:115px; font-weight:600;"><span data-zh>3. 习惯动作：</span><span data-ko>3. 습관 행동:</span></span><span style="color:var(--text); flex:1;"><span data-zh>观察周围环境留意细微变化；发现异常时竖起耳朵；警觉时握紧黄色对讲机；发现线索后记录；通过对讲机提醒同伴。</span><span data-ko>주변 관찰, 이상 감지 시 귀를 쫑긋 세움, 경계 시 노란 무전기를 꽉 쥠, 단서 기록 후 무전기로 동료에게 알림.</span></span></div><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline;"><span style="color:var(--text-Soft); min-width:115px; font-weight:600;"><span data-zh>4. 代表道具：</span><span data-ko>4. 대표 소품:</span></span><span style="color:var(--text); flex:1;"><span data-zh>黄色对讲机（传递危险信息）、笔记本（记录并保存线索）、背包（携带探索所需物品）。</span><span data-ko>노란색 무전기(위험 전달), 관찰 노트(단서 기록), 배낭(탐험 장비 휴대).</span></span></div><div style="display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline;"><span style="color:var(--text-Soft); min-width:115px; font-weight:600;"><span data-zh>5. 专属头衔：</span><span data-ko>5. 전용 칭호:</span></span><span style="color:var(--text); flex:1; font-weight:700; color:#F6DC80;"><span data-zh>观察者 · 预警者</span><span data-ko>관찰자 · 위험 예지자</span></span></div></div></div>',
 comics: [
   {
     epZh: '★ EPISODE 01 · 探险装备篇',
@@ -5125,7 +5139,89 @@ app: {
   tagsZh: ['星夜探索陪伴', '手绘日记记录卡', '黄色对讲机警报', '部位触摸互动', '原创角色原型'],
   tagsKo: ['별밤탐험동행', '손그림관찰일기', '노란무전기경보', '부위터치반응', '오리지널IP앱'],
   url: 'apps/rabbit-app/index.html'
-}
+},
+animation: {
+  src: 'assets/rabbit-short01.mp4',
+  titleZh: '《白兔·安月 · 专属动画短片 #01》',
+  titleKo: '《흰 토끼 · 안월 전용 애니메이션 #01》',
+  aspectRatio: '16/9',
+  isLandscape: true
+},
+animation2: {
+  src: 'assets/rabbit-short02.mp4',
+  titleZh: '《白兔·安月 · 专属动画短片 #02》',
+  titleKo: '《흰 토끼 · 안월 전용 애니메이션 #02》',
+  aspectRatio: '16/9',
+  isLandscape: true
+},
+emoticons: [
+  { img: 'assets/rabbit_expr_01.png', zh: '开心欢呼 · 举手', ko: '만세 · 신남!' },
+  { img: 'assets/rabbit_expr_02.png', zh: '害羞偷笑 · 眯眼', ko: '히히 · 부끄' },
+  { img: 'assets/rabbit_expr_03.png', zh: '叉腰鼓腮 · 生气', ko: '흥! · 뾰루퉁' },
+  { img: 'assets/rabbit_expr_04.png', zh: '垂耳委屈 · 哭泣', ko: '훌쩍 · 울먹' },
+  { img: 'assets/rabbit_expr_05.png', zh: '惊吓捂嘴 · ！！', ko: '깜짝이야!!' },
+  { img: 'assets/rabbit_expr_06.png', zh: '脸红捂脸 · 害羞', ko: '발그레 · 부끄' },
+  { img: 'assets/rabbit_expr_07.png', zh: '歪头沉思 · ？', ko: '음..? · 의문' },
+  { img: 'assets/rabbit_expr_08.png', zh: '元气挥手 · 早安', ko: '좋은 아침!' },
+  { img: 'assets/rabbit_expr_09.png', zh: '垂耳疲惫 · 晕乎', ko: '어질어질..' },
+  { img: 'assets/rabbit_expr_10.png', zh: '捧手祈愿 · 拜托', ko: '제발~ · 부탁' },
+  { img: 'assets/rabbit_expr_11.png', zh: '星星眼 · 期待', ko: '반짝반짝!' },
+  { img: 'assets/rabbit_expr_12.png', zh: '抱枕熟睡 · 晚安', ko: '잘 자요.. Zzz' }
+],
+emoticonZip: 'assets/rabbit_emoticons.zip',
+emoticonZipName: 'rabbit_emoticons.zip',
+wallpapers: [
+  {
+    img: 'assets/rabbit_wallpaper_1.jpg',
+    ratio: '16:9 横屏桌面壁纸',
+    ratioKo: '16:9 데스크톱 배경화면',
+    titleZh: '《星月萤火 · 观测笔记壁纸》',
+    titleKo: '《별달 반딧불 · 관찰 일기 배경화면》',
+    descZh: '弯月星轨与荧光草地之间，安月手握黄色对讲机与观察笔记本静静记录夜色变化。',
+    descKo: '초승달과 반딧불이 숲 속에서 노란 무전기와 노트를 들고 밤을 기록하는 안월.'
+  },
+  {
+    img: 'assets/rabbit_wallpaper_2.jpg',
+    ratio: '9:16 竖屏手机壁纸',
+    ratioKo: '9:16 모바일 잠금화면',
+    titleZh: '《林荫花海 · 午后观察壁纸》',
+    titleKo: '《나무 그늘 꽃밭 · 오후 관찰 배경화면》',
+    descZh: '大树浓荫与蒲公英花丛中，安月抱着线圈笔记本写下今日探索发现，对讲机与背包在身旁静静守候。',
+    descKo: '큰 나무 아래 꽃밭에서 노트를 펼치고 탐험 기록을 적는 안월.'
+  }
+],
+goods: [
+  {
+    code: 'GOODS 01',
+    icon: '🧸',
+    titleZh: '20cm 安月探索者毛绒公仔',
+    titleKo: '20cm 안월 탐험가 봉제 인형',
+    tagZh: '桌面摆件 / 陪伴玩偶',
+    tagKo: '데스크 피규어 / 동행 인형',
+    descZh: '还原安月经典白兔形象与灰蓝色探险服，搭配黄色对讲机及随身装备，柔软亲肤，可作为桌面摆件或随身陪伴玩偶。',
+    descKo: '안월의 클래식 흰 토끼 외형과 슬레이트 블루 탐험복, 노란 무전기 및 장비를 재현한 부드러운 20cm 봉제 인형.'
+  },
+  {
+    code: 'GOODS 02',
+    icon: '📡',
+    titleZh: '安月黄色对讲机亚克力挂件',
+    titleKo: '안월 노란 무전기 아크릴 키링',
+    tagZh: '透明亚克力 / 角色识别物',
+    tagKo: '투명 아크릴 / 시그니처 아이템',
+    descZh: '以安月标志性黄色对讲机为设计原型，搭配安月Q版形象，采用透明亚克力材质，突出角色专属识别元素。',
+    descKo: '안월의 상징인 노란 무전기와 SD 캐릭터를 투명 아크릴로 제작해 개성을 살린 키링.'
+  },
+  {
+    code: 'GOODS 03',
+    icon: '📓',
+    titleZh: '安月探索记录本 & 表情贴纸套装',
+    titleKo: '안월 탐험 기록 노트 & 이모티콘 스티커 세트',
+    tagZh: '文具套装 / 12款专属贴纸',
+    tagKo: '문구 세트 / 12종 전용 스티커',
+    descZh: '以探索笔记本为主题，搭配安月12款专属表情贴纸，融入星星、月亮及脚印元素，兼具实用性与收藏价值。',
+    descKo: '탐험 노트를 테마로 별·달·발자국 요소와 12종 안월 표정 스티커를 담은 실용 문구 세트.'
+  }
+]
 },
 otter: {
 avatar: 'assets/char_otter.jpg',
@@ -5538,6 +5634,107 @@ function renderMemberEmoticons(m) {
 </div>`;
   }
 }
+
+function renderMemberGoods(m) {
+  const container = document.getElementById('m-goods-container');
+  const heading = document.getElementById('m-w6-heading');
+  const badge = document.getElementById('m-w6-badge');
+  const btnDesc = document.getElementById('m-w6-btn-desc');
+  if (!container) return;
+
+  if ((m.wallpapers && m.wallpapers.length > 0) || (m.goods && m.goods.length > 0)) {
+    if (heading) {
+      heading.innerHTML = `<span data-zh>W5 P · 壁纸与实体周边企划 · ${m.titleZh}</span><span data-ko>W5 P · 배경화면 및 실물 굿즈 기획 · ${m.titleKo}</span>`;
+    }
+    if (badge) {
+      badge.innerHTML = `🎁 <span data-zh>已收录 ${m.wallpapers ? m.wallpapers.length : 0} 款主题壁纸 + ${m.goods ? m.goods.length : 0} 项周边企划</span><span data-ko>배경화면 ${m.wallpapers ? m.wallpapers.length : 0}종 + 굿즈 기획 ${m.goods ? m.goods.length : 0}종 수록</span>`;
+    }
+    if (btnDesc) {
+      btnDesc.innerHTML = `<span data-zh>★ 壁纸与周边企划已收录</span><span data-ko>★ 배경화면 &amp; 굿즈 수록</span>`;
+    }
+
+    let html = '';
+    if (m.wallpapers && m.wallpapers.length > 0) {
+      html += `
+      <div class="kun-info-card" style="margin-bottom:20px; border:2px solid rgba(246,220,128,0.45); background:linear-gradient(135deg, rgba(46,36,84,0.68) 0%, rgba(24,18,46,0.92) 100%);">
+        <div class="kun-card-title" style="margin-bottom:14px;">
+          <span class="card-icon">🖼️</span>
+          <div>
+            <h4><span data-zh>专属探索壁纸（横屏桌面 + 竖屏手机）</span><span data-ko>전용 탐험 배경화면 (데스크톱 + 모바일)</span></h4>
+            <small><span data-zh>点击图片可放大预览 · 支持保存原图作为电脑/手机壁纸</span><span data-ko>이미지를 클릭하면 크게 볼 수 있으며 원본 저장이 가능합니다</span></small>
+          </div>
+        </div>
+        <div class="kun-two-col-cards">
+          ${m.wallpapers.map((wp) => `
+            <div style="background:rgba(20,15,38,0.75); border:1.5px solid rgba(246,220,128,0.32); border-radius:16px; overflow:hidden; display:flex; flex-direction:column;">
+              <div style="cursor:pointer; background:#120E24; display:flex; align-items:center; justify-content:center; height:240px; overflow:hidden;" onclick="openComicModal('${wp.img}', '${wp.titleZh}')" title="点击查看大图 / 클릭하여 원본 보기">
+                <img src="${wp.img}" alt="${wp.titleZh}" style="width:100%; height:100%; object-fit:contain; display:block;" />
+              </div>
+              <div style="padding:14px; display:flex; flex-direction:column; gap:6px; flex:1;">
+                <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;">
+                  <span class="backpack-tag" style="background:rgba(246,220,128,0.18); color:#F6DC80; border:1px solid rgba(246,220,128,0.45); font-size:0.75rem;"><span data-zh>${wp.ratio}</span><span data-ko>${wp.ratioKo}</span></span>
+                  <a href="${wp.img}" download class="copy-prompt-btn" style="padding:4px 10px; font-size:0.75rem; text-decoration:none;">⬇ <span data-zh>下载壁纸</span><span data-ko>저장</span></a>
+                </div>
+                <h5 style="margin:2px 0 0; color:#FAF6EE; font-size:1rem;"><span data-zh>${wp.titleZh}</span><span data-ko>${wp.titleKo}</span></h5>
+                <p style="margin:0; font-size:0.86rem; color:var(--text-Soft); line-height:1.55;"><span data-zh>${wp.descZh}</span><span data-ko>${wp.descKo}</span></p>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>`;
+    }
+
+    if (m.goods && m.goods.length > 0) {
+      html += `
+      <div class="kun-info-card" style="border:2px solid rgba(143,164,188,0.42);">
+        <div class="kun-card-title" style="margin-bottom:14px;">
+          <span class="card-icon">🧸</span>
+          <div>
+            <h4><span data-zh>实体周边企划提案（公仔 / 挂件 / 文具）</span><span data-ko>실물 굿즈 기획 제안 (인형 / 키링 / 문구)</span></h4>
+            <small><span data-zh>围绕「探索陪伴 · 观察记录 · 星月治愈」三大角色特色延展</span><span data-ko>「탐험 동행 · 관찰 기록 · 별달 힐링」 3대 키워드 기반 굿즈 라인업</span></small>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:14px;">
+          ${m.goods.map((g) => `
+            <div style="background:rgba(24,18,46,0.72); border:1.5px solid rgba(246,220,128,0.3); border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:8px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:1.7rem;">${g.icon}</span>
+                <span class="backpack-tag" style="background:rgba(245,166,35,0.2); color:#F6DC80; border:1px solid rgba(246,220,128,0.45); font-size:0.75rem; font-weight:800;">${g.code}</span>
+              </div>
+              <h5 style="margin:0; color:#FAF6EE; font-size:1.02rem; line-height:1.4;"><span data-zh>${g.titleZh}</span><span data-ko>${g.titleKo}</span></h5>
+              <span style="font-size:0.78rem; color:#B8C7D9; font-weight:700;"><span data-zh>${g.tagZh}</span><span data-ko>${g.tagKo}</span></span>
+              <p style="margin:0; font-size:0.86rem; color:var(--text-Soft); line-height:1.6;"><span data-zh>${g.descZh}</span><span data-ko>${g.descKo}</span></p>
+            </div>
+          `).join('')}
+        </div>
+      </div>`;
+    }
+    container.innerHTML = html;
+  } else {
+    if (heading) {
+      heading.innerHTML = `<span data-zh>W5 P · 周边预留位（壁纸、实体周边提案）</span><span data-ko>W5 P · 굿즈 전용 슬롯 (배경화면, 실물 굿즈 제안)</span>`;
+    }
+    if (badge) {
+      badge.innerHTML = `🎁 <span data-zh>高清壁纸 + 实体周边企划展位</span><span data-ko>배경화면 + 실물 굿즈 제안 슬롯</span>`;
+    }
+    if (btnDesc) {
+      btnDesc.innerHTML = `<span data-zh>壁纸、实体周边提案</span><span data-ko>배경화면, 실물 굿즈 제안</span>`;
+    }
+    container.innerHTML = `
+<div class="kun-two-col-cards">
+<div class="kun-info-card" style="text-align:center; padding:36px 24px; border-style:dashed;">
+<div style="font-size:2.5rem; margin-bottom:10px;">🖼️</div>
+<h4 style="color:#F5A623; margin-bottom:8px;"><span data-zh>PC / 手机高清主题壁纸预留位 (배경화면 제안)</span><span data-ko>PC / 모바일 배경화면 제안 슬롯</span></h4>
+<p style="color:var(--text-Soft); font-size:0.88rem;"><span data-zh>预留 16:9 桌面壁纸与 9:16 手机锁屏壁纸展示及原图下载位。</span><span data-ko>16:9 데스크톱 및 9:16 모바일 잠금화면 배경화면 프리뷰 및 다운로드 슬롯입니다.</span></p>
+</div>
+<div class="kun-info-card" style="text-align:center; padding:36px 24px; border-style:dashed;">
+<div style="font-size:2.5rem; margin-bottom:10px;">🧸</div>
+<h4 style="color:#F5A623; margin-bottom:8px;"><span data-zh>实体周边提案预留位 (실물 굿즈 제안)</span><span data-ko>실물 굿즈 디자인 제안 슬롯</span></h4>
+<p style="color:var(--text-Soft); font-size:0.88rem;"><span data-zh>预留毛绒玩偶、亚克力立牌、徽章挂件等角色专属实体周边企划图位。</span><span data-ko>봉제 인형, 아크릴 스탠드, 키링 등 실물 굿즈 목업이 배치될 영역입니다.</span></p>
+</div>
+</div>`;
+  }
+}
 function openMemberRoom(id) {
   const parts = id.split('-w');
   const actualId = parts[0];
@@ -5566,6 +5763,9 @@ function openMemberRoom(id) {
   }
   if (m.emoticons && m.emoticons.length > 0) {
     badgesHtml += `<button type="button" onclick="switchMemberWTab(5)" class="backpack-tag" style="background:rgba(245,166,35,0.22); color:#F5A623; border:1.5px solid #F5A623; cursor:pointer; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击切换至表情包 / 클릭하여 이모티콘 보기"><span data-zh>😊 专属表情包 (${m.emoticons.length}款) ➔</span><span data-ko>😊 전용 이모티콘 (${m.emoticons.length}종) ➔</span></button>`;
+  }
+  if ((m.wallpapers && m.wallpapers.length > 0) || (m.goods && m.goods.length > 0)) {
+    badgesHtml += `<button type="button" onclick="switchMemberWTab(6)" class="backpack-tag" style="background:rgba(246,220,128,0.2); color:#F6DC80; border:1.5px solid #F6DC80; cursor:pointer; font-weight:900; margin-left:6px; transition:transform 0.2s;" title="点击查看壁纸与周边企划 / 클릭하여 배경화면 및 굿즈 보기"><span data-zh>🎁 壁纸与周边企划 ➔</span><span data-ko>🎁 배경화면 &amp; 굿즈 ➔</span></button>`;
   }
   document.getElementById('m-badges').innerHTML = badgesHtml;
 
@@ -5627,6 +5827,7 @@ function openMemberRoom(id) {
   renderMemberAnimation(m);
   renderMemberApp(m);
   renderMemberEmoticons(m);
+  renderMemberGoods(m);
   switchMemberWTab(targetTab);
 
   document.documentElement.setAttribute('data-view', 'member');
